@@ -1,0 +1,25 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.tab-pane
+{
+    -fx-tab-min-width: 75.0px;
+    -fx-tab-min-height: 100.0px; 
+}
+
+.tab .tab-label
+{
+	-fx-rotate: 90;
+    -fx-alignment: center;
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #9999cc;
+    -fx-focus-color: #8888c4;
+}
+
+
+
+
+
+
+
