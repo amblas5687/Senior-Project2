@@ -74,3 +74,6 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+#not the libs folder
+!libs
