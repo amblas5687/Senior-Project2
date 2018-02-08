@@ -21,7 +21,7 @@ public class AnnaMain extends Application {
 			 con = DBConfig.getConnection();
 			
 			
-			BorderPane root = FXMLLoader.load(getClass().getResource("/view/UserView.fxml"));
+			BorderPane root = FXMLLoader.load(getClass().getResource("/view/NewUserView.fxml"));
 			Scene scene = new Scene(root,600,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);

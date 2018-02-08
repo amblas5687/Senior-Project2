@@ -19,28 +19,20 @@ public class NewUserController {
 
     @FXML
     private TextField fnameTF;
-
     @FXML
     private TextField lnameTF;
-
     @FXML
     private DatePicker DOBPicker;
-
     @FXML
     private TextField emailTF;
-
     @FXML
     private PasswordField password1TF;
-
     @FXML
     private PasswordField password2TF;
-
     @FXML
     private Button nextBTN;
-
     @FXML
     private Button cancelBTN;
-
     @FXML
     private ComboBox<String> relationBox;
     
