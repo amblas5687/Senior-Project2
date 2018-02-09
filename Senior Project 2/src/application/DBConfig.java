@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class DBConfig {
 
-	private static final String USERNAME = "root";
+	private static final String USERNAME = "";
 	private static final String PASSWORD = "";
-	private static final String CONN = ("jdbc:mysql://localhost/");
-	private static final String DB = "seniorproject";
+	private static final String CONN = ("");
+	private static final String DB = "";
 
 	// connection  method that connects us to the MySQL database
 	public static Connection getConnection() throws SQLException{
