@@ -2,7 +2,10 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import application.AnnaMain;
+import application.DBConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,8 +70,8 @@ public class NewPatientController {
         	ps.setString(7, caregiver);
         	
         	ps.execute();
-    	} catch (Exception e) {
-    		e.printStackTrace();
+    	} catch (SQLException e) {
+    		DBConfig.displayException(e);
     	}
     	
     }
