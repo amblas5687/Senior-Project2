@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -87,26 +86,21 @@
                   <Insets left="5.0" right="5.0" />
                </padding>
             </Separator>
-            <TextField fx:id="fnameTF" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="fnameTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="lnameTF" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="lnameTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
             </TextField>
-            <DatePicker fx:id="DOBPicker" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <DatePicker fx:id="DOBPicker" disable="true" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
             </DatePicker>
-            <PasswordField fx:id="doctorTF" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </PasswordField>
             <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9">
                <buttons>
                   <Button fx:id="submitBTN" mnemonicParsing="false" onAction="#submit" text="Submit" />
@@ -117,17 +111,17 @@
                   <Insets />
                </GridPane.margin>
             </ButtonBar>
-            <ComboBox fx:id="stageBox" maxHeight="25.0" maxWidth="152.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <ComboBox fx:id="stageBox" disable="true" maxHeight="25.0" maxWidth="152.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
             </ComboBox>
-            <DatePicker fx:id="diagnosesPicker" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <DatePicker fx:id="diagnosesPicker" disable="true" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
             </DatePicker>
-            <TextField fx:id="cargiverTF" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TextField fx:id="cargiverTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
@@ -137,6 +131,11 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
+            <TextField fx:id="doctorTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
       </GridPane>
    </center>
