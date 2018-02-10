@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -102,11 +101,6 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </DatePicker>
-            <PasswordField fx:id="doctorTF" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </PasswordField>
             <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9">
                <buttons>
                   <Button fx:id="submitBTN" mnemonicParsing="false" onAction="#submit" text="Submit" />
@@ -136,6 +130,11 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
+            <TextField fx:id="doctorTF" maxHeight="25.0" maxWidth="152.0" minHeight="25.0" minWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
       </GridPane>
    </center>

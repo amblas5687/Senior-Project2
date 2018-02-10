@@ -1,15 +1,18 @@
 package controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import application.AnnaMain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class NewPatientController {
-
+	Connection conn = AnnaMain.con;
+	
     @FXML
     private TextField fnameTF;
     @FXML
@@ -17,7 +20,7 @@ public class NewPatientController {
     @FXML
     private DatePicker DOBPicker;
     @FXML
-    private PasswordField doctorTF;
+    private TextField doctorTF;
     @FXML
     private Button submitBTN;
     @FXML
@@ -43,7 +46,31 @@ public class NewPatientController {
 
     @FXML
     void submit(ActionEvent event) {
-
+    	String firstName = fnameTF.getText();
+    	String lastName = lnameTF.getText();
+    	String dob = DOBPicker.getValue().toString();
+    	String doc = doctorTF.getText();
+    	String stage = stageBox.getValue().toString();
+    	String diagDate = diagnosesPicker.getValue().toString();
+    	String caregiver = cargiverTF.getText();
+    	
+    	String query = "INSERT INTO patient (firstName, lastName, dob, currStage, diagnoseDate, primaryDoc, caregiver)"
+    			+ "VALUES (?,?,?,?,?,?,?)";
+    	try {
+    		PreparedStatement ps = conn.prepareStatement(query);
+        	ps.setString(1, firstName);
+        	ps.setString(2, lastName);
+        	ps.setString(3, dob);
+        	ps.setString(4, stage);
+        	ps.setString(5, diagDate);
+        	ps.setString(6, doc);
+        	ps.setString(7, caregiver);
+        	
+        	ps.execute();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
     }
 
 }
