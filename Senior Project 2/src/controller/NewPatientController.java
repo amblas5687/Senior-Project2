@@ -37,8 +37,6 @@ public class NewPatientController {
     
     
     public void initialize(){
-    	
-    	//add combo box selections
     	stageBox.getItems().addAll("Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5", "Stage 6", "Stage 7");
     }
     
@@ -70,10 +68,12 @@ public class NewPatientController {
         	ps.setString(7, caregiver);
         	
         	ps.execute();
+        	
     	} catch (SQLException e) {
     		DBConfig.displayException(e);
     	}
     	
+    	System.out.println("Successful insertion of patient information.");
     }
 
 }
