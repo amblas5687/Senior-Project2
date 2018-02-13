@@ -17,7 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class ViewUserController {
-	Connection con = AnnaMain.con;
+	Connection conn = AnnaMain.con;
 
     @FXML
     private TextField fnameTF;
@@ -45,7 +45,7 @@ public class ViewUserController {
     	String query = "SELECT * FROM user WHERE ID = 3";
     	
     	try {
-			PreparedStatement ps = con.prepareStatement(query);
+			PreparedStatement ps = conn.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -92,7 +92,7 @@ public class ViewUserController {
     			+ "email = ? WHERE ID = 3";
     			    			
     	try {
-			PreparedStatement ps = con.prepareStatement(query);
+			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setString(1, firstName);
 			ps.setString(2, lastName);
 			ps.setString(3, dob);
