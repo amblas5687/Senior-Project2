@@ -24,13 +24,32 @@ public class mainViewController {
 	 @FXML
 	 private AnchorPane content_view = new AnchorPane();
 	 
+	 private URL toPane;
+	 private AnchorPane temp;
+	 
+	 public void initialize(){
+		 try {
+			 
+			 toPane = getClass().getResource("/view/NewPatientView.fxml"); 
+	  		 temp = FXMLLoader.load(toPane);
+			 content_view.getChildren().setAll(temp);
+			 
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
+	 }
+	    
 	 @FXML
 	  private void selectMenuOption(ActionEvent event) {
+		 
 		 try{
-			 URL toPane;
-			 AnchorPane temp;
 			 char btn = event.getSource().toString().charAt(16);
 			 System.out.println(btn);
+			 
+			 btnMed.getStyleClass().remove("activeButton");
+			 btnPat.getStyleClass().remove("activeButton");
+			 btnInfo.getStyleClass().remove("activeButton");
 		     
 		     switch(btn)
 		     {
@@ -38,20 +57,20 @@ public class mainViewController {
 		     		toPane = getClass().getResource("/view/ViewMedInfo.fxml"); 
 		     		temp = FXMLLoader.load(toPane);
 		     		content_view.getChildren().setAll(temp);
-		     		//FXMLDocumentController.rootP.setStyle("-fx-background-color:#00FF00");
+		     		btnMed.getStyleClass().add("activeButton");
 		     		break;
 		        case 'P': //My Patients
 		        	toPane = getClass().getResource("/view/ViewPatientInfo.fxml"); 
 		     		temp = FXMLLoader.load(toPane);
 		     		content_view.getChildren().setAll(temp);
-		        	//FXMLDocumentController.rootP.setStyle("-fx-background-color:#0000FF");
-		            break;
+		     		btnPat.getStyleClass().add("activeButton");
+		        	break;
 		        case 'I': //My Info
 		        	toPane = getClass().getResource("/view/ViewUserInfo.fxml"); 
 		     		temp = FXMLLoader.load(toPane);
 		     		content_view.getChildren().setAll(temp);
-		        	//FXMLDocumentController.rootP.setStyle("-fx-background-color:#FF0000");
-		            break;
+		     		btnInfo.getStyleClass().add("activeButton");
+		     		break;
 		     }
 		  
 		 } catch (Exception e){
