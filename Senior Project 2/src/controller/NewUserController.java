@@ -1,8 +1,12 @@
 package controller;
 
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import application.AnnaMain;
 import application.DBConfig;
@@ -13,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import model.UserModel;
 
 public class NewUserController {
@@ -48,10 +53,69 @@ public class NewUserController {
     
     //user selects next button and enters code
     @FXML
-    void codeEnter(ActionEvent event) {
+    void patientCodeEnter(ActionEvent event) {
+    	TextInputDialog dialog = new TextInputDialog("");
+    	dialog.setTitle("Patient Code");
+    	dialog.setHeaderText("Enter the patient code that was \ngenerated when you created your patient");
+    	dialog.setContentText("Please enter the code:");
     	
-    	//temporary database submission for testing
-    	//*********************************************************************
+    	//grab the fields for the user
+	    UserModel subUser = grabFields();
+	    
+	    //generate userCode
+	    String userCode = genCode();
+	    subUser.setUserID(userCode);
+    	
+    	//get response
+    	Optional<String> result = dialog.showAndWait();
+    	if (result.isPresent()){
+    		
+    		//TODO need to check patient table to verify the patient
+    	    System.out.println("Code: " + result.get());
+    	    
+    	    subUser.setPatientCode(result.get());
+    	    
+    	    //prepare the query
+    	    String userQ = "INSERT into user (fname, lname, DOB, pRelation, email, password, patientCode, userID) "
+        			+ "VALUES (?,?,?,?,?,?,?,?)";
+        	try {
+    			PreparedStatement user = con.prepareStatement(userQ);
+    			user.setString(1, subUser.getFname());
+    			user.setString(2, subUser.getLname());
+    			user.setString(3, subUser.getDOB());
+    			user.setString(4, subUser.getRelation());
+    			user.setString(5, subUser.getEmail());
+    			user.setString(6, subUser.getPassword());
+    			user.setString(7, subUser.getPatientCode());
+    			user.setString(8, subUser.getUserID());
+
+    			
+    			user.execute();
+    			System.out.println(user);Le
+    			
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			DBConfig.displayException(e);
+    		}
+    	    
+    	    
+    	}
+
+    
+
+    }
+    
+    //user cancels submission
+    @FXML
+    void returnMain(ActionEvent event) {
+
+    }
+    
+    
+    //helper methods
+    
+    UserModel grabFields()
+    {
     	String fname = fnameTF.getText();
     	String lname = lnameTF.getText();
     	
@@ -63,32 +127,39 @@ public class NewUserController {
     	
     	UserModel tempUser = new UserModel(fname, lname, DOB, email, password, pRelation);
     	System.out.println(tempUser);
+		return tempUser;
     	
-    	String userQ = "INSERT into user (fname, lname, DOB, pRelation, email, password) "
-    			+ "VALUES (?,?,?,?,?,?)";
-    	try {
-			PreparedStatement user = con.prepareStatement(userQ);
-			user.setString(1, tempUser.getFname());
-			user.setString(2, tempUser.getLname());
-			user.setString(3, tempUser.getDOB());
-			user.setString(4, tempUser.getRelation());
-			user.setString(5, tempUser.getEmail());
-			user.setString(6, tempUser.getPassword());
-			
-			user.execute();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			DBConfig.displayException(e);
-		}
-    	//*********************************************************************
-
     }
+    
+    String genCode() {
+    			
+		StringBuilder sb = new StringBuilder();
 
-    //user cancels submission
-    @FXML
-    void returnMain(ActionEvent event) {
+		    	
+		    	// Create a secure random number generator using the SHA1PRNG algorithm
+				try {
+			    	SecureRandom rand = SecureRandom.getInstance("SHA1PRNG");
+				
+    			
+	    			// Get 16 random bytes
+	    			byte[] randBytes = new byte[16];
+	    			rand.nextBytes(randBytes);
+    			
+    			
 
-    }
+	    			for(int i = 0; i < randBytes.length; i++)
+	    			{
+	    				sb.append(String.format("%02X", randBytes[i]));
+	    			}
+    			
+    			System.out.println("\nBuilt string " + sb);
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("User code: " + sb.toString());
+				return sb.toString();
+    	
+    		}
 
 }
