@@ -30,7 +30,7 @@ public class mainViewController {
 	 public void initialize(){
 		 try {
 			 
-			 toPane = getClass().getResource("/view/NewPatientView.fxml"); 
+			 toPane = getClass().getResource("/view/NewMedView.fxml"); 
 	  		 temp = FXMLLoader.load(toPane);
 			 content_view.getChildren().setAll(temp);
 			 
@@ -46,6 +46,8 @@ public class mainViewController {
 		 try{
 			 char btn = event.getSource().toString().charAt(16);
 			 System.out.println(btn);
+			 String btn2 = event.getSource().toString();
+			 System.out.println(btn2);
 			 
 			 btnMed.getStyleClass().remove("activeButton");
 			 btnPat.getStyleClass().remove("activeButton");
