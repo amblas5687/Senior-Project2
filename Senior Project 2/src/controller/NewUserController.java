@@ -91,7 +91,7 @@ public class NewUserController {
 
     			
     			user.execute();
-    			System.out.println(user);Le
+    			System.out.println(user);
     			
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
