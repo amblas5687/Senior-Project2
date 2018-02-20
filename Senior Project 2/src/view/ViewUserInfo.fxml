@@ -43,7 +43,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
 		            <Label text="Password" GridPane.halignment="LEFT" GridPane.rowIndex="8">
@@ -51,7 +51,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
 		            <Label text="Personal Information">
@@ -75,7 +75,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
 		            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
@@ -161,7 +161,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="Last Name" GridPane.rowIndex="2">
@@ -169,7 +169,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="Date of Birth" GridPane.rowIndex="3">
@@ -177,7 +177,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="Relation to Patient" GridPane.rowIndex="4">
@@ -185,14 +185,14 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
 		         </children>
 		      </GridPane>
 		   </center>
 		   <top>
-		      <Label text="User Info" BorderPane.alignment="CENTER">
+		      <Label text="Your Information" BorderPane.alignment="CENTER">
 		         <font>
 		            <Font name="System Bold" size="24.0" />
 		         </font>

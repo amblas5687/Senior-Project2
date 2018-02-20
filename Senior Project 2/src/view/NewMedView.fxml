@@ -41,7 +41,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
 		            <Label text="Purpose of Presrciption" GridPane.halignment="LEFT" GridPane.rowIndex="7">
@@ -49,7 +49,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
 		            <Label text="Medication Information">
@@ -73,7 +73,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
 		            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
@@ -125,7 +125,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="Medication Dosage" GridPane.rowIndex="2">
@@ -133,7 +133,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="Medication Description" GridPane.rowIndex="3">
@@ -141,7 +141,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="110.0" />
+                        <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
                   <TextArea fx:id="medDescript" maxWidth="230.0" prefHeight="80.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -159,7 +159,7 @@
 		      </GridPane>
 		   </center>
 		   <top>
-		      <Label text="New Medication" BorderPane.alignment="CENTER">
+		      <Label text="Create Medication" BorderPane.alignment="CENTER">
 		         <font>
 		            <Font name="System Bold" size="24.0" />
 		         </font>
