@@ -159,7 +159,7 @@
 		      </GridPane>
 		   </center>
 		   <top>
-		      <Label text="Create Medication" BorderPane.alignment="CENTER">
+		      <Label text="Add Medication" BorderPane.alignment="CENTER">
 		         <font>
 		            <Font name="System Bold" size="24.0" />
 		         </font>
