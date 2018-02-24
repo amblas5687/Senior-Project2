@@ -3,11 +3,22 @@
 /*
  * Author: Danni
  * Sections:
+ * 		- Main
  * 		- Button
+ * 		- Alert
+ * 		- Dialog Pane
  *		- Date Picker
  * 		- Combo Box 
  * Preliminary color scheme -> subject to change
 */
+
+/* -- MAIN -- */
+
+/* Affects all GUIs */
+.root{
+	
+}
+
 
 /* -- BUTTON -- */
 
@@ -29,6 +40,26 @@
 /* Affects hover over action for currently selected button */
 .activeButton:hover{
 	-fx-background-color: #e6bbad;
+}
+
+
+/* -- ALERT -- */
+
+/* Affects alert dialog boxes */
+.alert
+{
+	-fx-background-color: lightgrey;
+	-fx-font-size: 14pt;
+}
+
+
+/* -- DIALOGPANE -- */
+
+/* Affects pop-up dialog boxes */
+.dialog-pane
+{
+	-fx-background-color: lightgrey;
+	-fx-font-size: 14pt;
 }
 
 

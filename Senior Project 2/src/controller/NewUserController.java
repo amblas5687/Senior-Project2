@@ -1,13 +1,11 @@
 package controller;
 
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
-
 import application.AnnaMain;
 import application.DBConfig;
 import javafx.event.ActionEvent;
@@ -55,6 +53,7 @@ public class NewUserController {
     @FXML
     void patientCodeEnter(ActionEvent event) {
     	TextInputDialog dialog = new TextInputDialog("");
+    	dialog.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
     	dialog.setTitle("Patient Code");
     	dialog.setHeaderText("Enter the patient code that was \ngenerated when you created your patient");
     	dialog.setContentText("Please enter the code:");
