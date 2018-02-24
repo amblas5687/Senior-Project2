@@ -1,20 +1,34 @@
 package controller;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+import java.util.Optional;
 import application.AnnaMain;
 import application.DBConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class NewPatientController {
 	Connection conn = AnnaMain.con;
+	
+	Stage stage;
+	Parent root;
+	Scene scene;
 	
     @FXML
     private TextField fnameTF;
@@ -47,25 +61,38 @@ public class NewPatientController {
 
     @FXML
     void submit(ActionEvent event) {
+    	
     	String firstName = fnameTF.getText();
     	String lastName = lnameTF.getText();
     	String dob = DOBPicker.getValue().toString();
     	String doc = doctorTF.getText();
-    	String stage = stageBox.getValue().toString();
+    	String curStage = stageBox.getValue().toString();
     	String diagDate = diagnosesPicker.getValue().toString();
     	String caregiver = cargiverTF.getText();
+    	String patientCode = genCode();
     	
-    	String query = "INSERT INTO patient (firstName, lastName, dob, currStage, diagnoseDate, primaryDoc, caregiver)"
-    			+ "VALUES (?,?,?,?,?,?,?)";
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	DialogPane dialogPane = alert.getDialogPane();
+    	dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+    	dialogPane.getStyleClass().add("alert");
+    	alert.setTitle("Patient Code");
+    	alert.setHeaderText("Patient code uniquely identifies each patient. Please record for further use."); 
+    	alert.setContentText("Patient Code: " + patientCode);
+    	
+    	Optional<ButtonType> result = alert.showAndWait();
+    	
+    	String query = "INSERT INTO patient (firstName, lastName, dob, currStage, diagnoseDate, primaryDoc, caregiver, patientCode)"
+    			+ "VALUES (?,?,?,?,?,?,?,?)";
     	try {
     		PreparedStatement ps = conn.prepareStatement(query);
         	ps.setString(1, firstName);
         	ps.setString(2, lastName);
         	ps.setString(3, dob);
-        	ps.setString(4, stage);
+        	ps.setString(4, curStage);
         	ps.setString(5, diagDate);
         	ps.setString(6, doc);
         	ps.setString(7, caregiver);
+        	ps.setString(8, patientCode);
         	
         	ps.execute();
         	
@@ -74,6 +101,49 @@ public class NewPatientController {
     	}
     	
     	System.out.println("Successful insertion of patient information.");
+    	
+    	if(result.get() == ButtonType.OK)
+    	{
+    		alert.hide();
+    		
+    		//Takes user to login page
+    		try {
+        		stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        		root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
+        		scene = new Scene(root);
+        		stage.setScene(scene);
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    }
+
+    String genCode() {
+		
+		StringBuilder sb = new StringBuilder();
+
+		// Create a secure random number generator using the SHA1PRNG algorithm
+		try {
+			SecureRandom rand = SecureRandom.getInstance("SHA1PRNG");
+				
+			// Get 16 random bytes
+	    	byte[] randBytes = new byte[16];
+	    	rand.nextBytes(randBytes);
+
+	    	for(int i = 0; i < randBytes.length; i++)
+	    	{
+	    		sb.append(String.format("%02X", randBytes[i]));
+	    	}
+    			
+    		System.out.println("\nBuilt string " + sb);
+				
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+				
+		System.out.println("Patient code: " + sb.toString());
+		return sb.toString();
+    	
     }
 
 }
