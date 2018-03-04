@@ -1,5 +1,6 @@
 package controller;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,20 +9,14 @@ import application.DBConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 public class NewMedController {
 	Connection conn = AnnaMain.con;
-	
-	Stage stage;
-	Parent root;
-	Scene scene;
 	
     @FXML
     private TextField medName;
@@ -48,13 +43,20 @@ public class NewMedController {
     private DatePicker DOPPicker;
 
     @FXML
+	private AnchorPane content_view;
+    
+    private URL toPane;
+	private AnchorPane temp;
+	 
+    @FXML
     void returnMain(ActionEvent event) {
+    	
     	try {
-    		stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-    		root = FXMLLoader.load(getClass().getResource("/view/mainView.fxml"));
-    		scene = new Scene(root);
-    		stage.setScene(scene);
     		
+			//Replace content_view's current display with the view for this controller
+			toPane = getClass().getResource("/view/ViewMedInfo.fxml");
+			temp = FXMLLoader.load(toPane);
+			content_view.getChildren().setAll(temp);
     		
     	} catch(Exception e) {
     		e.printStackTrace();
@@ -64,6 +66,7 @@ public class NewMedController {
 
     @FXML
     void submit(ActionEvent event) {
+    	
     	String mName = medName.getText();
     	String mDosage = medDosage.getText();
     	String mDescript = medDescript.getText();
@@ -73,6 +76,7 @@ public class NewMedController {
     	
     	String query = "INSERT INTO currentMeds (medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate)"
     			+ "VALUES (?,?,?,?,?,?)";
+    	
     	try {
     		PreparedStatement ps = conn.prepareStatement(query);
         	ps.setString(1, mName);
@@ -83,7 +87,7 @@ public class NewMedController {
         	ps.setString(6, pDate);
         	
         	ps.execute();
-        	
+        
     	} catch (SQLException e) {
     		DBConfig.displayException(e);
     	}
