@@ -12,23 +12,23 @@ import javafx.scene.layout.AnchorPane;
 public class MainViewController {
     
 	 @FXML
-	  public JFXButton btnMed;
+	 private JFXButton btnMed;
 	 @FXML
-	  private JFXButton btnPat;
+	 private JFXButton btnPat;
 	 @FXML
-	  private JFXButton btnInfo;
+	 private JFXButton btnInfo;
 	 @FXML
-	  private JFXButton btnExit;
+	 private JFXButton btnExit;
 	 @FXML
-	 public AnchorPane content;
+	 private AnchorPane content;
 	 @FXML
-	 public AnchorPane content_view = new AnchorPane();
+	 private AnchorPane content_view = new AnchorPane();
 	 
-	 public URL toPane;
-	 public AnchorPane temp;
+	 private URL toPane;
+	 private AnchorPane temp;
 	 
 	 public void initialize(){
-		 try {
+		/* try {
 			 
 			 toPane = getClass().getResource("/view/NewMedView.fxml"); 
 	  		 temp = FXMLLoader.load(toPane);
@@ -36,7 +36,7 @@ public class MainViewController {
 			 
 		 } catch(Exception e) {
 			 e.printStackTrace();
-		 }
+		 }*/
 		 
 	 }
 	    
@@ -60,6 +60,7 @@ public class MainViewController {
 		     		btnMed.getStyleClass().add("activeButton");
 		     		break;
 		        case 'P': //My Patients
+		        	System.out.println("HIT");
 		        	toPane = getClass().getResource("/view/ViewPatientInfo.fxml"); 
 		     		temp = FXMLLoader.load(toPane);
 		     		content_view.getChildren().setAll(temp);
@@ -83,21 +84,5 @@ public class MainViewController {
 	  private void logout(ActionEvent event) {
 		  System.exit(0);
 	   }
-	  
-	 @FXML
-	  public void cancelAddMed(ActionEvent event) {
-		 System.out.print("1 " + content_view.getId().toString());
-		  try {
-			  
-		  		toPane = getClass().getResource("/view/ViewMedInfo.fxml"); 
-	     		temp = FXMLLoader.load(toPane);
-	     		content_view.getChildren().setAll(temp);
-	     		System.out.println("HIT");
-		   	  
-		  } catch(Exception e) {
-			  e.printStackTrace();
-		  }
-		
-	  }
 	    
 }
