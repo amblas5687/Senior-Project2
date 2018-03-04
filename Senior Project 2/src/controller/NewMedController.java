@@ -74,6 +74,8 @@ public class NewMedController {
     	String pPurpose = purpOfPrescript.getText();
     	String pDate = DOPPicker.getValue().toString();
     	
+    	
+    	//TODO we need a where clause here to control inserts using patient code, and need to insert the patient code and date added
     	String query = "INSERT INTO currentMeds (medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate)"
     			+ "VALUES (?,?,?,?,?,?)";
     	
@@ -87,13 +89,18 @@ public class NewMedController {
         	ps.setString(6, pDate);
         	
         	ps.execute();
+        	System.out.println("Successful insertion of medication information.");
         
     	} catch (SQLException e) {
     		DBConfig.displayException(e);
+    		System.out.println("Failed insertion of medication information.");
     	}
     	
-    	System.out.println("Successful insertion of medication information.");
-    	
+    	clearFields();
+    }
+    
+    void clearFields()
+    {
     	//Clear form for next addition
     	medName.setText("");
     	medDosage.setText("");
