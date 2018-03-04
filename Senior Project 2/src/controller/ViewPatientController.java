@@ -1,5 +1,6 @@
 package controller;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +11,12 @@ import application.AnnaMain;
 import application.DBConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import model.PatientModel;
 
 public class ViewPatientController {
@@ -38,7 +41,12 @@ public class ViewPatientController {
     private DatePicker diagnosesPicker;
     @FXML
     private TextField cargiverTF;
-    
+    @FXML
+   	private AnchorPane content_view;
+       
+    private URL toPane;
+   	private AnchorPane temp;
+   	
     //Dummy user for testing
     String tempCode = "1";
     
@@ -122,6 +130,10 @@ public class ViewPatientController {
     	stageBox.setDisable(false);
     	diagnosesPicker.setDisable(false);
     	cargiverTF.setDisable(false);
+    	
+    	cancelBTN.setVisible(true);
+    	editBTN.setVisible(false);
+    	submitBTN.setVisible(true);
     }
     
     private void disableEdit()
@@ -133,11 +145,26 @@ public class ViewPatientController {
     	stageBox.setDisable(true);
     	diagnosesPicker.setDisable(true);
     	cargiverTF.setDisable(true);
+    	
+    	cancelBTN.setVisible(false);
+    	submitBTN.setVisible(false);
+    	editBTN.setVisible(true);
     }
 
     @FXML
     void returnMain(ActionEvent event) {
-
+    	
+    	try {
+    		
+			//Replace content_view's current display with the view for this controller
+			toPane = getClass().getResource("/view/ViewPatientInfo.fxml");
+			temp = FXMLLoader.load(toPane);
+			content_view.getChildren().setAll(temp);
+    		
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
     }
 
     @FXML
