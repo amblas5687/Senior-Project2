@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="968.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewUserController">
+<AnchorPane fx:id="content_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="968.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewUserController">
    <children>
    		<BorderPane prefHeight="400.0" prefWidth="600.0">
 		   <center>
@@ -149,7 +149,7 @@
                         <Font size="16.0" />
                      </font>
 		            </Button>
-		          <Button fx:id="cancelBTN" mnemonicParsing="false" onAction="#returnMain" prefHeight="25.0" prefWidth="75.0" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="9">
+		          <Button fx:id="cancelBTN" mnemonicParsing="false" onAction="#returnMain" prefHeight="25.0" prefWidth="75.0" text="Cancel" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="9">
                      <font>
                         <Font size="16.0" />
                      </font>

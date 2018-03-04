@@ -1,5 +1,6 @@
 package controller;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,11 +11,13 @@ import application.AnnaMain;
 import application.DBConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class ViewUserController {
 	Connection conn = AnnaMain.con;
@@ -39,6 +42,11 @@ public class ViewUserController {
     private Button cancelBTN;
     @FXML
     private ComboBox<String> relationBox;
+    @FXML
+	private AnchorPane content_view;
+    
+    private URL toPane;
+	private AnchorPane temp;
     
     public void initialize(){
     	String dob = "", relation = "";
@@ -54,6 +62,9 @@ public class ViewUserController {
 				dob = rs.getString("DOB");
 				emailTF.setText(rs.getString("email"));
 				relation = rs.getString("pRelation");
+				password1TF.setText(rs.getString("password"));
+				password2TF.setText(rs.getString("password"));
+
 			}
 			
 			DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -78,6 +89,7 @@ public class ViewUserController {
     	relationBox.setDisable(false);
     	relationBox.getItems().addAll("Son/Daughter", "Spouse", "Grandchild", "Friend", "Medical Professional");
     	emailTF.setDisable(false);	
+    	cancelBTN.setVisible(true);
     }
     
     @FXML
@@ -112,12 +124,24 @@ public class ViewUserController {
     	relationBox.setDisable(true);
     	emailTF.setDisable(true);
     	btnEdit.setVisible(true);
+    	cancelBTN.setVisible(false);
     }
 
     //user cancels submission
     @FXML
     void returnMain(ActionEvent event) {
 
+    	try {
+    		
+			//Replace content_view's current display with the view for this controller
+			toPane = getClass().getResource("/view/ViewUserInfo.fxml");
+			temp = FXMLLoader.load(toPane);
+			content_view.getChildren().setAll(temp);
+    		
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
     }
 
 }
