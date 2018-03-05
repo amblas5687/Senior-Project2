@@ -60,14 +60,14 @@ public class CurrentMedsController {
 		    while(rs.next())
 		    	{
 		    		medName = rs.getString("medName");
-		    		System.out.println(medName);
 		    		medDate = rs.getString("prescribDate");
 		    		medDetails = rs.getString("medDescript");
 		    		doc = rs.getString("prescribDoc");
+		    		//System.out.println(doc);
 		    		medDose = rs.getString("medDosage");
 		    		purpose = rs.getString("purpPresrcipt");
 		    		
-		    		tempMed = new CurMedModel(medName, medDate, medDetails, doc, medDose, purpose);
+		    		tempMed = new CurMedModel(medName, medDate, doc, medDetails, medDose, purpose);
 		    		patientMeds.add(tempMed);	
 		    		System.out.println("grabbing med... " + tempMed);
 		    	}
