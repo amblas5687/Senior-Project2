@@ -77,7 +77,6 @@ public class NewMedController {
     	String pDate = DOPPicker.getValue().toString();
     	
     	
-    	//TODO we need a where clause here to control inserts using patient code, and need to insert the patient code and date added
     	String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate)"
     			+ "VALUES (?,?,?,?,?,?,?)";
     	

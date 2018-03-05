@@ -144,7 +144,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextArea fx:id="medDescript" maxWidth="230.0" prefHeight="80.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <TextArea fx:id="medDescript" maxWidth="230.0" prefHeight="80.0" prefWidth="230.0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
