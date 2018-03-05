@@ -8,10 +8,10 @@
    <children>
       <TableView fx:id="medicationTable" prefHeight="444.0" prefWidth="796.0">
         <columns>
-          <TableColumn fx:id="mName" prefWidth="129.0" text="Medication Name" />
-          <TableColumn fx:id="mDosage" minWidth="0.0" prefWidth="79.5" text="Dosage" />
-            <TableColumn fx:id="mDate" minWidth="8.0" prefWidth="122.0" text="Perscription Date" />
-            <TableColumn fx:id="mDoc" prefWidth="128.0" text="Perscribing Doctor" />
+          <TableColumn fx:id="mName" prefWidth="247.2000366449356" text="Medication Name" />
+          <TableColumn fx:id="mDosage" minWidth="0.0" prefWidth="110.4000244140625" text="Dosage" />
+            <TableColumn fx:id="mDate" minWidth="8.0" prefWidth="205.60006713867188" text="Perscription Date" />
+            <TableColumn fx:id="mDoc" prefWidth="229.5999755859375" text="Perscribing Doctor" />
         </columns>
       </TableView>
    </children>
