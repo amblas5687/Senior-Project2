@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class NewMedController {
+	
 	Connection conn = AnnaMain.con;
 	
     @FXML
@@ -67,6 +68,7 @@ public class NewMedController {
     @FXML
     void submit(ActionEvent event) {
     	
+    	String patientCode = "123456789";
     	String mName = medName.getText();
     	String mDosage = medDosage.getText();
     	String mDescript = medDescript.getText();
@@ -76,32 +78,31 @@ public class NewMedController {
     	
     	
     	//TODO we need a where clause here to control inserts using patient code, and need to insert the patient code and date added
-    	String query = "INSERT INTO currentMeds (medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate)"
-    			+ "VALUES (?,?,?,?,?,?)";
+    	String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate)"
+    			+ "VALUES (?,?,?,?,?,?,?)";
     	
     	try {
     		PreparedStatement ps = conn.prepareStatement(query);
-        	ps.setString(1, mName);
-        	ps.setString(2, mDosage);
-        	ps.setString(3, mDescript);
-        	ps.setString(4, pDoc);
-        	ps.setString(5, pPurpose);
-        	ps.setString(6, pDate);
+    		ps.setString(1, patientCode);
+        	ps.setString(2, mName);
+        	ps.setString(3, mDosage);
+        	ps.setString(4, mDescript);
+        	ps.setString(5, pDoc);
+        	ps.setString(6, pPurpose);
+        	ps.setString(7, pDate);
         	
         	ps.execute();
+        	
         	System.out.println("Successful insertion of medication information.");
         
     	} catch (SQLException e) {
+    		
     		DBConfig.displayException(e);
+    		
     		System.out.println("Failed insertion of medication information.");
     	}
     	
-    	clearFields();
-    }
-    
-    void clearFields()
-    {
-    	//Clear form for next addition
+    	//Clears fields after medication insertion
     	medName.setText("");
     	medDosage.setText("");
     	medDescript.setText("");
@@ -109,4 +110,5 @@ public class NewMedController {
     	purpOfPrescript.setText("");
     	DOPPicker.setValue(null);
     }
+    
 }
