@@ -17,7 +17,7 @@ import model.CurMedModel;
 public class CurrentMedsController {
 	
 	//code for testing
-	String testCode = "123456789";
+	String testCode = "1";
 	Connection conn = AnnaMain.con;
 
     @FXML
