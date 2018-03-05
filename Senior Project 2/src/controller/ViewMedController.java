@@ -46,6 +46,8 @@ public class ViewMedController {
 	 //add to toggle group
 	 currMed.setToggleGroup(state);
 	 archMed.setToggleGroup(state);
+	 
+	 currMed.setSelected(true);
 		 
 	}
 	
