@@ -8,6 +8,7 @@
  * 		- Alert
  * 		- Toggle Button
  * 		- Dialog Pane
+ * 		- Table View
  *		- Date Picker
  * 		- Combo Box 
  * Preliminary color scheme -> subject to change
@@ -75,6 +76,25 @@
 {
 	-fx-background-color: lightgrey;
 	-fx-font-size: 14pt;
+}
+
+
+/* -- TABLE VIEW -- */
+
+/* Affects column head (behind label) */
+.table-view .column-header{
+	-fx-background-color: lightblue;
+}
+
+/* Affects labels of column head of table view */
+.table-view .column-header-background .label{
+	-fx-background-color: lightblue;
+    -fx-font-size: 16px;
+}
+
+/* Affects content in table cells */
+.table-view .table-cell{
+    -fx-font-size: 16px;
 }
 
 
