@@ -6,6 +6,7 @@
  * 		- Main
  * 		- Button
  * 		- Alert
+ * 		- Toggle Button
  * 		- Dialog Pane
  *		- Date Picker
  * 		- Combo Box 
@@ -50,6 +51,20 @@
 {
 	-fx-background-color: lightgrey;
 	-fx-font-size: 14pt;
+}
+
+
+/* -- TOGGLE BUTTON -- */
+
+/* Changes selected toggle button */
+.toggle-button:selected {
+    -fx-background-color: lightblue, /* #090a0c, */
+        linear-gradient(gray 0%, gray 20%, gray 100%),
+        linear-gradient(lightblue, #86c5da),
+        radial-gradient(center 50% 0%, radius 100%, lightblue, rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 
