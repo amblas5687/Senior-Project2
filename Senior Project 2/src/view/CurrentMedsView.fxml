@@ -4,10 +4,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CurrentMedsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CurrentMedsController">
    <children>
-      <TableView fx:id="medicationTable" layoutX="39.0" layoutY="21.0" prefHeight="370.0" prefWidth="530.0">
+      <TableView fx:id="medicationTable" prefHeight="444.0" prefWidth="796.0">
         <columns>
           <TableColumn fx:id="mName" prefWidth="129.0" text="Medication Name" />
           <TableColumn fx:id="mDosage" minWidth="0.0" prefWidth="79.5" text="Dosage" />
