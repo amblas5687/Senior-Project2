@@ -1,10 +1,6 @@
 package model;
 
-import java.sql.Date;
-import java.time.LocalDate;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
