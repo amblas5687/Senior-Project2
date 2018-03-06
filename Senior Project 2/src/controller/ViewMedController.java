@@ -129,5 +129,16 @@ public class ViewMedController {
 	@FXML
 	private void editMed(ActionEvent event) {
 		
+		try {
+    	
+			//Replace content_view's current display with the view for this controller
+			toPane = getClass().getResource("/view/EditCurrentMeds.fxml");
+			temp = FXMLLoader.load(toPane);
+			content_view.getChildren().setAll(temp);
+    		
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+		
 	}
 }
