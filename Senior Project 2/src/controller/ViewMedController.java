@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -23,12 +25,21 @@ public class ViewMedController {
 	
 	@FXML
 	private Button btnEdit;
+
+    @FXML
+    private Button btnSearch;
+    
+    @FXML
+    private TextField searchTF;
 	
     @FXML
     private ToggleButton currMed;
 
     @FXML
     private ToggleButton archMed;
+    
+	@FXML
+    private ComboBox<String> searchOptions;
 
 	@FXML
 	private AnchorPane table_med = new AnchorPane();
@@ -42,6 +53,8 @@ public class ViewMedController {
 	private ToggleGroup state = new ToggleGroup();
 	
 	public void initialize(){
+		
+		searchOptions.getItems().addAll("Name", "Date", "Date Range");
 		
 		 try {
 			 
@@ -64,6 +77,8 @@ public class ViewMedController {
 	@FXML
 	private void currentMed(ActionEvent event) {
 		
+		 currMed.setSelected(true);
+		
 		 btnAdd.setVisible(true);
 		 btnArchive.setVisible(true);
 		 btnEdit.setVisible(true);
@@ -84,6 +99,8 @@ public class ViewMedController {
 	@FXML
 	private void archivedMed(ActionEvent event) {
 		
+		 archMed.setSelected(true);
+		
 		 btnAdd.setVisible(false);
 		 btnArchive.setVisible(false);
 		 btnEdit.setVisible(false);
@@ -99,6 +116,12 @@ public class ViewMedController {
 		 }
 		 
 	}
+	
+	@FXML
+	private void searchMed(ActionEvent event) {
+
+    }
+
 	
 	@FXML
 	private void addMed(ActionEvent event) {
