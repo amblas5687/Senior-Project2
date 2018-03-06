@@ -9,8 +9,8 @@
  * 		- Toggle Button
  * 		- Dialog Pane
  * 		- Table View
- *		- Date Picker
  * 		- Combo Box 
+ *		- Date Picker
  * Preliminary color scheme -> subject to change
 */
 
@@ -117,6 +117,14 @@
 }
 
 
+/* -- COMBO BOX -- */
+
+/* Affects all combo boxes */
+.combo-box{
+	-fx-font: 16px System;
+}
+
+
 /* -- DATE PICKER -- */
 
 /* Affects all date pickers */
@@ -204,15 +212,3 @@
 	-fx-border-color: #1783CC;
 	-fx-background-color: black;
  }
-
-
-/* -- COMBO BOX -- */
-
-/* Affects all combo boxes */
-.combo-box{
-	-fx-font: 16px System;
-}
-
-
-
-
