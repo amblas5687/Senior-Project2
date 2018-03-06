@@ -91,6 +91,12 @@
     -fx-font-size: 16px;
 }
 
+/* Affects row selector of table view */
+.table-row-cell:selected { 
+	-fx-background-color: #e6bbad;
+	-fx-selection-bar: #e6bbad;
+}
+
 /* Affects scroll bar buttons */
 .table-view *.scroll-bar:horizontal *.increment-button,
 .table-view *.scroll-bar:horizontal *.decrement-button {
