@@ -13,7 +13,16 @@ import javafx.scene.layout.AnchorPane;
 public class ViewMedController {
 
 	@FXML
-	private Button add;
+	private Button btnAdd;
+	
+	@FXML
+	private Button btnDetails;
+	
+	@FXML
+	private Button btnArchive;
+	
+	@FXML
+	private Button btnEdit;
 	
     @FXML
     private ToggleButton currMed;
@@ -33,32 +42,62 @@ public class ViewMedController {
 	private ToggleGroup state = new ToggleGroup();
 	
 	public void initialize(){
-	 try {
-		 
-		 toPane = getClass().getResource("/view/CurrentMedsView.fxml"); 
-  		 temp = FXMLLoader.load(toPane);
-		 table_med.getChildren().setAll(temp);
-		 
-	 } catch(Exception e) {
-		 e.printStackTrace();
-	 }
+		
+		 try {
+			 
+			 toPane = getClass().getResource("/view/CurrentMedsView.fxml"); 
+	  		 temp = FXMLLoader.load(toPane);
+			 table_med.getChildren().setAll(temp);
+			 
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
 	 
-	 //add to toggle group
-	 currMed.setToggleGroup(state);
-	 archMed.setToggleGroup(state);
-	 
-	 currMed.setSelected(true);
+		 //add to toggle group
+		 currMed.setToggleGroup(state);
+		 archMed.setToggleGroup(state);
+		 
+		 currMed.setSelected(true);
 		 
 	}
 	
 	@FXML
 	private void currentMed(ActionEvent event) {
 		
+		 btnAdd.setVisible(true);
+		 btnArchive.setVisible(true);
+		 btnEdit.setVisible(true);
+		 
+		 try {
+			//Replace table_med's present display with the view of current med table
+			 toPane = getClass().getResource("/view/CurrentMedsView.fxml"); 
+	  		 temp = FXMLLoader.load(toPane);
+			 table_med.getChildren().setAll(temp);
+			 
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
 	}
 	
+	//activates when the archived toggle button is selected
 	@FXML
 	private void archivedMed(ActionEvent event) {
 		
+		 btnAdd.setVisible(false);
+		 btnArchive.setVisible(false);
+		 btnEdit.setVisible(false);
+		 
+		 try {
+			//Replace table_med's present display with the view of archived med table
+			 toPane = getClass().getResource("/view/CurrentMedsView.fxml");//Change to archived med table when it is created
+	  		 temp = FXMLLoader.load(toPane);
+			 table_med.getChildren().setAll(temp);
+			 
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
 	}
 	
 	@FXML
@@ -74,5 +113,21 @@ public class ViewMedController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@FXML
+	private void viewDetails(ActionEvent event) {
+		
+	}
+	
+	//activates when the archive button is selected
+	@FXML
+	private void archiveMed(ActionEvent event) {
+		
+	}
+	
+	@FXML
+	private void editMed(ActionEvent event) {
+		
 	}
 }

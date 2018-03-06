@@ -35,7 +35,22 @@
                         <Font size="16.0" />
                      </font>
                   </ToggleButton>
-                  <Button fx:id="add" layoutX="872.0" layoutY="153.0" mnemonicParsing="false" onAction="#addMed" text="Add">
+                  <Button fx:id="btnDetails" disable="true" layoutX="862.0" layoutY="152.0" mnemonicParsing="false" onAction="#viewDetails" text="Details">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnAdd" layoutX="872.0" layoutY="558.0" mnemonicParsing="false" onAction="#addMed" text="Add">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnArchive" disable="true" layoutX="861.0" layoutY="222.0" mnemonicParsing="false" onAction="#archiveMed" text="Archive">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnEdit" disable="true" layoutX="872.0" layoutY="292.0" mnemonicParsing="false" onAction="#editMed" text="Edit">
                      <font>
                         <Font size="16.0" />
                      </font>
