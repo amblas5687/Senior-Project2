@@ -6,11 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import application.AnnaMain;
 import application.DBConfig;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import model.MedModel;
 
 public class CurrentMedsController {
@@ -29,14 +33,31 @@ public class CurrentMedsController {
     private TableColumn<MedModel, String> mDate;
     @FXML
     private TableColumn<MedModel, String> mDoc;
+    
     ObservableList<MedModel> patientMeds = FXCollections.observableArrayList();
     
     
     public void initialize(){
     	grabMeds();
+    	
+    	//adds listener to table
+    	/*medicationTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<MedModel>() {
+    	    @Override
+    	    public void changed(ObservableValue<? extends MedModel> observable,
+    	    		MedModel oldValue, MedModel newValue) {
+
+    	        System.out.println("ListView Selection Changed (newValue: " + newValue.getMedName() + ")\n");
+    	    }
+    	});*/
     }
     
-    
+    @FXML
+    void clickMed(MouseEvent event) {
+    	
+    	MedModel selectedMed = medicationTable.getSelectionModel().getSelectedItem();
+    	System.out.println(selectedMed);   
+
+    }
     
     void grabMeds() {
     	
@@ -81,6 +102,7 @@ public class CurrentMedsController {
     	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
     	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
     	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+    	//listView.setItems(patientMeds);
     	medicationTable.setItems(patientMeds);
 
     	
