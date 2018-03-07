@@ -124,6 +124,18 @@
 	-fx-font: 16px System;
 }
 
+/* Affects dropdown selector for list */
+.combo-box .list-cell:hover{
+	-fx-background-color: #86c5da;
+	-fx-text-fill: black;
+}
+
+/* Affects selected item in dropdown list */
+.combo-box .list-view .list-cell:filled:selected{
+	-fx-background-color: #e6bbad;
+	-fx-text-fill: black;
+}
+
 
 /* -- DATE PICKER -- */
 
