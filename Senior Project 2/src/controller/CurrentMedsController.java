@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import model.CurMedModel;
+import model.MedModel;
 
 public class CurrentMedsController {
 	
@@ -20,16 +20,16 @@ public class CurrentMedsController {
 	Connection conn = AnnaMain.con;
 
     @FXML
-    private TableView<CurMedModel> medicationTable;
+    private TableView<MedModel> medicationTable;
     @FXML
-    private TableColumn<CurMedModel, String> mName;
+    private TableColumn<MedModel, String> mName;
     @FXML
-    private TableColumn<CurMedModel, String> mDosage;
+    private TableColumn<MedModel, String> mDosage;
     @FXML
-    private TableColumn<CurMedModel, String> mDate;
+    private TableColumn<MedModel, String> mDate;
     @FXML
-    private TableColumn<CurMedModel, String> mDoc;
-    ObservableList<CurMedModel> patientMeds = FXCollections.observableArrayList();
+    private TableColumn<MedModel, String> mDoc;
+    ObservableList<MedModel> patientMeds = FXCollections.observableArrayList();
     
     
     public void initialize(){
@@ -47,7 +47,7 @@ public class CurrentMedsController {
 		    	ResultSet rs = curMedPS.executeQuery();
 		    	
 		    	
-		    	CurMedModel tempMed;
+		    	MedModel tempMed;
 		    	String medName;
 		    	String medDate;
 		    	String medDetails;
@@ -66,7 +66,7 @@ public class CurrentMedsController {
 		    		medDose = rs.getString("medDosage");
 		    		purpose = rs.getString("purpPresrcipt");
 		    		
-		    		tempMed = new CurMedModel(medName, medDate, doc, medDetails, medDose, purpose);
+		    		tempMed = new MedModel(medName, medDate, doc, medDetails, medDose, purpose);
 		    		patientMeds.add(tempMed);	
 		    		System.out.println("grabbing med... " + tempMed);
 		    	}
