@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -37,6 +38,9 @@ public class ViewMedController {
 
     @FXML
     private ToggleButton archMed;
+    
+    @FXML
+    private DatePicker DRPicker;
     
 	@FXML
     private ComboBox<String> searchOptions;
@@ -71,7 +75,7 @@ public class ViewMedController {
 		 archMed.setToggleGroup(state);
 		 
 		 currMed.setSelected(true);
-		 
+		
 	}
 	
 	@FXML

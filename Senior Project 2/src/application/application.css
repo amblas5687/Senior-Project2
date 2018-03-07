@@ -141,9 +141,6 @@
 
 /* Affects all date pickers */
 .date-picker{
-    -fx-background-color: rgba(255,255,255,0.0);
-    -fx-background-radius: 15 15 15 15;
-    -fx-background-insets: 6 6 6 6 ;
     -fx-text-fill: rgba(0,0,0,0.7);
     -fx-font: 16px System;
 }
