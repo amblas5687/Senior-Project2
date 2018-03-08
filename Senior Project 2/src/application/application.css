@@ -83,7 +83,7 @@
 /* Affects labels of column head of table view */
 .table-view .column-header-background .label{
 	-fx-background-color: lightblue;
-    -fx-font-size: 16px;
+    -fx-font-size: 15.5px;
 }
 
 /* Affects content in table cells */
