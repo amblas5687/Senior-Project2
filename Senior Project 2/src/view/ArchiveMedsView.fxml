@@ -1,20 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArchivedMedsController">
-   <children>
-      <TableView fx:id="archiveTable" prefHeight="444.0" prefWidth="796.0">
-         <columns>
-            <TableColumn fx:id="mName" prefWidth="157.59996950626373" text="Medication Name" />
-            <TableColumn fx:id="mDosage" minWidth="0.0" prefWidth="75.99993896484375" text="Dosage" />
-            <TableColumn fx:id="mDate" minWidth="8.0" prefWidth="132.00006103515625" text="Perscription Date" />
-            <TableColumn fx:id="mDoc" prefWidth="151.20004272460938" text="Perscribing Doctor" />
-            <TableColumn fx:id="archiveDate" prefWidth="106.4000244140625" text="Archive Date" />
-            <TableColumn fx:id="archiveReason" prefWidth="169.5999755859375" text="Archive Reason" />
-         </columns>
-      </TableView>
-   </children>
+<AnchorPane fx:id="content_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArchivedMedsController">
+	<children>
+		<BorderPane prefHeight="678.0" prefWidth="968.0">
+         <top>
+            <Label text="Medication Information" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <AnchorPane prefHeight="450.0" prefWidth="842.0" BorderPane.alignment="CENTER">
+               <children>
+	               <TableView fx:id="archiveTable" layoutX="30.0" layoutY="152.0" prefHeight="444.0" prefWidth="796.0">
+         		   	<columns>
+            			<TableColumn fx:id="mName" prefWidth="157.59996950626373" text="Medication Name" />
+            			<TableColumn fx:id="mDosage" minWidth="0.0" prefWidth="75.99993896484375" text="Dosage" />
+            			<TableColumn fx:id="mDate" minWidth="8.0" prefWidth="132.00006103515625" text="Perscription Date" />
+            			<TableColumn fx:id="mDoc" prefWidth="151.20004272460938" text="Perscribing Doctor" />
+            			<TableColumn fx:id="archiveDate" prefWidth="106.4000244140625" text="Archive Date" />
+            			<TableColumn fx:id="archiveReason" prefWidth="169.5999755859375" text="Archive Reason" />
+         			</columns>
+     			 </TableView>
+                  <ToggleButton fx:id="currMed" layoutX="401.0" layoutY="23.0" mnemonicParsing="false" onAction="#currentMed" text="Current">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </ToggleButton>
+                  <ToggleButton fx:id="archMed" layoutX="477.0" layoutY="23.0" mnemonicParsing="false" onAction="#archivedMed" text="Archived">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </ToggleButton>
+                  <Button fx:id="btnDetails" disable="true" layoutX="860.0" layoutY="152.0" maxHeight="25.0" minWidth="75.0" mnemonicParsing="false" onAction="#viewDetails" text="Details">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <ComboBox fx:id="searchOptions" layoutX="240.0" layoutY="84.0" maxHeight="40.0" prefHeight="40.0" prefWidth="144.0" />
+                  <TextField fx:id="searchTF" layoutX="384.0" layoutY="84.0" prefHeight="40.0" prefWidth="277.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="btnSearch" layoutX="662.0" layoutY="84.0" minHeight="40.0" minWidth="75.0" mnemonicParsing="false" onAction="#searchMed" text="Search">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <DatePicker fx:id="DRPicker" layoutX="384.0" layoutY="84.0" maxHeight="40.0" maxWidth="277.0" minHeight="40.0" minWidth="277.0" prefHeight="40.0" prefWidth="277.0" visible="false" />
+               </children>
+            </AnchorPane>
+         </center>
+       </BorderPane>
+	</children>
 </AnchorPane>

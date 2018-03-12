@@ -54,7 +54,7 @@ public class MainViewController {
 		     switch(btn)
 		     {
 		     	case 'M': //My Meds
-		     		toPane = getClass().getResource("/view/ViewMedInfo.fxml"); 
+		     		toPane = getClass().getResource("/view/CurrentMedsView.fxml"); 
 		     		temp = FXMLLoader.load(toPane);
 		     		content_view.getChildren().setAll(temp);
 		     		btnMed.getStyleClass().add("activeButton");
