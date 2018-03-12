@@ -6,11 +6,19 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 public class MainViewController {
     
+	 Parent root;
+	 Scene scene;
+	 Stage stage;
+	
 	 @FXML
 	 private JFXButton btnMed;
 	 @FXML
@@ -87,7 +95,16 @@ public class MainViewController {
 
 	 @FXML
 	  private void logout(ActionEvent event) {
-		  System.exit(0);
+		 
+		 try {
+				stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
+				scene = new Scene(root);
+				stage.setScene(scene);
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+
 	   }
 	    
 }
