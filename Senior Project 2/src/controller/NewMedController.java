@@ -55,7 +55,7 @@ public class NewMedController {
     	try {
     		
 			//Replace content_view's current display with the view for this controller
-			toPane = getClass().getResource("/view/ViewMedInfo.fxml");
+			toPane = getClass().getResource("/view/CurrentMedsView.fxml");
 			temp = FXMLLoader.load(toPane);
 			content_view.getChildren().setAll(temp);
     		
