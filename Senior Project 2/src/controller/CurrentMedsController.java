@@ -122,7 +122,7 @@ public class CurrentMedsController {
     	try {
 		    	String medQ = "SELECT * FROM currentMeds WHERE patientCode = ?";
 		    	PreparedStatement curMedPS = conn.prepareStatement(medQ);
-		    	curMedPS.setString(1, MainViewController.currentPatientID);
+		    	curMedPS.setString(1, LoginController.currentPatientID);
 		    	ResultSet rs = curMedPS.executeQuery();
 		    	
 		    	

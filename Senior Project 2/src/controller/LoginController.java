@@ -37,6 +37,12 @@ public class LoginController {
 
 	 @FXML
 	 private JFXButton btnPatient;
+	 
+	 
+	//global variables for login
+	 public static String currentUserID;
+	 public static String currentPatientID;
+		 
 
 	 @FXML
 	 void loadNewPatient(ActionEvent event) {
@@ -89,6 +95,12 @@ public class LoginController {
 						root = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
 						scene = new Scene(root);
 						stage.setScene(scene);
+						
+						currentUserID = rs.getString("userID");
+						currentPatientID = rs.getString("patientCode");
+						
+						System.out.println("Current user and their patient " + currentUserID + " " + currentPatientID);
+						 
 					 } else {
 						 System.out.println("Unsuccessful login");
 					 }

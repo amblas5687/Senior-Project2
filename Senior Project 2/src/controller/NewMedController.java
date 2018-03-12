@@ -83,7 +83,7 @@ public class NewMedController {
     	
     	try {
     		PreparedStatement ps = conn.prepareStatement(query);
-    		ps.setString(1, MainViewController.currentPatientID);
+    		ps.setString(1, LoginController.currentPatientID);
         	ps.setString(2, mName);
         	ps.setString(3, mDosage);
         	ps.setString(4, mDescript);

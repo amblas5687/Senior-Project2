@@ -113,7 +113,7 @@ void grabMeds() {
     	try {
 		    	String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ?";
 		    	PreparedStatement arcMedsPS = conn.prepareStatement(medQ);
-		    	arcMedsPS.setString(1, MainViewController.currentPatientID);
+		    	arcMedsPS.setString(1, LoginController.currentPatientID);
 		    	ResultSet rs = arcMedsPS.executeQuery();
 		    	
 		    	
