@@ -3,6 +3,7 @@ package controller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import com.jfoenix.controls.JFXButton;
 import application.AnnaMain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +33,40 @@ public class LoginController {
 	 private Button btnLogin;
 
 	 @FXML
+     private JFXButton btnUser;
+
+	 @FXML
+	 private JFXButton btnPatient;
+
+	 @FXML
+	 void loadNewPatient(ActionEvent event) {
+		 
+		 try {
+			stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("/view/NewPatientView.fxml"));
+			scene = new Scene(root);
+			stage.setScene(scene);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
+	 }
+
+	 @FXML
+	 void loadNewUser(ActionEvent event) {
+		 
+		 try {
+			stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("/view/NewUserView.fxml"));
+			scene = new Scene(root);
+			stage.setScene(scene);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
+	 }
+
+	 @FXML
 	 void login(ActionEvent event) {
 		 
 		 try {
@@ -50,10 +85,10 @@ public class LoginController {
 					String pass = rs.getString("password");
 			 
 					 if(mail.equals(email) && pass.equals(password)){
-							stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-							root = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
-							scene = new Scene(root);
-							stage.setScene(scene);
+						stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+						root = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
+						scene = new Scene(root);
+						stage.setScene(scene);
 					 } else {
 						 System.out.println("Unsuccessful login");
 					 }

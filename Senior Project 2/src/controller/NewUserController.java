@@ -10,16 +10,24 @@ import application.AnnaMain;
 import application.DBConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.Stage;
 import model.UserModel;
 
 public class NewUserController {
 
+	Parent root;
+	Scene scene;
+	Stage stage;
+	
     @FXML
     private TextField fnameTF;
     @FXML
@@ -108,6 +116,15 @@ public class NewUserController {
     @FXML
     void returnMain(ActionEvent event) {
 
+		 try {
+				stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
+				scene = new Scene(root);
+				stage.setScene(scene);
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+    	
     }
     
     

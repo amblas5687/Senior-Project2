@@ -57,6 +57,15 @@ public class NewPatientController {
     @FXML
     void returnMain(ActionEvent event) {
 
+		 try {
+				stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
+				scene = new Scene(root);
+				stage.setScene(scene);
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+    	
     }
 
     @FXML
