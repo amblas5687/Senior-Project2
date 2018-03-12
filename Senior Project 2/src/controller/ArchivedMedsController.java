@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.MedModel;
 
@@ -126,6 +127,16 @@ public class ArchivedMedsController {
 		 
 	}
 	
+    @FXML
+    void clickMed(MouseEvent event) {
+    	
+    	MedModel selectedMed = archiveTable.getSelectionModel().getSelectedItem();
+    	System.out.println(selectedMed);   
+    	
+    	if(selectedMed != null) {
+	    	btnDetails.setDisable(false);
+    	}
+    }
 	
 	@FXML
 	private void viewDetails(ActionEvent event) {

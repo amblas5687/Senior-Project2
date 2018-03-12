@@ -108,7 +108,12 @@ public class CurrentMedsController {
     	
     	MedModel selectedMed = medicationTable.getSelectionModel().getSelectedItem();
     	System.out.println(selectedMed);   
-
+    	
+    	if(selectedMed != null) {
+	    	btnDetails.setDisable(false);
+	    	btnArchive.setDisable(false);
+	    	btnEdit.setDisable(false);
+    	}
     }
     
     void grabMeds() {
