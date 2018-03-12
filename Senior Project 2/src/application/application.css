@@ -171,7 +171,7 @@
 /* Changes calendar picture on date picker selector on hover */
 .date-picker .arrow-button:hover .arrow{
 	-fx-background-radius: 0px;
-	-fx-background-color: purple;
+	-fx-background-color: #005662;
  }
 
 /* Changes arrow background surrounding month and year on calendar in date picker */
@@ -198,22 +198,24 @@
 /* Changes grid with dates on calendar in date picker */
  .date-picker .cell {
 	-fx-background-color: #80deea;/* #232323; */
-	-fx-pref-width:20px ;
-	-fx-pref-height:25px ;
+	-fx-pref-width:20px;
+	-fx-pref-height:25px;
  }
 
 /* Changes hover on dates for calendar in date picker */
 .date-picker .cell:hover {
-	-fx-background-color: #1783CC;
-	-fx-pref-width:20px ;
-	-fx-pref-height:25px ;
+	-fx-background-color: #0097a7;
+	-fx-pref-width:20px;
+	-fx-pref-height:25px;
+	
 }
 
 /* Changes current date on calendar in date picker */
 .date-picker .cell:focused {
-	-fx-background-color: #11659e;
-	-fx-pref-width:20px ;
-	-fx-pref-height:25px ;
+	-fx-background-color: #ffcdd2;
+	-fx-pref-width:20px;
+	-fx-pref-height:25px;
+	-fx-text-fill: black;
  }
 
 /* Changes border around date grid in calendar of date picker */
