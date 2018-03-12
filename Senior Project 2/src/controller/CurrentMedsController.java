@@ -134,6 +134,7 @@ public class CurrentMedsController {
 		    	String doc;
 		    	String medDose;
 		    	String purpose;
+		    	String dateAdded;
 		    	
 		    	
 		    	
@@ -147,8 +148,10 @@ public class CurrentMedsController {
 		    		//System.out.println(doc);
 		    		medDose = rs.getString("medDosage");
 		    		purpose = rs.getString("purpPresrcipt");
+		    		dateAdded = rs.getString("dateAdded");
 		    		
-		    		tempMed = new MedModel(patientCode, medName, medDate, doc, medDetails, medDose, purpose);
+		    		
+		    		tempMed = new MedModel(patientCode, medName, medDate, doc, medDetails, medDose, purpose, dateAdded);
 		    		patientMeds.add(tempMed);	
 		    		System.out.println("grabbing med... " + tempMed);
 		    	}
@@ -276,11 +279,22 @@ public class CurrentMedsController {
 		    	moveMedPS.setString(9, archiveReason);
 		    	
 		    	moveMedPS.execute();
+		    	System.out.println("Medication moved!");
 		    	
 		    	
 		    	//************************************
 				//DELETE MED AFTER MOVING FROM CURRENT
 				//************************************
+		    	String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medName = ? AND prescribDate = ?";
+				PreparedStatement deleteMedPS = conn.prepareStatement(deleteMedQ);
+				
+				deleteMedPS.setString(1, patientCode);
+				deleteMedPS.setString(2, medName);
+				deleteMedPS.setString(3, prescribDate);
+				//deleteMedPS.setString(4, moveMed.getDateAdded().get());
+		    	
+				deleteMedPS.execute();
+				System.out.println("Medication deleted!");
 		    	
 		    	
 		    	
