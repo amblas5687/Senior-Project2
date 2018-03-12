@@ -68,7 +68,6 @@ public class NewMedController {
     @FXML
     void submit(ActionEvent event) {
     	
-    	String patientCode = "123456789";
     	String mName = medName.getText();
     	String mDosage = medDosage.getText();
     	String mDescript = medDescript.getText();
@@ -82,7 +81,7 @@ public class NewMedController {
     	
     	try {
     		PreparedStatement ps = conn.prepareStatement(query);
-    		ps.setString(1, patientCode);
+    		ps.setString(1, MainViewController.currentPatientID);
         	ps.setString(2, mName);
         	ps.setString(3, mDosage);
         	ps.setString(4, mDescript);

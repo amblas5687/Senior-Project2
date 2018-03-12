@@ -27,7 +27,6 @@ import model.MedModel;
 public class CurrentMedsController {
 	
 	//code for testing
-	String testCode = "1";
 	Connection conn = AnnaMain.con;
 
 
@@ -107,7 +106,7 @@ public class CurrentMedsController {
     void clickMed(MouseEvent event) {
     	
     	MedModel selectedMed = medicationTable.getSelectionModel().getSelectedItem();
-    	System.out.println(selectedMed);   
+    	System.out.println("selected" + selectedMed);   
 
     }
     
@@ -116,11 +115,12 @@ public class CurrentMedsController {
     	try {
 		    	String medQ = "SELECT * FROM currentMeds WHERE patientCode = ?";
 		    	PreparedStatement curMedPS = conn.prepareStatement(medQ);
-		    	curMedPS.setString(1, testCode);
+		    	curMedPS.setString(1, MainViewController.currentPatientID);
 		    	ResultSet rs = curMedPS.executeQuery();
 		    	
 		    	
 		    	MedModel tempMed;
+		    	String patientCode;
 		    	String medName;
 		    	String medDate;
 		    	String medDetails;
@@ -129,8 +129,10 @@ public class CurrentMedsController {
 		    	String purpose;
 		    	
 		    	
+		    	
 		    while(rs.next())
 		    	{
+		    		patientCode = rs.getString("patientCode");
 		    		medName = rs.getString("medName");
 		    		medDate = rs.getString("prescribDate");
 		    		medDetails = rs.getString("medDescript");
@@ -139,7 +141,7 @@ public class CurrentMedsController {
 		    		medDose = rs.getString("medDosage");
 		    		purpose = rs.getString("purpPresrcipt");
 		    		
-		    		tempMed = new MedModel(medName, medDate, doc, medDetails, medDose, purpose);
+		    		tempMed = new MedModel(patientCode, medName, medDate, doc, medDetails, medDose, purpose);
 		    		patientMeds.add(tempMed);	
 		    		System.out.println("grabbing med... " + tempMed);
 		    	}
@@ -225,7 +227,64 @@ public class CurrentMedsController {
 	@FXML
 	private void archiveMed(ActionEvent event) {
 		
+		//get selected med
+		MedModel moveMed = medicationTable.getSelectionModel().getSelectedItem();
+		System.out.println("Med to move..." + moveMed);
+		
+		
+		try {
+				
+				//********************************
+				//MOVE MED TO ARCHIVE TABLE
+				//********************************
+
+				//grab values to insert into archive
+				String patientCode = moveMed.getPatientCode().get();
+				String medName = moveMed.getMedName().get();
+		    	String medDosage = moveMed.getMedDosage().get();
+		    	String medDescript = moveMed.getDetails().get();
+		    	String prescribDoc = moveMed.getDoc().get();
+		    	String purpPresrcipt = moveMed.getPurpose().get();
+		    	String prescribDate = moveMed.getDate().get();
+		    	String dateArchived = java.time.LocalDate.now().toString();  
+		    	String archiveReason="get from textfield popup";
+				
+		    	
+		    	
+				String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, medDescript, "
+						+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
+						+ "VALUES (?,?,?,?,?,?,?,?,?)";
+		    	
+				PreparedStatement moveMedPS = conn.prepareStatement(moveMedQ);
+		    	
+		    	//set strings
+		    	moveMedPS.setString(1, patientCode);
+		    	moveMedPS.setString(2, medName);
+		    	moveMedPS.setString(3, medDosage);
+		    	moveMedPS.setString(4, medDescript);
+		    	moveMedPS.setString(5, prescribDoc);
+		    	moveMedPS.setString(6, purpPresrcipt);
+		    	moveMedPS.setString(7, prescribDate);
+		    	moveMedPS.setString(8, dateArchived);
+		    	moveMedPS.setString(9, archiveReason);
+		    	
+		    	moveMedPS.execute();
+		    	
+		    	
+		    	//************************************
+				//DELETE MED AFTER MOVING FROM CURRENT
+				//************************************
+		    	
+		    	
+		    	
+		}catch (SQLException e) {
+    		
+    		DBConfig.displayException(e);
+    		System.out.println("Failed move of medication information.");
+    	}
+		
 	}
+	
 	
 	@FXML
 	private void editMed(ActionEvent event) {

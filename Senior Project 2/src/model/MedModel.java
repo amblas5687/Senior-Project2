@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 
 public class MedModel {
 	
+	StringProperty patientCode;
 	StringProperty medName;
 	StringProperty medDosage;
 	StringProperty doc;
@@ -17,9 +18,10 @@ public class MedModel {
 	
 	
 	//used for current patient
-	public MedModel(String medName, String medDate, String doc, String purpose,
+	public MedModel(String patientCode, String medName, String medDate, String doc, String purpose,
 			String medDose, String details) {
 		super();
+		this.patientCode = new SimpleStringProperty(patientCode);
 		this.medName = new SimpleStringProperty(medName);
 		this.medDosage = new SimpleStringProperty(medDose);
 		this.doc = new SimpleStringProperty(doc);
@@ -30,9 +32,10 @@ public class MedModel {
 	
 	
 	//for archived meds
-	public MedModel(String medName, String medDose, String doc, String purpose,
+	public MedModel(String patientCode, String medName, String medDose, String doc, String purpose,
 			String medDate, String details, String archiveDate, String archiveReason) {
 		super();
+		this.patientCode = new SimpleStringProperty(patientCode);
 		this.medName = new SimpleStringProperty(medName);
 		this.medDosage = new SimpleStringProperty(medDose);
 		this.doc = new SimpleStringProperty(doc);
@@ -43,13 +46,19 @@ public class MedModel {
 		this.archiveReason = new SimpleStringProperty(archiveReason);;
 	}
 
-
-
-
 	public MedModel() {
 		super();
 	}
 
+	
+	public StringProperty getPatientCode() {
+		return patientCode;
+	}
+
+	public void setPatientCode(StringProperty patientCode) {
+		this.patientCode = patientCode;
+	}
+	
 	public StringProperty getMedName() {
 		return medName;
 	}

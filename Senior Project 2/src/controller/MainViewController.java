@@ -27,6 +27,11 @@ public class MainViewController {
 	 private URL toPane;
 	 private AnchorPane temp;
 	 
+	 //global variables for login
+	 public static String currentUserID;
+	 public static String currentPatientID = "1";
+	 
+	 
 	 public void initialize(){
 		/* try {
 			 

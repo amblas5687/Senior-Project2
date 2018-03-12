@@ -75,6 +75,7 @@ public class ViewMedController {
 		 archMed.setToggleGroup(state);
 		 
 		 currMed.setSelected(true);
+		 btnArchive.setDisable(false);
 		
 	}
 	
@@ -150,7 +151,8 @@ public class ViewMedController {
 	//activates when the archive button is selected
 	@FXML
 	private void archiveMed(ActionEvent event) {
-		
+		CurrentMedsController tempMedController = new CurrentMedsController();
+		tempMedController.archiveMed();
 	}
 	
 	@FXML
