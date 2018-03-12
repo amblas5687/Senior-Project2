@@ -74,10 +74,12 @@ public class NewMedController {
     	String pDoc = prescribDoc.getText();
     	String pPurpose = purpOfPrescript.getText();
     	String pDate = DOPPicker.getValue().toString();
+    	String dateAdded = java.time.LocalDate.now().toString();  
+
     	
     	
-    	String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate)"
-    			+ "VALUES (?,?,?,?,?,?,?)";
+    	String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate, dateAdded)"
+    			+ "VALUES (?,?,?,?,?,?,?,?)";
     	
     	try {
     		PreparedStatement ps = conn.prepareStatement(query);
@@ -88,6 +90,7 @@ public class NewMedController {
         	ps.setString(5, pDoc);
         	ps.setString(6, pPurpose);
         	ps.setString(7, pDate);
+        	ps.setString(8, dateAdded);
         	
         	ps.execute();
         	
