@@ -295,6 +295,11 @@ public class CurrentMedsController {
 		    	
 				deleteMedPS.execute();
 				System.out.println("Medication deleted!");
+				
+				
+				//reload current med page
+				patientMeds.clear();
+				grabMeds();
 		    	
 		    	
 		    	
