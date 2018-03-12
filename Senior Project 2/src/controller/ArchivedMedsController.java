@@ -1,6 +1,14 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import application.AnnaMain;
+import application.DBConfig;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,6 +75,8 @@ public class ArchivedMedsController {
 	private ToggleGroup state = new ToggleGroup();
 	
 	
+	Connection conn = AnnaMain.con;
+	
 	public void initialize(){
 		
 		searchOptions.getItems().addAll("Name", "Date", "Date Range");
@@ -76,6 +86,9 @@ public class ArchivedMedsController {
 		archMed.setToggleGroup(state);
 		
 		archMed.setSelected(true);
+		
+		//grabs all the archived meds
+		grabMeds();
 		
 	}
 	
@@ -91,6 +104,64 @@ public class ArchivedMedsController {
     	archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
     	
     	archiveTable.setItems(archivedMeds);
+    	
+    }
+    
+    
+void grabMeds() {
+    	
+    	try {
+		    	String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ?";
+		    	PreparedStatement arcMedsPS = conn.prepareStatement(medQ);
+		    	arcMedsPS.setString(1, MainViewController.currentPatientID);
+		    	ResultSet rs = arcMedsPS.executeQuery();
+		    	
+		    	
+		    	MedModel tempMed;
+		    	String patientCode;
+		    	String medName;
+		    	String medDose;
+		    	String doc;
+		    	String purpose;
+		    	String medDate;
+		    	String medDetails;
+		    	String archiveDate;
+		    	String archiveReason;
+		    	
+		    	
+		    while(rs.next())
+		    	{
+		    		patientCode = rs.getString("patientCode");
+		    		medName = rs.getString("medName");
+		    		medDate = rs.getString("prescribDate");
+		    		medDetails = rs.getString("medDescript");
+		    		doc = rs.getString("prescribDoc");
+		    		medDose = rs.getString("medDosage");
+		    		purpose = rs.getString("purpPresrcipt");
+		    		archiveDate = rs.getString("dateArchived");
+		    		archiveReason = rs.getString("archiveReason");
+		    		
+		    		tempMed = new MedModel(patientCode, medName, medDose, doc, purpose, medDate, medDetails, archiveDate, archiveReason);
+		    		
+		    		archivedMeds.add(tempMed);	
+		    		System.out.println("grabbing med-archive... " + tempMed);
+		    	}
+	    	}
+    	catch (SQLException e) {
+    		DBConfig.displayException(e);	
+    		System.out.println("failed grab");
+    	}
+    	
+    	
+    	mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+    	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+    	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+    	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+    	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
+    	archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
+    	
+    	archiveTable.setItems(archivedMeds);
+
     	
     }
     
