@@ -17,7 +17,7 @@
 	<children>
 		<BorderPane prefHeight="678.0" prefWidth="968.0">
          <top>
-            <Label text="Medication Information" BorderPane.alignment="CENTER">
+            <Label text="Archived Medication Information" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
