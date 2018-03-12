@@ -26,22 +26,22 @@
 
 /* Affects all JFXButtons */
 .jfx-button{
-    -fx-background-color: lightblue;
+    -fx-background-color: #80deea;
 }
 
 /* Affects hover over action for all JFXButtons */
 .jfx-button:hover{
-	-fx-background-color: #86c5da;
+	-fx-background-color: #4bacb8;
 }
 
 /* Affects currently selected button */
 .activeButton{
-	-fx-background-color: #e6bbad;
+	-fx-background-color: #ffcdd2;
 }
 
 /* Affects hover over action for currently selected button */
 .activeButton:hover{
-	-fx-background-color: #e6bbad;
+	-fx-background-color: #ffcdd2;
 }
 
 
@@ -59,7 +59,7 @@
 
 /* Changes selected toggle button */
 .toggle-button:selected {
-	-fx-base: lightblue;
+	-fx-base: #80deea;
 }
 
 
@@ -77,12 +77,12 @@
 
 /* Affects column head (behind label) */
 .table-view .column-header{
-	-fx-background-color: lightblue;
+	-fx-background-color: #80deea;
 }
 
 /* Affects labels of column head of table view */
 .table-view .column-header-background .label{
-	-fx-background-color: lightblue;
+	-fx-background-color: #80deea;
     -fx-font-size: 15.5px;
 }
 
@@ -93,8 +93,8 @@
 
 /* Affects row selector of table view */
 .table-row-cell:selected { 
-	-fx-background-color: #e6bbad;
-	-fx-selection-bar: #e6bbad;
+	-fx-background-color: #ffcdd2;
+	-fx-selection-bar: #ffcdd2;
 }
 
 /* Affects scroll bar buttons */
@@ -126,13 +126,13 @@
 
 /* Affects dropdown selector for list */
 .combo-box .list-cell:hover{
-	-fx-background-color: #86c5da;
+	-fx-background-color: #4bacb8;
 	-fx-text-fill: black;
 }
 
 /* Affects selected item in dropdown list */
 .combo-box .list-view .list-cell:filled:selected{
-	-fx-background-color: #e6bbad;
+	-fx-background-color: #ffcdd2;
 	-fx-text-fill: black;
 }
 
@@ -147,7 +147,7 @@
 
 /* Affects month and year at top of calendar of date picker */
 .date-picker-popup > .month-year-pane {
-    -fx-background-color: lightblue;
+    -fx-background-color: #80deea;
     -fx-background-radius: 15 15 15 15;
     -fx-background-insets: 6 6 6 6 ;
     -fx-text-fill: rgba(0,0,0,0.7);
@@ -157,7 +157,7 @@
 /* Changes background of date picker calendar selector */
 .date-picker .arrow-button{
 	-fx-background-radius: 3px;
-	-fx-background-color: lightblue;/* #232323; */
+	-fx-background-color: #80deea;/* #232323; */
 	-fx-padding: 20px;
 }
 
@@ -197,7 +197,7 @@
 
 /* Changes grid with dates on calendar in date picker */
  .date-picker .cell {
-	-fx-background-color: lightblue;/* #232323; */
+	-fx-background-color: #80deea;/* #232323; */
 	-fx-pref-width:20px ;
 	-fx-pref-height:25px ;
  }
