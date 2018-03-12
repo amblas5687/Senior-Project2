@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <BorderPane prefHeight="678.0" prefWidth="968.0">
+      <BorderPane prefHeight="678.0" prefWidth="1200.0">
          <center>
             <GridPane BorderPane.alignment="CENTER">
               <columnConstraints>
@@ -28,7 +27,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="usernameTF" maxHeight="40.0" maxWidth="230.0" prefWidth="230.0" GridPane.columnIndex="1">
+                  <TextField fx:id="emailTF" maxHeight="40.0" maxWidth="230.0" prefWidth="230.0" GridPane.columnIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -38,7 +37,7 @@
                         <Font size="16.0" />
                      </font>
                   </PasswordField>
-                  <Label text="Username:" GridPane.halignment="CENTER">
+                  <Label text="Email:" GridPane.halignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
