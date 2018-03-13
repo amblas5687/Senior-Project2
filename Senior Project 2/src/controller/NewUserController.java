@@ -14,11 +14,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.GridPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.UserModel;
 
@@ -60,11 +64,21 @@ public class NewUserController {
     //user selects next button and enters code
     @FXML
     void patientCodeEnter(ActionEvent event) {
-    	TextInputDialog dialog = new TextInputDialog("");
+    	Alert dialog = new Alert(AlertType.CONFIRMATION);
     	dialog.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
     	dialog.setTitle("Patient Code");
     	dialog.setHeaderText("Enter the patient code that was \ngenerated when you created your patient");
-    	dialog.setContentText("Please enter the code:");
+    	
+    	GridPane grid = new GridPane();
+    	Label label = new Label("Please enter your patient code:  ");
+    	TextField textField = new TextField();
+    	
+    	grid.add(label, 0, 0);
+    	grid.add(textField, 1, 0);
+    	dialog.getDialogPane().setContent(grid);
+    	
+    	ButtonType noCode = new ButtonType("No patient code");
+    	dialog.getDialogPane().getButtonTypes().setAll(noCode, ButtonType.OK, ButtonType.CANCEL);
     	
     	//grab the fields for the user
 	    UserModel subUser = grabFields();
@@ -74,13 +88,23 @@ public class NewUserController {
 	    subUser.setUserID(userCode);
     	
     	//get response
-    	Optional<String> result = dialog.showAndWait();
-    	if (result.isPresent()){
+    	Optional<ButtonType> result = dialog.showAndWait();
+    	
+		if(result.get() == noCode) {
+			 try {
+					stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+					root = FXMLLoader.load(getClass().getResource("/view/NewPatientView.fxml"));
+					scene = new Scene(root);
+					stage.setScene(scene);
+			 } catch(Exception e) {
+				 e.printStackTrace();
+			 }
+		} else if (result.get() == ButtonType.OK){
     		
     		//TODO need to check patient table to verify the patient
     	    System.out.println("Code: " + result.get());
     	    
-    	    subUser.setPatientCode(result.get());
+    	    subUser.setPatientCode(textField.getText());
     	    
     	    //prepare the query
     	    String userQ = "INSERT into user (fname, lname, DOB, pRelation, email, password, patientCode, userID) "
