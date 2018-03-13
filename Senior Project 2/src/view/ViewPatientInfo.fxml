@@ -127,7 +127,33 @@
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
 		            </DatePicker>
-					<Button fx:id="submitBTN" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="75.0" text="Submit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="9">
+		            <TextField fx:id="cargiverTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+		            </TextField>
+		            <ComboBox fx:id="stageBox" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+		            </ComboBox>
+		             <DatePicker fx:id="diagnosesPicker" disable="true" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+		            </DatePicker>
+		            <TextField fx:id="doctorTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+		            </TextField>
+		            <Button fx:id="editBTN" mnemonicParsing="false" onAction="#edit" prefHeight="25.0" prefWidth="75.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="9">
 		               <GridPane.margin>
 		                  <Insets left="105.0" />
 		               </GridPane.margin>
@@ -135,7 +161,7 @@
                         <Font size="16.0" />
                      </font>
 		            </Button>
-		            <Button fx:id="editBTN" mnemonicParsing="false" onAction="#edit" prefHeight="25.0" prefWidth="75.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="9">
+					<Button fx:id="submitBTN" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="75.0" text="Submit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="9">
 		               <GridPane.margin>
 		                  <Insets left="105.0" />
 		               </GridPane.margin>
@@ -150,24 +176,6 @@
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin></Button>
-		            <ComboBox fx:id="stageBox" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-		            </ComboBox>
-		            <DatePicker fx:id="diagnosesPicker" disable="true" editable="false" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-		            </DatePicker>
-		            <TextField fx:id="cargiverTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-		            </TextField>
 		            <Label text="Primary Caregiver" GridPane.rowIndex="4">
                      <font>
                         <Font size="16.0" />
@@ -176,14 +184,6 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
-		            <TextField fx:id="doctorTF" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-		            </TextField>
 		         </children>
 		      </GridPane>
 		   </center>

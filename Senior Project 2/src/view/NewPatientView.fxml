@@ -131,6 +131,32 @@
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
 		            </DatePicker>
+		            <TextField fx:id="cargiverTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+		            </TextField>
+		            <ComboBox fx:id="stageBox" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+		            </ComboBox>
+		            <DatePicker fx:id="diagnosesPicker" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+		            </DatePicker>
+		            <TextField fx:id="doctorTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+		            </TextField>
 		            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9">
 		               <buttons>
 		                  <Button fx:id="submitBTN" mnemonicParsing="false" onAction="#submit" text="Submit">
@@ -146,24 +172,6 @@
 		                  <Insets />
 		               </GridPane.margin>
 		            </ButtonBar>
-		            <ComboBox fx:id="stageBox" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-		            </ComboBox>
-		            <DatePicker fx:id="diagnosesPicker" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-		            </DatePicker>
-		            <TextField fx:id="cargiverTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-		            </TextField>
 		            <Label text="Primary Caregiver" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="50.0" />
@@ -172,14 +180,6 @@
                         <Font size="16.0" />
                      </font>
 		            </Label>
-		            <TextField fx:id="doctorTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-		            </TextField>
 		         </children>
 		      </GridPane>
 		   </center>

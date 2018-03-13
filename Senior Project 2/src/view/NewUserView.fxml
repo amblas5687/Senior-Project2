@@ -140,6 +140,11 @@
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
 		            </DatePicker>
+		            <ComboBox fx:id="relationBox" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+		               <GridPane.margin>
+		                  <Insets left="5.0" />
+		               </GridPane.margin>
+		            </ComboBox>
 		            <TextField fx:id="emailTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
@@ -179,11 +184,6 @@
 		                  <Insets />
 		               </GridPane.margin>
 		            </ButtonBar>
-		            <ComboBox fx:id="relationBox" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-		               <GridPane.margin>
-		                  <Insets left="5.0" />
-		               </GridPane.margin>
-		            </ComboBox>
 		         </children>
 		      </GridPane>
 		   </center>
