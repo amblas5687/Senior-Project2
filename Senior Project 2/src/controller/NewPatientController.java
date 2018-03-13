@@ -83,10 +83,15 @@ public class NewPatientController {
     	Alert alert = new Alert(AlertType.INFORMATION);
     	DialogPane dialogPane = alert.getDialogPane();
     	dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+    	dialogPane.setMaxHeight(200);
     	dialogPane.getStyleClass().add("alert");
     	alert.setTitle("Patient Code");
     	alert.setHeaderText("Patient code uniquely identifies each patient. Please record for further use."); 
-    	alert.setContentText("Patient Code: " + patientCode);
+
+    	TextField textField = new TextField("Patient Code: " + patientCode);
+    	textField.setEditable(false);
+    	textField.setStyle("-fx-background-color: ligthgrey;");
+    	alert.getDialogPane().setContent(textField);
     	
     	Optional<ButtonType> result = alert.showAndWait();
     	

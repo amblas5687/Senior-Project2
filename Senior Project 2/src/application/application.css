@@ -48,8 +48,7 @@
 /* -- ALERT -- */
 
 /* Affects alert dialog boxes */
-.alert
-{
+.alert{
 	-fx-background-color: lightgrey;
 	-fx-font-size: 14pt;
 }
@@ -66,10 +65,14 @@
 /* -- DIALOGPANE -- */
 
 /* Affects pop-up dialog boxes */
-.dialog-pane
-{
+.dialog-pane{
 	-fx-background-color: lightgrey;
 	-fx-font-size: 14pt;
+}
+
+/* Affects buttons on dialog pane */
+.dialog-pane .button{
+	-fx-base: #80deea;
 }
 
 
