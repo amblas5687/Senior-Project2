@@ -10,5 +10,7 @@
 	<classpathentry kind="lib" path="libs/jfoenix-9.0.1.jar"/>
 	<classpathentry kind="lib" path="libs/joda-time-2.9.7.jar"/>
 	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="libs/c3p0-0.9.5.2.jar"/>
+	<classpathentry kind="lib" path="libs/mchange-commons-java-0.2.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

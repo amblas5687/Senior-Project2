@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -22,6 +25,11 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 import model.MedModel;
 
 public class CurrentMedsController {
@@ -233,7 +241,14 @@ public class CurrentMedsController {
 	}
 	
 	@FXML
-	private void viewDetails(ActionEvent event) {
+	private void viewDetails(ActionEvent event) throws IOException {
+		
+        Stage anotherStage = new Stage();
+        Parent anotherRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("/view/LoginView.fxml")); // FXML for second stage
+        Scene anotherScene = new Scene(anotherRoot);
+        anotherStage.setScene(anotherScene);
+        anotherStage.initModality(Modality.APPLICATION_MODAL);
+        anotherStage.show();
 		
 	}
 	
