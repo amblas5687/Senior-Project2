@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.UserModel;
 
@@ -68,6 +69,9 @@ public class NewUserController {
     	dialog.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
     	dialog.setTitle("Patient Code");
     	dialog.setHeaderText("Enter the patient code that was \ngenerated when you created your patient");
+    	
+    	stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+    	stage.getIcons().add(new Image("/application/4getmenot1.jpg"));
     	
     	GridPane grid = new GridPane();
     	Label label = new Label("Please enter your patient code:  ");

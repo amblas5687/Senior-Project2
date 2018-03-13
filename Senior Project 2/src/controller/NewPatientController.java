@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -87,6 +88,9 @@ public class NewPatientController {
     	dialogPane.getStyleClass().add("alert");
     	alert.setTitle("Patient Code");
     	alert.setHeaderText("Patient code uniquely identifies each patient. Please record for further use."); 
+    	
+    	stage = (Stage) alert.getDialogPane().getScene().getWindow();
+    	stage.getIcons().add(new Image("/application/4getmenot1.jpg"));
 
     	TextField textField = new TextField("Patient Code: " + patientCode);
     	textField.setEditable(false);
