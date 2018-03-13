@@ -16,11 +16,13 @@ public class MedModel {
 	StringProperty archiveDate;
 	StringProperty archiveReason;
 	StringProperty dateAdded;
+	StringProperty medID;
+
 	
 	
 	//used for current patient
 	public MedModel(String patientCode, String medName, String medDate, String doc, String purpose,
-			String medDose, String details, String dateAdded) {
+			String medDose, String details, String dateAdded, String medID, String archiveDate, String archiveReason) {
 		super();
 		this.patientCode = new SimpleStringProperty(patientCode);
 		this.medName = new SimpleStringProperty(medName);
@@ -30,22 +32,10 @@ public class MedModel {
 		this.date = new SimpleStringProperty(medDate);
 		this.details = new SimpleStringProperty(details);
 		this.dateAdded = new SimpleStringProperty(dateAdded);
-	}
-	
-	
-	//for archived meds
-	public MedModel(String patientCode, String medName, String medDose, String doc, String purpose,
-			String medDate, String details, String archiveDate, String archiveReason) {
-		super();
-		this.patientCode = new SimpleStringProperty(patientCode);
-		this.medName = new SimpleStringProperty(medName);
-		this.medDosage = new SimpleStringProperty(medDose);
-		this.doc = new SimpleStringProperty(doc);
-		this.purpose = new SimpleStringProperty(purpose);
-		this.date = new SimpleStringProperty(medDate);
-		this.details = new SimpleStringProperty(details);
-		this.archiveDate = new SimpleStringProperty(archiveDate);;
-		this.archiveReason = new SimpleStringProperty(archiveReason);;
+		this.medID = new SimpleStringProperty(medID);
+		this.archiveDate = new SimpleStringProperty(archiveDate);
+		this.archiveReason = new SimpleStringProperty(archiveReason);
+
 	}
 
 	public MedModel() {
@@ -117,6 +107,14 @@ public class MedModel {
 		this.dateAdded = dateAdded;
 	}
 	
+	public StringProperty getMedID() {
+		return medID;
+	}
+
+	public void setMedID(StringProperty medID) {
+		this.medID = medID;
+	}
+	
 	public StringProperty getArchiveDate() {
 		return archiveDate;
 	}
@@ -136,9 +134,9 @@ public class MedModel {
 
 	
 	public String toString() {
-		return "CurMedModel [patietnCode=" + patientCode + ",medName=" + medName + ", medDosage=" + medDosage + ", doc=" + doc + ", purpose=" + purpose
-				+ ", date=" + date + ", details=" + details + "dateAdded=" + dateAdded +
-				",archiveDate=" + archiveDate + "archiveReason=" + archiveReason + "]";
+		return "CurMedModel [patietnCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", doc=" + doc + ", purpose=" + purpose
+				+ ", date=" + date + ", details=" + details + ", dateAdded=" + dateAdded + ", medID=" + medID +
+				", archiveDate=" + archiveDate + ", archiveReason=" + archiveReason + "]";
 	}
 	
 

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 import application.AnnaMain;
 import application.DBConfig;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -141,8 +140,8 @@ void grabMeds() {
 		    		archiveDate = rs.getString("dateArchived");
 		    		archiveReason = rs.getString("archiveReason");
 		    		
-		    		tempMed = new MedModel(patientCode, medName, medDose, doc, purpose, medDate, medDetails, archiveDate, archiveReason);
-		    		
+		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
+		    			    		
 		    		archivedMeds.add(tempMed);	
 		    		System.out.println("grabbing med-archive... " + tempMed);
 		    	}

@@ -80,6 +80,9 @@ public class CurrentMedsController {
 	
 	private ToggleGroup state = new ToggleGroup();
     
+	
+	private static MedModel curEditMed;
+	
     public void initialize(){
     	grabMeds();
     	
@@ -135,6 +138,7 @@ public class CurrentMedsController {
 		    	String medDose;
 		    	String purpose;
 		    	String dateAdded;
+		    	String medID;
 		    	
 		    	
 		    	
@@ -149,9 +153,9 @@ public class CurrentMedsController {
 		    		medDose = rs.getString("medDosage");
 		    		purpose = rs.getString("purpPresrcipt");
 		    		dateAdded = rs.getString("dateAdded");
+		    		medID = rs.getString("medID");
 		    		
-		    		
-		    		tempMed = new MedModel(patientCode, medName, medDate, doc, medDetails, medDose, purpose, dateAdded);
+		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null);
 		    		patientMeds.add(tempMed);	
 		    		System.out.println("grabbing med... " + tempMed);
 		    	}
@@ -258,6 +262,8 @@ public class CurrentMedsController {
 		    	String prescribDate = moveMed.getDate().get();
 		    	String dateArchived = java.time.LocalDate.now().toString();  
 		    	String archiveReason="get from textfield popup";
+		    	
+		    	String medID = moveMed.getMedID().get();
 				
 		    	
 		    	
@@ -285,13 +291,11 @@ public class CurrentMedsController {
 		    	//************************************
 				//DELETE MED AFTER MOVING FROM CURRENT
 				//************************************
-		    	String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medName = ? AND prescribDate = ? AND dateAdded = ?";
+		    	String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medID = ?";
 				PreparedStatement deleteMedPS = conn.prepareStatement(deleteMedQ);
 				
 				deleteMedPS.setString(1, patientCode);
-				deleteMedPS.setString(2, medName);
-				deleteMedPS.setString(3, prescribDate);
-				deleteMedPS.setString(4, moveMed.getDateAdded().get());
+				deleteMedPS.setString(2, medID);
 		    	
 				deleteMedPS.execute();
 				System.out.println("Medication deleted!");
@@ -319,13 +323,27 @@ public class CurrentMedsController {
     	
 			//Replace content_view's current display with the view for this controller
 			toPane = getClass().getResource("/view/EditCurrentMeds.fxml");
+			
+			//get the med to edit and set it into a static variable
+			curEditMed = medicationTable.getSelectionModel().getSelectedItem();
+			
 			temp = FXMLLoader.load(toPane);
+			
+			
 			content_view.getChildren().setAll(temp);
+            
+			
     		
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
 		
-	}  
+		
+	}
+	
+	public MedModel getEdit()
+	{
+		return curEditMed;
+	}
 
 }
