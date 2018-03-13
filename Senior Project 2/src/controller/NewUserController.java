@@ -95,6 +95,7 @@ public class NewUserController {
     	Optional<ButtonType> result = dialog.showAndWait();
     	
 		if(result.get() == noCode) {
+			
 			 try {
 					stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 					root = FXMLLoader.load(getClass().getResource("/view/NewPatientView.fxml"));
@@ -103,6 +104,7 @@ public class NewUserController {
 			 } catch(Exception e) {
 				 e.printStackTrace();
 			 }
+			 
 		} else if (result.get() == ButtonType.OK){
     		
     		//TODO need to check patient table to verify the patient
