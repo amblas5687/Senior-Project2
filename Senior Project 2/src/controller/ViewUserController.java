@@ -50,10 +50,11 @@ public class ViewUserController {
     
     public void initialize(){
     	String dob = "", relation = "";
-    	String query = "SELECT * FROM user WHERE ID = 3";
+    	String query = "SELECT * FROM user WHERE userID = ?";
     	
     	try {
 			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, LoginController.currentUserID);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -101,7 +102,7 @@ public class ViewUserController {
     	String email = emailTF.getText();
     	
     	String query = "UPDATE user SET fname = ?, lname = ?, DOB = ?, pRelation = ?, "
-    			+ "email = ? WHERE ID = 3";
+    			+ "email = ? WHERE userID = ?";
     			    			
     	try {
 			PreparedStatement ps = conn.prepareStatement(query);
@@ -110,6 +111,7 @@ public class ViewUserController {
 			ps.setString(3, dob);
 			ps.setString(4, relation);
 			ps.setString(5, email);
+			ps.setString(6, LoginController.currentUserID);
 			
 			ps.execute();
 			

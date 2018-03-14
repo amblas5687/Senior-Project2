@@ -47,9 +47,7 @@ public class ViewPatientController {
     private URL toPane;
    	private AnchorPane temp;
    	
-    //Dummy user for testing
-    String tempCode = "1";
-    
+   	
 	Connection con = AnnaMain.con;
 
    
@@ -66,7 +64,7 @@ public class ViewPatientController {
 		PatientModel curPatient = new PatientModel();
     	try {
 			PreparedStatement patientInfo = con.prepareStatement(patientQ);
-			patientInfo.setString(1, tempCode);
+			patientInfo.setString(1, LoginController.currentPatientID);
 			ResultSet rs = patientInfo.executeQuery();
 						
 			
@@ -79,9 +77,9 @@ public class ViewPatientController {
 				curPatient.setDiagnosesDate(rs.getString("diagnoseDate"));
 				curPatient.setDoctor(rs.getString("primaryDoc"));
 				curPatient.setCargiver(rs.getString("caregiver"));
-				curPatient.setPatientCode(tempCode);
+				curPatient.setPatientCode(LoginController.currentPatientID);
 				
-				System.out.println(curPatient);
+				System.out.println("Viewing patient... " + curPatient);
 			}
 			
 		} catch (SQLException e) {
@@ -180,7 +178,7 @@ public class ViewPatientController {
     	updatePatient.setStage(stageBox.getValue().toString());
     	updatePatient.setDiagnosesDate(diagnosesPicker.getValue().toString());
     	updatePatient.setCargiver(cargiverTF.getText());
-    	updatePatient.setPatientCode(tempCode);
+    	updatePatient.setPatientCode(LoginController.currentPatientID);
     	
     	String patientQ = "UPDATE patient SET firstName= ?, lastName= ?, dob= ?, currStage= ?, diagnoseDate= ?, primaryDoc= ?, "
     			+ "caregiver= ? WHERE patientCode = ?";
