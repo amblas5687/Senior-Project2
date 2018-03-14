@@ -3,12 +3,14 @@ package controller;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import application.AnnaMain;
 import application.DBConfig;
+import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,9 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import model.MedModel;
 
 public class EditMedController {
-	
-	Connection conn = AnnaMain.con;
-	
+		
 	@FXML
     private AnchorPane content_view;
 
@@ -57,13 +57,14 @@ public class EditMedController {
 
    
 	public void initialize(){
+		System.out.println("*******EDIT MED*******");
 		setMed();
 	}
 	
 	public void setMed() {
 		CurrentMedsController test = new CurrentMedsController();
 		editMed = test.getEdit();
-		System.out.println("Med to edit " + editMed);
+		System.out.println("MED TO EDIT... " + editMed);
 		
 		//prepopulate textfields
 		medName.setText(editMed.getMedName().get());
@@ -76,8 +77,7 @@ public class EditMedController {
     	String prescribDateString = editMed.getDate().get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	LocalDate prescribDate = LocalDate.parse(prescribDateString, formatter);
-    	System.out.println(prescribDate);
-    	DOPPicker.setValue(prescribDate);
+\    	DOPPicker.setValue(prescribDate);
     	DOPPicker.setDisable(true);
     	
 	}
@@ -113,8 +113,15 @@ public class EditMedController {
     			+ "prescribDoc = ?, purpPresrcipt = ?, dateUpdated = ? "
     			+ "WHERE patientCode = ? AND medID = ?";
     	
+    	
+    	Connection connection = null;
+    	PreparedStatement ps = null;
+    	ResultSet rs = null;
+    	
     	try {
-    		PreparedStatement ps = conn.prepareStatement(query);
+			connection = DataSource.getInstance().getConnection();    		
+    		
+    		ps = connection.prepareStatement(query);
         	ps.setString(1, mName);
         	ps.setString(2, mDosage);
         	ps.setString(3, mDescript);
@@ -128,7 +135,7 @@ public class EditMedController {
         	
         	ps.execute();
         	
-        	System.out.println("Successful update of medication information.");
+        	System.out.println("MEDICATION UPDATED");
         	
         	
         	//go back to current meds
@@ -149,9 +156,47 @@ public class EditMedController {
     		
     		DBConfig.displayException(e);
     		
-    		System.out.println("Failed update of medication information.");
+    		System.out.println("FAILED UPDATE");
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
     	}
     	
-
-    }
+    	//close connections
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+    }//end submit
+    
+    
+    
+    
 }
