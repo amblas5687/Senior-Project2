@@ -2,9 +2,12 @@ package controller;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+
 import application.AnnaMain;
 import application.DBConfig;
 import javafx.collections.FXCollections;
@@ -212,12 +215,80 @@ void grabMeds() {
 		
 	}
 	
-	
+
+    @FXML
+    void options(ActionEvent event) {
+    	String option = searchOptions.getValue();
+    	if(option == "Date" || option == "Date Range") {
+    		searchTF.setVisible(false);
+    		DRPicker.setVisible(true);
+    	} else {
+    		DRPicker.setVisible(false);
+    		searchTF.setVisible(true);
+    	}
+    }
+    
 	@FXML
 	private void searchMed(ActionEvent event) {
-
-    }
-
+		
+		String option = searchOptions.getValue();
+		
+    	if(option == "Name") {
+    		
+    	} else if(option == "Date") {
+			LocalDate drp = DRPicker.getValue();
+			Date date = java.sql.Date.valueOf(drp);
+			System.out.println(date);
+			String query = "SELECT * FROM archivedMeds WHERE prescribDate = ?";
+			
+	    	try {
+	    		
+	    		PreparedStatement ps = conn.prepareStatement(query);
+	    		ps.setDate(1, date);
+	    		
+	    		ResultSet rs = ps.executeQuery();
+	    		while(rs.next()) {
+	    			
+	    			MedModel tempMed;
+	    	    	String patientCode;
+	    	    	String medName;
+	    	    	String medDose;
+	    	    	String doc;
+	    	    	String purpose;
+	    	    	String medDate;
+	    	    	String medDetails;
+	    	    	String archiveDate;
+	    	    	String archiveReason;
 	
+	    			patientCode = rs.getString("patientCode");
+		    		medName = rs.getString("medName");
+		    		medDate = rs.getString("prescribDate");
+		    		medDetails = rs.getString("medDescript");
+		    		doc = rs.getString("prescribDoc");
+		    		medDose = rs.getString("medDosage");
+		    		purpose = rs.getString("purpPresrcipt");
+		    		archiveDate = rs.getString("dateArchived");
+		    		archiveReason = rs.getString("archiveReason");
+		    		
+		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
+		    			    		
+		    		archivedMeds.add(tempMed);	
+	    			
+	    		}
+	    		
+	    	} catch (SQLException ex) {
+	    		DBConfig.displayException(ex);
+	    	}
+	    	
+			mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+	    	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+	    	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+	    	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+	    	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
+	    	archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
+	    	
+	    	archiveTable.setItems(archivedMeds);
+    	}
+    }
 
 }
