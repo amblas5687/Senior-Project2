@@ -238,7 +238,7 @@ void grabMeds() {
     	} else if(option == "Date") {
 			LocalDate drp = DRPicker.getValue();
 			Date date = java.sql.Date.valueOf(drp);
-			System.out.println(date);
+			
 			String query = "SELECT * FROM archivedMeds WHERE prescribDate = ?";
 			
 	    	try {
@@ -247,6 +247,9 @@ void grabMeds() {
 	    		ps.setDate(1, date);
 	    		
 	    		ResultSet rs = ps.executeQuery();
+	    		
+	    		archiveTable.getItems().clear();
+	    		
 	    		while(rs.next()) {
 	    			
 	    			MedModel tempMed;
@@ -279,16 +282,18 @@ void grabMeds() {
 	    	} catch (SQLException ex) {
 	    		DBConfig.displayException(ex);
 	    	}
-	    	
+
 			mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-	    	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
-	    	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
-	    	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
-	    	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
-	    	archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
+		   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+		   	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+		   	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+		   	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
+		    archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
+	    		
+		    archiveTable.setItems(archivedMeds);
 	    	
-	    	archiveTable.setItems(archivedMeds);
     	}
+    	
     }
 
 }
