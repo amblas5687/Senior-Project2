@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import application.AnnaMain;
 import application.DBConfig;
+import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class ViewUserController {
-	Connection conn = AnnaMain.con;
 
     @FXML
     private TextField fnameTF;
@@ -49,13 +49,23 @@ public class ViewUserController {
 	private AnchorPane temp;
     
     public void initialize(){
+		
+    	System.out.println("*******VIEW USER INFO*******");
+
+    	Connection connection = null;
+    	PreparedStatement ps = null;
+    	ResultSet rs = null;
+    	
+    	
     	String dob = "", relation = "";
     	String query = "SELECT * FROM user WHERE userID = ?";
     	
     	try {
-			PreparedStatement ps = conn.prepareStatement(query);
+			connection = DataSource.getInstance().getConnection();
+    		
+			ps = connection.prepareStatement(query);
 			ps.setString(1, LoginController.currentUserID);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				fnameTF.setText(rs.getString("fname"));
@@ -71,14 +81,50 @@ public class ViewUserController {
 			DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate date = LocalDate.parse(dob, df);
 			DOBPicker.setValue(date);
-			
 			relationBox.setValue(relation);
+			
+	    	System.out.println("PULLED USER INFO");
+			
 		} catch (SQLException e) {
 			DBConfig.displayException(e);
-		}
+		}catch (Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	//close connections
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}//END FINALLY
     	
-    	System.out.println("Successful pull of user information.");
-    }
+    }//END METHOD
  
     @FXML
     void edit(ActionEvent event) {
@@ -103,9 +149,14 @@ public class ViewUserController {
     	
     	String query = "UPDATE user SET fname = ?, lname = ?, DOB = ?, pRelation = ?, "
     			+ "email = ? WHERE userID = ?";
-    			    			
+    	
+    	Connection connection = null;
+    	PreparedStatement ps = null;    	
+    	
     	try {
-			PreparedStatement ps = conn.prepareStatement(query);
+			connection = DataSource.getInstance().getConnection();
+    		
+			ps = connection.prepareStatement(query);
 			ps.setString(1, firstName);
 			ps.setString(2, lastName);
 			ps.setString(3, dob);
@@ -115,10 +166,38 @@ public class ViewUserController {
 			
 			ps.execute();
 			
+	    	System.out.println("CHANGED USER INFO");
+			
 		} catch (SQLException e) {
 			DBConfig.displayException(e);
-		}
-    	System.out.println("Successful change of user information.");
+		}catch (Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	//close connections
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+					
+		}//end finally
+    	
     	btnSubmit.setVisible(false);
     	fnameTF.setDisable(true);
     	lnameTF.setDisable(true);
