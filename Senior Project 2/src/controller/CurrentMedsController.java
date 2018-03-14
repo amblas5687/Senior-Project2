@@ -221,6 +221,90 @@ public class CurrentMedsController {
 	
 	@FXML
 	private void searchMed(ActionEvent event) {
+		
+		
+		//clear the list for search
+		patientMeds.clear();
+		
+		String option = searchOptions.getValue();
+		System.out.println("searching by..." + option);
+		
+		
+		//if they do not select a search value, just grab all again
+		if(option == null){
+			
+			grabMeds();
+			
+		}
+		
+		//search by name
+		else if(option.equals("Name"))
+		{
+			
+			try {
+					String medNameSearch = searchTF.getText();
+	
+			    	String nameQ = "SELECT * FROM currentMeds WHERE medName = ? AND patientCode = ?";
+			    	PreparedStatement namePS = conn.prepareStatement(nameQ);
+			    	namePS.setString(1, medNameSearch);
+			    	namePS.setString(2, LoginController.currentPatientID);
+			    	ResultSet rs = namePS.executeQuery();
+			
+		    	
+			    	//create model
+			    	MedModel tempMed;
+			    	String patientCode;
+			    	String medName;
+			    	String medDate;
+			    	String medDetails;
+			    	String doc;
+			    	String medDose;
+			    	String purpose;
+			    	String dateAdded;
+			    	String medID;
+			    	
+				    	
+				    //set values from search
+				    while(rs.next())
+				    	{
+				    		patientCode = rs.getString("patientCode");
+				    		medName = rs.getString("medName");
+				    		medDate = rs.getString("prescribDate");
+				    		medDetails = rs.getString("medDescript");
+				    		doc = rs.getString("prescribDoc");
+				    		//System.out.println(doc);
+				    		medDose = rs.getString("medDosage");
+				    		purpose = rs.getString("purpPresrcipt");
+				    		dateAdded = rs.getString("dateAdded");
+				    		medID = rs.getString("medID");
+				    		
+				    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null);
+				    		
+				    		//add to list
+				    		patientMeds.add(tempMed);	
+				    		System.out.println("grabbing med... " + tempMed);
+				    	}
+			    	}
+				catch (SQLException e) {
+					DBConfig.displayException(e);	
+					System.out.println("failed grab");
+			}
+			
+				
+				//set table values
+				mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+				mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+				mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+				mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+				//listView.setItems(patientMeds);
+				medicationTable.setItems(patientMeds);
+				
+								
+				//clear the search values
+				searchOptions.setValue(null);
+				searchTF.setText(null);
+			
+		}
 
     }
 
