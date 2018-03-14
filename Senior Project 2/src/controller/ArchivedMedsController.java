@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 import application.AnnaMain;
 import application.DBConfig;
+import application.DataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -85,9 +86,7 @@ public class ArchivedMedsController {
 	
 	private ToggleGroup state = new ToggleGroup();
 	
-	
-	Connection conn = AnnaMain.con;
-	
+		
 	public void initialize(){
 		
 		searchOptions.getItems().addAll("Name", "Date", "Date Range");
@@ -102,30 +101,23 @@ public class ArchivedMedsController {
 		grabMeds();
 		
 	}
-	
-    void setMeds(ObservableList<MedModel> queryList) {
-    	
-    	archivedMeds = queryList;
-    	
-    	mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-    	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
-    	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
-    	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
-    	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
-    	archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
-    	
-    	archiveTable.setItems(archivedMeds);
-    	
-    }
     
     
-void grabMeds() {
+    void grabMeds() {
+    	
+    	Connection connection = null;
+    	PreparedStatement arcMedsPS = null;
+    	ResultSet rs = null;
+    	
     	
     	try {
-		    	String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ?";
-		    	PreparedStatement arcMedsPS = conn.prepareStatement(medQ);
+    		
+				connection = DataSource.getInstance().getConnection();
+		    	
+				String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ?";
+		    	arcMedsPS = connection.prepareStatement(medQ);
 		    	arcMedsPS.setString(1, LoginController.currentPatientID);
-		    	ResultSet rs = arcMedsPS.executeQuery();
+		    	rs = arcMedsPS.executeQuery();
 		    	
 		    	
 		    	MedModel tempMed;
@@ -161,7 +153,41 @@ void grabMeds() {
     	catch (SQLException e) {
     		DBConfig.displayException(e);	
     		System.out.println("failed grab");
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
     	}
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(arcMedsPS!=null)
+			{
+				try {
+					arcMedsPS.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
     	
     	
     	mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
@@ -271,12 +297,18 @@ void grabMeds() {
 		
 		String query = "SELECT * FROM archivedMeds WHERE prescribDate = ?";
 		
+
+    	Connection connection = null;
+    	PreparedStatement ps = null;
+    	ResultSet rs = null;
+		
     	try {
+			connection = DataSource.getInstance().getConnection();
     		
-    		PreparedStatement ps = conn.prepareStatement(query);
+    		ps = connection.prepareStatement(query);
     		ps.setDate(1, date);
     		
-    		ResultSet rs = ps.executeQuery();
+    		rs = ps.executeQuery();
     		
     		archiveTable.getItems().clear();
     		
@@ -311,7 +343,42 @@ void grabMeds() {
     		
     	} catch (SQLException ex) {
     		DBConfig.displayException(ex);
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
     	}
+    	//close the connections
+		finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 
 		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
 	   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
@@ -332,10 +399,16 @@ void grabMeds() {
 		
 		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= '" + date1 + "' AND prescribDate <= '" + date2 + "';";
 		
+		Connection connection = null;
+		PreparedStatement ps = null;  		
+		ResultSet rs = null;
+		
     	try {
     		
-    		PreparedStatement ps = conn.prepareStatement(query);  		
-    		ResultSet rs = ps.executeQuery();
+			connection = DataSource.getInstance().getConnection();
+
+    		ps = connection.prepareStatement(query);  		
+    		rs = ps.executeQuery();
     		
     		archiveTable.getItems().clear();
     		
@@ -370,7 +443,41 @@ void grabMeds() {
     		
     	} catch (SQLException ex) {
     		DBConfig.displayException(ex);
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
     	}
+		finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
     	
 		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
 	   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
