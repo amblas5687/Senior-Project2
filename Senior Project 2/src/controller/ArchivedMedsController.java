@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -62,7 +63,16 @@ public class ArchivedMedsController {
     private ToggleButton archMed;
     
     @FXML
-    private DatePicker DRPicker;
+    private DatePicker datePicker;
+    
+    @FXML
+    private DatePicker DRPicker1;
+    
+    @FXML
+    private DatePicker DRPicker2;
+    
+    @FXML
+    private Label drpLabel;
     
 	@FXML
     private ComboBox<String> searchOptions;
@@ -219,11 +229,23 @@ void grabMeds() {
     @FXML
     void options(ActionEvent event) {
     	String option = searchOptions.getValue();
-    	if(option == "Date" || option == "Date Range") {
+    	if(option == "Date") {
     		searchTF.setVisible(false);
-    		DRPicker.setVisible(true);
+    		DRPicker1.setVisible(false);
+    		DRPicker2.setVisible(false);
+    		drpLabel.setVisible(false);
+    		datePicker.setVisible(true);
+    	} else if(option == "Date Range"){
+    		searchTF.setVisible(false);
+    		datePicker.setVisible(false);
+    		DRPicker1.setVisible(true);
+    		DRPicker2.setVisible(true);
+    		drpLabel.setVisible(true);
     	} else {
-    		DRPicker.setVisible(false);
+    		DRPicker1.setVisible(false);
+    		DRPicker2.setVisible(false);
+    		drpLabel.setVisible(false);
+    		datePicker.setVisible(false);
     		searchTF.setVisible(true);
     	}
     }
@@ -236,64 +258,128 @@ void grabMeds() {
     	if(option == "Name") {
     		
     	} else if(option == "Date") {
-			LocalDate drp = DRPicker.getValue();
-			Date date = java.sql.Date.valueOf(drp);
-			
-			String query = "SELECT * FROM archivedMeds WHERE prescribDate = ?";
-			
-	    	try {
-	    		
-	    		PreparedStatement ps = conn.prepareStatement(query);
-	    		ps.setDate(1, date);
-	    		
-	    		ResultSet rs = ps.executeQuery();
-	    		
-	    		archiveTable.getItems().clear();
-	    		
-	    		while(rs.next()) {
-	    			
-	    			MedModel tempMed;
-	    	    	String patientCode;
-	    	    	String medName;
-	    	    	String medDose;
-	    	    	String doc;
-	    	    	String purpose;
-	    	    	String medDate;
-	    	    	String medDetails;
-	    	    	String archiveDate;
-	    	    	String archiveReason;
-	
-	    			patientCode = rs.getString("patientCode");
-		    		medName = rs.getString("medName");
-		    		medDate = rs.getString("prescribDate");
-		    		medDetails = rs.getString("medDescript");
-		    		doc = rs.getString("prescribDoc");
-		    		medDose = rs.getString("medDosage");
-		    		purpose = rs.getString("purpPresrcipt");
-		    		archiveDate = rs.getString("dateArchived");
-		    		archiveReason = rs.getString("archiveReason");
-		    		
-		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
-		    			    		
-		    		archivedMeds.add(tempMed);	
-	    			
-	    		}
-	    		
-	    	} catch (SQLException ex) {
-	    		DBConfig.displayException(ex);
-	    	}
-
-			mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-		   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
-		   	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
-		   	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
-		   	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
-		    archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
-	    		
-		    archiveTable.setItems(archivedMeds);
-	    	
+    		optionDate();
+    	} else if(option == "Date Range") {
+    		optionDateRange();
     	}
     	
     }
+	
+	void optionDate() {
+		LocalDate dp = datePicker.getValue();
+		Date date = java.sql.Date.valueOf(dp);
+		
+		String query = "SELECT * FROM archivedMeds WHERE prescribDate = ?";
+		
+    	try {
+    		
+    		PreparedStatement ps = conn.prepareStatement(query);
+    		ps.setDate(1, date);
+    		
+    		ResultSet rs = ps.executeQuery();
+    		
+    		archiveTable.getItems().clear();
+    		
+    		while(rs.next()) {
+    			
+    			MedModel tempMed;
+    	    	String patientCode;
+    	    	String medName;
+    	    	String medDose;
+    	    	String doc;
+    	    	String purpose;
+    	    	String medDate;
+    	    	String medDetails;
+    	    	String archiveDate;
+    	    	String archiveReason;
+
+    			patientCode = rs.getString("patientCode");
+	    		medName = rs.getString("medName");
+	    		medDate = rs.getString("prescribDate");
+	    		medDetails = rs.getString("medDescript");
+	    		doc = rs.getString("prescribDoc");
+	    		medDose = rs.getString("medDosage");
+	    		purpose = rs.getString("purpPresrcipt");
+	    		archiveDate = rs.getString("dateArchived");
+	    		archiveReason = rs.getString("archiveReason");
+	    		
+	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
+	    			    		
+	    		archivedMeds.add(tempMed);	
+    			
+    		}
+    		
+    	} catch (SQLException ex) {
+    		DBConfig.displayException(ex);
+    	}
+
+		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+	   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+	   	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+	   	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+	   	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
+	    archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
+    		
+	    archiveTable.setItems(archivedMeds);
+	}
+	
+	void optionDateRange() {
+		
+		LocalDate drp1 = DRPicker1.getValue();
+		LocalDate drp2 = DRPicker2.getValue();
+		Date date1 = java.sql.Date.valueOf(drp1);
+		Date date2 = java.sql.Date.valueOf(drp2);
+		
+		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= '" + date1 + "' AND prescribDate <= '" + date2 + "';";
+		
+    	try {
+    		
+    		PreparedStatement ps = conn.prepareStatement(query);  		
+    		ResultSet rs = ps.executeQuery();
+    		
+    		archiveTable.getItems().clear();
+    		
+    		while(rs.next()) {
+
+    			MedModel tempMed;
+    	    	String patientCode;
+    	    	String medName;
+    	    	String medDose;
+    	    	String doc;
+    	    	String purpose;
+    	    	String medDate;
+    	    	String medDetails;
+    	    	String archiveDate;
+    	    	String archiveReason;
+
+    			patientCode = rs.getString("patientCode");
+	    		medName = rs.getString("medName");
+	    		medDate = rs.getString("prescribDate");
+	    		medDetails = rs.getString("medDescript");
+	    		doc = rs.getString("prescribDoc");
+	    		medDose = rs.getString("medDosage");
+	    		purpose = rs.getString("purpPresrcipt");
+	    		archiveDate = rs.getString("dateArchived");
+	    		archiveReason = rs.getString("archiveReason");
+	    		
+	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
+	    			    		
+	    		archivedMeds.add(tempMed);	
+	    		
+    		}
+    		
+    	} catch (SQLException ex) {
+    		DBConfig.displayException(ex);
+    	}
+    	
+		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+	   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+	   	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+	   	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+	   	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
+	    archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
+    		
+	    archiveTable.setItems(archivedMeds);
+	}
 
 }
