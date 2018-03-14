@@ -3,8 +3,11 @@ package controller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.jfoenix.controls.JFXButton;
 import application.AnnaMain;
+import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +20,6 @@ import javafx.stage.Stage;
 
 public class LoginController {
 	
-	 Connection conn = AnnaMain.con;
-
 	 Parent root;
 	 Scene scene;
 	 Stage stage;
@@ -43,7 +44,12 @@ public class LoginController {
 	 public static String currentUserID;
 	 public static String currentPatientID;
 		 
-
+	 public void initialize(){
+			
+			System.out.println("*******LOGIN*******");
+	 }
+	 
+	 
 	 @FXML
 	 void loadNewPatient(ActionEvent event) {
 		 
@@ -75,15 +81,22 @@ public class LoginController {
 	 @FXML
 	 void login(ActionEvent event) {
 		 
+		 	Connection connection = null;
+	    	PreparedStatement ps = null;
+	    	ResultSet rs = null;
+		 
 		 try {
+			 
+			 connection = DataSource.getInstance().getConnection();
+
 			 String email = emailTF.getText();
 			 String password = passwordTF.getText();
 			 String query = "SELECT * FROM user WHERE email = ? AND password = ?";
 			 
-			 PreparedStatement ps = conn.prepareStatement(query);
+			 ps = connection.prepareStatement(query);
 			 ps.setString(1, email);
 			 ps.setString(2, password);
-			 ResultSet rs = ps.executeQuery();
+			 rs = ps.executeQuery();
 			 
 			 while(rs.next()){
 
@@ -99,16 +112,51 @@ public class LoginController {
 						currentUserID = rs.getString("userID");
 						currentPatientID = rs.getString("patientCode");
 						
-						System.out.println("Current user and their patient " + currentUserID + " " + currentPatientID);
+						System.out.println("CURRENT USER AND PATIENT... " + currentUserID + "__" + currentPatientID);
 						 
 					 } else {
-						 System.out.println("Unsuccessful login");
+						 System.out.println("FAILED LOGIN");
 					 }
 			 }
 			 
 			 
-		 }catch(Exception e) {
-			 e.printStackTrace();
-		 }
-	 }
+		 }catch (Exception e)
+	    	{
+	    		e.printStackTrace();
+	    	}
+		 	//close connections
+	    	finally {
+				if(connection!=null)
+				{
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(ps!=null)
+				{
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(rs!=null)
+				{
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}//end finally
+	 }//end login
+	 
+	 
 }
