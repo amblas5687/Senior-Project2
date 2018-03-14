@@ -20,9 +20,9 @@
 		   <center>
 		      <GridPane maxHeight="643.0" minHeight="643.0" minWidth="968.0" prefHeight="571.0" prefWidth="840.0" BorderPane.alignment="CENTER">
 		        <columnConstraints>
-		          <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.5" minWidth="10.0" prefWidth="233.0" />
-		          <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.5" minWidth="10.0" prefWidth="233.0" />
-		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="232.0" />
+		          <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="233.0" />
+		          <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="233.0" />
+		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="232.0" />
 		        </columnConstraints>
 		        <rowConstraints>
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -82,7 +82,7 @@
 		                  <Insets left="5.0" right="5.0" />
 		               </padding>
 		            </Separator>
-		            <TextField fx:id="medName" disable="true" maxHeight="41.0" maxWidth="231.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+		            <TextField fx:id="medName" disable="true" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -90,7 +90,7 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="medDosage" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+		            <TextField fx:id="medDosage" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -98,12 +98,12 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextArea fx:id="medDescript" disable="true" maxWidth="230.0" prefHeight="80.0" prefWidth="230.0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+		            <TextArea fx:id="medDescript" disable="true" maxWidth="300.0" prefHeight="80.0" prefWidth="230.0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextArea>
-		            <TextField fx:id="prescribDoc" disable="true" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+		            <TextField fx:id="prescribDoc" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -111,16 +111,16 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="purpOfPrescript" disable="true" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+		            <TextField fx:id="purpOfPrescript" disable="true" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="DOPPicker" disable="true" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                  <DatePicker fx:id="LUPicker" disable="true" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-		            <Button fx:id="btnOK" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                  <DatePicker fx:id="DOPPicker" disable="true" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                  <DatePicker fx:id="LUPicker" disable="true" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+		            <Button fx:id="btnOK" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 		               <GridPane.margin>
-		                  <Insets left="105.0" />
+		                  <Insets />
 		               </GridPane.margin>
                      <font>
                         <Font size="16.0" />

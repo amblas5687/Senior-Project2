@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -21,9 +20,9 @@
 		   <center>
 		      <GridPane BorderPane.alignment="CENTER">
 		         <columnConstraints>
-		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.5" minWidth="10.0" prefWidth="173.5" />
-		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.5" minWidth="10.0" prefWidth="187.0" />
-		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="482.5" minWidth="10.0" prefWidth="255.0" />
+		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="395.2000213623047" />
+		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="410.3999786376953" />
+		            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="342.4000122070313" />
 		         </columnConstraints>
 		         <rowConstraints>
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -110,7 +109,7 @@
 		                  <Insets left="5.0" right="5.0" />
 		               </padding>
 		            </Separator>
-		            <TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+		            <TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
@@ -118,7 +117,7 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+		            <TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
@@ -126,12 +125,12 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <DatePicker fx:id="DOBPicker" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+		            <DatePicker fx:id="DOBPicker" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
 		            </DatePicker>
-		            <TextField fx:id="cargiverTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+		            <TextField fx:id="cargiverTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
@@ -139,17 +138,17 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <ComboBox fx:id="stageBox" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+		            <ComboBox fx:id="stageBox" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
 		            </ComboBox>
-		            <DatePicker fx:id="diagnosesPicker" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+		            <DatePicker fx:id="diagnosesPicker" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
 		            </DatePicker>
-		            <TextField fx:id="doctorTF" maxHeight="25.0" maxWidth="152.0" minHeight="40.0" minWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+		            <TextField fx:id="doctorTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 		               <GridPane.margin>
 		                  <Insets left="5.0" />
 		               </GridPane.margin>
@@ -157,21 +156,6 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9">
-		               <buttons>
-		                  <Button fx:id="submitBTN" mnemonicParsing="false" onAction="#submit" text="Submit">
-                           <font>
-                              <Font size="16.0" />
-                           </font></Button>
-		                  <Button fx:id="cancelBTN" mnemonicParsing="false" onAction="#returnMain" text="Cancel">
-                           <font>
-                              <Font size="16.0" />
-                           </font></Button>
-		               </buttons>
-		               <GridPane.margin>
-		                  <Insets />
-		               </GridPane.margin>
-		            </ButtonBar>
 		            <Label text="Primary Caregiver" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="50.0" />
@@ -180,6 +164,22 @@
                         <Font size="16.0" />
                      </font>
 		            </Label>
+		                  <Button fx:id="submitBTN" mnemonicParsing="false" onAction="#submit" text="Submit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="100.0" />
+                     </GridPane.margin>
+                  </Button>
+		                  <Button fx:id="cancelBTN" mnemonicParsing="false" onAction="#returnMain" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="100.0" />
+                     </GridPane.margin>
+                  </Button>
 		         </children>
 		      </GridPane>
 		   </center>
