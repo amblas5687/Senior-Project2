@@ -145,7 +145,7 @@ public class MedModel {
 
 	
 	public String toString() {
-		return "CurMedModel [patietnCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", /ndoc=" + doc + ", purpose=" + purpose
+		return "CurMedModel [patientCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", /ndoc=" + doc + ", purpose=" + purpose
 				+ ", date=" + date + ", /ndetails=" + details + ", dateAdded=" + dateAdded + ", medID=" + medID +
 				", /narchiveDate=" + archiveDate + ", archiveReason=" + archiveReason + ", dateUpdated=" + dateUpdated + "]";
 	}

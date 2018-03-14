@@ -52,9 +52,14 @@ public class MedDetailsController {
     	
     	CurrentMedsController test = new CurrentMedsController();
 		medDetails = test.getDetail();
-		System.out.println("MED DETAILS... " + medDetails);
-		
-		medName.setText(medDetails.getMedName().get());
+		System.out.println("SETTING MED DETAILS FOR... " + medDetails);
+		getDetails();	        
+    }
+    
+    
+    private void getDetails()
+    {
+    	medName.setText(medDetails.getMedName().get());
 		medDosage.setText(medDetails.getMedDosage().get());
     	medDescript.setText(medDetails.getDetails().get());
     	prescribDoc.setText(medDetails.getDoc().get());
@@ -75,13 +80,12 @@ public class MedDetailsController {
 	    	LUPicker.setValue(updateDate);
 	    	LUPicker.setDisable(true);
     	}
-		        
     }
     
     @FXML
     void stopViewing(ActionEvent event) {
     	
-    	System.out.println("CLOSEING MED DETAIL WINDOW...");
+    	System.out.println("CLOSING MED DETAIL WINDOW...");
     	
     	Stage detailStage = (Stage)btnOK.getScene().getWindow();
         // do what you have to do
