@@ -77,7 +77,7 @@ public class EditMedController {
     	String prescribDateString = editMed.getDate().get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	LocalDate prescribDate = LocalDate.parse(prescribDateString, formatter);
-\    	DOPPicker.setValue(prescribDate);
+    	DOPPicker.setValue(prescribDate);
     	DOPPicker.setDisable(true);
     	
 	}
