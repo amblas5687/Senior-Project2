@@ -17,12 +17,14 @@ public class MedModel {
 	StringProperty archiveReason;
 	StringProperty dateAdded;
 	StringProperty medID;
+	StringProperty dateUpdated;
 
 	
 	
 	//used for current patient
 	public MedModel(String patientCode, String medName, String medDate, String doc, String purpose,
-			String medDose, String details, String dateAdded, String medID, String archiveDate, String archiveReason) {
+			String medDose, String details, String dateAdded, 
+			String medID, String archiveDate, String archiveReason, String dateUpdated) {
 		super();
 		this.patientCode = new SimpleStringProperty(patientCode);
 		this.medName = new SimpleStringProperty(medName);
@@ -35,6 +37,7 @@ public class MedModel {
 		this.medID = new SimpleStringProperty(medID);
 		this.archiveDate = new SimpleStringProperty(archiveDate);
 		this.archiveReason = new SimpleStringProperty(archiveReason);
+		this.dateUpdated = new SimpleStringProperty(dateUpdated);
 
 	}
 
@@ -130,13 +133,21 @@ public class MedModel {
 	public void setArchiveReason(StringProperty archiveReason) {
 		this.archiveReason = archiveReason;
 	}
+	
+	public StringProperty getDateUpdated() {
+		return dateUpdated;
+	}
+
+	public void setDateUpdated(StringProperty dateUpdated) {
+		this.dateUpdated = dateUpdated;
+	}
 
 
 	
 	public String toString() {
-		return "CurMedModel [patietnCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", doc=" + doc + ", purpose=" + purpose
-				+ ", date=" + date + ", details=" + details + ", dateAdded=" + dateAdded + ", medID=" + medID +
-				", archiveDate=" + archiveDate + ", archiveReason=" + archiveReason + "]";
+		return "CurMedModel [patietnCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", /ndoc=" + doc + ", purpose=" + purpose
+				+ ", date=" + date + ", /ndetails=" + details + ", dateAdded=" + dateAdded + ", medID=" + medID +
+				", /narchiveDate=" + archiveDate + ", archiveReason=" + archiveReason + ", dateUpdated=" + dateUpdated + "]";
 	}
 	
 

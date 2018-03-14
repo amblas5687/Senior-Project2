@@ -143,7 +143,7 @@ public class ArchivedMedsController {
 		    		archiveDate = rs.getString("dateArchived");
 		    		archiveReason = rs.getString("archiveReason");
 		    		
-		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
+		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason, null);
 		    			    		
 		    		archivedMeds.add(tempMed);	
 		    		System.out.println("GRABBING MEDS FROM ARCHIVE... " + tempMed);
@@ -335,7 +335,7 @@ public class ArchivedMedsController {
 	    		archiveDate = rs.getString("dateArchived");
 	    		archiveReason = rs.getString("archiveReason");
 	    		
-	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
+	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason, null);
 	    			    		
 	    		archivedMeds.add(tempMed);	
     			
@@ -435,7 +435,7 @@ public class ArchivedMedsController {
 	    		archiveDate = rs.getString("dateArchived");
 	    		archiveReason = rs.getString("archiveReason");
 	    		
-	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
+	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason, null);
 	    			    		
 	    		archivedMeds.add(tempMed);	
 	    		

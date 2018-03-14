@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import application.DBConfig;
 import application.DataSource;
 import javafx.collections.FXCollections;
@@ -20,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -82,8 +86,13 @@ public class CurrentMedsController {
 	
 	private ToggleGroup state = new ToggleGroup();
     
-	
+	//static variable for editing meds
 	private static MedModel curEditMed;
+	
+	//static variable for viewing details
+	private static MedModel curDetailMed;
+
+	
 	
     public void initialize(){
     	
@@ -148,6 +157,7 @@ public class CurrentMedsController {
 		    	String purpose;
 		    	String dateAdded;
 		    	String medID;
+		    	String dateUpdated;
 		    	
 		    	
 		    	
@@ -163,8 +173,10 @@ public class CurrentMedsController {
 		    		purpose = rs.getString("purpPresrcipt");
 		    		dateAdded = rs.getString("dateAdded");
 		    		medID = rs.getString("medID");
+		    		dateUpdated = rs.getString("dateUpdated");
 		    		
-		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null);
+		    		
+		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null, dateUpdated);
 		    		patientMeds.add(tempMed);	
 		    		System.out.println("GRABBING MEDS FROM CURRENT..." + tempMed);
 		    	}
@@ -304,6 +316,7 @@ public class CurrentMedsController {
 			    	String purpose;
 			    	String dateAdded;
 			    	String medID;
+			    	String dateUpdated;
 			    	
 				    	
 				    //set values from search
@@ -319,8 +332,9 @@ public class CurrentMedsController {
 				    		purpose = rs.getString("purpPresrcipt");
 				    		dateAdded = rs.getString("dateAdded");
 				    		medID = rs.getString("medID");
+				    		dateUpdated = rs.getString("dateUpdated");
 				    		
-				    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null);
+				    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null, dateUpdated);
 				    		
 				    		//add to list
 				    		patientMeds.add(tempMed);	
@@ -404,14 +418,22 @@ public class CurrentMedsController {
 	@FXML
 	private void viewDetails(ActionEvent event) throws IOException {
 		
-        Stage anotherStage = new Stage();
-        Parent anotherRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("/view/LoginView.fxml")); // FXML for second stage
-        Scene anotherScene = new Scene(anotherRoot);
-        anotherStage.setScene(anotherScene);
-        anotherStage.initModality(Modality.APPLICATION_MODAL);
-        anotherStage.show();
+		//get the med to edit and set it into a static variable
+		curDetailMed = medicationTable.getSelectionModel().getSelectedItem();
 		
+        Stage detailStage = new Stage();
+        Parent detailRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("/view/ViewDetailsCurrentMeds.fxml")); // FXML for second stage
+        Scene detailScene = new Scene(detailRoot);
+        detailStage.setScene(detailScene);
+        detailStage.initModality(Modality.APPLICATION_MODAL);
+		 detailStage.show();		
 	}
+	
+	@FXML
+    void stopViewing(ActionEvent event) {
+
+    }
+
 	
 	//activates when the archive button is selected
 	@FXML
@@ -572,6 +594,11 @@ public class CurrentMedsController {
 	public MedModel getEdit()
 	{
 		return curEditMed;
+	}
+	
+	public MedModel getDetail()
+	{
+		return curDetailMed;
 	}
 
 }
