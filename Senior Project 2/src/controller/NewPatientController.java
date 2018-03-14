@@ -4,10 +4,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import application.AnnaMain;
 import application.DBConfig;
+import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class NewPatientController {
-	Connection conn = AnnaMain.con;
 	
 	Stage stage;
 	Parent root;
@@ -52,6 +53,7 @@ public class NewPatientController {
     
     
     public void initialize(){
+		System.out.println("*******NEW PATIENT*******");
     	stageBox.getItems().addAll("Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5", "Stage 6", "Stage 7");
     }
     
@@ -101,8 +103,16 @@ public class NewPatientController {
     	
     	String query = "INSERT INTO patient (firstName, lastName, dob, currStage, diagnoseDate, primaryDoc, caregiver, patientCode)"
     			+ "VALUES (?,?,?,?,?,?,?,?)";
+    	
+    	
+    	Connection connection = null;
+    	PreparedStatement ps = null;    	
+    	
     	try {
-    		PreparedStatement ps = conn.prepareStatement(query);
+			connection = DataSource.getInstance().getConnection();
+    		
+    		
+    		ps = connection.prepareStatement(query);
         	ps.setString(1, firstName);
         	ps.setString(2, lastName);
         	ps.setString(3, dob);
@@ -117,8 +127,35 @@ public class NewPatientController {
     	} catch (SQLException e) {
     		DBConfig.displayException(e);
     	}
+    	catch (Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	//close connections
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}//end finally
     	
-    	System.out.println("Successful insertion of patient information.");
+    	System.out.println("CREATED NEW PATIENT");
     	
     	if(result.get() == ButtonType.OK)
     	{
@@ -134,8 +171,9 @@ public class NewPatientController {
     			e.printStackTrace();
     		}
     	}
-    }
+    }//end method
 
+    
     String genCode() {
 		
 		StringBuilder sb = new StringBuilder();
@@ -153,13 +191,13 @@ public class NewPatientController {
 	    		sb.append(String.format("%02X", randBytes[i]));
 	    	}
     			
-    		System.out.println("\nBuilt string " + sb);
+    		System.out.println("\nBUILT CODE " + sb);
 				
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 				
-		System.out.println("Patient code: " + sb.toString());
+		System.out.println("PATIENT CODE... " + sb.toString());
 		return sb.toString();
     	
     }
