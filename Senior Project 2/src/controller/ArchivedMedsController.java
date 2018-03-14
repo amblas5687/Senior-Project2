@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
-import application.AnnaMain;
 import application.DBConfig;
 import application.DataSource;
 import javafx.collections.FXCollections;
@@ -256,6 +254,7 @@ public class ArchivedMedsController {
     @FXML
     void options(ActionEvent event) {
     	String option = searchOptions.getValue();
+    	
     	if(option == "Date") {
     		searchTF.setVisible(false);
     		DRPicker1.setVisible(false);

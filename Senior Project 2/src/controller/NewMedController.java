@@ -4,7 +4,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import application.AnnaMain;
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
