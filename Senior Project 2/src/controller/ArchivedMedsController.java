@@ -88,6 +88,17 @@ public class ArchivedMedsController {
 	public void initialize(){
 		
 		System.out.println("*******ARCHIVED MED*******");
+		
+		//bind columns
+		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+    	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+    	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+    	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+    	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
+    	archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
+		archiveTable.setItems(archivedMeds);
+		
+		
 		searchOptions.getItems().addAll("Name", "Date", "Date Range");
 		
 		//add to toggle group
@@ -97,12 +108,12 @@ public class ArchivedMedsController {
 		archMed.setSelected(true);
 		
 		//grabs all the archived meds
-		grabMeds();
+		grabTopTen();
 		
 	}
     
     
-    void grabMeds() {
+    void grabAllMeds() {
     	
     	Connection connection = null;
     	PreparedStatement arcMedsPS = null;
@@ -114,7 +125,9 @@ public class ArchivedMedsController {
 				connection = DataSource.getInstance().getConnection();
 		    	
 				String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ?";
-		    	arcMedsPS = connection.prepareStatement(medQ);
+		    	
+				
+				arcMedsPS = connection.prepareStatement(medQ);
 		    	arcMedsPS.setString(1, LoginController.currentPatientID);
 		    	rs = arcMedsPS.executeQuery();
 		    	
@@ -189,17 +202,103 @@ public class ArchivedMedsController {
 		}
     	
     	
-    	mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-    	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
-    	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
-    	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
-    	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
-    	archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
-    	
-    	archiveTable.setItems(archivedMeds);
-
-    	
+    	//archiveTable.setItems(archivedMeds);   	
     }
+    
+	
+	 void grabTopTen() {
+	    	
+	    	Connection connection = null;
+	    	PreparedStatement arcMedsPS = null;
+	    	ResultSet rs = null;
+	    	
+	    	
+	    	try {
+	    		
+					connection = DataSource.getInstance().getConnection();
+			    	
+					String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ? ORDER BY dateArchived DESC LIMIT 10";
+			    	
+					
+					arcMedsPS = connection.prepareStatement(medQ);
+			    	arcMedsPS.setString(1, LoginController.currentPatientID);
+			    	rs = arcMedsPS.executeQuery();
+			    	
+			    	
+			    	MedModel tempMed;
+			    	String patientCode;
+			    	String medName;
+			    	String medDose;
+			    	String doc;
+			    	String purpose;
+			    	String medDate;
+			    	String medDetails;
+			    	String archiveDate;
+			    	String archiveReason;
+			    	
+			    	
+			    while(rs.next())
+			    	{
+			    		patientCode = rs.getString("patientCode");
+			    		medName = rs.getString("medName");
+			    		medDate = rs.getString("prescribDate");
+			    		medDetails = rs.getString("medDescript");
+			    		doc = rs.getString("prescribDoc");
+			    		medDose = rs.getString("medDosage");
+			    		purpose = rs.getString("purpPresrcipt");
+			    		archiveDate = rs.getString("dateArchived");
+			    		archiveReason = rs.getString("archiveReason");
+			    		
+			    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason, null);
+			    			    		
+			    		archivedMeds.add(tempMed);	
+			    		System.out.println("GRABBING TOP 10 MEDS FROM ARCHIVE... " + tempMed);
+			    	}
+		    	}
+	    	catch (SQLException e) {
+	    		DBConfig.displayException(e);	
+	    		System.out.println("FAILED GRAB TOP 10 ARCHIVE");
+	    	}catch (Exception e)
+	    	{
+	    		e.printStackTrace();
+	    	}
+	    	finally {
+				if(connection!=null)
+				{
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(arcMedsPS!=null)
+				{
+					try {
+						arcMedsPS.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(rs!=null)
+				{
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+	    	
+	    	
+	    	//archiveTable.setItems(archivedMeds);   	
+	    }
+	 
+	
     
 	@FXML
 	private void currentMed(ActionEvent event) {
@@ -285,19 +384,17 @@ public class ArchivedMedsController {
 		
 		if(option == null) {
 			archiveTable.getItems().clear();
+			grabAllMeds();
 		} else if(option == "Name") {
     		optionName();
-    		
     		searchOptions.setValue(null);
 			searchTF.setText(null);
     	} else if(option == "Date") {
     		optionDate();
-    		
     		datePicker.setValue(null);
 			searchOptions.setValue(null);
     	} else if(option == "Date Range") {
     		optionDateRange();
-    		
     		DRPicker1.setValue(null);
 			DRPicker2.setValue(null);
 			searchOptions.setValue(null);
@@ -353,12 +450,12 @@ public class ArchivedMedsController {
 	    			    		
 	    		archivedMeds.add(tempMed);	
     			
-				System.out.println("RESULT FROM NAME SEARCH CURRENT... " + tempMed);
+				System.out.println("RESULT FROM NAME SEARCH ARCHIVE... " + tempMed);
 			}
 
 		} catch (SQLException e) {
 			DBConfig.displayException(e);
-			System.out.println("FAILED SEARCH CURRENT");
+			System.out.println("FAILED SEARCH ARCHIVE");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -481,15 +578,6 @@ public class ArchivedMedsController {
 				}
 			}
 		}
-
-		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-	   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
-	   	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
-	   	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
-	   	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
-	    archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
-    		
-	    archiveTable.setItems(archivedMeds);
 	}
 	
 	void optionDateRange() {
@@ -580,15 +668,6 @@ public class ArchivedMedsController {
 				}
 			}
 		}
-    	
-		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-	   	mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
-	   	mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
-	   	mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
-	   	archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
-	    archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
-    		
-	    archiveTable.setItems(archivedMeds);
 	}
 
 }
