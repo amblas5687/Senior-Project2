@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import application.AnnaMain;
 import application.DBConfig;
+import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,13 +47,12 @@ public class ViewPatientController {
        
     private URL toPane;
    	private AnchorPane temp;
-   	
-   	
-	Connection con = AnnaMain.con;
-
    
     
     public void initialize(){
+    	
+		System.out.println("*******VIEW PATIENT INFORMATION*******");
+
     	
     	//add combo box selections
     	stageBox.getItems().addAll("Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5", "Stage 6", "Stage 7");    	
@@ -61,11 +61,18 @@ public class ViewPatientController {
     	
     	String patientQ = "SELECT * FROM patient WHERE patientCode = ?";
     	
+    	Connection connection = null;
+    	PreparedStatement patientInfo = null;
+    	ResultSet rs = null;
+    	
+    	
 		PatientModel curPatient = new PatientModel();
     	try {
-			PreparedStatement patientInfo = con.prepareStatement(patientQ);
+			connection = DataSource.getInstance().getConnection();
+    		
+			patientInfo = connection.prepareStatement(patientQ);
 			patientInfo.setString(1, LoginController.currentPatientID);
-			ResultSet rs = patientInfo.executeQuery();
+			rs = patientInfo.executeQuery();
 						
 			
 			while (rs.next()) {
@@ -79,13 +86,49 @@ public class ViewPatientController {
 				curPatient.setCargiver(rs.getString("caregiver"));
 				curPatient.setPatientCode(LoginController.currentPatientID);
 				
-				System.out.println("Viewing patient... " + curPatient);
+				System.out.println("VIEWING PATIENT... " + curPatient);
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			DBConfig.displayException(e);
+		}catch (Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	//close connections
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(patientInfo!=null)
+			{
+				try {
+					patientInfo.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
+    	
     	//*********************************************************************
     	
     	
@@ -180,10 +223,16 @@ public class ViewPatientController {
     	updatePatient.setCargiver(cargiverTF.getText());
     	updatePatient.setPatientCode(LoginController.currentPatientID);
     	
+    	
+    	Connection connection = null;
+    	PreparedStatement ps = null;
+    	
     	String patientQ = "UPDATE patient SET firstName= ?, lastName= ?, dob= ?, currStage= ?, diagnoseDate= ?, primaryDoc= ?, "
     			+ "caregiver= ? WHERE patientCode = ?";
     	try {
-    		PreparedStatement ps = con.prepareStatement(patientQ);
+			connection = DataSource.getInstance().getConnection();
+    		
+    		ps = connection.prepareStatement(patientQ);
         	ps.setString(1, updatePatient.getFname());
         	ps.setString(2, updatePatient.getLname());
         	ps.setString(3, updatePatient.getDOB());
@@ -197,13 +246,38 @@ public class ViewPatientController {
         	//disable editability
         	disableEdit();
         	
-        	System.out.println(updatePatient);
+        	System.out.println("PATIENT UPDATED... " + updatePatient);
     	} catch (SQLException e) {
     		DBConfig.displayException(e);
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
     	}
-    	
-    	
-
-    }
+    	//close connections
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+    }//end method
+    
+    
+    
 
 }
