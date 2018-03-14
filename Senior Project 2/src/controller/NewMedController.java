@@ -17,9 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class NewMedController {
-	
-	//Connection conn = AnnaMain.con;
-	
+		
     @FXML
     private TextField medName;
 
@@ -50,6 +48,13 @@ public class NewMedController {
     private URL toPane;
 	private AnchorPane temp;
 	 
+	
+	public void initialize(){
+		
+		System.out.println("*******NEW MED*******");
+	}
+	
+	
     @FXML
     void returnMain(ActionEvent event) {
     	
