@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.jfoenix.controls.JFXButton;
-import application.AnnaMain;
 import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import application.AnnaMain;
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
