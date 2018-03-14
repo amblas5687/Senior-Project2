@@ -78,17 +78,15 @@ public class NewMedController {
     	String dateAdded = java.time.LocalDate.now().toString();  
 
     	Connection connection = null;
+    	PreparedStatement ps = null;
     	
     	String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate, dateAdded)"
     			+ "VALUES (?,?,?,?,?,?,?,?)";
     	
     	try {
 				connection = DataSource.getInstance().getConnection();
-					
-	    		
-	    		
-	    		
-	    		PreparedStatement ps = connection.prepareStatement(query);
+			
+	    		ps = connection.prepareStatement(query);
 	    		ps.setString(1, LoginController.currentPatientID);
 	        	ps.setString(2, mName);
 	        	ps.setString(3, mDosage);
@@ -116,6 +114,16 @@ public class NewMedController {
     			{
     				try {
 						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+    			}
+    			
+    			if(ps!=null)
+    			{
+    				try {
+						ps.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
