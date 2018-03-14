@@ -89,6 +89,7 @@ public class ArchivedMedsController {
 		
 	public void initialize(){
 		
+		System.out.println("*******ARCHIVED MED*******");
 		searchOptions.getItems().addAll("Name", "Date", "Date Range");
 		
 		//add to toggle group
@@ -147,12 +148,12 @@ public class ArchivedMedsController {
 		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason);
 		    			    		
 		    		archivedMeds.add(tempMed);	
-		    		System.out.println("grabbing med-archive... " + tempMed);
+		    		System.out.println("GRABBING MEDS FROM ARCHIVE... " + tempMed);
 		    	}
 	    	}
     	catch (SQLException e) {
     		DBConfig.displayException(e);	
-    		System.out.println("failed grab");
+    		System.out.println("FAILED GRAB");
     	}catch (Exception e)
     	{
     		e.printStackTrace();
