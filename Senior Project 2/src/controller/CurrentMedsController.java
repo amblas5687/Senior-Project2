@@ -270,6 +270,7 @@ public class CurrentMedsController {
 	
     @FXML
     void options(ActionEvent event) {
+    	
     	String option = searchOptions.getValue();
     	
     	if(option == "Date") {
