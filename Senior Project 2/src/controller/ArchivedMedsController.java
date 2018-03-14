@@ -153,7 +153,7 @@ public class ArchivedMedsController {
 	    	}
     	catch (SQLException e) {
     		DBConfig.displayException(e);	
-    		System.out.println("FAILED GRAB");
+    		System.out.println("FAILED GRAB ARCHIVE");
     	}catch (Exception e)
     	{
     		e.printStackTrace();

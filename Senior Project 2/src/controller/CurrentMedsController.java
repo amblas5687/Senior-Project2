@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import application.AnnaMain;
 import application.DBConfig;
+import application.DataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,9 +35,6 @@ import model.MedModel;
 
 public class CurrentMedsController {
 	
-	//code for testing
-	Connection conn = AnnaMain.con;
-
 
     @FXML
     private TableView<MedModel> medicationTable;
@@ -92,6 +90,8 @@ public class CurrentMedsController {
 	private static MedModel curEditMed;
 	
     public void initialize(){
+    	
+		System.out.println("*******CURRENT MED*******");
     	grabMeds();
     	
     	searchOptions.getItems().addAll("Name", "Date", "Date Range");
@@ -117,9 +117,7 @@ public class CurrentMedsController {
     void clickMed(MouseEvent event) {
     	
     	MedModel selectedMed = medicationTable.getSelectionModel().getSelectedItem();
-    	System.out.println("selected" + selectedMed);   
-
-    	System.out.println(selectedMed);   
+    	System.out.println("SELECTED CURRENT MED..." + selectedMed);   
     	
     	if(selectedMed != null) {
 	    	btnDetails.setDisable(false);
@@ -130,11 +128,18 @@ public class CurrentMedsController {
     
     void grabMeds() {
     	
+    	Connection connection = null;
+    	PreparedStatement curMedPS = null;
+    	ResultSet rs = null;
+    	
     	try {
+    		
+				connection = DataSource.getInstance().getConnection();
+
 		    	String medQ = "SELECT * FROM currentMeds WHERE patientCode = ?";
-		    	PreparedStatement curMedPS = conn.prepareStatement(medQ);
+		    	curMedPS = connection.prepareStatement(medQ);
 		    	curMedPS.setString(1, LoginController.currentPatientID);
-		    	ResultSet rs = curMedPS.executeQuery();
+		    	rs = curMedPS.executeQuery();
 		    	
 		    	
 		    	MedModel tempMed;
@@ -165,13 +170,47 @@ public class CurrentMedsController {
 		    		
 		    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null);
 		    		patientMeds.add(tempMed);	
-		    		System.out.println("grabbing med... " + tempMed);
+		    		System.out.println("GRABBING MEDS FROM CURRENT..." + tempMed);
 		    	}
 	    	}
     	catch (SQLException e) {
     		DBConfig.displayException(e);	
-    		System.out.println("failed grab");
+    		System.out.println("FAILED GRAB CURRENT");
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
     	}
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(curMedPS!=null)
+			{
+				try {
+					curMedPS.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
     	
     	
     	mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
@@ -223,32 +262,39 @@ public class CurrentMedsController {
 	private void searchMed(ActionEvent event) {
 		
 		
+		Connection connection = null;
+    	PreparedStatement namePS = null;
+    	ResultSet rs = null;
+		
 		//clear the list for search
 		patientMeds.clear();
 		
 		String option = searchOptions.getValue();
-		System.out.println("searching by..." + option);
+		System.out.println("SEARCHING MED CURRENT BY..." + option);
 		
-		
-		//if they do not select a search value, just grab all again
-		if(option == null){
-			
-			grabMeds();
-			
-		}
-		
-		//search by name
-		else if(option.equals("Name"))
+		//try database connection first
+		try
 		{
+			connection = DataSource.getInstance().getConnection();
+
 			
-			try {
+			//if they do not select a search value, just grab all again
+			if(option == null){
+				
+				grabMeds();
+				
+			}
+			
+			//search by name
+			else if(option.equals("Name"))
+			{
 					String medNameSearch = searchTF.getText();
 	
 			    	String nameQ = "SELECT * FROM currentMeds WHERE medName = ? AND patientCode = ?";
-			    	PreparedStatement namePS = conn.prepareStatement(nameQ);
+			    	namePS = connection.prepareStatement(nameQ);
 			    	namePS.setString(1, medNameSearch);
 			    	namePS.setString(2, LoginController.currentPatientID);
-			    	ResultSet rs = namePS.executeQuery();
+			    	rs = namePS.executeQuery();
 			
 		    	
 			    	//create model
@@ -282,13 +328,9 @@ public class CurrentMedsController {
 				    		
 				    		//add to list
 				    		patientMeds.add(tempMed);	
-				    		System.out.println("grabbing med... " + tempMed);
+				    		System.out.println("RESULT FROM NAME SEARCH CURRENT... " + tempMed);
 				    	}
-			    	}
-				catch (SQLException e) {
-					DBConfig.displayException(e);	
-					System.out.println("failed grab");
-			}
+			
 			
 				
 				//set table values
@@ -303,8 +345,47 @@ public class CurrentMedsController {
 				//clear the search values
 				searchOptions.setValue(null);
 				searchTF.setText(null);
+			}//end search by name
 			
-		}
+		}catch (SQLException e) {
+			DBConfig.displayException(e);	
+			System.out.println("FAILED SEARCH CURRENT");
+			}catch (Exception e)
+			{
+	    		e.printStackTrace();
+	    	}
+			//close the connections
+	    	finally {
+				if(connection!=null)
+				{
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(namePS!=null)
+				{
+					try {
+						namePS.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(rs!=null)
+				{
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}//end finally
 
     }
 
@@ -342,10 +423,18 @@ public class CurrentMedsController {
 		
 		//get selected med
 		MedModel moveMed = medicationTable.getSelectionModel().getSelectedItem();
-		System.out.println("Med to move..." + moveMed);
+		System.out.println("MED TO MOVE CURRENT..." + moveMed);
 		
+		Connection connection = null;
+    	PreparedStatement moveMedPS = null;
+    	PreparedStatement deleteMedPS = null;
+    	ResultSet rs = null;
 		
 		try {
+			
+				connection = DataSource.getInstance().getConnection();
+
+			
 				
 				//********************************
 				//MOVE MED TO ARCHIVE TABLE
@@ -370,7 +459,7 @@ public class CurrentMedsController {
 						+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
 						+ "VALUES (?,?,?,?,?,?,?,?,?)";
 		    	
-				PreparedStatement moveMedPS = conn.prepareStatement(moveMedQ);
+				moveMedPS = connection.prepareStatement(moveMedQ);
 		    	
 		    	//set strings
 		    	moveMedPS.setString(1, patientCode);
@@ -384,20 +473,20 @@ public class CurrentMedsController {
 		    	moveMedPS.setString(9, archiveReason);
 		    	
 		    	moveMedPS.execute();
-		    	System.out.println("Medication moved!");
+		    	System.out.println("MEDICATION MOVED CURRENT");
 		    	
 		    	
 		    	//************************************
 				//DELETE MED AFTER MOVING FROM CURRENT
 				//************************************
 		    	String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medID = ?";
-				PreparedStatement deleteMedPS = conn.prepareStatement(deleteMedQ);
+				deleteMedPS = connection.prepareStatement(deleteMedQ);
 				
 				deleteMedPS.setString(1, patientCode);
 				deleteMedPS.setString(2, medID);
 		    	
 				deleteMedPS.execute();
-				System.out.println("Medication deleted!");
+				System.out.println("MEDICATION DELETED CURRENT");
 				
 				
 				//reload current med page
@@ -409,8 +498,52 @@ public class CurrentMedsController {
 		}catch (SQLException e) {
     		
     		DBConfig.displayException(e);
-    		System.out.println("Failed move of medication information.");
+    		System.out.println("FAILED ARCHIVCE");
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
     	}
+		//close connections
+    	finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(moveMedPS!=null)
+			{
+				try {
+					moveMedPS.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(deleteMedPS!=null)
+			{
+				try {
+					deleteMedPS.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		
 	}
 	
