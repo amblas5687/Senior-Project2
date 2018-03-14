@@ -4,10 +4,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import application.AnnaMain;
 import application.DBConfig;
+import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,12 +53,12 @@ public class NewUserController {
     private Button cancelBTN;
     @FXML
     private ComboBox<String> relationBox;
-    
-	Connection con = AnnaMain.con;
-    
+        
     
 
     public void initialize(){
+		
+    	System.out.println("*******NEW PATIENT*******");
     	
     	//add combo box selections
     	relationBox.getItems().addAll("Son/Daughter", "Spouse", "Grandchild", "Friend", "Medical Professional");
@@ -108,15 +110,20 @@ public class NewUserController {
 		} else if (result.get() == ButtonType.OK){
     		
     		//TODO need to check patient table to verify the patient
-    	    System.out.println("Code: " + result.get());
+    	    System.out.println("PATIENT CODE... " + result.get());
     	    
     	    subUser.setPatientCode(textField.getText());
+    	    
+    		Connection connection = null;
+        	PreparedStatement user = null;
     	    
     	    //prepare the query
     	    String userQ = "INSERT into user (fname, lname, DOB, pRelation, email, password, patientCode, userID) "
         			+ "VALUES (?,?,?,?,?,?,?,?)";
         	try {
-    			PreparedStatement user = con.prepareStatement(userQ);
+				connection = DataSource.getInstance().getConnection();
+        		
+    			user = connection.prepareStatement(userQ);
     			user.setString(1, subUser.getFname());
     			user.setString(2, subUser.getLname());
     			user.setString(3, subUser.getDOB());
@@ -128,19 +135,39 @@ public class NewUserController {
 
     			
     			user.execute();
-    			System.out.println(user);
+    			System.out.println("USER ENTERED..."+subUser);
     			
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
     			DBConfig.displayException(e);
-    		}
-    	    
-    	    
-    	}
-
-    
-
-    }
+    		}catch (Exception e)
+        	{
+        		e.printStackTrace();
+        	}
+        	//close connections
+        	finally {
+    			if(connection!=null)
+    			{
+    				try {
+    					connection.close();
+    				} catch (SQLException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    			}
+    			
+    			if(user!=null)
+    			{
+    				try {
+    					user.close();
+    				} catch (SQLException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    			}
+    		}//finally
+    	}//else if
+    }//end method
     
     //user cancels submission
     @FXML
