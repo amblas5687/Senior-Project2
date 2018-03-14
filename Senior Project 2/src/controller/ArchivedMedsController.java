@@ -253,6 +253,7 @@ public class ArchivedMedsController {
 
     @FXML
     void options(ActionEvent event) {
+    	
     	String option = searchOptions.getValue();
     	
     	if(option == "Date") {
@@ -280,16 +281,117 @@ public class ArchivedMedsController {
 	private void searchMed(ActionEvent event) {
 		
 		String option = searchOptions.getValue();
+		archiveTable.getItems().clear();
 		
-    	if(option == "Name") {
+		if(option == null) {
+			archiveTable.getItems().clear();
+		} else if(option == "Name") {
+    		optionName();
     		
+    		searchOptions.setValue(null);
+			searchTF.setText(null);
     	} else if(option == "Date") {
     		optionDate();
+    		
+    		datePicker.setValue(null);
+			searchOptions.setValue(null);
     	} else if(option == "Date Range") {
     		optionDateRange();
+    		
+    		DRPicker1.setValue(null);
+			DRPicker2.setValue(null);
+			searchOptions.setValue(null);
     	}
     	
     }
+	
+	void optionName() {
+		String search = searchTF.getText();
+
+		Connection connection = null;
+		PreparedStatement namePS = null;
+		ResultSet rs = null;
+
+		// try database connection first
+		try {
+			connection = DataSource.getInstance().getConnection();
+			// search by name
+			String curNameSearch = search;
+
+			String nameQ = "SELECT * FROM archivedMeds WHERE medName = ? AND patientCode = ?";
+			namePS = connection.prepareStatement(nameQ);
+			namePS.setString(1, curNameSearch);
+			namePS.setString(2, LoginController.currentPatientID);
+			rs = namePS.executeQuery();
+
+			// create model
+			MedModel tempMed;
+	    	String patientCode;
+	    	String medName;
+	    	String medDose;
+	    	String doc;
+	    	String purpose;
+	    	String medDate;
+	    	String medDetails;
+	    	String archiveDate;
+	    	String archiveReason;
+
+			// set values from search
+			while (rs.next()) {
+
+    			patientCode = rs.getString("patientCode");
+	    		medName = rs.getString("medName");
+	    		medDate = rs.getString("prescribDate");
+	    		medDetails = rs.getString("medDescript");
+	    		doc = rs.getString("prescribDoc");
+	    		medDose = rs.getString("medDosage");
+	    		purpose = rs.getString("purpPresrcipt");
+	    		archiveDate = rs.getString("dateArchived");
+	    		archiveReason = rs.getString("archiveReason");
+	    		
+	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null, archiveDate, archiveReason, null);
+	    			    		
+	    		archivedMeds.add(tempMed);	
+    			
+				System.out.println("RESULT FROM NAME SEARCH CURRENT... " + tempMed);
+			}
+
+		} catch (SQLException e) {
+			DBConfig.displayException(e);
+			System.out.println("FAILED SEARCH CURRENT");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// close the connections
+		finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (namePS != null) {
+				try {
+					namePS.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+	}
 	
 	void optionDate() {
 		LocalDate dp = datePicker.getValue();

@@ -310,18 +310,17 @@ public class CurrentMedsController {
 			// clear the search values
 			searchOptions.setValue(null);
 			searchTF.setText(null);
-
 		} else if (option == "Date") {
 			optionDate();
+			
 			datePicker.setValue(null);
 			searchOptions.setValue(null);
-			searchTF.setText(null);
 		} else if (option == "Date Range") {
 			optionDateRange();
+			
 			DRPicker1.setValue(null);
 			DRPicker2.setValue(null);
 			searchOptions.setValue(null);
-			searchTF.setText(null);
 		}
 	}
 
