@@ -3,12 +3,11 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import application.DBConfig;
 import application.DataSource;
 import javafx.collections.FXCollections;
@@ -21,9 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -74,7 +73,16 @@ public class CurrentMedsController {
     private ToggleButton archMed;
     
     @FXML
-    private DatePicker DRPicker;
+    private DatePicker datePicker;
+    
+    @FXML
+    private DatePicker DRPicker1;
+    
+    @FXML
+    private DatePicker DRPicker2;
+    
+    @FXML
+    private Label drpLabel;
     
 	@FXML
     private ComboBox<String> searchOptions;
@@ -266,138 +274,342 @@ public class CurrentMedsController {
 		 
 	}
 	
+	
+    @FXML
+    void options(ActionEvent event) {
+    	String option = searchOptions.getValue();
+    	
+    	if(option == "Date") {
+    		searchTF.setVisible(false);
+    		DRPicker1.setVisible(false);
+    		DRPicker2.setVisible(false);
+    		drpLabel.setVisible(false);
+    		datePicker.setVisible(true);
+    	} else if(option == "Date Range"){
+    		searchTF.setVisible(false);
+    		datePicker.setVisible(false);
+    		DRPicker1.setVisible(true);
+    		DRPicker2.setVisible(true);
+    		drpLabel.setVisible(true);
+    	} else {
+    		DRPicker1.setVisible(false);
+    		DRPicker2.setVisible(false);
+    		drpLabel.setVisible(false);
+    		datePicker.setVisible(false);
+    		searchTF.setVisible(true);
+    	}
+    }
+    
+	
 	@FXML
 	private void searchMed(ActionEvent event) {
 		
+		String option = searchOptions.getValue();
+		
+		if(option == null) {
+			grabMeds();
+		} else if(option == "Name") {
+    		optionName();
+    	} else if(option == "Date") {
+    		optionDate();
+    	} else if(option == "Date Range") {
+    		optionDateRange();
+    	}
+    }
+
+	
+	void optionName() {
+		
+		String search = searchTF.getText();
 		
 		Connection connection = null;
-    	PreparedStatement namePS = null;
+		PreparedStatement namePS = null;
+		ResultSet rs = null;
+		// try database connection first
+		try {
+			connection = DataSource.getInstance().getConnection();
+			// search by name
+			String curNameSearch = search;
+
+			String nameQ = "SELECT * FROM currentMeds WHERE medName = ? AND patientCode = ?";
+			namePS = connection.prepareStatement(nameQ);
+			namePS.setString(1, curNameSearch);
+			namePS.setString(2, LoginController.currentPatientID);
+			rs = namePS.executeQuery();
+
+			// create model
+			MedModel tempMed;
+			String patientCode;
+			String medName;
+			String medDate;
+			String medDetails;
+			String doc;
+			String medDose;
+			String purpose;
+			String dateAdded;
+			String medID;
+			String dateUpdated;
+
+			// set values from search
+			while (rs.next()) {
+				patientCode = rs.getString("patientCode");
+				medName = rs.getString("medName");
+				medDate = rs.getString("prescribDate");
+				medDetails = rs.getString("medDescript");
+				doc = rs.getString("prescribDoc");
+				// System.out.println(doc);
+				medDose = rs.getString("medDosage");
+				purpose = rs.getString("purpPresrcipt");
+				dateAdded = rs.getString("dateAdded");
+				medID = rs.getString("medID");
+				dateUpdated = rs.getString("dateUpdated");
+
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded,
+						medID, null, null, dateUpdated);
+
+				// add to list
+				patientMeds.add(tempMed);
+				System.out.println("RESULT FROM NAME SEARCH CURRENT... " + tempMed);
+			}
+
+		} catch (SQLException e) {
+			DBConfig.displayException(e);
+			System.out.println("FAILED SEARCH CURRENT");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// close the connections
+		finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (namePS != null) {
+				try {
+					namePS.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} // end finally
+
+	}// end method
+	
+	
+	void optionDate() {
+		LocalDate dp = datePicker.getValue();
+		Date date = java.sql.Date.valueOf(dp);
+		
+		String query = "SELECT * FROM currentMeds WHERE prescribDate = ?";
+		
+
+    	Connection connection = null;
+    	PreparedStatement ps = null;
     	ResultSet rs = null;
 		
-		//clear the list for search
-		patientMeds.clear();
-		
-		String option = searchOptions.getValue();
-		System.out.println("SEARCHING MED CURRENT BY..." + option);
-		
-		//try database connection first
-		try
-		{
+    	try {
 			connection = DataSource.getInstance().getConnection();
+    		
+    		ps = connection.prepareStatement(query);
+    		ps.setDate(1, date);
+    		
+    		rs = ps.executeQuery();
+    		
+    		medicationTable.getItems().clear();
+    		
+    		while(rs.next()) {
+    			
+    			MedModel tempMed;
+		    	String patientCode;
+		    	String medName;
+		    	String medDate;
+		    	String medDetails;
+		    	String doc;
+		    	String medDose;
+		    	String purpose;
+		    	String dateAdded;
+		    	String medID;
+		    	String dateUpdated;
 
-			
-			//if they do not select a search value, just grab all again
-			if(option == null){
-				
-				grabMeds();
-				
+		    	patientCode = rs.getString("patientCode");
+	    		medName = rs.getString("medName");
+	    		medDate = rs.getString("prescribDate");
+	    		medDetails = rs.getString("medDescript");
+	    		doc = rs.getString("prescribDoc");
+	    		medDose = rs.getString("medDosage");
+	    		purpose = rs.getString("purpPresrcipt");
+	    		dateAdded = rs.getString("dateAdded");
+	    		medID = rs.getString("medID");
+	    		dateUpdated = rs.getString("dateUpdated");
+	    		
+	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null, dateUpdated);
+	    		
+	    		//add to list
+	    		patientMeds.add(tempMed);	
+    			
+    		}
+    		
+    	} catch (SQLException ex) {
+    		DBConfig.displayException(ex);
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	//close the connections
+		finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
-			//search by name
-			else if(option.equals("Name"))
+			if(ps!=null)
 			{
-					String medNameSearch = searchTF.getText();
-	
-			    	String nameQ = "SELECT * FROM currentMeds WHERE medName = ? AND patientCode = ?";
-			    	namePS = connection.prepareStatement(nameQ);
-			    	namePS.setString(1, medNameSearch);
-			    	namePS.setString(2, LoginController.currentPatientID);
-			    	rs = namePS.executeQuery();
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			
-		    	
-			    	//create model
-			    	MedModel tempMed;
-			    	String patientCode;
-			    	String medName;
-			    	String medDate;
-			    	String medDetails;
-			    	String doc;
-			    	String medDose;
-			    	String purpose;
-			    	String dateAdded;
-			    	String medID;
-			    	String dateUpdated;
-			    	
-				    	
-				    //set values from search
-				    while(rs.next())
-				    	{
-				    		patientCode = rs.getString("patientCode");
-				    		medName = rs.getString("medName");
-				    		medDate = rs.getString("prescribDate");
-				    		medDetails = rs.getString("medDescript");
-				    		doc = rs.getString("prescribDoc");
-				    		//System.out.println(doc);
-				    		medDose = rs.getString("medDosage");
-				    		purpose = rs.getString("purpPresrcipt");
-				    		dateAdded = rs.getString("dateAdded");
-				    		medID = rs.getString("medID");
-				    		dateUpdated = rs.getString("dateUpdated");
-				    		
-				    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null, dateUpdated);
-				    		
-				    		//add to list
-				    		patientMeds.add(tempMed);	
-				    		System.out.println("RESULT FROM NAME SEARCH CURRENT... " + tempMed);
-				    	}
-			
-			
-				
-				//set table values
-				mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-				mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
-				mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
-				mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
-				//listView.setItems(patientMeds);
-				medicationTable.setItems(patientMeds);
-				
-								
-				//clear the search values
-				searchOptions.setValue(null);
-				searchTF.setText(null);
-			}//end search by name
-			
-		}catch (SQLException e) {
-			DBConfig.displayException(e);	
-			System.out.println("FAILED SEARCH CURRENT");
-			}catch (Exception e)
+			if(rs!=null)
 			{
-	    		e.printStackTrace();
-	    	}
-			//close the connections
-	    	finally {
-				if(connection!=null)
-				{
-					try {
-						connection.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
-				if(namePS!=null)
-				{
-					try {
-						namePS.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				if(rs!=null)
-				{
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}//end finally
+			}
+		}
 
-    }
+    	mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+		mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+		mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+		mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+		
+		medicationTable.setItems(patientMeds);
+	}
+	
+	void optionDateRange() {
+		
+		LocalDate drp1 = DRPicker1.getValue();
+		LocalDate drp2 = DRPicker2.getValue();
+		Date date1 = java.sql.Date.valueOf(drp1);
+		Date date2 = java.sql.Date.valueOf(drp2);
+		
+		String query = "SELECT * FROM currentMeds WHERE prescribDate >= '" + date1 + "' AND prescribDate <= '" + date2 + "';";
+		
+		Connection connection = null;
+		PreparedStatement ps = null;  		
+		ResultSet rs = null;
+		
+    	try {
+    		
+			connection = DataSource.getInstance().getConnection();
+
+    		ps = connection.prepareStatement(query);  		
+    		rs = ps.executeQuery();
+    		
+    		medicationTable.getItems().clear();
+    		
+    		while(rs.next()) {
+
+    			MedModel tempMed;
+		    	String patientCode;
+		    	String medName;
+		    	String medDate;
+		    	String medDetails;
+		    	String doc;
+		    	String medDose;
+		    	String purpose;
+		    	String dateAdded;
+		    	String medID;
+		    	String dateUpdated;
+
+		    	patientCode = rs.getString("patientCode");
+	    		medName = rs.getString("medName");
+	    		medDate = rs.getString("prescribDate");
+	    		medDetails = rs.getString("medDescript");
+	    		doc = rs.getString("prescribDoc");
+	    		medDose = rs.getString("medDosage");
+	    		purpose = rs.getString("purpPresrcipt");
+	    		dateAdded = rs.getString("dateAdded");
+	    		medID = rs.getString("medID");
+	    		dateUpdated = rs.getString("dateUpdated");
+	    		
+	    		tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded, medID, null, null, dateUpdated);
+	    		
+	    		//add to list
+	    		patientMeds.add(tempMed);	
+	    		
+    		}
+    		
+    	} catch (SQLException ex) {
+    		DBConfig.displayException(ex);
+    	}catch (Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+		finally {
+			if(connection!=null)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(ps!=null)
+			{
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(rs!=null)
+			{
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+    	
+    	mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
+		mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+		mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
+		mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
+		
+		medicationTable.setItems(patientMeds);
+	}
 
 	
 	@FXML
