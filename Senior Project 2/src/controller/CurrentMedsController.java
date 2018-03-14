@@ -84,10 +84,8 @@ public class CurrentMedsController {
 	private Label drpLabel;
 
 	@FXML
-	private DatePicker DRPicker;
-
-	@FXML
 	private ComboBox<String> searchOptions;
+	
 	@FXML
 	private AnchorPane content_view;
 
