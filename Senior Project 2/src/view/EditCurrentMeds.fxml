@@ -157,7 +157,6 @@
                   </Label>
                   <Label fx:id="nameLBL" prefHeight="17.0" prefWidth="299.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Label fx:id="doseLBL" prefHeight="17.0" prefWidth="296.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label fx:id="descriptionLBL" prefHeight="17.0" prefWidth="292.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Label fx:id="doctorLBL" prefHeight="17.0" prefWidth="361.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                   <Label fx:id="purposeLBL" prefHeight="17.0" prefWidth="343.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
 		         </children>

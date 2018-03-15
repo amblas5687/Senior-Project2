@@ -59,9 +59,6 @@ public class EditMedController {
 	private Label doseLBL;
 
 	@FXML
-	private Label descriptionLBL;
-
-	@FXML
 	private Label doctorLBL;
 
 	@FXML
