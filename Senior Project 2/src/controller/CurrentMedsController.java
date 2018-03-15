@@ -318,9 +318,7 @@ public class CurrentMedsController {
 			grabMeds();
 		} else if (option == "Name") {
 			
-			if(checkName()) {
-				
-			} else {
+			if(!checkName()) {
 				optionName();
 				
 				// clear the search values
@@ -329,16 +327,24 @@ public class CurrentMedsController {
 			}
 			
 		} else if (option == "Date") {
-			optionDate();
 			
-			datePicker.setValue(null);
-			searchOptions.setValue(null);
+			if(!checkDate()) {
+				optionDate();
+				
+				datePicker.setValue(null);
+				searchOptions.setValue(null);
+			}
+		
 		} else if (option == "Date Range") {
-			optionDateRange();
 			
-			DRPicker1.setValue(null);
-			DRPicker2.setValue(null);
-			searchOptions.setValue(null);
+			if(!checkDateRange()) {
+				optionDateRange();
+				
+				DRPicker1.setValue(null);
+				DRPicker2.setValue(null);
+				searchOptions.setValue(null);
+			}
+			
 		}
 	}
 	
@@ -357,6 +363,45 @@ public class CurrentMedsController {
 			flag = true;
 		} else if(n) {
 			lblSearch.setText("No special characters or numbers.");
+			flag = true;
+		} else {
+			flag = false;
+		}
+		
+		return flag;
+	}
+	
+	boolean checkDate() {
+		
+		lblSearch.setText(null);
+		
+		if(datePicker.getValue() == null) {
+			lblSearch.setText("Please select a date.");
+			flag = true;
+		} else {
+			flag = false;
+		}
+		
+		return flag;
+	}
+	
+	boolean checkDateRange() {
+		
+		if(DRPicker1.getValue() == null || DRPicker2.getValue() == null) {
+			lblSearch.setText("Please fill in both dates.");
+			return flag = true;
+		}
+		
+		LocalDate dp1 = DRPicker1.getValue();
+		LocalDate dp2 = DRPicker2.getValue();
+		
+		Date date1 = java.sql.Date.valueOf(dp1);
+		Date date2 = java.sql.Date.valueOf(dp2);
+		
+		lblSearch.setText(null);
+	
+		if(date2.before(date1)) {
+			lblSearch.setText("Invalid date range.");
 			flag = true;
 		} else {
 			flag = false;
