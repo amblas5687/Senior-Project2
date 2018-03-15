@@ -73,6 +73,10 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
+                  <Label fx:id="errLBL" layoutX="295.0" layoutY="124.0" prefHeight="25.0" prefWidth="300.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
          </center>
