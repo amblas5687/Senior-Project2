@@ -69,7 +69,6 @@ public class MainViewController {
 		     		btnMed.getStyleClass().add("activeButton");
 		     		break;
 		        case 'P': //My Patients
-		        	System.out.println("HIT");
 		        	toPane = getClass().getResource("/view/ViewPatientInfo.fxml"); 
 		     		temp = FXMLLoader.load(toPane);
 		     		content_view.getChildren().setAll(temp);
