@@ -351,8 +351,9 @@ public class CurrentMedsController {
 	boolean checkName() {
 
 		String name = searchTF.getText();
+		name = name.trim();
 		
-		Pattern p = Pattern.compile("[^a-zA-Z\\s]");
+		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]+");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
 		
@@ -362,7 +363,7 @@ public class CurrentMedsController {
 			lblSearch.setText("Please enter a medication name.");
 			flag = true;
 		} else if(n) {
-			lblSearch.setText("No special characters or numbers.");
+			lblSearch.setText("No special characters, numbers, or extra spaces.");
 			flag = true;
 		} else {
 			flag = false;
