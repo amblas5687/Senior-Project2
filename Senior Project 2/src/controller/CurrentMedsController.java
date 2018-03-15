@@ -353,7 +353,7 @@ public class CurrentMedsController {
 		String name = searchTF.getText();
 		name = name.trim();
 		
-		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]+");
+		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
 		
