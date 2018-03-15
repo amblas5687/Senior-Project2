@@ -8,6 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import application.DBConfig;
 import application.DataSource;
 import javafx.collections.FXCollections;
@@ -82,12 +85,17 @@ public class CurrentMedsController {
 
 	@FXML
 	private Label drpLabel;
+	
+	@FXML 
+	private Label lblSearch;
 
 	@FXML
 	private ComboBox<String> searchOptions;
 	
 	@FXML
 	private AnchorPane content_view;
+	
+	private boolean flag;
 
 	private URL toPane;
 	private AnchorPane temp;
@@ -279,18 +287,23 @@ public class CurrentMedsController {
 			DRPicker1.setVisible(false);
 			DRPicker2.setVisible(false);
 			drpLabel.setVisible(false);
+			
 			datePicker.setVisible(true);
+			datePicker.setEditable(false);
 		} else if (option == "Date Range") {
 			searchTF.setVisible(false);
 			datePicker.setVisible(false);
+			
 			DRPicker1.setVisible(true);
 			DRPicker2.setVisible(true);
 			drpLabel.setVisible(true);
+			DRPicker1.setEditable(false);
 		} else {
 			DRPicker1.setVisible(false);
 			DRPicker2.setVisible(false);
 			drpLabel.setVisible(false);
 			datePicker.setVisible(false);
+			
 			searchTF.setVisible(true);
 		}
 	}
@@ -304,10 +317,17 @@ public class CurrentMedsController {
 		if (option == null) {
 			grabMeds();
 		} else if (option == "Name") {
-			optionName();
-			// clear the search values
-			searchOptions.setValue(null);
-			searchTF.setText(null);
+			
+			if(checkName()) {
+				
+			} else {
+				optionName();
+				
+				// clear the search values
+				searchOptions.setValue(null);
+				searchTF.setText(null);
+			}
+			
 		} else if (option == "Date") {
 			optionDate();
 			
@@ -321,7 +341,30 @@ public class CurrentMedsController {
 			searchOptions.setValue(null);
 		}
 	}
+	
+	boolean checkName() {
 
+		String name = searchTF.getText();
+		
+		Pattern p = Pattern.compile("[^a-zA-Z\\s]");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
+		
+		lblSearch.setText(null);
+		
+		if(name.equals("")) {
+			lblSearch.setText("Please enter a medication name.");
+			flag = true;
+		} else if(n) {
+			lblSearch.setText("No special characters or numbers.");
+			flag = true;
+		} else {
+			flag = false;
+		}
+		
+		return flag;
+	}
+	
 	void optionName() {
 
 		String search = searchTF.getText();
