@@ -62,8 +62,8 @@
 	        		 <columns>
 	          			<TableColumn fx:id="mName" prefWidth="247.2000366449356" text="Medication Name" />
 	          			<TableColumn fx:id="mDosage" minWidth="0.0" prefWidth="110.4000244140625" text="Dosage" />
-	            		<TableColumn fx:id="mDate" minWidth="8.0" prefWidth="205.60006713867188" text="Perscription Date" />
-	            		<TableColumn fx:id="mDoc" prefWidth="229.5999755859375" text="Perscribing Doctor" />
+	            		<TableColumn fx:id="mDate" minWidth="8.0" prefWidth="205.60006713867188" text="Prescription Date" />
+	            		<TableColumn fx:id="mDoc" prefWidth="229.5999755859375" text="Prescribing Doctor" />
 	        		 </columns>
 	      		  </TableView>
                   <Button fx:id="btnDetails" disable="true" layoutX="860.0" layoutY="152.0" maxHeight="25.0" minWidth="75.0" mnemonicParsing="false" onAction="#viewDetails" text="Details">

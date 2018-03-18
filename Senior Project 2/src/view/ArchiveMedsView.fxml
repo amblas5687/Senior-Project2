@@ -62,8 +62,8 @@
          		   	<columns>
             			<TableColumn fx:id="mName" prefWidth="157.59996950626373" text="Medication Name" />
             			<TableColumn fx:id="mDosage" minWidth="0.0" prefWidth="75.99993896484375" text="Dosage" />
-            			<TableColumn fx:id="mDate" minWidth="8.0" prefWidth="132.00006103515625" text="Perscription Date" />
-            			<TableColumn fx:id="mDoc" prefWidth="151.20004272460938" text="Perscribing Doctor" />
+            			<TableColumn fx:id="mDate" minWidth="8.0" prefWidth="132.00006103515625" text="Prescription Date" />
+            			<TableColumn fx:id="mDoc" prefWidth="151.20004272460938" text="Prescribing Doctor" />
             			<TableColumn fx:id="archiveDate" prefWidth="106.4000244140625" text="Archive Date" />
             			<TableColumn fx:id="archiveReason" prefWidth="169.5999755859375" text="Archive Reason" />
          			</columns>
