@@ -96,7 +96,7 @@ public class ArchivedMedsController {
 
 		// bind columns
 		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-		mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+		mDosage.setCellValueFactory(cellData -> cellData.getValue().getTypeAndAmount());
 		mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
 		mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
 		archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
@@ -136,6 +136,7 @@ public class ArchivedMedsController {
 			String patientCode;
 			String medName;
 			String medDose;
+			String doseType;
 			String doc;
 			String purpose;
 			String medDate;
@@ -150,11 +151,12 @@ public class ArchivedMedsController {
 				medDetails = rs.getString("medDescript");
 				doc = rs.getString("prescribDoc");
 				medDose = rs.getString("medDosage");
+				doseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
 						archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
@@ -217,6 +219,7 @@ public class ArchivedMedsController {
 			String patientCode;
 			String medName;
 			String medDose;
+			String doseType;
 			String doc;
 			String purpose;
 			String medDate;
@@ -231,11 +234,12 @@ public class ArchivedMedsController {
 				medDetails = rs.getString("medDescript");
 				doc = rs.getString("prescribDoc");
 				medDose = rs.getString("medDosage");
+				doseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
 						archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
@@ -416,6 +420,7 @@ public class ArchivedMedsController {
 			String patientCode;
 			String medName;
 			String medDose;
+			String doseType;
 			String doc;
 			String purpose;
 			String medDate;
@@ -432,11 +437,12 @@ public class ArchivedMedsController {
 				medDetails = rs.getString("medDescript");
 				doc = rs.getString("prescribDoc");
 				medDose = rs.getString("medDosage");
+				doseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
 						archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
@@ -507,6 +513,7 @@ public class ArchivedMedsController {
 				String patientCode;
 				String medName;
 				String medDose;
+				String doseType;
 				String doc;
 				String purpose;
 				String medDate;
@@ -520,11 +527,12 @@ public class ArchivedMedsController {
 				medDetails = rs.getString("medDescript");
 				doc = rs.getString("prescribDoc");
 				medDose = rs.getString("medDosage");
+				doseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
 						archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
@@ -596,6 +604,7 @@ public class ArchivedMedsController {
 				String patientCode;
 				String medName;
 				String medDose;
+				String doseType;
 				String doc;
 				String purpose;
 				String medDate;
@@ -609,11 +618,12 @@ public class ArchivedMedsController {
 				medDetails = rs.getString("medDescript");
 				doc = rs.getString("prescribDoc");
 				medDose = rs.getString("medDosage");
+				doseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, null, null,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
 						archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
