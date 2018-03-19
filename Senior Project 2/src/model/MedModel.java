@@ -9,6 +9,7 @@ public class MedModel {
 	StringProperty patientCode;
 	StringProperty medName;
 	StringProperty medDosage;
+	StringProperty doseType;
 	StringProperty doc;
 	StringProperty purpose;
 	StringProperty date;
@@ -23,12 +24,13 @@ public class MedModel {
 	
 	//used for current patient
 	public MedModel(String patientCode, String medName, String medDate, String doc, String purpose,
-			String medDose, String details, String dateAdded, 
+			String medDose, String doseType, String details, String dateAdded, 
 			String medID, String archiveDate, String archiveReason, String dateUpdated) {
 		super();
 		this.patientCode = new SimpleStringProperty(patientCode);
 		this.medName = new SimpleStringProperty(medName);
 		this.medDosage = new SimpleStringProperty(medDose);
+		this.doseType = new SimpleStringProperty(doseType);
 		this.doc = new SimpleStringProperty(doc);
 		this.purpose = new SimpleStringProperty(purpose);
 		this.date = new SimpleStringProperty(medDate);
@@ -68,6 +70,24 @@ public class MedModel {
 
 	public void setMedDosage(StringProperty medDosage) {
 		this.medDosage = medDosage;
+	}
+	
+	public StringProperty getDoseType() {
+		return doseType;
+	}
+
+	public void setDoseType(StringProperty doseType) {
+		this.doseType = doseType;
+	}
+	
+	public String getTypeAndAmount()
+	{
+		String doseAndType;
+		String dose = getMedDosage().get();
+		String type = getDoseType().get();
+		doseAndType = dose + " " + type;
+		
+		return doseAndType;
 	}
 
 	public StringProperty getDoc() {
@@ -145,9 +165,9 @@ public class MedModel {
 
 	
 	public String toString() {
-		return "CurMedModel [patientCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", /ndoc=" + doc + ", purpose=" + purpose
-				+ ", date=" + date + ", /ndetails=" + details + ", dateAdded=" + dateAdded + ", medID=" + medID +
-				", /narchiveDate=" + archiveDate + ", archiveReason=" + archiveReason + ", dateUpdated=" + dateUpdated + "]";
+		return "CurMedModel [patientCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", doseType= " + doseType + " \ndoc=" + doc + ", purpose=" + purpose
+				+ ", date=" + date + ", \ndetails=" + details + ", dateAdded=" + dateAdded + ", medID=" + medID +
+				", \narchiveDate=" + archiveDate + ", archiveReason=" + archiveReason + ", dateUpdated=" + dateUpdated + "]";
 	}
 	
 
