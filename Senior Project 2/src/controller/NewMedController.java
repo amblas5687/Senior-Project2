@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -32,6 +33,9 @@ public class NewMedController {
 
 	@FXML
 	private TextField purpOfPrescript;
+	
+	@FXML
+	private ComboBox<String> doseType;
 
 	@FXML
 	private Button btnSubmit;
@@ -69,6 +73,8 @@ public class NewMedController {
 	public void initialize() {
 
 		System.out.println("*******NEW MED*******");
+		
+		doseType.getItems().addAll("mg", "oz");
 	}
 
 	@FXML
@@ -90,18 +96,20 @@ public class NewMedController {
 	@FXML
 	void submit(ActionEvent event) {
 
-		boolean validName, validDose, validDoctor, validPurpose, validDate = true;
+		boolean validName, validDose, validDoseType, validDoctor, validPurpose, validDate = true;
 
 		validName = validateName();
 		validDose = validateDose();
+		validDoseType = validateDoseType();
 		validDoctor = validateDoctor();
 		validPurpose = validatePurpose();
 		validDate = validateDate();
 
-		if (validName && validDose && validDoctor && validPurpose && validDate) {
+		if (validName && validDose && validDoseType && validDoctor && validPurpose && validDate) {
 
 			String mName = medName.getText();
 			String mDosage = medDosage.getText();
+			String mDoseType = doseType.getValue().toString();
 			String mDescript = medDescript.getText();
 			String pDoc = prescribDoc.getText();
 			String pPurpose = purpOfPrescript.getText();
@@ -111,8 +119,8 @@ public class NewMedController {
 			Connection connection = null;
 			PreparedStatement ps = null;
 
-			String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, medDescript, prescribDoc, purpPresrcipt, prescribDate, dateAdded)"
-					+ "VALUES (?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, doseType, medDescript, prescribDoc, purpPresrcipt, prescribDate, dateAdded)"
+					+ "VALUES (?,?,?,?,?,?,?,?,?)";
 
 			try {
 				connection = DataSource.getInstance().getConnection();
@@ -121,11 +129,12 @@ public class NewMedController {
 				ps.setString(1, LoginController.currentPatientID);
 				ps.setString(2, mName);
 				ps.setString(3, mDosage);
-				ps.setString(4, mDescript);
-				ps.setString(5, pDoc);
-				ps.setString(6, pPurpose);
-				ps.setString(7, pDate);
-				ps.setString(8, dateAdded);
+				ps.setString(4, mDoseType);
+				ps.setString(5, mDescript);
+				ps.setString(6, pDoc);
+				ps.setString(7, pPurpose);
+				ps.setString(8, pDate);
+				ps.setString(9, dateAdded);
 
 				ps.execute();
 
@@ -161,6 +170,7 @@ public class NewMedController {
 			// Clears fields after medication insertion
 			medName.setText("");
 			medDosage.setText("");
+			doseType.setValue(null);
 			medDescript.setText("");
 			prescribDoc.setText("");
 			purpOfPrescript.setText("");
@@ -218,6 +228,22 @@ public class NewMedController {
 			doseFlag = false;
 		}
 		return doseFlag;
+	}
+	
+	private boolean validateDoseType() {
+		System.out.println("VALIDATING DOSAGE TYPE");
+		boolean dtFlag = true;
+		String dose = medDosage.getText();
+		
+		if(doseType.getValue() == null && dose.equals("")) {
+			dtFlag = false;
+			doseLBL.setText("Please fill in dosage amount and select a dosage type.");
+		} else if(doseType.getValue() ==  null) {
+			dtFlag = false;
+			doseLBL.setText("Please select a dosage type.");
+		}
+		
+		return dtFlag;
 	}
 
 	private boolean validateDoctor() {

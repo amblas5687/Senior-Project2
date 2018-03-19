@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -88,6 +89,9 @@
 		               <padding>
 		                  <Insets left="5.0" right="5.0" />
 		               </padding>
+                     <GridPane.margin>
+                        <Insets top="45.0" />
+                     </GridPane.margin>
 		            </Separator>
 		            <TextField fx:id="medName" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 		               <GridPane.margin>
@@ -97,9 +101,9 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="medDosage" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+		            <TextField fx:id="medDosage" maxHeight="25.0" maxWidth="140.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 		               <GridPane.margin>
-		                  <Insets />
+		                  <Insets right="160.0" />
 		               </GridPane.margin>
                      <font>
                         <Font size="16.0" />
@@ -109,6 +113,9 @@
                      <font>
                         <Font size="16.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets top="30.0" />
+                     </GridPane.margin>
                   </TextArea>
 		            <TextField fx:id="prescribDoc" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
 		               <GridPane.margin>
@@ -163,11 +170,36 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="nameLBL" prefWidth="303.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="doseLBL" prefHeight="17.0" prefWidth="349.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label fx:id="doctorLBL" prefHeight="17.0" prefWidth="391.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <Label fx:id="purposeLBL" prefHeight="17.0" prefWidth="302.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                  <Label fx:id="datePrescribedLBL" prefHeight="17.0" prefWidth="295.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="doseType" prefWidth="140.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="160.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Label fx:id="nameLBL" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="doctorLBL" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="doseLBL" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="purposeLBL" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="datePrescribedLBL" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
 		         </children>
 		      </GridPane>
          </bottom>

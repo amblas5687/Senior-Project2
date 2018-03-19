@@ -114,7 +114,7 @@ public class CurrentMedsController {
 
 		// bind columns
 		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
-		mDosage.setCellValueFactory(cellData -> cellData.getValue().getMedDosage());
+		mDosage.setCellValueFactory(cellData -> cellData.getValue().getTypeAndAmount());
 		mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
 		mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
 		medicationTable.setItems(patientMeds);
@@ -181,6 +181,7 @@ public class CurrentMedsController {
 			String medDetails;
 			String doc;
 			String medDose;
+			String medDoseType;
 			String purpose;
 			String dateAdded;
 			String medID;
@@ -194,12 +195,13 @@ public class CurrentMedsController {
 				doc = rs.getString("prescribDoc");
 				// System.out.println(doc);
 				medDose = rs.getString("medDosage");
+				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
 						medID, null, null, dateUpdated);
 				patientMeds.add(tempMed);
 				System.out.println("GRABBING MEDS FROM CURRENT..." + tempMed);
@@ -439,6 +441,7 @@ public class CurrentMedsController {
 			String medDetails;
 			String doc;
 			String medDose;
+			String medDoseType;
 			String purpose;
 			String dateAdded;
 			String medID;
@@ -453,12 +456,13 @@ public class CurrentMedsController {
 				doc = rs.getString("prescribDoc");
 				// System.out.println(doc);
 				medDose = rs.getString("medDosage");
+				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
 						medID, null, null, dateUpdated);
 
 				// add to list
@@ -531,6 +535,7 @@ public class CurrentMedsController {
 				String medDetails;
 				String doc;
 				String medDose;
+				String medDoseType;
 				String purpose;
 				String dateAdded;
 				String medID;
@@ -542,12 +547,13 @@ public class CurrentMedsController {
 				medDetails = rs.getString("medDescript");
 				doc = rs.getString("prescribDoc");
 				medDose = rs.getString("medDosage");
+				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
 						medID, null, null, dateUpdated);
 
 				// add to list
@@ -621,6 +627,7 @@ public class CurrentMedsController {
 				String medDetails;
 				String doc;
 				String medDose;
+				String medDoseType;
 				String purpose;
 				String dateAdded;
 				String medID;
@@ -632,12 +639,13 @@ public class CurrentMedsController {
 				medDetails = rs.getString("medDescript");
 				doc = rs.getString("prescribDoc");
 				medDose = rs.getString("medDosage");
+				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDetails, dateAdded,
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
 						medID, null, null, dateUpdated);
 
 				// add to list
@@ -741,6 +749,7 @@ public class CurrentMedsController {
 			String patientCode = moveMed.getPatientCode().get();
 			String medName = moveMed.getMedName().get();
 			String medDosage = moveMed.getMedDosage().get();
+			String medDoseType = moveMed.getDoseType().get();
 			String medDescript = moveMed.getDetails().get();
 			String prescribDoc = moveMed.getDoc().get();
 			String purpPresrcipt = moveMed.getPurpose().get();
@@ -750,9 +759,9 @@ public class CurrentMedsController {
 
 			String medID = moveMed.getMedID().get();
 
-			String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, medDescript, "
+			String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, doseType, medDescript, "
 					+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?)";
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 			moveMedPS = connection.prepareStatement(moveMedQ);
 
@@ -760,12 +769,13 @@ public class CurrentMedsController {
 			moveMedPS.setString(1, patientCode);
 			moveMedPS.setString(2, medName);
 			moveMedPS.setString(3, medDosage);
-			moveMedPS.setString(4, medDescript);
-			moveMedPS.setString(5, prescribDoc);
-			moveMedPS.setString(6, purpPresrcipt);
-			moveMedPS.setString(7, prescribDate);
-			moveMedPS.setString(8, dateArchived);
-			moveMedPS.setString(9, archiveReason);
+			moveMedPS.setString(4, medDoseType);
+			moveMedPS.setString(5, medDescript);
+			moveMedPS.setString(6, prescribDoc);
+			moveMedPS.setString(7, purpPresrcipt);
+			moveMedPS.setString(8, prescribDate);
+			moveMedPS.setString(9, dateArchived);
+			moveMedPS.setString(10, archiveReason);
 
 			moveMedPS.execute();
 			System.out.println("MEDICATION MOVED CURRENT");
