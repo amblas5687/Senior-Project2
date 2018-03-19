@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -51,6 +52,9 @@ public class EditMedController {
 
 	@FXML
 	private TextField purpOfPrescript;
+	
+	@FXML
+	private ComboBox<String> doseType;
 
 	@FXML
 	private Label nameLBL;
@@ -73,8 +77,11 @@ public class EditMedController {
 	public void initialize() {
 		System.out.println("*******EDIT MED*******");
 		setMed();
+		
+		doseType.getItems().addAll("mg", "oz");
 	}
 
+	
 	public void setMed() {
 		CurrentMedsController test = new CurrentMedsController();
 		editMed = test.getEdit();
@@ -83,6 +90,7 @@ public class EditMedController {
 		// prepopulate textfields
 		medName.setText(editMed.getMedName().get());
 		medDosage.setText(editMed.getMedDosage().get());
+		doseType.setValue(editMed.getDoseType().get());
 		medDescript.setText(editMed.getDetails().get());
 		prescribDoc.setText(editMed.getDoc().get());
 		purpOfPrescript.setText(editMed.getPurpose().get());
@@ -125,12 +133,13 @@ public class EditMedController {
 		if (validName && validDose && validDoctor && validPurpose) {
 			String mName = medName.getText();
 			String mDosage = medDosage.getText();
+			String mDoseType = doseType.getValue();
 			String mDescript = medDescript.getText();
 			String pDoc = prescribDoc.getText();
 			String pPurpose = purpOfPrescript.getText();
 			String dateUpdated = java.time.LocalDate.now().toString();
 
-			String query = "UPDATE currentMeds SET medName = ?, medDosage = ?, medDescript = ?, "
+			String query = "UPDATE currentMeds SET medName = ?, medDosage = ?, doseType = ?, medDescript = ?, "
 					+ "prescribDoc = ?, purpPresrcipt = ?, dateUpdated = ? " + "WHERE patientCode = ? AND medID = ?";
 
 			Connection connection = null;
@@ -143,14 +152,15 @@ public class EditMedController {
 				ps = connection.prepareStatement(query);
 				ps.setString(1, mName);
 				ps.setString(2, mDosage);
-				ps.setString(3, mDescript);
-				ps.setString(4, pDoc);
-				ps.setString(5, pPurpose);
-				ps.setString(6, dateUpdated);
+				ps.setString(3, mDoseType);
+				ps.setString(4, mDescript);
+				ps.setString(5, pDoc);
+				ps.setString(6, pPurpose);
+				ps.setString(7, dateUpdated);
 
 				// parameters from edit med to update by
-				ps.setString(7, editMed.getPatientCode().get());
-				ps.setString(8, editMed.getMedID().get());
+				ps.setString(8, editMed.getPatientCode().get());
+				ps.setString(9, editMed.getMedID().get());
 
 				ps.execute();
 
