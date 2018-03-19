@@ -26,12 +26,32 @@
 
 /* Affects all JFXButtons */
 .jfx-button{
-    -fx-background-color: #80deea;
+   
 }
 
 /* Affects hover over action for all JFXButtons */
 .jfx-button:hover{
-	-fx-background-color: #4bacb8;
+	
+}
+
+/* Affects buttons (on login page) linked to this custom class */
+.loginJFXButton{
+	 
+}
+
+/* Affects hover for buttons (on login page) linked to this custom class */
+.loginJFXButton:hover{
+	 -fx-background-color: #80deea;
+}
+
+/* Affects buttons (on main page) linked to this custom class */
+.mainJFXButton{
+	 -fx-background-color: #80deea;
+}
+
+/* Affects hover for buttons (on main page) linked to this custom class */
+.mainJFXButton:hover{
+	 -fx-background-color: #4bacb8;
 }
 
 /* Affects currently selected button */

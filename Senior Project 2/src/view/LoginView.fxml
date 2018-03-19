@@ -73,7 +73,7 @@
 		                        <Insets left="30.0" />
 		                     </GridPane.margin>
 		                  </Label>
-		                  <JFXButton fx:id="btnUser" onAction="#loadNewUser" text="Create User Account" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+		                  <JFXButton fx:id="btnUser" onAction="#loadNewUser" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Create User Account" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 		                     <font>
 		                        <Font size="16.0" />
 		                     </font>
@@ -81,7 +81,7 @@
 		                        <Insets left="200.0" />
 		                     </GridPane.margin>
 		                  </JFXButton>
-		                  <JFXButton fx:id="btnPatient" layoutX="227.0" layoutY="422.0" onAction="#loadNewPatient" text="Create Patient Account" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+		                  <JFXButton fx:id="btnPatient" layoutX="227.0" layoutY="422.0" onAction="#loadNewPatient" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Create Patient Account" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 		                     <font>
 		                        <Font size="16.0" />
 		                     </font>
