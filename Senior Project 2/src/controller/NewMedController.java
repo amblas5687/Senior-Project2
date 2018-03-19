@@ -74,7 +74,7 @@ public class NewMedController {
 
 		System.out.println("*******NEW MED*******");
 		
-		doseType.getItems().addAll("mg", "oz");
+		doseType.getItems().addAll("mg", "g", "kg", "oz", "tab", "tsp", "tbsp");
 	}
 
 	@FXML

@@ -78,7 +78,7 @@ public class EditMedController {
 		System.out.println("*******EDIT MED*******");
 		setMed();
 		
-		doseType.getItems().addAll("mg", "oz");
+		doseType.getItems().addAll("mg", "g", "kg", "oz", "tab", "tsp", "tbsp");
 	}
 
 	
