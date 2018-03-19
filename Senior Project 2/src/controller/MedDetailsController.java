@@ -60,7 +60,11 @@ public class MedDetailsController {
     private void getDetails()
     {
     	medName.setText(medDetails.getMedName().get());
-		medDosage.setText(medDetails.getMedDosage().get());
+    	
+    	//concatenate dose and type
+    	String dosage = medDetails.getMedDosage().get() + " " + medDetails.getDoseType().get();
+    	
+		medDosage.setText(dosage);
     	medDescript.setText(medDetails.getDetails().get());
     	prescribDoc.setText(medDetails.getDoc().get());
     	purpOfPrescript.setText(medDetails.getPurpose().get());
