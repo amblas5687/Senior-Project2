@@ -80,12 +80,14 @@ public class MedModel {
 		this.doseType = doseType;
 	}
 	
-	public String getTypeAndAmount()
+	public StringProperty getTypeAndAmount()
 	{
-		String doseAndType;
+		StringProperty doseAndType;
+		String doseAndTypeString;
 		String dose = getMedDosage().get();
 		String type = getDoseType().get();
-		doseAndType = dose + " " + type;
+		doseAndTypeString = dose + " " + type;
+		doseAndType = new SimpleStringProperty(doseAndTypeString);
 		
 		return doseAndType;
 	}
