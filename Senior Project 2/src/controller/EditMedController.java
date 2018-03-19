@@ -123,14 +123,15 @@ public class EditMedController {
 	@FXML
 	void submit(ActionEvent event) {
 
-		boolean validName, validDose, validDoctor, validPurpose = true;
+		boolean validName, validDose, validDoseType, validDoctor, validPurpose = true;
 
 		validName = validateName();
 		validDose = validateDose();
+		validDoseType = validateDoseType();
 		validDoctor = validateDoctor();
 		validPurpose = validatePurpose();
 
-		if (validName && validDose && validDoctor && validPurpose) {
+		if (validName && validDose && validDoseType && validDoctor && validPurpose) {
 			String mName = medName.getText();
 			String mDosage = medDosage.getText();
 			String mDoseType = doseType.getValue();
@@ -267,6 +268,22 @@ public class EditMedController {
 			doseFlag = false;
 		}
 		return doseFlag;
+	}
+	
+	private boolean validateDoseType() {
+		System.out.println("VALIDATING DOSAGE TYPE");
+		boolean dtFlag = true;
+		String dose = medDosage.getText();
+		
+		if(doseType.getValue() == null && dose.equals("")) {
+			dtFlag = false;
+			doseLBL.setText("Please fill in dosage amount and select a dosage type.");
+		} else if(doseType.getValue() ==  null) {
+			dtFlag = false;
+			doseLBL.setText("Please select a dosage type.");
+		}
+		
+		return dtFlag;
 	}
 
 	/*
