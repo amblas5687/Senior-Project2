@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -715,6 +716,7 @@ public class CurrentMedsController {
 																														// stage
 		Scene detailScene = new Scene(detailRoot);
 		detailStage.setScene(detailScene);
+		detailStage.getIcons().add(new Image("/application/4getmenot1.jpg"));
 		detailStage.initModality(Modality.APPLICATION_MODAL);
 		detailStage.show();
 	}
