@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,20 +19,29 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.MedModel;
@@ -86,16 +96,16 @@ public class CurrentMedsController {
 
 	@FXML
 	private Label drpLabel;
-	
-	@FXML 
+
+	@FXML
 	private Label lblSearch;
 
 	@FXML
 	private ComboBox<String> searchOptions;
-	
+
 	@FXML
 	private AnchorPane content_view;
-	
+
 	private boolean flag;
 
 	private URL toPane;
@@ -119,8 +129,8 @@ public class CurrentMedsController {
 		mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
 		mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
 		medicationTable.setItems(patientMeds);
-		
-		//load the meds
+
+		// load the meds
 		grabMeds();
 
 		searchOptions.getItems().addAll("Name", "Date", "Date Range");
@@ -158,8 +168,8 @@ public class CurrentMedsController {
 	}
 
 	void grabMeds() {
-		
-		//default clear table
+
+		// default clear table
 		medicationTable.getItems().clear();
 
 		Connection connection = null;
@@ -202,8 +212,8 @@ public class CurrentMedsController {
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
-						medID, null, null, dateUpdated);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
+						dateAdded, medID, null, null, dateUpdated);
 				patientMeds.add(tempMed);
 				System.out.println("GRABBING MEDS FROM CURRENT..." + tempMed);
 			}
@@ -290,13 +300,13 @@ public class CurrentMedsController {
 			DRPicker1.setVisible(false);
 			DRPicker2.setVisible(false);
 			drpLabel.setVisible(false);
-			
+
 			datePicker.setVisible(true);
 			datePicker.setEditable(false);
 		} else if (option == "Date Range") {
 			searchTF.setVisible(false);
 			datePicker.setVisible(false);
-			
+
 			DRPicker1.setVisible(true);
 			DRPicker2.setVisible(true);
 			drpLabel.setVisible(true);
@@ -306,7 +316,7 @@ public class CurrentMedsController {
 			DRPicker2.setVisible(false);
 			drpLabel.setVisible(false);
 			datePicker.setVisible(false);
-			
+
 			searchTF.setVisible(true);
 		}
 	}
@@ -320,100 +330,100 @@ public class CurrentMedsController {
 		if (option == null) {
 			grabMeds();
 		} else if (option == "Name") {
-			
-			if(!checkName()) {
+
+			if (!checkName()) {
 				optionName();
-				
+
 				// clear the search values
 				searchOptions.setValue(null);
 				searchTF.setText(null);
 			}
-			
+
 		} else if (option == "Date") {
-			
-			if(!checkDate()) {
+
+			if (!checkDate()) {
 				optionDate();
-				
+
 				datePicker.setValue(null);
 				searchOptions.setValue(null);
 			}
-		
+
 		} else if (option == "Date Range") {
-			
-			if(!checkDateRange()) {
+
+			if (!checkDateRange()) {
 				optionDateRange();
-				
+
 				DRPicker1.setValue(null);
 				DRPicker2.setValue(null);
 				searchOptions.setValue(null);
 			}
-			
+
 		}
 	}
-	
+
 	boolean checkName() {
 
 		String name = searchTF.getText();
 		name = name.trim();
-		
+
 		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*$");
-    	Matcher nam = p.matcher(name);
-    	boolean n = nam.find();
-		
+		Matcher nam = p.matcher(name);
+		boolean n = nam.find();
+
 		lblSearch.setText(null);
-		
-		if(name.equals("")) {
+
+		if (name.equals("")) {
 			lblSearch.setText("Please enter a medication name.");
 			flag = true;
-		} else if(n) {
+		} else if (n) {
 			lblSearch.setText("No special characters, numbers, or extra spaces.");
 			flag = true;
 		} else {
 			flag = false;
 		}
-		
+
 		return flag;
 	}
-	
+
 	boolean checkDate() {
-		
+
 		lblSearch.setText(null);
-		
-		if(datePicker.getValue() == null) {
+
+		if (datePicker.getValue() == null) {
 			lblSearch.setText("Please select a date.");
 			flag = true;
 		} else {
 			flag = false;
 		}
-		
+
 		return flag;
 	}
-	
+
 	boolean checkDateRange() {
-		
-		if(DRPicker1.getValue() == null || DRPicker2.getValue() == null) {
+
+		if (DRPicker1.getValue() == null || DRPicker2.getValue() == null) {
 			lblSearch.setText("Please fill in both dates.");
 			return flag = true;
 		}
-		
+
 		LocalDate dp1 = DRPicker1.getValue();
 		LocalDate dp2 = DRPicker2.getValue();
-		
+
 		Date date1 = java.sql.Date.valueOf(dp1);
 		Date date2 = java.sql.Date.valueOf(dp2);
-		
+
 		lblSearch.setText(null);
-	
-		if(date2.before(date1)) {
+
+		if (date2.before(date1)) {
 			lblSearch.setText("Invalid date range.");
 			flag = true;
 		} else {
 			flag = false;
 		}
-		
+
 		return flag;
 	}
-	
+
 	void optionName() {
 
 		String search = searchTF.getText();
@@ -463,8 +473,8 @@ public class CurrentMedsController {
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
-						medID, null, null, dateUpdated);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
+						dateAdded, medID, null, null, dateUpdated);
 
 				// add to list
 				patientMeds.add(tempMed);
@@ -554,8 +564,8 @@ public class CurrentMedsController {
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
-						medID, null, null, dateUpdated);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
+						dateAdded, medID, null, null, dateUpdated);
 
 				// add to list
 				patientMeds.add(tempMed);
@@ -646,8 +656,8 @@ public class CurrentMedsController {
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails, dateAdded,
-						medID, null, null, dateUpdated);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
+						dateAdded, medID, null, null, dateUpdated);
 
 				// add to list
 				patientMeds.add(tempMed);
@@ -734,115 +744,173 @@ public class CurrentMedsController {
 		MedModel moveMed = medicationTable.getSelectionModel().getSelectedItem();
 		System.out.println("MED TO MOVE CURRENT..." + moveMed);
 
-		Connection connection = null;
-		PreparedStatement moveMedPS = null;
-		PreparedStatement deleteMedPS = null;
-		ResultSet rs = null;
+		// dialog for archive reason
+		// Create the custom dialog.
+		Dialog dialog = new Dialog();
+		dialog.initModality(Modality.APPLICATION_MODAL);
 
-		try {
+		DialogPane dialogPane = dialog.getDialogPane();
+		// css for info alert box
+		// dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 
-			connection = DataSource.getInstance().getConnection();
+		dialogPane.getStyleClass().add("alert");
 
-			// ********************************
-			// MOVE MED TO ARCHIVE TABLE
-			// ********************************
+		dialog.setTitle("Archive Reason");
+		dialog.setHeaderText("Enter archival reason below:");
 
-			// grab values to insert into archive
-			String patientCode = moveMed.getPatientCode().get();
-			String medName = moveMed.getMedName().get();
-			String medDosage = moveMed.getMedDosage().get();
-			String medDoseType = moveMed.getDoseType().get();
-			String medDescript = moveMed.getDetails().get();
-			String prescribDoc = moveMed.getDoc().get();
-			String purpPresrcipt = moveMed.getPurpose().get();
-			String prescribDate = moveMed.getDate().get();
-			String dateArchived = java.time.LocalDate.now().toString();
-			String archiveReason = "get from textfield popup";
+		// Set the button types.
+		ButtonType createBtn = new ButtonType("Add Reason", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(createBtn);
 
-			String medID = moveMed.getMedID().get();
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(20, 90, 10, 10));
 
-			String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, doseType, medDescript, "
-					+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+		TextArea notes = new TextArea();
+		notes.setPromptText("Enter archive reason here");
 
-			moveMedPS = connection.prepareStatement(moveMedQ);
+		grid.add(notes, 1, 0);
 
-			// set strings
-			moveMedPS.setString(1, patientCode);
-			moveMedPS.setString(2, medName);
-			moveMedPS.setString(3, medDosage);
-			moveMedPS.setString(4, medDoseType);
-			moveMedPS.setString(5, medDescript);
-			moveMedPS.setString(6, prescribDoc);
-			moveMedPS.setString(7, purpPresrcipt);
-			moveMedPS.setString(8, prescribDate);
-			moveMedPS.setString(9, dateArchived);
-			moveMedPS.setString(10, archiveReason);
+		dialog.getDialogPane().setContent(grid);
 
-			moveMedPS.execute();
-			System.out.println("MEDICATION MOVED CURRENT");
+		notes.setEditable(true);
+		notes.setWrapText(true);
+		// sets grid dimensions
+		// notes.setMaxWidth(Double.MAX_VALUE);
+		// notes.setMaxHeight(Double.MAX_VALUE);
+		// GridPane.setVgrow(notes, Priority.ALWAYS);
+		// GridPane.setHgrow(notes, Priority.ALWAYS);
 
-			// ************************************
-			// DELETE MED AFTER MOVING FROM CURRENT
-			// ************************************
-			String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medID = ?";
-			deleteMedPS = connection.prepareStatement(deleteMedQ);
+		grid.setMaxWidth(Double.MAX_VALUE);
+		Optional result = dialog.showAndWait();
+		// makes dialog box expandable -> default is not
 
-			deleteMedPS.setString(1, patientCode);
-			deleteMedPS.setString(2, medID);
+		// expands window to view full text area -> hides automatically if this is not
+		// set
+		dialog.getDialogPane().setExpanded(true);
+		String no = notes.getText();
+		if (result.get() == createBtn && !no.equals("")) {
+			System.out.println("NOTES... " + notes.getText());
 
-			deleteMedPS.execute();
-			System.out.println("MEDICATION DELETED CURRENT");
+			Connection connection = null;
+			PreparedStatement moveMedPS = null;
+			PreparedStatement deleteMedPS = null;
+			ResultSet rs = null;
 
-			// reload current med page
-			grabMeds();
+			try {
 
-		} catch (SQLException e) {
+				connection = DataSource.getInstance().getConnection();
 
-			DBConfig.displayException(e);
-			System.out.println("FAILED ARCHIVCE");
-		} catch (Exception e) {
-			e.printStackTrace();
+				// ********************************
+				// MOVE MED TO ARCHIVE TABLE
+				// ********************************
+
+				// grab values to insert into archive
+				String patientCode = moveMed.getPatientCode().get();
+				String medName = moveMed.getMedName().get();
+				String medDosage = moveMed.getMedDosage().get();
+				String medDoseType = moveMed.getDoseType().get();
+				String medDescript = moveMed.getDetails().get();
+				String prescribDoc = moveMed.getDoc().get();
+				String purpPresrcipt = moveMed.getPurpose().get();
+				String prescribDate = moveMed.getDate().get();
+				String dateArchived = java.time.LocalDate.now().toString();
+				String archiveReason = notes.getText();
+
+				String medID = moveMed.getMedID().get();
+
+				String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, doseType, medDescript, "
+						+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
+						+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+				moveMedPS = connection.prepareStatement(moveMedQ);
+
+				// set strings
+				moveMedPS.setString(1, patientCode);
+				moveMedPS.setString(2, medName);
+				moveMedPS.setString(3, medDosage);
+				moveMedPS.setString(4, medDoseType);
+				moveMedPS.setString(5, medDescript);
+				moveMedPS.setString(6, prescribDoc);
+				moveMedPS.setString(7, purpPresrcipt);
+				moveMedPS.setString(8, prescribDate);
+				moveMedPS.setString(9, dateArchived);
+				moveMedPS.setString(10, archiveReason);
+
+				moveMedPS.execute();
+				System.out.println("MEDICATION MOVED CURRENT");
+
+				// ************************************
+				// DELETE MED AFTER MOVING FROM CURRENT
+				// ************************************
+				String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medID = ?";
+				deleteMedPS = connection.prepareStatement(deleteMedQ);
+
+				deleteMedPS.setString(1, patientCode);
+				deleteMedPS.setString(2, medID);
+
+				deleteMedPS.execute();
+				System.out.println("MEDICATION DELETED CURRENT");
+
+				// reload current med page
+				grabMeds();
+
+			} catch (SQLException e) {
+
+				DBConfig.displayException(e);
+				System.out.println("FAILED ARCHIVCE");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// close connections
+			finally {
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+				if (moveMedPS != null) {
+					try {
+						moveMedPS.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if (deleteMedPS != null) {
+					try {
+						deleteMedPS.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} // finally
+
+		}//end if
+		else if (result == null || no.equals(""))
+		{
+			Alert failure = new Alert(AlertType.ERROR);
+			//safely catches error by pop-up alert.
+			failure.setContentText("Must enter archive reason");
+			Optional<ButtonType> error = failure.showAndWait();
 		}
-		// close connections
-		finally {
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 
-			if (moveMedPS != null) {
-				try {
-					moveMedPS.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if (deleteMedPS != null) {
-				try {
-					deleteMedPS.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-
-	}
+	}// method
 
 	@FXML
 	private void editMed(ActionEvent event) {
