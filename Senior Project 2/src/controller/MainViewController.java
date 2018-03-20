@@ -37,15 +37,15 @@ public class MainViewController {
 	 
 	 
 	 public void initialize(){
-		/* try {
+		try {
 			 
-			 toPane = getClass().getResource("/view/NewMedView.fxml"); 
+			 toPane = getClass().getResource("/view/HelpDocs.fxml"); 
 	  		 temp = FXMLLoader.load(toPane);
 			 content_view.getChildren().setAll(temp);
 			 
 		 } catch(Exception e) {
 			 e.printStackTrace();
-		 }*/
+		 }
 		 
 	 }
 	    
