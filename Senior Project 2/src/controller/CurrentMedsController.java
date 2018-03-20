@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -790,124 +791,130 @@ public class CurrentMedsController {
 		// set
 		dialog.getDialogPane().setExpanded(true);
 		String no = notes.getText();
-		if (result.get() == createBtn && !no.equals("")) {
-			System.out.println("NOTES... " + notes.getText());
 
-			Connection connection = null;
-			PreparedStatement moveMedPS = null;
-			PreparedStatement deleteMedPS = null;
-			ResultSet rs = null;
+		try {
+			result.get();
 
-			try {
+			if (result.get() == createBtn && !no.equals("")) {
+				System.out.println("NOTES... " + notes.getText());
 
-				connection = DataSource.getInstance().getConnection();
+				Connection connection = null;
+				PreparedStatement moveMedPS = null;
+				PreparedStatement deleteMedPS = null;
+				ResultSet rs = null;
 
-				// ********************************
-				// MOVE MED TO ARCHIVE TABLE
-				// ********************************
+				try {
 
-				// grab values to insert into archive
-				String patientCode = moveMed.getPatientCode().get();
-				String medName = moveMed.getMedName().get();
-				String medDosage = moveMed.getMedDosage().get();
-				String medDoseType = moveMed.getDoseType().get();
-				String medDescript = moveMed.getDetails().get();
-				String prescribDoc = moveMed.getDoc().get();
-				String purpPresrcipt = moveMed.getPurpose().get();
-				String prescribDate = moveMed.getDate().get();
-				String dateArchived = java.time.LocalDate.now().toString();
-				String archiveReason = notes.getText();
+					connection = DataSource.getInstance().getConnection();
 
-				String medID = moveMed.getMedID().get();
+					// ********************************
+					// MOVE MED TO ARCHIVE TABLE
+					// ********************************
 
-				String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, doseType, medDescript, "
-						+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
-						+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+					// grab values to insert into archive
+					String patientCode = moveMed.getPatientCode().get();
+					String medName = moveMed.getMedName().get();
+					String medDosage = moveMed.getMedDosage().get();
+					String medDoseType = moveMed.getDoseType().get();
+					String medDescript = moveMed.getDetails().get();
+					String prescribDoc = moveMed.getDoc().get();
+					String purpPresrcipt = moveMed.getPurpose().get();
+					String prescribDate = moveMed.getDate().get();
+					String dateArchived = java.time.LocalDate.now().toString();
+					String archiveReason = notes.getText();
 
-				moveMedPS = connection.prepareStatement(moveMedQ);
+					String medID = moveMed.getMedID().get();
 
-				// set strings
-				moveMedPS.setString(1, patientCode);
-				moveMedPS.setString(2, medName);
-				moveMedPS.setString(3, medDosage);
-				moveMedPS.setString(4, medDoseType);
-				moveMedPS.setString(5, medDescript);
-				moveMedPS.setString(6, prescribDoc);
-				moveMedPS.setString(7, purpPresrcipt);
-				moveMedPS.setString(8, prescribDate);
-				moveMedPS.setString(9, dateArchived);
-				moveMedPS.setString(10, archiveReason);
+					String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, doseType, medDescript, "
+							+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
+							+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-				moveMedPS.execute();
-				System.out.println("MEDICATION MOVED CURRENT");
+					moveMedPS = connection.prepareStatement(moveMedQ);
 
-				// ************************************
-				// DELETE MED AFTER MOVING FROM CURRENT
-				// ************************************
-				String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medID = ?";
-				deleteMedPS = connection.prepareStatement(deleteMedQ);
+					// set strings
+					moveMedPS.setString(1, patientCode);
+					moveMedPS.setString(2, medName);
+					moveMedPS.setString(3, medDosage);
+					moveMedPS.setString(4, medDoseType);
+					moveMedPS.setString(5, medDescript);
+					moveMedPS.setString(6, prescribDoc);
+					moveMedPS.setString(7, purpPresrcipt);
+					moveMedPS.setString(8, prescribDate);
+					moveMedPS.setString(9, dateArchived);
+					moveMedPS.setString(10, archiveReason);
 
-				deleteMedPS.setString(1, patientCode);
-				deleteMedPS.setString(2, medID);
+					moveMedPS.execute();
+					System.out.println("MEDICATION MOVED CURRENT");
 
-				deleteMedPS.execute();
-				System.out.println("MEDICATION DELETED CURRENT");
+					// ************************************
+					// DELETE MED AFTER MOVING FROM CURRENT
+					// ************************************
+					String deleteMedQ = "DELETE FROM currentMeds WHERE patientCode = ? AND medID = ?";
+					deleteMedPS = connection.prepareStatement(deleteMedQ);
 
-				// reload current med page
-				grabMeds();
+					deleteMedPS.setString(1, patientCode);
+					deleteMedPS.setString(2, medID);
 
-			} catch (SQLException e) {
+					deleteMedPS.execute();
+					System.out.println("MEDICATION DELETED CURRENT");
 
-				DBConfig.displayException(e);
-				System.out.println("FAILED ARCHIVCE");
-			} catch (Exception e) {
-				e.printStackTrace();
+					// reload current med page
+					grabMeds();
+
+				} catch (SQLException e) {
+
+					DBConfig.displayException(e);
+					System.out.println("FAILED ARCHIVCE");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// close connections
+				finally {
+					if (connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+					if (moveMedPS != null) {
+						try {
+							moveMedPS.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					if (deleteMedPS != null) {
+						try {
+							deleteMedPS.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				} // finally
+
+			} // end if
+			else if (no.equals("")) {
+				Alert failure = new Alert(AlertType.ERROR);
+				// safely catches error by pop-up alert.
+				failure.setContentText("Must enter archive reason");
+				Optional<ButtonType> error = failure.showAndWait();
 			}
-			// close connections
-			finally {
-				if (connection != null) {
-					try {
-						connection.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
-				if (moveMedPS != null) {
-					try {
-						moveMedPS.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				if (deleteMedPS != null) {
-					try {
-						deleteMedPS.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			} // finally
-
-		}//end if
-		else if (result == null || no.equals(""))
-		{
-			Alert failure = new Alert(AlertType.ERROR);
-			//safely catches error by pop-up alert.
-			failure.setContentText("Must enter archive reason");
-			Optional<ButtonType> error = failure.showAndWait();
+		} catch (NoSuchElementException e) {
+			dialog.close();
 		}
 
 	}// method
