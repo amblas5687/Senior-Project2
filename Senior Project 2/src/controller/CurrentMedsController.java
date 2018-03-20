@@ -26,7 +26,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -752,16 +751,17 @@ public class CurrentMedsController {
 
 		DialogPane dialogPane = dialog.getDialogPane();
 		// css for info alert box
-		// dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 
-		dialogPane.getStyleClass().add("alert");
+		//dialogPane.getStyleClass().add("alert");
 
 		dialog.setTitle("Archive Reason");
 		dialog.setHeaderText("Enter archival reason below:");
 
 		// Set the button types.
-		ButtonType createBtn = new ButtonType("Add Reason", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(createBtn);
+		ButtonType createBtn = new ButtonType("Add Reason");
+		ButtonType btnCancel = new ButtonType("Cancel");
+		dialog.getDialogPane().getButtonTypes().addAll(btnCancel, createBtn);
 
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
@@ -907,10 +907,13 @@ public class CurrentMedsController {
 				} // finally
 
 			} // end if
-			else if (no.equals("")) {
+			else if(result.get() == btnCancel) {
+				dialog.hide();
+			} else if (no.equals("")) {
 				Alert failure = new Alert(AlertType.ERROR);
 				// safely catches error by pop-up alert.
 				failure.setContentText("Must enter archive reason");
+				failure.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 				Optional<ButtonType> error = failure.showAndWait();
 			}
 		} catch (NoSuchElementException e) {
