@@ -176,37 +176,37 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </Label>
-                        <Label fx:id="lblFname" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Label fx:id="lblFname" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblLname" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Label fx:id="lblLname" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblCaregiver" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                        <Label fx:id="lblCaregiver" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDOB" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="lblDOB" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDiagnoses" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+                        <Label fx:id="lblDiagnoses" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStage" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                        <Label fx:id="lblStage" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDoc" GridPane.columnIndex="2" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+                        <Label fx:id="lblDoc" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
