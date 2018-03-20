@@ -9,8 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class MainViewController {
@@ -27,6 +30,10 @@ public class MainViewController {
 	 private JFXButton btnInfo;
 	 @FXML
 	 private JFXButton btnExit;
+	 @FXML
+     private Label logo;
+	 @FXML
+	 private Tooltip tp;
 	 @FXML
 	 private AnchorPane content;
 	 @FXML
@@ -46,7 +53,10 @@ public class MainViewController {
 		 } catch(Exception e) {
 			 e.printStackTrace();
 		 }
-		 
+		
+		 tp.setText("Help & Documentation");
+		 tp.setShowDelay(Duration.seconds(0.25));
+		 logo.setStyle("-fx-background-image: url('/application/4getmenot1.jpg');");
 	 }
 	    
 	 @FXML
@@ -86,6 +96,20 @@ public class MainViewController {
 			 e.printStackTrace();
 		 }
 		 
+	  }
+	 
+	 @FXML
+	  void help(ActionEvent event) {
+		 
+		 try {
+			 
+			 toPane = getClass().getResource("/view/HelpDocs.fxml"); 
+	  		 temp = FXMLLoader.load(toPane);
+	  		 content_view.getChildren().setAll(temp);
+  		 
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
 	  }
 
 	 @FXML
