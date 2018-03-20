@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
@@ -15,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.PatientModel;
@@ -36,6 +40,22 @@ public class ViewPatientController {
     @FXML
     private Button cancelBTN;
     @FXML
+    private Label lblFname;
+    @FXML
+    private Label lblLname;
+    @FXML
+    private Label lblDOB;
+    @FXML
+    private Label lblCaregiver;
+    @FXML
+    private Label lblStage;
+    @FXML
+    private Label lblDiagnoses;
+    @FXML
+    private Label lblDoc;
+    @FXML
+    private Label lblAll;
+    @FXML
     private ComboBox<String> stageBox;
     @FXML
     private DatePicker diagnosesPicker;
@@ -46,6 +66,9 @@ public class ViewPatientController {
        
     private URL toPane;
    	private AnchorPane temp;
+   	
+   	private boolean flag;
+   	private int count;
    
     
     public void initialize(){
@@ -210,73 +233,247 @@ public class ViewPatientController {
     @FXML
     void submit(ActionEvent event) {
     	
-		PatientModel updatePatient = new PatientModel();
-
-    	
-    	updatePatient.setFname(fnameTF.getText());
-    	updatePatient.setLname(lnameTF.getText());
-    	updatePatient.setDOB(DOBPicker.getValue().toString());
-    	updatePatient.setDoctor(doctorTF.getText());
-    	updatePatient.setStage(stageBox.getValue().toString());
-    	updatePatient.setDiagnosesDate(diagnosesPicker.getValue().toString());
-    	updatePatient.setCargiver(cargiverTF.getText());
-    	updatePatient.setPatientCode(LoginController.currentPatientID);
-    	
-    	
-    	Connection connection = null;
-    	PreparedStatement ps = null;
-    	
-    	String patientQ = "UPDATE patient SET firstName= ?, lastName= ?, dob= ?, currStage= ?, diagnoseDate= ?, primaryDoc= ?, "
-    			+ "caregiver= ? WHERE patientCode = ?";
-    	try {
-			connection = DataSource.getInstance().getConnection();
-    		
-    		ps = connection.prepareStatement(patientQ);
-        	ps.setString(1, updatePatient.getFname());
-        	ps.setString(2, updatePatient.getLname());
-        	ps.setString(3, updatePatient.getDOB());
-        	ps.setString(4, updatePatient.getStage());
-        	ps.setString(5, updatePatient.getDiagnosesDate());
-        	ps.setString(6, updatePatient.getDoctor());
-        	ps.setString(7, updatePatient.getCargiver());
-        	ps.setString(8, updatePatient.getPatientCode());
-        	ps.execute();
-        	
-        	//disable editability
-        	disableEdit();
-        	
-        	System.out.println("PATIENT UPDATED... " + updatePatient);
-    	} catch (SQLException e) {
-    		DBConfig.displayException(e);
-    	}catch (Exception e)
-    	{
-    		e.printStackTrace();
-    	}
-    	//close connections
-    	finally {
-			if(connection!=null)
-			{
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+    	lblAll.setText(null);
+	   	
+	   	count = 0;
+	   	boolean fName = checkFirstName();
+	   	boolean lName = checkLastName();
+	   	boolean DOB = checkDOB();
+	   	boolean cGiver = checkCaregiver();
+	   	boolean cStage = checkStage();
+	   	boolean dDate = checkDiagnoses();
+	   	boolean Doc = checkDoc();
+	   	
+    	if(count > 0) {
+	   		lblAll.setText("Please fill in all fields.");
+	   	} else if(!fName && !lName && !DOB && !cGiver && !cStage && !dDate && !Doc) {
+	   		
+			PatientModel updatePatient = new PatientModel();
+	
+	    	
+	    	updatePatient.setFname(fnameTF.getText());
+	    	updatePatient.setLname(lnameTF.getText());
+	    	updatePatient.setDOB(DOBPicker.getValue().toString());
+	    	updatePatient.setDoctor(doctorTF.getText());
+	    	updatePatient.setStage(stageBox.getValue().toString());
+	    	updatePatient.setDiagnosesDate(diagnosesPicker.getValue().toString());
+	    	updatePatient.setCargiver(cargiverTF.getText());
+	    	updatePatient.setPatientCode(LoginController.currentPatientID);
+	    	
+	    	
+	    	Connection connection = null;
+	    	PreparedStatement ps = null;
+	    	
+	    	String patientQ = "UPDATE patient SET firstName= ?, lastName= ?, dob= ?, currStage= ?, diagnoseDate= ?, primaryDoc= ?, "
+	    			+ "caregiver= ? WHERE patientCode = ?";
+	    	try {
+				connection = DataSource.getInstance().getConnection();
+	    		
+	    		ps = connection.prepareStatement(patientQ);
+	        	ps.setString(1, updatePatient.getFname());
+	        	ps.setString(2, updatePatient.getLname());
+	        	ps.setString(3, updatePatient.getDOB());
+	        	ps.setString(4, updatePatient.getStage());
+	        	ps.setString(5, updatePatient.getDiagnosesDate());
+	        	ps.setString(6, updatePatient.getDoctor());
+	        	ps.setString(7, updatePatient.getCargiver());
+	        	ps.setString(8, updatePatient.getPatientCode());
+	        	ps.execute();
+	        	
+	        	//disable editability
+	        	disableEdit();
+	        	
+	        	System.out.println("PATIENT UPDATED... " + updatePatient);
+	    	} catch (SQLException e) {
+	    		DBConfig.displayException(e);
+	    	}catch (Exception e)
+	    	{
+	    		e.printStackTrace();
+	    	}
+	    	//close connections
+	    	finally {
+				if(connection!=null)
+				{
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}
-			
-			if(ps!=null)
-			{
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				
+				if(ps!=null)
+				{
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}
-		}//end finally
+			}//end finally
+	   	}//end if
     }//end method
     
+    boolean checkFirstName() {
+	   	
+    	lblFname.setText(null);
+    	
+    	String name = fnameTF.getText();
+    	
+	   	if(name.equals("")) {
+	   		lblFname.setText("Enter first name.");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	name = name.trim();
+		
+		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*$");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
+		
+    	
+	   	if(n) {
+	   		lblFname.setText("No numbers, special characters, or extra spaces.");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
     
+    boolean checkLastName() {
+    	
+    	lblLname.setText(null);
+    	
+    	String name = lnameTF.getText();
+	   	
+	   	if(name.equals("")) {
+	   		lblLname.setText("Enter last name.");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	name = name.trim();
+		
+		Pattern p = Pattern.compile("[^a-zA-Z]+[\\-\\.\\s]?[^a-zA-Z]*$");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
+		
+    	
+	   	if(n) {
+	   		lblLname.setText("No numbers, special characters, or extra spaces.");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
     
+    boolean checkCaregiver() {
+    	
+    	lblCaregiver.setText(null);
+    	
+    	String name = cargiverTF.getText();
+	   	
+	   	if(name.equals("")) {
+	   		lblCaregiver.setText("Enter name of caregiver.");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	name = name.trim();
+		
+		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*[\\-\\.\\s]?[^a-zA-Z]*$");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
+		
+    	
+	   	if(n) {
+	   		lblCaregiver.setText("No numbers, special characters, or extra spaces.");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
+    
+    boolean checkDOB() {
+    	
+    	lblDOB.setText(null);
+    	
+		if(DOBPicker.getValue() == null) {
+			lblDOB.setText("Please select a date.");
+	   		count++;
+			flag = true;
+		} else {
+			flag = false;
+		}
+		
+		return flag;
+    }
+    
+    boolean checkDiagnoses(){
+    	
+    	lblDiagnoses.setText(null);
+    	
+    	if(diagnosesPicker.getValue() == null) {
+			lblDiagnoses.setText("Please select a date.");
+	   		count++;
+			flag = true;
+		} else {
+			flag = false;
+		}
+    	
+    	return flag;
+    }
+    
+    boolean checkStage(){
+    	
+    	lblStage.setText(null);
+    	
+    	if(stageBox.getValue() == null) {
+			lblStage.setText("Please select a stage.");
+	   		count++;
+			flag = true;
+		} else {
+			flag = false;
+		}
+		
+		return flag;
+    }
+    
+    boolean checkDoc() {
+    	
+    	lblDoc.setText(null);
+    	
+    	String doc = doctorTF.getText();
+    
+    	if(doc.equals("")) {
+	   		lblDoc.setText("Enter doctor name.");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	doc = doc.trim();
+		
+		Pattern p = Pattern.compile("[^a-zA-Z]+\\.?\\s?[^a-zA-Z]*[\\-\\.\\s]?[^a-zA-Z]*$");
+    	Matcher nam = p.matcher(doc);
+    	boolean n = nam.find();
+		
+    	
+	   	if(n) {
+	   		lblDoc.setText("No numbers, special characters, or extra spaces.");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
 
 }

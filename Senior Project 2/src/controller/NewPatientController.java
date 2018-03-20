@@ -102,14 +102,15 @@ public class NewPatientController {
 	   	boolean fName = checkFirstName();
 	   	boolean lName = checkLastName();
 	   	boolean DOB = checkDOB();
-	   	boolean Doc = checkDoc();
+	   	boolean cGiver = checkCaregiver();
 	   	boolean cStage = checkStage();
 	   	boolean dDate = checkDiagnoses();
-	   	boolean cGiver = checkCaregiver();
+	   	boolean Doc = checkDoc();
+	   	
 	   	
 	   	if(count > 0) {
 	   		lblAll.setText("Please fill in all fields.");
-	   	} else if(!fName && !lName && !DOB && !Doc && !cStage && !dDate && !cGiver) {
+	   	} else if(!fName && !lName && !DOB && !cGiver && !cStage && !dDate && !Doc) {
 	   		
 		    String firstName = fnameTF.getText();
 		   	String lastName = lnameTF.getText();
