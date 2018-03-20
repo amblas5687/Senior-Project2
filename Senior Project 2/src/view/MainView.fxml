@@ -11,7 +11,7 @@
    <children>
       <VBox prefHeight="670.0" prefWidth="233.0" stylesheets="@../application/application.css">
          <children>
-            <Label fx:id="logo" prefHeight="297.0" prefWidth="235.0">
+            <Label fx:id="logo" onMouseClicked="#help" prefHeight="297.0" prefWidth="235.0">
                <tooltip>
                   <Tooltip fx:id="tp" text="Empty Tooltip" />
                </tooltip>

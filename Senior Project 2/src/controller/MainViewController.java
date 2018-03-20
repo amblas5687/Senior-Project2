@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -99,7 +100,7 @@ public class MainViewController {
 	  }
 	 
 	 @FXML
-	  void help(ActionEvent event) {
+	  void help(MouseEvent event) {
 		 
 		 try {
 			 
