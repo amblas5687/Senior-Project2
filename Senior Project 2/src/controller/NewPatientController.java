@@ -5,10 +5,12 @@ import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
@@ -71,12 +73,13 @@ public class NewPatientController {
     
     private boolean flag;
     private int count;
+    private String dateOB = "";
+    private String dateOD = "";
     
     public void initialize(){
 		System.out.println("*******NEW PATIENT*******");
     	stageBox.getItems().addAll("Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5", "Stage 6", "Stage 7");
     	
-    	DOBPicker.setEditable(false);
     }
     
     @FXML
@@ -114,9 +117,9 @@ public class NewPatientController {
 	   		
 		    String firstName = fnameTF.getText();
 		   	String lastName = lnameTF.getText();
-		   	String dob = DOBPicker.getValue().toString();
+		   	String dob = dateOB;
 		   	String curStage = stageBox.getValue().toString();
-	    	String diagDate = diagnosesPicker.getValue().toString();
+	    	String diagDate = dateOD;
 	    	String doc = doctorTF.getText();
 		   	String caregiver = cargiverTF.getText();
 	      	String patientCode = genCode();
@@ -303,12 +306,64 @@ public class NewPatientController {
     	
     	lblDOB.setText(null);
     	
-		if(DOBPicker.getValue() == null) {
-			lblDOB.setText("Please select a date.");
+    	String dob = DOBPicker.getEditor().getText();
+
+    	if(dob.equals("")){ 
+    		
+			lblDOB.setText("Please select or enter a date.");
 	   		count++;
 			flag = true;
+			
 		} else {
-			flag = false;
+			
+			try {
+				
+				String[] sections = dob.split("/");
+				int year = Integer.parseInt(sections[2]);
+				Format formatter = new SimpleDateFormat("MM/dd/yyyy");
+				Date curDate = new Date();
+				
+				Pattern p = Pattern.compile("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4}$");
+		    	Matcher dat = p.matcher(dob);
+		    	boolean d = dat.find();
+		    	
+		    	if(!d) {
+		    		lblDOB.setText("Incorrect date format. Please use MM/DD/YYYY");
+		    		flag = true;
+		    	}
+		    	
+		    	if(sections[0].length() == 1) {
+		    		sections[0] = "0" + sections[0];
+		    	}
+		    	if(sections[1].length() == 1) {
+		    		sections[1] = "0" + sections[1];
+		    	}
+		    	
+		    	dob = sections[0] + "/" + sections[1] + "/" + sections[2];
+		    	
+		    	Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dob); 
+		    	String strDate = formatter.format(date);
+		    	
+		    	if(year < 1900) {
+		    		lblDOB.setText("Invalid year.");
+		    		flag = true;
+		    	} else if(!dob.equals(strDate)){
+		    		lblDOB.setText("Incorrect date.");
+		    		flag = true;
+		    	} else if(date.after(curDate)){
+		    		lblDOB.setText("Invalid date.");
+		    		flag = true;
+		    	}else {
+		    		dateOB = dob;
+		    		flag = false;
+		    	}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				lblDOB.setText("Incorrect date format. Please use MM/DD/YYYY");
+				return flag = true;
+			}
+			
 		}
 		
 		return flag;
@@ -318,12 +373,67 @@ public class NewPatientController {
     	
     	lblDiagnoses.setText(null);
     	
-    	if(diagnosesPicker.getValue() == null) {
-			lblDiagnoses.setText("Please select a date.");
+    	String diag = diagnosesPicker.getEditor().getText();
+    	
+    	if(diag.equals("")) {
+			lblDiagnoses.setText("Please select or enter a date.");
 	   		count++;
 			flag = true;
 		} else {
-			flag = false;
+			
+			try {
+				
+				String[] sections = diag.split("/");
+				int year = Integer.parseInt(sections[2]);
+				Format formatter = new SimpleDateFormat("MM/dd/yyyy");
+				Date curDate = new Date();
+				
+				Pattern p = Pattern.compile("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4}$");
+		    	Matcher dat = p.matcher(diag);
+		    	boolean d = dat.find();
+		    	
+		    	if(!d) {
+		    		lblDiagnoses.setText("Incorrect date format. Please use MM/DD/YYYY");
+		    		flag = true;
+		    	}
+		    	
+		    	if(sections[0].length() == 1) {
+		    		sections[0] = "0" + sections[0];
+		    	}
+		    	if(sections[1].length() == 1) {
+		    		sections[1] = "0" + sections[1];
+		    	}
+		    	
+		    	if(year < 1900) {
+		    		lblDiagnoses.setText("Invalid year.");
+		    		flag = true;
+		    	}
+		    	
+		    	diag = sections[0] + "/" + sections[1] + "/" + sections[2];
+		    	
+		    	Date date = new SimpleDateFormat("MM/dd/yyyy").parse(diag); 
+		    	String strDate = formatter.format(date);
+		    
+		    	if(year < 1900) {
+		    		lblDiagnoses.setText("Invalid year.");
+		    		flag = true;
+		    	} else if(!diag.equals(strDate)){
+		    		lblDiagnoses.setText("Incorrect date.");
+		    		flag = true;
+		    	} else if(date.after(curDate)){
+		    		lblDiagnoses.setText("Invalid date.");
+		    		flag = true;
+		    	}else {
+		    		dateOD = diag;
+		    		flag = false;
+		    	}
+				
+			} catch (Exception e) {
+				//e.printStackTrace();
+				lblDiagnoses.setText("Incorrect date format. Please use MM/DD/YYYY");
+				return flag = true;
+			}
+			
 		}
     	
     	return flag;
