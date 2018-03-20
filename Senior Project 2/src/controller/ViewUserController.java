@@ -50,6 +50,8 @@ public class ViewUserController {
     public void initialize(){
 		
     	System.out.println("*******VIEW USER INFO*******");
+    	
+    	relationBox.getItems().addAll("Son/Daughter", "Spouse", "Grandchild", "Friend", "Medical Professional");
 
     	Connection connection = null;
     	PreparedStatement ps = null;
@@ -133,7 +135,6 @@ public class ViewUserController {
     	lnameTF.setDisable(false);
     	DOBPicker.setDisable(false);
     	relationBox.setDisable(false);
-    	relationBox.getItems().addAll("Son/Daughter", "Spouse", "Grandchild", "Friend", "Medical Professional");
     	emailTF.setDisable(false);	
     	cancelBTN.setVisible(true);
     }
