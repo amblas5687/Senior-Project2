@@ -102,6 +102,10 @@ public class MainViewController {
 	 @FXML
 	  void help(MouseEvent event) {
 		 
+		 btnMed.getStyleClass().remove("activeButton");
+		 btnPat.getStyleClass().remove("activeButton");
+		 btnInfo.getStyleClass().remove("activeButton");
+		 
 		 try {
 			 
 			 toPane = getClass().getResource("/view/HelpDocs.fxml"); 

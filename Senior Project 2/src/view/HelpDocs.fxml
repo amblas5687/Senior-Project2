@@ -35,7 +35,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <WebView fx:id="web_view" maxHeight="300.0" maxWidth="500.0" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <WebView fx:id="web_view" maxHeight="300.0" maxWidth="500.0" onMouseClicked="#clickVideo" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Label text="Below is a video to help you navigate Forget Me Not:" GridPane.halignment="CENTER">
                            <font>
                               <Font size="16.0" />
