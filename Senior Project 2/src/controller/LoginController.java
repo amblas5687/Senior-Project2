@@ -43,8 +43,8 @@ public class LoginController {
 	 
 	 
 	//global variables for login
-	 public static String currentUserID;
-	 public static String currentPatientID;
+	 public static String currentUserID = null;
+	 public static String currentPatientID = null;
 		 
 	 public void initialize(){
 			
