@@ -1,12 +1,15 @@
 package controller;
 
-import javafx.event.EventHandler;
+import java.net.URL;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+
 
 public class HelpDocsController {
 	
@@ -14,33 +17,50 @@ public class HelpDocsController {
     private AnchorPane content_view;
 
     @FXML
-    private WebView web_view = new WebView();
+    private MediaView media_view;
     
-    private Stage stage;
+    @FXML
+    private Button btnStart;
+
+    @FXML
+    private Button btnStop;
+    
+    //URL mediaUrl = getClass().getResource("/application/jellyfish-25-mbps-hd-hevc.mp4");
+    URL mediaUrl = getClass().getResource("/application/dolbycanyon.mp4");
+    String mediaStringUrl = mediaUrl.toExternalForm();
+    Media media = new Media(mediaStringUrl);
+    final MediaPlayer player = new MediaPlayer(media);
+
     
     public void initialize() {
     	
-    	    web_view.getEngine().load(
-    	      "https://www.youtube.com/embed/Sk-U8ruIQyA"
-    	    );
-    	    
+    	media_view.setMediaPlayer(player);
     }
     
     @FXML
-    void clickVideo(MouseEvent event) {
-    	System.out.println("HIT");
-    	stage = (Stage) ((WebView) event.getSource()).getScene().getWindow();
+    void startVideo(ActionEvent event) {
     	
-    	System.out.println(content_view);//Scene@6eee3cfa
-    	stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
-    		
-            @Override
-            public void handle(WindowEvent event) {
-            	web_view.getEngine().load(null);
-            	
-            	System.out.println("HIT2");
-            }
-        });
+    	player.play();
     	
+    	
+    	player.setOnEndOfMedia(new Runnable() {
+    	    @Override
+    	    public void run() {
+    	        player.stop();
+    	    }
+    	});
     }
+
+    @FXML
+    void stopVideo(ActionEvent event) {
+    	
+    	player.pause();
+    }
+    
+    @FXML
+    void exitVideo(MouseEvent event) {
+    	
+    	player.pause();
+    }
+
 }
