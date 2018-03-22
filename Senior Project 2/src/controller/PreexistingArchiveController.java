@@ -1,12 +1,11 @@
 package controller;
 
-import java.net.URL;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
@@ -75,8 +74,6 @@ public class PreexistingArchiveController {
     @FXML
     private Label datePrescribedLBL;
     
-    private URL toPane;
-	private AnchorPane temp;
 	
 	public void initialize() {
 
@@ -92,7 +89,7 @@ public class PreexistingArchiveController {
     	try {
 			stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 			root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
-			scene = new Scene(root);
+			scene = new Scene(root, 1200, 670);
 			stage.setScene(scene);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -186,7 +183,8 @@ public class PreexistingArchiveController {
 			btnSubmit.setPrefWidth(120);
 			
 			//TODO fix insets
-			cancelBTN.setStyle("-fx-insets-right: 130px");
+			//cancelBTN.setStyle("-fx-background-insets: 0 130px 0 0;");
+			cancelBTN.setLayoutX(130);
 
 		} // end if
 
