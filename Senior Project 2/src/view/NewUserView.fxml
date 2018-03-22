@@ -205,6 +205,13 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
+                        <Label fx:id="fnameERR" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="lnameERR" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Label fx:id="dobERR" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Label fx:id="relationERR" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Label fx:id="emailERR" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <Label fx:id="p1ERR" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <Label fx:id="p2ERR" GridPane.columnIndex="2" GridPane.rowIndex="9" />
 				         	</children>
 				      	</GridPane>
 				      	<GridPane prefHeight="40.0" prefWidth="1200.0">
