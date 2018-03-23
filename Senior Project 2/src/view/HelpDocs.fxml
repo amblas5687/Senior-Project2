@@ -47,7 +47,7 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="60.0" left="85.0" />
+                              <Insets bottom="60.0" left="90.0" />
                            </GridPane.margin>
                         </Button>
                         <Button fx:id="btnStop" mnemonicParsing="false" onAction="#stopVideo" text="Stop" GridPane.rowIndex="1">
@@ -55,7 +55,7 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="85.0" top="60.0" />
+                              <Insets left="90.0" top="60.0" />
                            </GridPane.margin>
                         </Button>
                      </children>
