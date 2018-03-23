@@ -27,13 +27,13 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane layoutY="50.0" maxWidth="968.0" prefHeight="400.0" prefWidth="968.0">
+                  <GridPane maxWidth="968.0" prefHeight="350.0" prefWidth="968.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="350.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Below is a video to help you navigate Forget Me Not:" GridPane.halignment="CENTER">
@@ -58,6 +58,64 @@
                               <Insets left="90.0" top="60.0" />
                            </GridPane.margin>
                         </Button>
+                        <Button fx:id="btnMeds" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="120.0" right="85.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="btnUser" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="87.0" top="120.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="btnPatient" mnemonicParsing="false" onAction="#patientVideo" text="Patient" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="80.0" />
+                           </GridPane.margin>
+                        </Button>
+                     </children>
+                  </GridPane>
+                  <GridPane layoutY="350.0" prefHeight="235.0" prefWidth="968.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Simple system discription with highlights on common features." wrapText="true" GridPane.halignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="*DISCLAIMER*" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="This system was built as a senior project. Therefore, errors and bugs exist in the project. If you find an issue, please feel free to report it to us." wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="10.0" right="5.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Contact us at: forgetmenot@gmail.com" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
                </children>

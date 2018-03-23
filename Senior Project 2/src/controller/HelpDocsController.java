@@ -26,6 +26,16 @@ public class HelpDocsController {
     @FXML
     private Button btnStop;
     
+    @FXML
+    private Button btnMeds;
+
+    @FXML
+    private Button btnUser;
+
+    @FXML
+    private Button btnPatient;
+
+    
     //URL mediaUrl = getClass().getResource("/application/jellyfish-25-mbps-hd-hevc.mp4");
     URL mediaUrl = getClass().getResource("/application/moon_jellies_hd_stock_video (1).mp4");
     String mediaStringUrl = mediaUrl.toExternalForm();
@@ -64,6 +74,22 @@ public class HelpDocsController {
     void stopVideo(ActionEvent event) {
     	
     	player.pause();
+    }
+    
+    @FXML
+    void medsVideo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void patientVideo(ActionEvent event) {
+
+    }
+    
+
+    @FXML
+    void userVideo(ActionEvent event) {
+
     }
     
     @FXML
