@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -167,7 +168,7 @@ public class ViewUserController {
 	}
 
 	@FXML
-	void submit(ActionEvent event) {
+	void submit(ActionEvent event) throws ParseException {
 
 		// validate fields
 		boolean validDOB, validFname, validLname, validRelation, validEmail, validPassword = false;
@@ -182,7 +183,20 @@ public class ViewUserController {
 
 			String firstName = fnameTF.getText();
 			String lastName = lnameTF.getText();
-			String dob = DOBPicker.getValue().toString();
+			
+			
+			
+			// grab date
+			String DOB = DOBPicker.getEditor().getText();
+
+			// format date for database
+			Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+			Date DOBDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOB);
+			String formatDate = formatter2.format(DOBDate);
+			System.out.println("Before format " + DOB + " After format " + formatDate);
+			
+			
+			
 			String relation = relationBox.getValue();
 			String email = emailTF.getText();
 
@@ -198,7 +212,7 @@ public class ViewUserController {
 				ps = connection.prepareStatement(query);
 				ps.setString(1, firstName);
 				ps.setString(2, lastName);
-				ps.setString(3, dob);
+				ps.setString(3, formatDate);
 				ps.setString(4, relation);
 				ps.setString(5, email);
 				ps.setString(6, LoginController.currentUserID);

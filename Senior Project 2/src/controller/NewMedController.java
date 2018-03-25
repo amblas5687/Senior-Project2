@@ -4,6 +4,11 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +38,7 @@ public class NewMedController {
 
 	@FXML
 	private TextField purpOfPrescript;
-	
+
 	@FXML
 	private ComboBox<String> doseType;
 
@@ -73,7 +78,7 @@ public class NewMedController {
 	public void initialize() {
 
 		System.out.println("*******NEW MED*******");
-		
+
 		doseType.getItems().addAll("mg", "g", "kg", "oz", "tab", "tsp", "tbsp");
 	}
 
@@ -94,7 +99,7 @@ public class NewMedController {
 	}
 
 	@FXML
-	void submit(ActionEvent event) {
+	void submit(ActionEvent event) throws ParseException {
 
 		boolean validName, validDose, validDoseType, validDoctor, validPurpose, validDate = true;
 
@@ -113,7 +118,16 @@ public class NewMedController {
 			String mDescript = medDescript.getText();
 			String pDoc = prescribDoc.getText();
 			String pPurpose = purpOfPrescript.getText();
-			String pDate = DOPPicker.getValue().toString();
+
+			// grab date
+			String pDate = DOPPicker.getEditor().getText();
+
+			// format date for database
+			Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+			Date DOPDate = new SimpleDateFormat("MM/dd/yyyy").parse(pDate);
+			String formatDate = formatter2.format(DOPDate);
+			System.out.println("Before format " + pDate + " After format " + formatDate);
+
 			String dateAdded = java.time.LocalDate.now().toString();
 
 			Connection connection = null;
@@ -133,7 +147,7 @@ public class NewMedController {
 				ps.setString(5, mDescript);
 				ps.setString(6, pDoc);
 				ps.setString(7, pPurpose);
-				ps.setString(8, pDate);
+				ps.setString(8, formatDate);
 				ps.setString(9, dateAdded);
 
 				ps.execute();
@@ -229,20 +243,20 @@ public class NewMedController {
 		}
 		return doseFlag;
 	}
-	
+
 	private boolean validateDoseType() {
 		System.out.println("VALIDATING DOSAGE TYPE");
 		boolean dtFlag = true;
 		String dose = medDosage.getText();
-		
-		if(doseType.getValue() == null && dose.equals("")) {
+
+		if (doseType.getValue() == null && dose.equals("")) {
 			dtFlag = false;
 			doseLBL.setText("Please fill in dosage amount and select a dosage type.");
-		} else if(doseType.getValue() ==  null) {
+		} else if (doseType.getValue() == null) {
 			dtFlag = false;
 			doseLBL.setText("Please select a dosage type.");
 		}
-		
+
 		return dtFlag;
 	}
 
@@ -298,17 +312,55 @@ public class NewMedController {
 
 	private boolean validateDate() {
 		System.out.println("VALIDATING DATE...");
-		datePrescribedLBL.setText(null);
-		boolean dateFlag = true;
 
-		if (DOPPicker.getValue() == null) {
-			datePrescribedLBL.setText("Please select a date.");
-			System.out.println("DATE NOT SET");
-			dateFlag = false;
-		} else {
-			dateFlag = true;
+		datePrescribedLBL.setText(null);
+
+		String dopString = DOPPicker.getEditor().getText();
+
+		// rough check of dob format
+		Pattern p = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$");
+		Matcher m = p.matcher(dopString);
+		boolean b = m.matches();
+
+		System.out.println("Date " + dopString);
+
+		// date is empty
+		if (dopString.equals(null) || dopString.equals("")) {
+			datePrescribedLBL.setText("Please enter a date");
+			System.out.println("DOB EMTPY");
+			return false;
 		}
-		return dateFlag;
-	}
+		// date format is wrong
+		else if (!b) {
+			System.out.println("INVALID DATE FORMAT");
+			datePrescribedLBL.setText("Invalid date format. MM/DD/YYYY");
+			return false;
+		} else {
+
+			try {
+				// parse the date to see if it is a real date
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				df.setLenient(false);
+				df.parse(dopString);
+
+				// get current date and convert date into date object
+				Date curDate = new Date();
+				Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dopString);
+
+				// date is after current date
+				if (date.after(curDate)) {
+					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
+					datePrescribedLBL.setText("Date cannot be after today's date");
+					return false;
+				}
+				return true;
+			} catch (ParseException e) {
+				// not an actual date
+				System.out.println("INVALID DATE");
+				datePrescribedLBL.setText("Incorrect date.");
+				return false;
+			}
+		}
+	}// end method
 
 }
