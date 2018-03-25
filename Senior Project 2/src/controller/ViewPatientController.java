@@ -5,8 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -231,7 +235,11 @@ public class ViewPatientController {
     }
 
     @FXML
-    void submit(ActionEvent event) {
+    void submit(ActionEvent event) throws ParseException{
+    	
+    	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date dobDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOBPicker.getEditor().getText());
+		Date diagnosesDate = new SimpleDateFormat("MM/dd/yyyy").parse(diagnosesPicker.getEditor().getText());
     	
     	lblAll.setText(null);
 	   	
@@ -253,10 +261,10 @@ public class ViewPatientController {
 	    	
 	    	updatePatient.setFname(fnameTF.getText());
 	    	updatePatient.setLname(lnameTF.getText());
-	    	updatePatient.setDOB(DOBPicker.getValue().toString());
+	    	updatePatient.setDOB(formatter.format(dobDate));
 	    	updatePatient.setDoctor(doctorTF.getText());
 	    	updatePatient.setStage(stageBox.getValue().toString());
-	    	updatePatient.setDiagnosesDate(diagnosesPicker.getValue().toString());
+	    	updatePatient.setDiagnosesDate(formatter.format(diagnosesDate));
 	    	updatePatient.setCargiver(cargiverTF.getText());
 	    	updatePatient.setPatientCode(LoginController.currentPatientID);
 	    	
@@ -405,31 +413,109 @@ public class ViewPatientController {
     boolean checkDOB() {
     	
     	lblDOB.setText(null);
-    	
-		if(DOBPicker.getValue() == null) {
-			lblDOB.setText("Please select a date.");
-	   		count++;
+
+		String dob = DOBPicker.getEditor().getText();
+
+		if (dob.equals("")) {
+
+			lblDOB.setText("Please select or enter a date.");
+			count++;
 			flag = true;
+
 		} else {
-			flag = false;
+
+			try {
+
+				String[] sections = dob.split("/");
+				int year = Integer.parseInt(sections[2]);
+				DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+				formatter.setLenient(false);
+				Date date = formatter.parse(dob);
+				Date curDate = new Date();
+
+				Pattern p = Pattern.compile("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4}$");
+				Matcher dat = p.matcher(dob);
+				boolean d = dat.find();
+
+				if (!d) {
+					lblDOB.setText("Incorrect date format. Please use MM/DD/YYYY");
+					return flag = true;
+				}
+
+				if (year < 1900) {
+					lblDOB.setText("Invalid year.");
+					flag = true;
+				} else if (date.after(curDate)) {
+					lblDOB.setText("Invalid date. Date cannot be after today's date.");
+					flag = true;
+				} else {
+					flag = false;
+				}
+
+			} catch (ParseException e) {
+				
+				lblDOB.setText("Incorrect date.");
+				return flag = true;
+			}
+
 		}
-		
+
 		return flag;
     }
     
     boolean checkDiagnoses(){
     	
     	lblDiagnoses.setText(null);
-    	
-    	if(diagnosesPicker.getValue() == null) {
-			lblDiagnoses.setText("Please select a date.");
-	   		count++;
+
+		String diag = diagnosesPicker.getEditor().getText();
+
+		if (diag.equals("")) {
+			lblDiagnoses.setText("Please select or enter a date.");
+			count++;
 			flag = true;
 		} else {
-			flag = false;
+
+			try {
+
+				String[] sections = diag.split("/");
+				int year = Integer.parseInt(sections[2]);
+				DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+				Date dob = formatter.parse(DOBPicker.getEditor().getText());
+				formatter.setLenient(false);
+				Date date = formatter.parse(diag);
+				Date curDate = new Date();
+
+				Pattern p = Pattern.compile("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4}$");
+				Matcher dat = p.matcher(diag);
+				boolean d = dat.find();
+
+				if (!d) {
+					lblDiagnoses.setText("Incorrect date format. Please use MM/DD/YYYY");
+					return flag = true;
+				}
+
+				if (year < 1900) {
+					lblDiagnoses.setText("Invalid year.");
+					flag = true;
+				} else if (date.after(curDate)) {
+					lblDiagnoses.setText("Invalid date. Date cannot be after today's date.");
+					flag = true;
+				} else if(date.before(dob) || date.equals(dob)) {
+					lblDiagnoses.setText("Invalid date. Date cannot be before or on the day of patient's birthday.");
+					flag = true;
+				} else {
+					flag = false;
+				}
+
+			} catch (ParseException e) {
+				
+				lblDiagnoses.setText("Incorrect date.");
+				return flag = true;
+			}
+
 		}
-    	
-    	return flag;
+
+		return flag;
     }
     
     boolean checkStage(){

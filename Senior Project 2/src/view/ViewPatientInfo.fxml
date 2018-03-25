@@ -124,7 +124,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <DatePicker fx:id="DOBPicker" disable="true" editable="false" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+			            <DatePicker fx:id="DOBPicker" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 			               <GridPane.margin>
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
@@ -142,7 +142,7 @@
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
 			            </ComboBox>
-			             <DatePicker fx:id="diagnosesPicker" disable="true" editable="false" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+			             <DatePicker fx:id="diagnosesPicker" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
 			               <GridPane.margin>
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
