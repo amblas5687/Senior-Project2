@@ -98,10 +98,15 @@ public class NewUserController {
 	void patientCodeEnter(ActionEvent event) throws ParseException {
 
 		// validate fields
-		boolean validDOB = false;
+		boolean validDOB, validFname, validLname, validRelation, validEmail, validPassword = false;
 		validDOB = validateDOB();
+		validFname = validateFName();
+		validLname = validateLName();
+		validRelation = validateRelation();
+		validEmail = validateEmail();
+		validPassword = validatePassword();
 
-		if (validDOB) {
+		if (validDOB && validFname && validLname && validRelation && validEmail && validPassword) {
 
 			// grab the fields for the user
 			UserModel subUser = grabFields();
@@ -232,17 +237,14 @@ public class NewUserController {
 		String fname = fnameTF.getText();
 		String lname = lnameTF.getText();
 
-		//grab date
+		// grab date
 		String DOB = DOBPicker.getEditor().getText();
-		
-		//format date for database
+
+		// format date for database
 		Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
 		Date DOBDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOB);
 		String formatDate = formatter2.format(DOBDate);
 		System.out.println("Before format " + DOB + " After format " + formatDate);
-
-
-
 
 		String pRelation = relationBox.getValue();
 		String email = emailTF.getText();
@@ -289,16 +291,16 @@ public class NewUserController {
 		Pattern p = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$");
 		Matcher m = p.matcher(dobString);
 		boolean b = m.matches();
-		
+
 		System.out.println("Date " + dobString);
 
-		//date is empty
-		if (dobString == null) {
+		// date is empty
+		if (dobString.equals(null) || dobString.equals("")) {
 			lblDOB.setText("Please enter a date");
 			System.out.println("DOB EMTPY");
 			return false;
 		}
-		//date format is wrong
+		// date format is wrong
 		else if (!b) {
 			System.out.println("INVALID DATE FORMAT");
 			lblDOB.setText("Invalid date format. MM/DD/YYYY");
@@ -315,7 +317,7 @@ public class NewUserController {
 				Date curDate = new Date();
 				Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dobString);
 
-				//date is after current date
+				// date is after current date
 				if (date.after(curDate)) {
 					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
 					lblDOB.setText("Date cannot be after today's date");
@@ -323,13 +325,143 @@ public class NewUserController {
 				}
 				return true;
 			} catch (ParseException e) {
-				//not an actual date
+				// not an actual date
 				System.out.println("INVALID DATE");
 				lblDOB.setText("Incorrect date.");
 				return false;
 			}
 		}
 
+	}// end method
+
+	private boolean validateFName() {
+
+		lblFname.setText(null);
+		System.out.println("VALIDATING FIRST NAME");
+
+		String fname = fnameTF.getText();
+		fname = fname.trim();
+
+		// regex pattern only allow letters, single space, then letters
+		Pattern p = Pattern.compile("^[a-zA-Z]+\\s?[a-zA-Z]*$");// . represents single character
+		Matcher m = p.matcher(fname);
+		boolean b = m.matches();
+
+		if (fname.equals(null) || fname.equals("")) {
+			lblFname.setText("First name cannot be empty");
+			System.out.println("FIRST NAME IS EMPTY...");
+			return false;
+		} else if (!b) {
+			lblFname.setText("No numbers or special characters");
+			System.out.println("FIRST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
+			return false;
+		}
+
+		return true;
+
+	}// end method
+
+	private boolean validateLName() {
+
+		lblLname.setText(null);
+		System.out.println("VALIDATING LAST NAME");
+
+		String lname = lnameTF.getText();
+		lname = lname.trim();
+
+		// regex pattern only allow letters, single space, then letters
+		Pattern p = Pattern.compile("^[a-zA-Z]+((\\.\\s)|[\\.\\s\\-])?[a-zA-Z]*$");// . represents single character
+		Matcher m = p.matcher(lname);
+		boolean b = m.matches();
+
+		if (lname.equals(null) || lname.equals("")) {
+			lblLname.setText("Last name cannot be empty");
+			System.out.println("LAST NAME IS EMPTY...");
+			return false;
+		} else if (!b) {
+			lblLname.setText("No numbers or special characters");
+			System.out.println("LAST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
+			return false;
+		}
+
+		return true;
+	}// end method
+
+	private boolean validateRelation() {
+
+		lblRelation.setText(null);
+		System.out.println("VALIDATING RELATION");
+
+		if (relationBox.getValue() == null) {
+			lblRelation.setText("Please provide a relation");
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean validateEmail() {
+
+		String email = emailTF.getText();
+		// ^([a-zA-Z0-9~!$%^&*_=+}{\'?]+(\.[a-zA-Z0-9~!$%^&*_=+}{\'?]+)*@[a-zA-Z0-9_-]+(\.com|\.net|\.edu|\.gov|\.mil))$
+		Pattern p = Pattern.compile("^([a-zA-Z0-9~!$%^&*_=+}{\\'?]+(\\.[a-zA-Z0-9~!$%^&*_=+}"
+				+ "{\\'?]+)*@[a-zA-Z0-9_-]+(\\.com|\\.net|\\.edu|\\.gov|\\.mil))$");// . represents single character
+		Matcher m = p.matcher(email);
+		boolean b = m.matches();
+
+		if (email.equals(null) || email.equals("")) {
+			lblEmail.setText("Email cannot be empty");
+			System.out.println("EMAIL IS EMPTY...");
+			return false;
+		} else if (!b) {
+			lblEmail.setText("Invalid email format");
+			System.out.println("EMAIL WAS NOT IN PROPER FORMAT");
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean validatePassword() {
+
+		String p1 = password1TF.getText();
+		String p2 = password2TF.getText();
+
+		lblPassword1.setText(null);
+		lblPassword2.setText(null);
+
+		boolean passwordFlag = true;
+
+		/*
+		 * Pattern p = Pattern.compile("^$");// . represents single character Matcher m
+		 * = p.matcher(email); boolean b = m.matches();
+		 */
+
+		if ((p1.equals(null) || p1.equals("")) && (p2.equals(null) || p2.equals(""))) {
+			lblPassword1.setText("Password cannot be empty");
+			lblPassword2.setText("Password cannot be empty");
+			System.out.println("BOTH PASSWORDS EMPTY...");
+			passwordFlag = false;
+		} else if (p1.equals(null) || p1.equals("")) {
+			lblPassword1.setText("Password cannot be empty");
+			System.out.println("PASSWORD EMPTY...");
+			passwordFlag = false;
+		} else if (p1.length() < 4) {
+			lblPassword1.setText("Password not long enough, must be longer than 4");
+			System.out.println("PASSWORD < 4");
+			passwordFlag = false;
+		} else if (p2.equals(null) || p2.equals("")) {
+			lblPassword2.setText("Password cannot be empty");
+			System.out.println("PASSWORD EMPTY...");
+			passwordFlag = false;
+		} else if (!p1.equals(p2)) {
+			lblPassword1.setText("Password does not match");
+			lblPassword2.setText("Password does not match");
+			System.out.println("PASSWORDS DON'T MATCH...");
+			passwordFlag = false;
+		}
+
+		return passwordFlag;
 	}
 
 }
