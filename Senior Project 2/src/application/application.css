@@ -5,6 +5,7 @@
  * Sections:
  * 		- Main
  * 		- Button
+ * 		- Slider
  * 		- Alert
  * 		- Toggle Button
  * 		- Dialog Pane
@@ -62,6 +63,26 @@
 /* Affects hover over action for currently selected button */
 .activeButton:hover{
 	-fx-background-color: #ffcdd2;
+}
+
+
+/* -- SLIDER -- */
+
+/* Affects the left side of the slider track */
+.jfx-slider .colored-track {
+    -fx-background-color: #4bacb8;
+}
+
+/* Affects the slider thumb (circle) */
+.jfx-slider .thumb {
+    -fx-background-color: #4bacb8;
+}
+
+/* Affects the tear-drop with time that pops up while you drag the slider */
+.jfx-slider .animated-thumb,
+.jfx-slider .animated-thumb:min{
+	-fx-background-color: #80deea;
+	-fx-text-fill: black;
 }
 
 

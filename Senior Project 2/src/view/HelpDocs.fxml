@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXSlider?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -41,7 +42,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <MediaView fx:id="media_view" fitHeight="300.0" fitWidth="500.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <MediaView fx:id="media_view" fitHeight="300.0" fitWidth="500.0" onMouseClicked="#clickVideo" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startVideo" text="Start" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
@@ -82,6 +83,11 @@
                               <Insets right="80.0" />
                            </GridPane.margin>
                         </Button>
+                        <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" maxWidth="500.0" onDragDetected="#dragSlider" showTickMarks="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets top="270.0" />
+                           </GridPane.margin>
+                        </JFXSlider>
                      </children>
                   </GridPane>
                   <GridPane layoutY="350.0" prefHeight="235.0" prefWidth="968.0">

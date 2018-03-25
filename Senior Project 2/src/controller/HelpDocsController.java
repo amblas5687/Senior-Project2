@@ -1,6 +1,10 @@
 package controller;
 
 import java.net.URL;
+
+import com.jfoenix.controls.JFXSlider;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
@@ -34,6 +39,9 @@ public class HelpDocsController {
 
     @FXML
     private Button btnPatient;
+    
+    @FXML
+    private JFXSlider timeSlider;
 
     
     //URL mediaUrl = getClass().getResource("/application/jellyfish-25-mbps-hd-hevc.mp4");
@@ -41,26 +49,22 @@ public class HelpDocsController {
     String mediaStringUrl = mediaUrl.toExternalForm();
     Media media = new Media(mediaStringUrl);
     final MediaPlayer player = new MediaPlayer(media);
-    Duration time;
+    Duration time, curTime;
     
     public void initialize() {
     	
+    	timeSlider.setDisable(true);
     	media_view.setMediaPlayer(player);
+    	timeSlider.setValue(0);
     }
     
     @FXML
     void startVideo(ActionEvent event) {
     	
-    	player.setOnPlaying(new Runnable() {
-    	    @Override
-    	    public void run() {
-    	  
-    	    	player.setStopTime(Duration.millis(182732.0));
-    	    }
-    	});
-    	
     	player.play();
-    	player.setStartTime(Duration.millis(0.0));
+    	timeSlider.setDisable(false);
+    	//player.setStartTime(Duration.millis(0.0));
+    	player.setStopTime(Duration.millis(182732.0));
     	
     	player.setOnEndOfMedia(new Runnable() {
     	    @Override
@@ -68,12 +72,80 @@ public class HelpDocsController {
     	        player.stop();
     	    }
     	});
+    	System.out.println(player.getTotalDuration().toMinutes());
+    	player.currentTimeProperty().addListener(new InvalidationListener() {
+    		
+    		public void invalidated(Observable ov) {
+    			System.out.println("HIT");
+    			if (!timeSlider.isValueChanging()) {
+    				System.out.println("HIT2");
+    				System.out.println(player.currentTimeProperty().get());
+    				System.out.println(player.currentTimeProperty().get().toMinutes());
+    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
+    				
+    			}
+            }
+        });
+    	
     }
 
     @FXML
     void stopVideo(ActionEvent event) {
     	
     	player.pause();
+    	
+    	player.currentTimeProperty().addListener(new InvalidationListener() {
+    		
+    		public void invalidated(Observable ov) {
+    			System.out.println("HIT3");
+    			if (!timeSlider.isValueChanging()) {
+    				System.out.println("HIT4");
+    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
+    				
+    			}
+            }
+        });
+    }
+    
+    @FXML
+    void dragSlider(MouseEvent event) {
+    	timeSlider.valueProperty().addListener(new InvalidationListener() {
+    	    public void invalidated(Observable ov) {
+    	       if (timeSlider.isValueChanging()) {
+    	       // multiply duration by percentage calculated by slider position
+    	    	  System.out.println("Get: " + player.currentTimeProperty().get());
+    	    	  System.out.println("Math: " + player.currentTimeProperty().get().multiply(timeSlider.getValue() / 100.0));
+    	          player.seek(player.currentTimeProperty().get().multiply(timeSlider.getValue() / 100.0));
+    	       }
+    	    }
+    	});
+    }
+    
+    @FXML
+    void clickVideo(MouseEvent event) {
+    	
+    	timeSlider.setDisable(false);
+    	System.out.println(player.getStatus());
+    	if(player.getStatus() == Status.PLAYING) {
+    		player.pause();
+    	} else {
+    		player.play();
+    	}
+    	System.out.println(player.getStatus());
+    	
+    	player.currentTimeProperty().addListener(new InvalidationListener() {
+    		
+    		public void invalidated(Observable ov) {
+    			System.out.println("HIT");
+    			if (!timeSlider.isValueChanging()) {
+    				System.out.println("HIT2");
+    				System.out.println(player.currentTimeProperty().get());
+    				System.out.println(player.currentTimeProperty().get().toMinutes());
+    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
+    				
+    			}
+            }
+        });	
     }
     
     @FXML
@@ -96,15 +168,28 @@ public class HelpDocsController {
     void exitVideo(MouseEvent event) {
     	
     	time = player.currentTimeProperty().get().add(Duration.seconds(1.5));
+    	System.out.println("Current time: " + player.getCurrentTime());
+    	
+    	if(player.getCurrentTime().greaterThan(Duration.ZERO) && !timeSlider.isDisable()) {
+	    	player.currentTimeProperty().addListener(new InvalidationListener() {
+	    		
+	    		public void invalidated(Observable ov) {
+	    			System.out.println("HIT5");
+	    			if (!timeSlider.isValueChanging()) {
+	    				System.out.println("HIT6");
+	    				System.out.println("Time: " + player.currentTimeProperty().get());
+	    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
+	    				
+	    			}
+	            }
+	        });
+    	}
     	
     	player.setStopTime(time);
-    	player.setOnStopped(new Runnable() {
-    	    @Override
-    	    public void run() {
-    	  
-    	    	player.setStartTime(time);
-    	    }
-    	});
+    	
+    	player.setStartTime(time);
+    	//player.setStopTime(Duration.millis(182732.0));
+
     	
     }
 
