@@ -402,6 +402,9 @@ public class NewUserController {
 
 	private boolean validateEmail() {
 
+		System.out.println("VALIDATING EMAIL");
+		lblEmail.setText(null);
+		
 		String email = emailTF.getText();
 		// ^([a-zA-Z0-9~!$%^&*_=+}{\'?]+(\.[a-zA-Z0-9~!$%^&*_=+}{\'?]+)*@[a-zA-Z0-9_-]+(\.com|\.net|\.edu|\.gov|\.mil))$
 		Pattern p = Pattern.compile("^([a-zA-Z0-9~!$%^&*_=+}{\\'?]+(\\.[a-zA-Z0-9~!$%^&*_=+}"
