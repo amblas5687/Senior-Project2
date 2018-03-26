@@ -795,7 +795,7 @@ public class CurrentMedsController {
 		try {
 			result.get();
 
-			if (result.get() == createBtn && !no.equals("")) {
+			if (result.get() == createBtn && !no.equals("") && no.length() < 500) {
 				System.out.println("NOTES... " + notes.getText());
 
 				Connection connection = null;
@@ -915,6 +915,14 @@ public class CurrentMedsController {
 				failure.setContentText("Must enter archive reason");
 				failure.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 				Optional<ButtonType> error = failure.showAndWait();
+			}
+			else if(no.length() > 500)
+			{
+				Alert failure = new Alert(AlertType.ERROR);
+				// safely catches error by pop-up alert.
+				failure.setContentText("Notes must be less than 500 characters");
+				failure.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+				Optional<ButtonType> error = failure.showAndWait();	
 			}
 		} catch (NoSuchElementException e) {
 			dialog.close();
