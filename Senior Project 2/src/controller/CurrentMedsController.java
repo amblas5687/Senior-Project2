@@ -26,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -747,13 +748,13 @@ public class CurrentMedsController {
 		// dialog for archive reason
 		// Create the custom dialog.
 		Dialog dialog = new Dialog();
-		dialog.initModality(Modality.APPLICATION_MODAL);
+		/dialog.initModality(Modality.APPLICATION_MODAL);
 
 		DialogPane dialogPane = dialog.getDialogPane();
 		// css for info alert box
 		dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 
-		//dialogPane.getStyleClass().add("alert");
+		// dialogPane.getStyleClass().add("alert");
 
 		dialog.setTitle("Archive Reason");
 		dialog.setHeaderText("Enter archival reason below:");
@@ -783,7 +784,7 @@ public class CurrentMedsController {
 		// GridPane.setVgrow(notes, Priority.ALWAYS);
 		// GridPane.setHgrow(notes, Priority.ALWAYS);
 
-		grid.setMaxWidth(Double.MAX_VALUE);
+		// grid.setMaxWidth(Double.MAX_VALUE);
 		Optional result = dialog.showAndWait();
 		// makes dialog box expandable -> default is not
 
@@ -907,22 +908,22 @@ public class CurrentMedsController {
 				} // finally
 
 			} // end if
-			else if(result.get() == btnCancel) {
+			else if (result.get() == btnCancel) {
 				dialog.hide();
 			} else if (no.equals("")) {
 				Alert failure = new Alert(AlertType.ERROR);
 				// safely catches error by pop-up alert.
 				failure.setContentText("Must enter archive reason");
-				failure.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+				failure.getDialogPane().getStylesheets()
+						.add(getClass().getResource("/application/application.css").toExternalForm());
 				Optional<ButtonType> error = failure.showAndWait();
-			}
-			else if(no.length() > 500)
-			{
+			} else if (no.length() > 500) {
 				Alert failure = new Alert(AlertType.ERROR);
 				// safely catches error by pop-up alert.
 				failure.setContentText("Notes must be less than 500 characters");
-				failure.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-				Optional<ButtonType> error = failure.showAndWait();	
+				failure.getDialogPane().getStylesheets()
+						.add(getClass().getResource("/application/application.css").toExternalForm());
+				Optional<ButtonType> error = failure.showAndWait();
 			}
 		} catch (NoSuchElementException e) {
 			dialog.close();
