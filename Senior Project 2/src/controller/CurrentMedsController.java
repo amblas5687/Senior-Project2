@@ -748,7 +748,7 @@ public class CurrentMedsController {
 		// dialog for archive reason
 		// Create the custom dialog.
 		Dialog dialog = new Dialog();
-		/dialog.initModality(Modality.APPLICATION_MODAL);
+		dialog.initModality(Modality.APPLICATION_MODAL);
 
 		DialogPane dialogPane = dialog.getDialogPane();
 		// css for info alert box
