@@ -6,6 +6,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +33,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.MedModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class ArchivedMedsController {
 
@@ -156,8 +162,8 @@ public class ArchivedMedsController {
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
-						archiveDate, archiveReason, null);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null,
+						null, archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
 				System.out.println("GRABBING MEDS FROM ARCHIVE... " + tempMed);
@@ -239,8 +245,8 @@ public class ArchivedMedsController {
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
-						archiveDate, archiveReason, null);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null,
+						null, archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
 				System.out.println("GRABBING TOP 10 MEDS FROM ARCHIVE... " + tempMed);
@@ -358,7 +364,7 @@ public class ArchivedMedsController {
 	}
 
 	@FXML
-	private void searchMed(ActionEvent event) {
+	private void searchMed(ActionEvent event) throws ParseException {
 
 		boolean searchFlag = true;
 		String option = searchOptions.getValue();
@@ -377,16 +383,14 @@ public class ArchivedMedsController {
 
 		} else if (option == "Date") {
 			searchFlag = validateDate();
-			if(searchFlag == true)
-			{
+			if (searchFlag == true) {
 				optionDate();
 				datePicker.setValue(null);
 				searchOptions.setValue(null);
 			}
 		} else if (option == "Date Range") {
 			searchFlag = validateDateRange();
-			if(searchFlag == true)
-			{
+			if (searchFlag == true) {
 				optionDateRange();
 				DRPicker1.setValue(null);
 				DRPicker2.setValue(null);
@@ -442,8 +446,8 @@ public class ArchivedMedsController {
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
-						archiveDate, archiveReason, null);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null,
+						null, archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
 
@@ -487,9 +491,14 @@ public class ArchivedMedsController {
 		} // end finally
 	}
 
-	void optionDate() {
-		LocalDate dp = datePicker.getValue();
-		Date date = java.sql.Date.valueOf(dp);
+	void optionDate() throws ParseException {
+		String dp = datePicker.getEditor().getText();
+
+		// format date for database
+		Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date datePickerDate = new SimpleDateFormat("MM/dd/yyyy").parse(dp);
+		String formatDate = formatter2.format(datePickerDate);
+		System.out.println("Before format " + dp + " After format " + formatDate);
 
 		String query = "SELECT * FROM archivedMeds WHERE prescribDate = ?";
 
@@ -501,7 +510,7 @@ public class ArchivedMedsController {
 			connection = DataSource.getInstance().getConnection();
 
 			ps = connection.prepareStatement(query);
-			ps.setDate(1, date);
+			ps.setString(1, formatDate);
 
 			rs = ps.executeQuery();
 
@@ -532,8 +541,8 @@ public class ArchivedMedsController {
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
-						archiveDate, archiveReason, null);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null,
+						null, archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
 
@@ -575,15 +584,24 @@ public class ArchivedMedsController {
 		}
 	}
 
-	void optionDateRange() {
+	void optionDateRange() throws ParseException {
 
-		LocalDate drp1 = DRPicker1.getValue();
-		LocalDate drp2 = DRPicker2.getValue();
-		Date date1 = java.sql.Date.valueOf(drp1);
-		Date date2 = java.sql.Date.valueOf(drp2);
+		String date1String = DRPicker1.getEditor().getText();
+		String date2String = DRPicker2.getEditor().getText();
+		
+		// format date for database
+		Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(date1String);
+		java.util.Date date2 = new SimpleDateFormat("MM/dd/yyyy").parse(date2String);
 
-		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= '" + date1 + "' AND prescribDate <= '" + date2
-				+ "';";
+		String formatDate1 = formatter2.format(date1);
+		String formatDate2 = formatter2.format(date2);
+
+		System.out.println("Before format " + date1String + "__" + date2String+  
+				" After format " + formatDate1 + "__" + formatDate2);
+		
+		
+		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= ? AND prescribDate <= ?";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -594,6 +612,8 @@ public class ArchivedMedsController {
 			connection = DataSource.getInstance().getConnection();
 
 			ps = connection.prepareStatement(query);
+			ps.setString(1, formatDate1);
+			ps.setString(2, formatDate2);
 			rs = ps.executeQuery();
 
 			archiveTable.getItems().clear();
@@ -623,8 +643,8 @@ public class ArchivedMedsController {
 				archiveDate = rs.getString("dateArchived");
 				archiveReason = rs.getString("archiveReason");
 
-				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null, null,
-						archiveDate, archiveReason, null);
+				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, doseType, medDetails, null,
+						null, archiveDate, archiveReason, null);
 
 				archivedMeds.add(tempMed);
 
@@ -691,47 +711,145 @@ public class ArchivedMedsController {
 
 	private boolean validateDate() {
 		System.out.println("VALIDATING DATE...");
+
 		errLBL.setText(null);
-		boolean dateFlag = true;
 
-		if (datePicker.getValue() == null) {
-			errLBL.setText("Please select a date.");
-			System.out.println("DATE NOT SET");
-			dateFlag = false;
-		} else {
-			dateFlag = true;
+		String dateString = datePicker.getEditor().getText();
+
+		// rough check of dob format
+		Pattern p = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$");
+		Matcher m = p.matcher(dateString);
+		boolean b = m.matches();
+
+		System.out.println("Date " + dateString);
+
+		// date is empty
+		if (dateString.equals(null) || dateString.equals("")) {
+			errLBL.setText("Please enter a date");
+			System.out.println("DATE EMTPY");
+			return false;
 		}
+		// date format is wrong
+		else if (!b) {
+			System.out.println("INVALID DATE FORMAT");
+			errLBL.setText("Invalid date format. MM/DD/YYYY");
+			return false;
+		} else {
 
-		return dateFlag;
+			try {
+				// parse the date to see if it is a real date
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				df.setLenient(false);
+				df.parse(dateString);
+
+				// get current date and convert date into date object,
+				// use fully qualified name because of import conflict
+				java.util.Date curDate = new java.util.Date();
+				java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dateString);
+
+				// date is after current date
+				if (date.after(curDate)) {
+					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
+					errLBL.setText("Date cannot be after today's date");
+					return false;
+				}
+				return true;
+			} catch (ParseException e) {
+				// not an actual date
+				System.out.println("INVALID DATE");
+				errLBL.setText("Incorrect date.");
+				return false;
+			}
+		}
 	}
 
 	private boolean validateDateRange() {
+
 		System.out.println("VALIDATING DATE RANGE...");
-		
-		boolean dateRangeFlag = true;
-		if (DRPicker1.getValue() == null || DRPicker2.getValue() == null) {
-			errLBL.setText("Please fill in both dates.");
-			System.out.println("DATE NOT SET");
-			return dateRangeFlag = false;
-		}
-
-		LocalDate dp1 = DRPicker1.getValue();
-		LocalDate dp2 = DRPicker2.getValue();
-
-		Date date1 = java.sql.Date.valueOf(dp1);
-		Date date2 = java.sql.Date.valueOf(dp2);
 
 		errLBL.setText(null);
 
-		if (date2.before(date1)) {
-			errLBL.setText("Invalid date range.");
-			System.out.println("DATE RANGE INVALID");
-			dateRangeFlag = false;
+		String d1String = DRPicker1.getEditor().getText();
+		String d2String = DRPicker2.getEditor().getText();
+
+		// rough check of dob format
+		Pattern p = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$");
+		Matcher m1 = p.matcher(d1String);
+		Matcher m2 = p.matcher(d2String);
+		boolean b1 = m1.matches();
+		boolean b2 = m2.matches();
+
+		System.out.println("Dates " + d1String + " -- " + d2String);
+
+		// date is empty
+		if ((d1String.equals(null) || d1String.equals("")) || (d2String.equals(null) || d2String.equals(""))) {
+			errLBL.setText("Please enter both dates");
+			System.out.println("DATES EMTPY");
+			return false;
+		}
+		// date format is wrong
+		else if (!b1 || !b2) {
+			System.out.println("INVALID DATE FORMAT");
+			errLBL.setText("Invalid date format. MM/DD/YYYY");
+			return false;
 		} else {
-			dateRangeFlag = true;
+
+			try {
+				// parse the date to see if it is a real date
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				df.setLenient(false);
+				df.parse(d1String);
+				df.parse(d2String);
+
+				// get current date and convert date into date object,
+				// use fully qualified name because of import conflict
+				java.util.Date curDate = new java.util.Date();
+				java.util.Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(d1String);
+				java.util.Date date2 = new SimpleDateFormat("MM/dd/yyyy").parse(d2String);
+
+				// date is after current date
+				if (date1.after(curDate)) {
+					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
+					errLBL.setText("Date cannot be after today's date");
+					return false;
+				}
+
+				// if d1 after d2
+				else if (date1.after(date2)) {
+					System.out.println("DATE 1 AFTER DATE 2");
+					errLBL.setText("Invalid date range.");
+					return false;
+				}
+				return true;
+			} catch (ParseException e) {
+				// not an actual date
+				System.out.println("INVALID DATE");
+				errLBL.setText("Incorrect date.");
+				return false;
+			}
 		}
 
-		return dateRangeFlag;
+		/*
+		 * //888888888888888888888888888888888888888888888888888888888888888
+		 * System.out.println("VALIDATING DATE RANGE...");
+		 * 
+		 * boolean dateRangeFlag = true; if (DRPicker1.getValue() == null ||
+		 * DRPicker2.getValue() == null) { errLBL.setText("Please fill in both dates.");
+		 * System.out.println("DATE NOT SET"); return dateRangeFlag = false; }
+		 * 
+		 * LocalDate dp1 = DRPicker1.getValue(); LocalDate dp2 = DRPicker2.getValue();
+		 * 
+		 * Date date1 = java.sql.Date.valueOf(dp1); Date date2 =
+		 * java.sql.Date.valueOf(dp2);
+		 * 
+		 * errLBL.setText(null);
+		 * 
+		 * if (date2.before(date1)) { errLBL.setText("Invalid date range.");
+		 * System.out.println("DATE RANGE INVALID"); dateRangeFlag = false; } else {
+		 * dateRangeFlag = true; }
+		 * 
+		 * return dateRangeFlag;
+		 */
 	}
 
 }

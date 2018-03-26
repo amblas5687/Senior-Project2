@@ -77,6 +77,7 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
+                  <DatePicker fx:id="DRPicker11" layoutX="306.0" layoutY="94.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" visible="false" />
                </children>
             </AnchorPane>
          </center>
