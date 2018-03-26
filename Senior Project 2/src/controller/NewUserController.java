@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.Format;
@@ -158,31 +159,52 @@ public class NewUserController {
 			} else if (code != null && result.get() == ButtonType.OK) {
 
 				// TODO need to check patient table to verify the patient
-				System.out.println("PATIENT CODE... " + result.get());
-
-				subUser.setPatientCode(textField.getText());
+				System.out.println("PATIENT CODE... " + textField.getText());
 
 				Connection connection = null;
 				PreparedStatement user = null;
+				PreparedStatement patient = null;
+				ResultSet rs = null;
 
-				// prepare the query
-				String userQ = "INSERT into user (fname, lname, DOB, pRelation, email, password, patientCode, userID) "
-						+ "VALUES (?,?,?,?,?,?,?,?)";
+				// check if patient code in database
 				try {
+					String patientQ = "SELECT patientCode FROM patient WHERE patientCode = ?";
+
 					connection = DataSource.getInstance().getConnection();
+					patient = connection.prepareStatement(patientQ);
+					patient.setString(1, textField.getText());
+					rs = patient.executeQuery();
 
-					user = connection.prepareStatement(userQ);
-					user.setString(1, subUser.getFname());
-					user.setString(2, subUser.getLname());
-					user.setString(3, subUser.getDOB());
-					user.setString(4, subUser.getRelation());
-					user.setString(5, subUser.getEmail());
-					user.setString(6, subUser.getPassword());
-					user.setString(7, subUser.getPatientCode());
-					user.setString(8, subUser.getUserID());
+					if (!rs.isBeforeFirst()) {
+						System.out.println("PATIENT DOES NOT EXIST");
+						Alert failure = new Alert(AlertType.ERROR);
+						// safely catches error by pop-up alert.
+						failure.setContentText("Patient does not exist");
+						failure.getDialogPane().getStylesheets()
+								.add(getClass().getResource("/application/application.css").toExternalForm());
+						Optional<ButtonType> error = failure.showAndWait();
 
-					user.execute();
-					System.out.println("USER ENTERED..." + subUser);
+					} else {
+
+						subUser.setPatientCode(textField.getText());
+
+						// prepare the query
+						String userQ = "INSERT into user (fname, lname, DOB, pRelation, email, password, patientCode, userID) "
+								+ "VALUES (?,?,?,?,?,?,?,?)";
+
+						user = connection.prepareStatement(userQ);
+						user.setString(1, subUser.getFname());
+						user.setString(2, subUser.getLname());
+						user.setString(3, subUser.getDOB());
+						user.setString(4, subUser.getRelation());
+						user.setString(5, subUser.getEmail());
+						user.setString(6, subUser.getPassword());
+						user.setString(7, subUser.getPatientCode());
+						user.setString(8, subUser.getUserID());
+
+						user.execute();
+						System.out.println("USER ENTERED..." + subUser);
+					}
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -210,9 +232,28 @@ public class NewUserController {
 							e.printStackTrace();
 						}
 					}
+					
+					if (patient != null) {
+						try {
+							patient.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				} // finally
 			} // else if
 		} // end if
+
 	}// end method
 
 	// user cancels submission
@@ -404,7 +445,7 @@ public class NewUserController {
 
 		System.out.println("VALIDATING EMAIL");
 		lblEmail.setText(null);
-		
+
 		String email = emailTF.getText();
 		// ^([a-zA-Z0-9~!$%^&*_=+}{\'?]+(\.[a-zA-Z0-9~!$%^&*_=+}{\'?]+)*@[a-zA-Z0-9_-]+(\.com|\.net|\.edu|\.gov|\.mil))$
 		Pattern p = Pattern.compile("^([a-zA-Z0-9~!$%^&*_=+}{\\'?]+(\\.[a-zA-Z0-9~!$%^&*_=+}"
