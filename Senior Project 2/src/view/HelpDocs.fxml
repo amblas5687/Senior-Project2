@@ -43,22 +43,6 @@
                            </font>
                         </Label>
                         <MediaView fx:id="media_view" fitHeight="300.0" fitWidth="500.0" onMouseClicked="#clickVideo" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startVideo" text="Start" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets bottom="60.0" left="90.0" />
-                           </GridPane.margin>
-                        </Button>
-                        <Button fx:id="btnStop" mnemonicParsing="false" onAction="#stopVideo" text="Stop" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="90.0" top="60.0" />
-                           </GridPane.margin>
-                        </Button>
                         <Button fx:id="btnMeds" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
@@ -83,11 +67,19 @@
                               <Insets right="80.0" />
                            </GridPane.margin>
                         </Button>
-                        <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" maxWidth="500.0" onDragDetected="#dragSlider" showTickMarks="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" maxWidth="470.0" onDragDetected="#dragSlider" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
-                              <Insets top="270.0" />
+                              <Insets left="30.0" top="260.0" />
                            </GridPane.margin>
                         </JFXSlider>
+                        <Label fx:id="lblStatus" onMouseClicked="#clickPlay" prefWidth="15.0" text="&gt;" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="470.0" top="260.0" />
+                           </GridPane.margin>
+                        </Label>
                      </children>
                   </GridPane>
                   <GridPane layoutY="350.0" prefHeight="235.0" prefWidth="968.0">

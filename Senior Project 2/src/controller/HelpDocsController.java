@@ -3,11 +3,15 @@ package controller;
 import java.net.URL;
 
 import com.jfoenix.controls.JFXSlider;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -26,10 +30,7 @@ public class HelpDocsController {
     private MediaView media_view;
     
     @FXML
-    private Button btnStart;
-
-    @FXML
-    private Button btnStop;
+    private Label lblStatus;
     
     @FXML
     private Button btnMeds;
@@ -59,12 +60,20 @@ public class HelpDocsController {
     }
     
     @FXML
-    void startVideo(ActionEvent event) {
+    void clickPlay(MouseEvent event) {
     	
-    	player.play();
     	timeSlider.setDisable(false);
-    	//player.setStartTime(Duration.millis(0.0));
-    	player.setStopTime(Duration.millis(182732.0));
+    	
+    	if(player.getStatus() == Status.PLAYING) {
+    		player.pause();
+    		lblStatus.setStyle("-fx-font: 24 arial;");
+    		lblStatus.setText(">");
+    	} else {
+    		player.play();
+    		lblStatus.setStyle("-fx-font: 16 arial;"
+    						 + "-fx-font-weight: bold;");
+    		lblStatus.setText("||");
+    	}
     	
     	player.setOnEndOfMedia(new Runnable() {
     	    @Override
@@ -72,34 +81,16 @@ public class HelpDocsController {
     	        player.stop();
     	    }
     	});
-    	System.out.println(player.getTotalDuration().toMinutes());
+    	
+    	System.out.println("Total time: " + player.getTotalDuration().toMinutes());
     	player.currentTimeProperty().addListener(new InvalidationListener() {
     		
     		public void invalidated(Observable ov) {
-    			System.out.println("HIT");
+    			
     			if (!timeSlider.isValueChanging()) {
-    				System.out.println("HIT2");
+    				System.out.println("HIT");
     				System.out.println(player.currentTimeProperty().get());
     				System.out.println(player.currentTimeProperty().get().toMinutes());
-    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
-    				
-    			}
-            }
-        });
-    	
-    }
-
-    @FXML
-    void stopVideo(ActionEvent event) {
-    	
-    	player.pause();
-    	
-    	player.currentTimeProperty().addListener(new InvalidationListener() {
-    		
-    		public void invalidated(Observable ov) {
-    			System.out.println("HIT3");
-    			if (!timeSlider.isValueChanging()) {
-    				System.out.println("HIT4");
     				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
     				
     			}
@@ -109,6 +100,7 @@ public class HelpDocsController {
     
     @FXML
     void dragSlider(MouseEvent event) {
+    	
     	timeSlider.valueProperty().addListener(new InvalidationListener() {
     	    public void invalidated(Observable ov) {
     	       if (timeSlider.isValueChanging()) {
@@ -125,18 +117,21 @@ public class HelpDocsController {
     void clickVideo(MouseEvent event) {
     	
     	timeSlider.setDisable(false);
-    	System.out.println(player.getStatus());
+    	
     	if(player.getStatus() == Status.PLAYING) {
     		player.pause();
+    		lblStatus.setStyle("-fx-font: 24 arial;");
+    		lblStatus.setText(">");
     	} else {
     		player.play();
+    		lblStatus.setStyle("-fx-font: 16 arial;"
+    						 + "-fx-font-weight: bold;");
+    		lblStatus.setText("||");
     	}
-    	System.out.println(player.getStatus());
     	
     	player.currentTimeProperty().addListener(new InvalidationListener() {
     		
     		public void invalidated(Observable ov) {
-    			System.out.println("HIT");
     			if (!timeSlider.isValueChanging()) {
     				System.out.println("HIT2");
     				System.out.println(player.currentTimeProperty().get());
@@ -167,30 +162,24 @@ public class HelpDocsController {
     @FXML
     void exitVideo(MouseEvent event) {
     	
-    	time = player.currentTimeProperty().get().add(Duration.seconds(1.5));
-    	System.out.println("Current time: " + player.getCurrentTime());
+    	//pauses video
+    	Timeline timeline = new Timeline(new KeyFrame(
+    	        Duration.seconds(1),
+    	        ae -> player.pause()));
+    	timeline.play();
     	
-    	if(player.getCurrentTime().greaterThan(Duration.ZERO) && !timeSlider.isDisable()) {
-	    	player.currentTimeProperty().addListener(new InvalidationListener() {
-	    		
-	    		public void invalidated(Observable ov) {
-	    			System.out.println("HIT5");
-	    			if (!timeSlider.isValueChanging()) {
-	    				System.out.println("HIT6");
-	    				System.out.println("Time: " + player.currentTimeProperty().get());
-	    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
-	    				
-	    			}
-	            }
-	        });
-    	}
+    	//sets font size on video pause
+    	Timeline tline = new Timeline(new KeyFrame(
+    	        Duration.seconds(1),
+    	        ae -> lblStatus.setStyle("-fx-font: 24 arial;")));
+    	tline.play();
     	
-    	player.setStopTime(time);
-    	
-    	player.setStartTime(time);
-    	//player.setStopTime(Duration.millis(182732.0));
-
-    	
+    	//changes label on video pause
+    	Timeline tlin = new Timeline(new KeyFrame(
+    	        Duration.seconds(1),
+    	        ae -> lblStatus.setText(">")));
+    	tlin.play();
+  
     }
 
 }
