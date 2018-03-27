@@ -67,12 +67,12 @@
                               <Insets right="80.0" />
                            </GridPane.margin>
                         </Button>
-                        <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" maxWidth="470.0" onDragDetected="#dragSlider" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" max="3.045" maxWidth="470.0" onDragDetected="#dragSlider" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="30.0" top="260.0" />
                            </GridPane.margin>
                         </JFXSlider>
-                        <Label fx:id="lblStatus" onMouseClicked="#clickPlay" prefWidth="15.0" text="&gt;" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Label fx:id="lblStatus" onMouseClicked="#clickPlay" prefWidth="15.0" text="&gt;" textFill="#4bacb8" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>

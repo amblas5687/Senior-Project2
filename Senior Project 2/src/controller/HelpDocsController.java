@@ -54,15 +54,12 @@ public class HelpDocsController {
     
     public void initialize() {
     	
-    	timeSlider.setDisable(true);
     	media_view.setMediaPlayer(player);
     	timeSlider.setValue(0);
     }
     
     @FXML
     void clickPlay(MouseEvent event) {
-    	
-    	timeSlider.setDisable(false);
     	
     	if(player.getStatus() == Status.PLAYING) {
     		player.pause();
@@ -91,7 +88,7 @@ public class HelpDocsController {
     				System.out.println("HIT");
     				System.out.println(player.currentTimeProperty().get());
     				System.out.println(player.currentTimeProperty().get().toMinutes());
-    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
+    				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
     				
     			}
             }
@@ -104,10 +101,9 @@ public class HelpDocsController {
     	timeSlider.valueProperty().addListener(new InvalidationListener() {
     	    public void invalidated(Observable ov) {
     	       if (timeSlider.isValueChanging()) {
-    	       // multiply duration by percentage calculated by slider position
-    	    	  System.out.println("Get: " + player.currentTimeProperty().get());
-    	    	  System.out.println("Math: " + player.currentTimeProperty().get().multiply(timeSlider.getValue() / 100.0));
-    	          player.seek(player.currentTimeProperty().get().multiply(timeSlider.getValue() / 100.0));
+    	    	   System.out.println("Value: " + timeSlider.getValue());
+    	       
+    	          player.seek(Duration.minutes(timeSlider.getValue()));
     	       }
     	    }
     	});
@@ -115,8 +111,6 @@ public class HelpDocsController {
     
     @FXML
     void clickVideo(MouseEvent event) {
-    	
-    	timeSlider.setDisable(false);
     	
     	if(player.getStatus() == Status.PLAYING) {
     		player.pause();
@@ -136,7 +130,7 @@ public class HelpDocsController {
     				System.out.println("HIT2");
     				System.out.println(player.currentTimeProperty().get());
     				System.out.println(player.currentTimeProperty().get().toMinutes());
-    				timeSlider.setValue(player.currentTimeProperty().get().multiply(100.0).toMinutes());
+    				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
     				
     			}
             }
