@@ -39,8 +39,8 @@
                         <Font size="16.0" />
                      </font>
                   </ToggleButton>
-                  <ComboBox fx:id="searchOptions" layoutX="142.0" layoutY="84.0" maxHeight="40.0" onAction="#options" prefHeight="40.0" prefWidth="153.0" />
-                  <TextField fx:id="searchTF" layoutX="296.0" layoutY="84.0" prefHeight="40.0" prefWidth="455.0">
+                  <ComboBox fx:id="searchOptions" layoutX="142.0" layoutY="84.0" maxHeight="40.0" onAction="#options" prefHeight="40.0" prefWidth="153.0" promptText="Select..." />
+                  <TextField fx:id="searchTF" layoutX="296.0" layoutY="84.0" prefHeight="40.0" prefWidth="455.0" promptText="Search...">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -50,9 +50,9 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <DatePicker fx:id="datePicker" layoutX="296.0" layoutY="84.0" maxHeight="40.0" maxWidth="456.0" minHeight="40.0" minWidth="277.0" prefHeight="40.0" prefWidth="455.0" visible="false" />
-                  <DatePicker fx:id="DRPicker1" layoutX="296.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" visible="false" />
-                  <DatePicker fx:id="DRPicker2" layoutX="536.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" visible="false" />
+                  <DatePicker fx:id="datePicker" layoutX="296.0" layoutY="84.0" maxHeight="40.0" maxWidth="456.0" minHeight="40.0" minWidth="277.0" prefHeight="40.0" prefWidth="455.0" promptText="MM/DD/YYYY" visible="false" />
+                  <DatePicker fx:id="DRPicker1" layoutX="296.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" promptText="MM/DD/YYYY" visible="false" />
+                  <DatePicker fx:id="DRPicker2" layoutX="536.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" promptText="MM/DD/YYYY" visible="false" />
                   <Label fx:id="drpLabel" alignment="CENTER" layoutX="511.0" layoutY="94.0" minWidth="25.0" prefHeight="25.0" text="to" visible="false">
                      <font>
                         <Font size="16.0" />
