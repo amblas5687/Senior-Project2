@@ -807,13 +807,19 @@ public class ArchivedMedsController {
 				java.util.Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(d1String);
 				java.util.Date date2 = new SimpleDateFormat("MM/dd/yyyy").parse(d2String);
 
-				// date is after current date
+				// date 1 is after current date
 				if (date1.after(curDate)) {
 					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
 					errLBL.setText("Date cannot be after today's date");
 					return false;
 				}
-
+				//date 2 after current date
+				else if(date2.after(curDate))
+				{
+					System.out.println("DATE 2 CANNOT BE AFTER TODAY'S DATE");
+					errLBL.setText("To date cannot be after today's date");
+					return false;
+				}
 				// if d1 after d2
 				else if (date1.after(date2)) {
 					System.out.println("DATE 1 AFTER DATE 2");
