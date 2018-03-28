@@ -386,6 +386,7 @@ public class ArchivedMedsController {
 			if (searchFlag == true) {
 				optionDate();
 				datePicker.setValue(null);
+				datePicker.getEditor().setText(null);
 				searchOptions.setValue(null);
 			}
 		} else if (option == "Date Range") {
@@ -393,7 +394,9 @@ public class ArchivedMedsController {
 			if (searchFlag == true) {
 				optionDateRange();
 				DRPicker1.setValue(null);
+				DRPicker1.getEditor().setText(null);
 				DRPicker2.setValue(null);
+				DRPicker2.getEditor().setText(null);
 				searchOptions.setValue(null);
 			}
 		}
