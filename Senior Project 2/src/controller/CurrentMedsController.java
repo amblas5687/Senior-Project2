@@ -7,6 +7,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -170,6 +174,8 @@ public class CurrentMedsController {
 
 	void grabMeds() {
 
+		System.out.println("GRABBING ALL MEDS FROM CURRENT...");
+
 		// default clear table
 		medicationTable.getItems().clear();
 
@@ -216,7 +222,7 @@ public class CurrentMedsController {
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
 						dateAdded, medID, null, null, dateUpdated);
 				patientMeds.add(tempMed);
-				System.out.println("GRABBING MEDS FROM CURRENT..." + tempMed);
+				System.out.println("MED..." + tempMed);
 			}
 		} catch (SQLException e) {
 			DBConfig.displayException(e);
@@ -303,7 +309,6 @@ public class CurrentMedsController {
 			drpLabel.setVisible(false);
 
 			datePicker.setVisible(true);
-			datePicker.setEditable(false);
 		} else if (option == "Date Range") {
 			searchTF.setVisible(false);
 			datePicker.setVisible(false);
@@ -311,7 +316,6 @@ public class CurrentMedsController {
 			DRPicker1.setVisible(true);
 			DRPicker2.setVisible(true);
 			drpLabel.setVisible(true);
-			DRPicker1.setEditable(false);
 		} else {
 			DRPicker1.setVisible(false);
 			DRPicker2.setVisible(false);
@@ -323,7 +327,7 @@ public class CurrentMedsController {
 	}
 
 	@FXML
-	private void searchMed(ActionEvent event) {
+	private void searchMed(ActionEvent event) throws ParseException {
 
 		String option = searchOptions.getValue();
 		medicationTable.getItems().clear();
@@ -342,7 +346,7 @@ public class CurrentMedsController {
 
 		} else if (option == "Date") {
 
-			if (!checkDate()) {
+			if (checkDate()) {
 				optionDate();
 
 				datePicker.setValue(null);
@@ -351,7 +355,7 @@ public class CurrentMedsController {
 
 		} else if (option == "Date Range") {
 
-			if (!checkDateRange()) {
+			if (checkDateRange()) {
 				optionDateRange();
 
 				DRPicker1.setValue(null);
@@ -388,41 +392,130 @@ public class CurrentMedsController {
 
 	boolean checkDate() {
 
+		System.out.println("VALIDATING DATE...");
+
 		lblSearch.setText(null);
 
-		if (datePicker.getValue() == null) {
-			lblSearch.setText("Please select a date.");
-			flag = true;
-		} else {
-			flag = false;
-		}
+		String dateString = datePicker.getEditor().getText();
 
-		return flag;
+		// rough check of dob format
+		Pattern p = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$");
+		Matcher m = p.matcher(dateString);
+		boolean b = m.matches();
+
+		System.out.println("Date " + dateString);
+
+		// date is empty
+		if (dateString.equals(null) || dateString.equals("")) {
+			lblSearch.setText("Please enter a date");
+			System.out.println("DATE EMTPY");
+			return false;
+		}
+		// date format is wrong
+		else if (!b) {
+			System.out.println("INVALID DATE FORMAT");
+			lblSearch.setText("Invalid date format. MM/DD/YYYY");
+			return false;
+		} else {
+
+			try {
+				// parse the date to see if it is a real date
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				df.setLenient(false);
+				df.parse(dateString);
+
+				// get current date and convert date into date object,
+				// use fully qualified name because of import conflict
+				java.util.Date curDate = new java.util.Date();
+				java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dateString);
+
+				// date is after current date
+				if (date.after(curDate)) {
+					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
+					lblSearch.setText("Date cannot be after today's date");
+					return false;
+				}
+				return true;
+			} catch (ParseException e) {
+				// not an actual date
+				System.out.println("INVALID DATE");
+				lblSearch.setText("Incorrect date.");
+				return false;
+			}
+		}
 	}
 
 	boolean checkDateRange() {
 
-		if (DRPicker1.getValue() == null || DRPicker2.getValue() == null) {
-			lblSearch.setText("Please fill in both dates.");
-			return flag = true;
-		}
-
-		LocalDate dp1 = DRPicker1.getValue();
-		LocalDate dp2 = DRPicker2.getValue();
-
-		Date date1 = java.sql.Date.valueOf(dp1);
-		Date date2 = java.sql.Date.valueOf(dp2);
+		System.out.println("VALIDATING DATE RANGE...");
 
 		lblSearch.setText(null);
 
-		if (date2.before(date1)) {
-			lblSearch.setText("Invalid date range.");
-			flag = true;
-		} else {
-			flag = false;
-		}
+		String d1String = DRPicker1.getEditor().getText();
+		String d2String = DRPicker2.getEditor().getText();
 
-		return flag;
+		// rough check of dob format
+		Pattern p = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$");
+		Matcher m1 = p.matcher(d1String);
+		Matcher m2 = p.matcher(d2String);
+		boolean b1 = m1.matches();
+		boolean b2 = m2.matches();
+
+		System.out.println("Dates " + d1String + " -- " + d2String);
+
+		// date is empty
+		if ((d1String.equals(null) || d1String.equals("")) || (d2String.equals(null) || d2String.equals(""))) {
+			lblSearch.setText("Please enter both dates");
+			System.out.println("DATES EMTPY");
+			return false;
+		}
+		// date format is wrong
+		else if (!b1 || !b2) {
+			System.out.println("INVALID DATE FORMAT");
+			lblSearch.setText("Invalid date format. MM/DD/YYYY");
+			return false;
+		} else {
+
+			try {
+				// parse the date to see if it is a real date
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				df.setLenient(false);
+				df.parse(d1String);
+				df.parse(d2String);
+
+				// get current date and convert date into date object,
+				// use fully qualified name because of import conflict
+				java.util.Date curDate = new java.util.Date();
+				java.util.Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(d1String);
+				java.util.Date date2 = new SimpleDateFormat("MM/dd/yyyy").parse(d2String);
+
+				// date is after current date
+				if (date1.after(curDate)) {
+					System.out.println("DATE 1 CANNOT BE AFTER TODAY'S DATE");
+					lblSearch.setText("From date cannot be after today's date");
+					return false;
+				}
+				else if(date2.after(curDate))
+				{
+					System.out.println("DATE 2 CANNOT BE AFTER TODAY'S DATE");
+					lblSearch.setText("To date cannot be after today's date");
+					return false;
+				}
+
+				// if d1 after d2
+				else if (date1.after(date2)) {
+					System.out.println("DATE 1 AFTER DATE 2");
+					lblSearch.setText("Invalid date range.");
+					return false;
+				}
+				return true;
+			} catch (ParseException e) {
+				// not an actual date
+				System.out.println("INVALID DATE");
+				lblSearch.setText("Incorrect date.");
+				return false;
+			}
+		}
 	}
 
 	void optionName() {
@@ -520,9 +613,14 @@ public class CurrentMedsController {
 
 	}// end method
 
-	void optionDate() {
-		LocalDate dp = datePicker.getValue();
-		Date date = java.sql.Date.valueOf(dp);
+	void optionDate() throws ParseException {
+		String dp = datePicker.getEditor().getText();
+
+		// format date for database
+		Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date datePickerDate = new SimpleDateFormat("MM/dd/yyyy").parse(dp);
+		String formatDate = formatter2.format(datePickerDate);
+		System.out.println("Before format " + dp + " After format " + formatDate);
 
 		String query = "SELECT * FROM currentMeds WHERE prescribDate = ?";
 
@@ -534,7 +632,7 @@ public class CurrentMedsController {
 			connection = DataSource.getInstance().getConnection();
 
 			ps = connection.prepareStatement(query);
-			ps.setDate(1, date);
+			ps.setString(1, formatDate);
 
 			rs = ps.executeQuery();
 
@@ -609,15 +707,23 @@ public class CurrentMedsController {
 		}
 	}
 
-	void optionDateRange() {
+	void optionDateRange() throws ParseException {
 
-		LocalDate drp1 = DRPicker1.getValue();
-		LocalDate drp2 = DRPicker2.getValue();
-		Date date1 = java.sql.Date.valueOf(drp1);
-		Date date2 = java.sql.Date.valueOf(drp2);
+		String date1String = DRPicker1.getEditor().getText();
+		String date2String = DRPicker2.getEditor().getText();
+		
+		// format date for database
+		Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(date1String);
+		java.util.Date date2 = new SimpleDateFormat("MM/dd/yyyy").parse(date2String);
 
-		String query = "SELECT * FROM currentMeds WHERE prescribDate >= '" + date1 + "' AND prescribDate <= '" + date2
-				+ "';";
+		String formatDate1 = formatter2.format(date1);
+		String formatDate2 = formatter2.format(date2);
+
+		System.out.println("Before format " + date1String + "__" + date2String+  
+				" After format " + formatDate1 + "__" + formatDate2);
+
+		String query = "SELECT * FROM currentMeds WHERE prescribDate >= ? AND prescribDate <= ?";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -628,6 +734,8 @@ public class CurrentMedsController {
 			connection = DataSource.getInstance().getConnection();
 
 			ps = connection.prepareStatement(query);
+			ps.setString(1, formatDate1);
+			ps.setString(2, formatDate2);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
