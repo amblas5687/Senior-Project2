@@ -350,6 +350,7 @@ public class CurrentMedsController {
 				optionDate();
 
 				datePicker.setValue(null);
+				datePicker.getEditor().setText(null);
 				searchOptions.setValue(null);
 			}
 
@@ -359,7 +360,9 @@ public class CurrentMedsController {
 				optionDateRange();
 
 				DRPicker1.setValue(null);
+				DRPicker1.getEditor().setText(null);
 				DRPicker2.setValue(null);
+				DRPicker2.getEditor().setText(null);
 				searchOptions.setValue(null);
 			}
 
@@ -622,7 +625,7 @@ public class CurrentMedsController {
 		String formatDate = formatter2.format(datePickerDate);
 		System.out.println("Before format " + dp + " After format " + formatDate);
 
-		String query = "SELECT * FROM currentMeds WHERE prescribDate = ?";
+		String query = "SELECT * FROM currentMeds WHERE prescribDate = ? AND patientCode = ?";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -633,6 +636,7 @@ public class CurrentMedsController {
 
 			ps = connection.prepareStatement(query);
 			ps.setString(1, formatDate);
+			ps.setString(2, LoginController.currentPatientID);
 
 			rs = ps.executeQuery();
 
@@ -723,7 +727,7 @@ public class CurrentMedsController {
 		System.out.println("Before format " + date1String + "__" + date2String+  
 				" After format " + formatDate1 + "__" + formatDate2);
 
-		String query = "SELECT * FROM currentMeds WHERE prescribDate >= ? AND prescribDate <= ?";
+		String query = "SELECT * FROM currentMeds WHERE prescribDate >= ? AND prescribDate <= ? AND patientCode = ?";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -736,6 +740,7 @@ public class CurrentMedsController {
 			ps = connection.prepareStatement(query);
 			ps.setString(1, formatDate1);
 			ps.setString(2, formatDate2);
+			ps.setString(3, LoginController.currentPatientID);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
