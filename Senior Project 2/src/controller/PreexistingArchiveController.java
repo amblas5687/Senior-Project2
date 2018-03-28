@@ -4,6 +4,10 @@ package controller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import application.DBConfig;
@@ -307,18 +311,57 @@ public class PreexistingArchiveController {
 	}
 
 	private boolean validateDate() {
+		
 		System.out.println("VALIDATING DATE...");
-		datePrescribedLBL.setText(null);
-		boolean dateFlag = true;
 
-		if (DOPPicker.getValue() == null) {
-			datePrescribedLBL.setText("Please select a date.");
-			System.out.println("DATE NOT SET");
-			dateFlag = false;
-		} else {
-			dateFlag = true;
+		datePrescribedLBL.setText(null);
+
+		String dopString = DOPPicker.getEditor().getText();
+
+		// rough check of dob format
+		Pattern p = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$");
+		Matcher m = p.matcher(dopString);
+		boolean b = m.matches();
+
+		System.out.println("Date " + dopString);
+
+		// date is empty
+		if (dopString.equals(null) || dopString.equals("")) {
+			datePrescribedLBL.setText("Please enter a date");
+			System.out.println("DOB EMTPY");
+			return false;
 		}
-		return dateFlag;
+		// date format is wrong
+		else if (!b) {
+			System.out.println("INVALID DATE FORMAT");
+			datePrescribedLBL.setText("Invalid date format. MM/DD/YYYY");
+			return false;
+		} else {
+
+			try {
+				// parse the date to see if it is a real date
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				df.setLenient(false);
+				df.parse(dopString);
+
+				// get current date and convert date into date object
+				Date curDate = new Date();
+				Date date = new SimpleDateFormat("MM/dd/yyyy").parse(dopString);
+
+				// date is after current date
+				if (date.after(curDate)) {
+					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
+					datePrescribedLBL.setText("Date cannot be after today's date");
+					return false;
+				}
+				return true;
+			} catch (ParseException e) {
+				// not an actual date
+				System.out.println("INVALID DATE");
+				datePrescribedLBL.setText("Incorrect date.");
+				return false;
+			}
+		}
 	}
 
 }
