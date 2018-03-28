@@ -500,7 +500,7 @@ public class ArchivedMedsController {
 		String formatDate = formatter2.format(datePickerDate);
 		System.out.println("Before format " + dp + " After format " + formatDate);
 
-		String query = "SELECT * FROM archivedMeds WHERE prescribDate = ?";
+		String query = "SELECT * FROM archivedMeds WHERE prescribDate = ? AND patientCode = ?";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -511,6 +511,7 @@ public class ArchivedMedsController {
 
 			ps = connection.prepareStatement(query);
 			ps.setString(1, formatDate);
+			ps.setString(2, LoginController.currentPatientID);
 
 			rs = ps.executeQuery();
 
@@ -588,7 +589,7 @@ public class ArchivedMedsController {
 
 		String date1String = DRPicker1.getEditor().getText();
 		String date2String = DRPicker2.getEditor().getText();
-		
+
 		// format date for database
 		Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date date1 = new SimpleDateFormat("MM/dd/yyyy").parse(date1String);
@@ -597,11 +598,10 @@ public class ArchivedMedsController {
 		String formatDate1 = formatter2.format(date1);
 		String formatDate2 = formatter2.format(date2);
 
-		System.out.println("Before format " + date1String + "__" + date2String+  
-				" After format " + formatDate1 + "__" + formatDate2);
-		
-		
-		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= ? AND prescribDate <= ?";
+		System.out.println("Before format " + date1String + "__" + date2String + " After format " + formatDate1 + "__"
+				+ formatDate2);
+
+		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= ? AND prescribDate <= ? AND patientCode = ?";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -614,6 +614,7 @@ public class ArchivedMedsController {
 			ps = connection.prepareStatement(query);
 			ps.setString(1, formatDate1);
 			ps.setString(2, formatDate2);
+			ps.setString(3, LoginController.currentPatientID);
 			rs = ps.executeQuery();
 
 			archiveTable.getItems().clear();
@@ -813,9 +814,8 @@ public class ArchivedMedsController {
 					errLBL.setText("Date cannot be after today's date");
 					return false;
 				}
-				//date 2 after current date
-				else if(date2.after(curDate))
-				{
+				// date 2 after current date
+				else if (date2.after(curDate)) {
 					System.out.println("DATE 2 CANNOT BE AFTER TODAY'S DATE");
 					errLBL.setText("To date cannot be after today's date");
 					return false;
@@ -834,28 +834,6 @@ public class ArchivedMedsController {
 				return false;
 			}
 		}
-
-		/*
-		 * //888888888888888888888888888888888888888888888888888888888888888
-		 * System.out.println("VALIDATING DATE RANGE...");
-		 * 
-		 * boolean dateRangeFlag = true; if (DRPicker1.getValue() == null ||
-		 * DRPicker2.getValue() == null) { errLBL.setText("Please fill in both dates.");
-		 * System.out.println("DATE NOT SET"); return dateRangeFlag = false; }
-		 * 
-		 * LocalDate dp1 = DRPicker1.getValue(); LocalDate dp2 = DRPicker2.getValue();
-		 * 
-		 * Date date1 = java.sql.Date.valueOf(dp1); Date date2 =
-		 * java.sql.Date.valueOf(dp2);
-		 * 
-		 * errLBL.setText(null);
-		 * 
-		 * if (date2.before(date1)) { errLBL.setText("Invalid date range.");
-		 * System.out.println("DATE RANGE INVALID"); dateRangeFlag = false; } else {
-		 * dateRangeFlag = true; }
-		 * 
-		 * return dateRangeFlag;
-		 */
 	}
 
 }
