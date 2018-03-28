@@ -204,6 +204,17 @@ public class NewUserController {
 
 						user.execute();
 						System.out.println("USER ENTERED..." + subUser);
+
+						//go back to main
+						try {
+							stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+							root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
+							scene = new Scene(root);
+							stage.setScene(scene);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
 					}
 
 				} catch (SQLException e) {
@@ -232,7 +243,7 @@ public class NewUserController {
 							e.printStackTrace();
 						}
 					}
-					
+
 					if (patient != null) {
 						try {
 							patient.close();
@@ -241,7 +252,7 @@ public class NewUserController {
 							e.printStackTrace();
 						}
 					}
-					
+
 					if (rs != null) {
 						try {
 							rs.close();
