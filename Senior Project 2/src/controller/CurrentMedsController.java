@@ -834,21 +834,16 @@ public class CurrentMedsController {
 		curDetailMed = medicationTable.getSelectionModel().getSelectedItem();
 
 		Stage detailStage = new Stage();
-		Parent detailRoot = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ViewDetailsCurrentMeds.fxml")); // FXML
-																														// for
-																														// second
-																														// stage
+		Parent detailRoot = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ViewDetailsCurrentMeds.fxml"));
+		
+		
 		Scene detailScene = new Scene(detailRoot);
 		detailStage.setScene(detailScene);
 		detailStage.getIcons().add(new Image("/application/4getmenot1.jpg"));
 		detailStage.initModality(Modality.APPLICATION_MODAL);
 		detailStage.show();
 	}
-
-	@FXML
-	void stopViewing(ActionEvent event) {
-
-	}
+	
 
 	// activates when the archive button is selected and moves med
 	@FXML

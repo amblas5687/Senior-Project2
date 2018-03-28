@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.MedModel;
 
-public class MedDetailsController {
+public class CurMedDetailsController {
 
     @FXML
     private AnchorPane content_view;
@@ -48,7 +48,7 @@ public class MedDetailsController {
     
     public void initialize(){
     	
-		System.out.println("*******VIEW MED DETAILS*******");
+		System.out.println("*******VIEW CURRENT DETAILS*******");
     	
     	CurrentMedsController test = new CurrentMedsController();
 		medDetails = test.getDetail();
@@ -89,7 +89,7 @@ public class MedDetailsController {
     @FXML
     void stopViewing(ActionEvent event) {
     	
-    	System.out.println("CLOSING MED DETAIL WINDOW...");
+    	System.out.println("CLOSING CURRENT DETAIL WINDOW...");
     	
     	Stage detailStage = (Stage)btnOK.getScene().getWindow();
         // do what you have to do

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -21,6 +22,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -30,8 +33,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.MedModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -95,6 +101,11 @@ public class ArchivedMedsController {
 	private AnchorPane temp;
 
 	private ToggleGroup state = new ToggleGroup();
+	
+	
+	// static variable for viewing details
+	private static MedModel arcDetailMed;
+	
 
 	public void initialize() {
 
@@ -333,9 +344,26 @@ public class ArchivedMedsController {
 	}
 
 	@FXML
-	private void viewDetails(ActionEvent event) {
+	private void viewDetails(ActionEvent event) throws IOException {
 
+		// get the med to edit and set it into a static variable
+		arcDetailMed = archiveTable.getSelectionModel().getSelectedItem();
+
+		Stage detailStage = new Stage();
+		Parent detailRoot = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ViewDetailsArchiveMed.fxml")); 
+
+		
+		Scene detailScene = new Scene(detailRoot);
+		detailStage.setScene(detailScene);
+		detailStage.getIcons().add(new Image("/application/4getmenot1.jpg"));
+		detailStage.initModality(Modality.APPLICATION_MODAL);
+		detailStage.show();
 	}
+	
+	public MedModel getDetail() {
+		return arcDetailMed;
+	}
+
 
 	@FXML
 	void options(ActionEvent event) {
