@@ -42,21 +42,21 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <MediaView fx:id="media_view" fitHeight="300.0" fitWidth="500.0" onMouseClicked="#clickVideo" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnMeds" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <MediaView fx:id="media_view" fitHeight="305.0" fitWidth="500.0" onMouseClicked="#clickVideo" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnMeds" maxWidth="72.0" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="120.0" right="85.0" />
+                              <Insets bottom="120.0" right="80.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnUser" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <Button fx:id="btnUser" maxWidth="72.0" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="87.0" top="120.0" />
+                              <Insets right="80.0" top="120.0" />
                            </GridPane.margin>
                         </Button>
                         <Button fx:id="btnPatient" mnemonicParsing="false" onAction="#patientVideo" text="Patient" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
@@ -69,15 +69,15 @@
                         </Button>
                         <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" max="3.045" maxWidth="470.0" onDragDetected="#dragSlider" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
-                              <Insets left="30.0" top="260.0" />
+                              <Insets left="30.0" top="257.0" />
                            </GridPane.margin>
                         </JFXSlider>
-                        <Label fx:id="lblStatus" onMouseClicked="#clickPlay" prefWidth="15.0" text="&gt;" textFill="#4bacb8" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Label fx:id="lblStatus" maxHeight="25.0" minHeight="25.0" onMouseClicked="#clickPlay" prefHeight="25.0" prefWidth="25.0" textFill="#4bacb8" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="470.0" top="260.0" />
+                              <Insets right="470.0" top="257.0" />
                            </GridPane.margin>
                         </Label>
                      </children>
@@ -96,9 +96,9 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="*DISCLAIMER*" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label text="*DISCLAIMER*" textFill="#bf5f82" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
                         <Label text="This system was built as a senior project. Therefore, errors and bugs exist in the project. If you find an issue, please feel free to report it to us." wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">

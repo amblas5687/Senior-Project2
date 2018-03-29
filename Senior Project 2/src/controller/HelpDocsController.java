@@ -1,9 +1,7 @@
 package controller;
 
 import java.net.URL;
-
 import com.jfoenix.controls.JFXSlider;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
@@ -56,6 +54,18 @@ public class HelpDocsController {
     	
     	media_view.setMediaPlayer(player);
     	timeSlider.setValue(0);
+    	lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
+				 + "-fx-background-repeat: no-repeat;");
+    	
+    	player.setOnEndOfMedia(new Runnable() {
+		    @Override
+		    public void run() {
+		        player.pause();
+	    		lblStatus.setStyle("-fx-background-image: url('/application/replay.png');"
+						 + "-fx-background-repeat: no-repeat;");
+		        System.out.println("Status: " + player.getStatus());
+		    }
+    	});
     }
     
     @FXML
@@ -63,21 +73,14 @@ public class HelpDocsController {
     	
     	if(player.getStatus() == Status.PLAYING) {
     		player.pause();
-    		lblStatus.setStyle("-fx-font: 24 arial;");
-    		lblStatus.setText(">");
+    		lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
+					 + "-fx-background-repeat: no-repeat;");
     	} else {
+    		
     		player.play();
-    		lblStatus.setStyle("-fx-font: 16 arial;"
-    						 + "-fx-font-weight: bold;");
-    		lblStatus.setText("||");
+    		lblStatus.setStyle("-fx-background-image: url('/application/pause.png');"
+					 + "-fx-background-repeat: no-repeat;");
     	}
-    	
-    	player.setOnEndOfMedia(new Runnable() {
-    	    @Override
-    	    public void run() {
-    	        player.stop();
-    	    }
-    	});
     	
     	System.out.println("Total time: " + player.getTotalDuration().toMinutes());
     	player.currentTimeProperty().addListener(new InvalidationListener() {
@@ -86,13 +89,13 @@ public class HelpDocsController {
     			
     			if (!timeSlider.isValueChanging()) {
     				System.out.println("HIT");
-    				System.out.println(player.currentTimeProperty().get());
     				System.out.println(player.currentTimeProperty().get().toMinutes());
     				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
     				
     			}
             }
         });
+    	
     }
     
     @FXML
@@ -111,16 +114,15 @@ public class HelpDocsController {
     
     @FXML
     void clickVideo(MouseEvent event) {
-    	
+    	System.out.println(player.getStatus());
     	if(player.getStatus() == Status.PLAYING) {
     		player.pause();
-    		lblStatus.setStyle("-fx-font: 24 arial;");
-    		lblStatus.setText(">");
+    		lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
+					 + "-fx-background-repeat: no-repeat;");
     	} else {
     		player.play();
-    		lblStatus.setStyle("-fx-font: 16 arial;"
-    						 + "-fx-font-weight: bold;");
-    		lblStatus.setText("||");
+    		lblStatus.setStyle("-fx-background-image: url('/application/pause.png');"
+    						 + "-fx-background-repeat: no-repeat;");
     	}
     	
     	player.currentTimeProperty().addListener(new InvalidationListener() {
@@ -128,13 +130,13 @@ public class HelpDocsController {
     		public void invalidated(Observable ov) {
     			if (!timeSlider.isValueChanging()) {
     				System.out.println("HIT2");
-    				System.out.println(player.currentTimeProperty().get());
     				System.out.println(player.currentTimeProperty().get().toMinutes());
     				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
     				
     			}
             }
         });	
+    	
     }
     
     @FXML
@@ -165,14 +167,9 @@ public class HelpDocsController {
     	//sets font size on video pause
     	Timeline tline = new Timeline(new KeyFrame(
     	        Duration.seconds(1),
-    	        ae -> lblStatus.setStyle("-fx-font: 24 arial;")));
+    	        ae -> lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
+						 			   + "-fx-background-repeat: no-repeat;")));
     	tline.play();
-    	
-    	//changes label on video pause
-    	Timeline tlin = new Timeline(new KeyFrame(
-    	        Duration.seconds(1),
-    	        ae -> lblStatus.setText(">")));
-    	tlin.play();
   
     }
 
