@@ -116,10 +116,6 @@ public class NewPatientController {
 	@FXML
 	void submit(ActionEvent event) throws ParseException{
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date dobDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOBPicker.getEditor().getText());
-		Date diagnosesDate = new SimpleDateFormat("MM/dd/yyyy").parse(diagnosesPicker.getEditor().getText());
-		
 		lblAll.setText(null);
 
 		count = 0;
@@ -134,6 +130,10 @@ public class NewPatientController {
 		if (count > 0) {
 			lblAll.setText("Please fill in all fields.");
 		} else if (!fName && !lName && !DOB && !cGiver && !cStage && !dDate && !Doc) {
+			
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date dobDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOBPicker.getEditor().getText());
+			Date diagnosesDate = new SimpleDateFormat("MM/dd/yyyy").parse(diagnosesPicker.getEditor().getText());
 
 			String firstName = fnameTF.getText();
 			String lastName = lnameTF.getText();
