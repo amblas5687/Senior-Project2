@@ -205,7 +205,7 @@ public class NewUserController {
 						user.execute();
 						System.out.println("USER ENTERED..." + subUser);
 
-						//go back to main
+						// go back to main
 						try {
 							stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 							root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
@@ -264,6 +264,9 @@ public class NewUserController {
 				} // finally
 			} // else if
 		} // end if
+		else {
+			System.out.println("FAILED TO VALIDATE");
+		}
 
 	}// end method
 
@@ -303,7 +306,7 @@ public class NewUserController {
 		String password = password1TF.getText();
 
 		UserModel tempUser = new UserModel(fname, lname, formatDate, email, password, pRelation);
-		System.out.println(tempUser);
+		System.out.println("GRABBED FIELDS FOR USER " + tempUser);
 		return tempUser;
 	}
 
@@ -456,6 +459,7 @@ public class NewUserController {
 
 		System.out.println("VALIDATING EMAIL");
 		lblEmail.setText(null);
+		boolean takenEmail = true;
 
 		String email = emailTF.getText();
 		// ^([a-zA-Z0-9~!$%^&*_=+}{\'?]+(\.[a-zA-Z0-9~!$%^&*_=+}{\'?]+)*@[a-zA-Z0-9_-]+(\.com|\.net|\.edu|\.gov|\.mil))$
@@ -473,8 +477,16 @@ public class NewUserController {
 			System.out.println("EMAIL WAS NOT IN PROPER FORMAT");
 			return false;
 		}
-
-		return true;
+		
+		//see if email taken
+		takenEmail = checkUserExist();
+		if(takenEmail)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private boolean validatePassword() {
@@ -517,6 +529,80 @@ public class NewUserController {
 		}
 
 		return passwordFlag;
+	}
+
+	private boolean checkUserExist() {
+
+		System.out.println("CHECKING IF EMAIL IS TAKEN");
+		lblEmail.setText(null);
+
+		String email = emailTF.getText();
+
+		Connection connection = null;
+		PreparedStatement userEmail = null;
+		ResultSet rs = null;
+
+		// check if patient code in database
+		try {
+			String emailQ = "SELECT email FROM user WHERE email = ?";
+
+			connection = DataSource.getInstance().getConnection();
+			userEmail = connection.prepareStatement(emailQ);
+			userEmail.setString(1, email);
+			rs = userEmail.executeQuery();
+
+			if (rs.isBeforeFirst()) {
+				System.out.println("USER EMAIL TAKEN");
+				lblEmail.setText("Email already taken");
+				Alert failure = new Alert(AlertType.ERROR);
+				// safely catches error by pop-up alert.
+				failure.setContentText("Email is already taken. Please use another.");
+				failure.getDialogPane().getStylesheets()
+						.add(getClass().getResource("/application/application.css").toExternalForm());
+				Optional<ButtonType> error = failure.showAndWait();
+				//System.out.println("Button type " + error.get());
+				if(error.isPresent() && error.get().getButtonData().toString() == "OK_DONE")
+				{
+					return false;
+				}
+				else if(!error.isPresent())
+				{
+					return false;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (userEmail != null) {
+				try {
+					userEmail.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} // finally
+		
+		return true;
+		
 	}
 
 }
