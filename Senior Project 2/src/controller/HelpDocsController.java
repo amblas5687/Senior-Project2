@@ -31,6 +31,9 @@ public class HelpDocsController {
     private Label lblStatus;
     
     @FXML
+    private Label lblDescription;
+    
+    @FXML
     private Button btnMeds;
 
     @FXML
@@ -42,9 +45,10 @@ public class HelpDocsController {
     @FXML
     private JFXSlider timeSlider;
 
+    boolean end = false;
     
     //URL mediaUrl = getClass().getResource("/application/jellyfish-25-mbps-hd-hevc.mp4");
-    URL mediaUrl = getClass().getResource("/application/moon_jellies_hd_stock_video (1).mp4");
+    URL mediaUrl = getClass().getResource("/application/moon_jellies.mp4");
     String mediaStringUrl = mediaUrl.toExternalForm();
     Media media = new Media(mediaStringUrl);
     final MediaPlayer player = new MediaPlayer(media);
@@ -57,26 +61,37 @@ public class HelpDocsController {
     	lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
 				 + "-fx-background-repeat: no-repeat;");
     	
+    	lblDescription.setText("\tForget Me Not is designed to help nonprofessional inhome cargivers keep track of Alzheimer's patient information.\n\n"
+    			+ "\tForget Me Not seeks to cut down on communication issues between multiple caregivers for one patient.");
+    	
     	player.setOnEndOfMedia(new Runnable() {
 		    @Override
 		    public void run() {
 		        player.pause();
 	    		lblStatus.setStyle("-fx-background-image: url('/application/replay.png');"
 						 + "-fx-background-repeat: no-repeat;");
+	    		
+	    		end = true;
 		        System.out.println("Status: " + player.getStatus());
 		    }
     	});
     }
     
     @FXML
-    void clickPlay(MouseEvent event) {
+    void clickVideo(MouseEvent event) {
     	
-    	if(player.getStatus() == Status.PLAYING) {
+    	if(end) {
+    		player.stop();
+    		player.play();
+    		lblStatus.setStyle("-fx-background-image: url('/application/pause.png');"
+					 + "-fx-background-repeat: no-repeat;");
+    		
+    		end = false;
+    	} else if(player.getStatus() == Status.PLAYING) {
     		player.pause();
     		lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
 					 + "-fx-background-repeat: no-repeat;");
     	} else {
-    		
     		player.play();
     		lblStatus.setStyle("-fx-background-image: url('/application/pause.png');"
 					 + "-fx-background-repeat: no-repeat;");
@@ -110,33 +125,6 @@ public class HelpDocsController {
     	       }
     	    }
     	});
-    }
-    
-    @FXML
-    void clickVideo(MouseEvent event) {
-    	System.out.println(player.getStatus());
-    	if(player.getStatus() == Status.PLAYING) {
-    		player.pause();
-    		lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
-					 + "-fx-background-repeat: no-repeat;");
-    	} else {
-    		player.play();
-    		lblStatus.setStyle("-fx-background-image: url('/application/pause.png');"
-    						 + "-fx-background-repeat: no-repeat;");
-    	}
-    	
-    	player.currentTimeProperty().addListener(new InvalidationListener() {
-    		
-    		public void invalidated(Observable ov) {
-    			if (!timeSlider.isValueChanging()) {
-    				System.out.println("HIT2");
-    				System.out.println(player.currentTimeProperty().get().toMinutes());
-    				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
-    				
-    			}
-            }
-        });	
-    	
     }
     
     @FXML
