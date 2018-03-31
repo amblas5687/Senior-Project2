@@ -167,20 +167,36 @@ public class ViewPatientController {
     	String tempDiagnoseDate = curPatient.getDiagnosesDate();
     	
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    	//convert DOB to LocalDate
-    	LocalDate localDOB = LocalDate.parse(tempDOB, formatter);
-    	//convert DiagnoseDate to LocalDate
-    	LocalDate localDDate = LocalDate.parse(tempDiagnoseDate, formatter);
     	
-    	
-    	DOBPicker.setValue(localDOB);
+    	if(tempDOB == null && tempDiagnoseDate == null) {
+    		tempDOB = "";
+    		tempDiagnoseDate = "";
+    		
+    		DOBPicker.getEditor().setText(tempDOB);
+    		
+    		diagnosesPicker.getEditor().setText(tempDiagnoseDate);
+    	} else if(tempDOB == null){
+    		tempDOB = "";
+    		
+    		DOBPicker.getEditor().setText(tempDOB);
+    	} else if(tempDiagnoseDate == null){
+    		tempDiagnoseDate = "";
+    		
+    		diagnosesPicker.getEditor().setText(tempDiagnoseDate);
+    	} else {
+        	//convert DOB to LocalDate
+        	LocalDate localDOB = LocalDate.parse(tempDOB, formatter);
+        	//convert DiagnoseDate to LocalDate
+        	LocalDate localDDate = LocalDate.parse(tempDiagnoseDate, formatter);
+        	
+        	DOBPicker.setValue(localDOB);
+        	
+        	diagnosesPicker.setValue(localDDate);
+    	}
     	
     	doctorTF.setText(curPatient.getDoctor());
     	
     	stageBox.setValue(curPatient.getStage());
-    	
-    	diagnosesPicker.setValue(localDDate);
     	
     	cargiverTF.setText(curPatient.getCargiver());
 
@@ -468,7 +484,7 @@ public class ViewPatientController {
     	lblDiagnoses.setText(null);
 
 		String diag = diagnosesPicker.getEditor().getText();
-
+		
 		if (diag.equals("")) {
 			lblDiagnoses.setText("Please select or enter a date.");
 			count++;
@@ -480,7 +496,12 @@ public class ViewPatientController {
 				String[] sections = diag.split("/");
 				int year = Integer.parseInt(sections[2]);
 				DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-				Date dob = formatter.parse(DOBPicker.getEditor().getText());
+				Date dob;
+				if(DOBPicker.getEditor().getText().equals("")) {
+					dob = null;
+				} else {
+					dob = formatter.parse(DOBPicker.getEditor().getText());
+				}
 				formatter.setLenient(false);
 				Date date = formatter.parse(diag);
 				Date curDate = new Date();
@@ -500,7 +521,7 @@ public class ViewPatientController {
 				} else if (date.after(curDate)) {
 					lblDiagnoses.setText("Invalid date. Date cannot be after today's date.");
 					flag = true;
-				} else if(date.before(dob) || date.equals(dob)) {
+				} else if(dob != null && date.before(dob) || date.equals(dob)) {
 					lblDiagnoses.setText("Invalid date. Date cannot be before or on the day of patient's birthday.");
 					flag = true;
 				} else {
