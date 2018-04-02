@@ -143,7 +143,7 @@ public class ArchivedMedsController {
 
 			connection = DataSource.getInstance().getConnection();
 
-			String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ?";
+			String medQ = "SELECT * FROM archivedMeds WHERE patientCode = ? ORDER BY dateArchived DESC";
 
 			arcMedsPS = connection.prepareStatement(medQ);
 			arcMedsPS.setString(1, LoginController.currentPatientID);
@@ -444,7 +444,7 @@ public class ArchivedMedsController {
 			// search by name
 			String curNameSearch = search;
 
-			String nameQ = "SELECT * FROM archivedMeds WHERE medName = ? AND patientCode = ?";
+			String nameQ = "SELECT * FROM archivedMeds WHERE medName = ? AND patientCode = ?ORDER BY dateArchived DESC ";
 			namePS = connection.prepareStatement(nameQ);
 			namePS.setString(1, curNameSearch);
 			namePS.setString(2, LoginController.currentPatientID);
@@ -531,7 +531,7 @@ public class ArchivedMedsController {
 		String formatDate = formatter2.format(datePickerDate);
 		System.out.println("Before format " + dp + " After format " + formatDate);
 
-		String query = "SELECT * FROM archivedMeds WHERE prescribDate = ? AND patientCode = ?";
+		String query = "SELECT * FROM archivedMeds WHERE prescribDate = ? AND patientCode = ? ORDER BY dateArchived DESC";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -632,7 +632,7 @@ public class ArchivedMedsController {
 		System.out.println("Before format " + date1String + "__" + date2String + " After format " + formatDate1 + "__"
 				+ formatDate2);
 
-		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= ? AND prescribDate <= ? AND patientCode = ?";
+		String query = "SELECT * FROM archivedMeds WHERE prescribDate >= ? AND prescribDate <= ? AND patientCode = ? ORDER BY dateArchived DESC";
 
 		Connection connection = null;
 		PreparedStatement ps = null;

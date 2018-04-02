@@ -187,7 +187,7 @@ public class CurrentMedsController {
 
 			connection = DataSource.getInstance().getConnection();
 
-			String medQ = "SELECT * FROM currentMeds WHERE patientCode = ?";
+			String medQ = "SELECT * FROM currentMeds WHERE patientCode = ? ORDER BY prescribDate DESC";
 			curMedPS = connection.prepareStatement(medQ);
 			curMedPS.setString(1, LoginController.currentPatientID);
 			rs = curMedPS.executeQuery();
@@ -535,7 +535,7 @@ public class CurrentMedsController {
 			// search by name
 			String curNameSearch = search;
 
-			String nameQ = "SELECT * FROM currentMeds WHERE medName = ? AND patientCode = ?";
+			String nameQ = "SELECT * FROM currentMeds WHERE medName = ? AND patientCode = ? ORDER BY prescribDate DESC";
 			namePS = connection.prepareStatement(nameQ);
 			namePS.setString(1, curNameSearch);
 			namePS.setString(2, LoginController.currentPatientID);
@@ -625,7 +625,7 @@ public class CurrentMedsController {
 		String formatDate = formatter2.format(datePickerDate);
 		System.out.println("Before format " + dp + " After format " + formatDate);
 
-		String query = "SELECT * FROM currentMeds WHERE prescribDate = ? AND patientCode = ?";
+		String query = "SELECT * FROM currentMeds WHERE prescribDate = ? AND patientCode = ? ORDER BY prescribDate DESC";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -727,7 +727,7 @@ public class CurrentMedsController {
 		System.out.println("Before format " + date1String + "__" + date2String+  
 				" After format " + formatDate1 + "__" + formatDate2);
 
-		String query = "SELECT * FROM currentMeds WHERE prescribDate >= ? AND prescribDate <= ? AND patientCode = ?";
+		String query = "SELECT * FROM currentMeds WHERE prescribDate >= ? AND prescribDate <= ? AND patientCode = ? ORDER BY prescribDate DESC";
 
 		Connection connection = null;
 		PreparedStatement ps = null;
