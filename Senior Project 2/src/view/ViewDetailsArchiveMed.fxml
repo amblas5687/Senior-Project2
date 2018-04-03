@@ -89,7 +89,7 @@
                         <Insets top="10.0" />
                      </GridPane.margin>
                   </Separator>
-                  <TextField fx:id="medName" disable="true" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="270.0" promptText="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <TextField fx:id="medName" editable="false" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="270.0" promptText="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -97,7 +97,7 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="medDosage" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="300.0" promptText="Dose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <TextField fx:id="medDosage" editable="false" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="300.0" promptText="Dose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -105,7 +105,7 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextArea fx:id="medDescript" disable="true" maxHeight="80.0" maxWidth="300.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="300.0" promptText="What it does, side effects, etc." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                  <TextArea fx:id="medDescript" editable="false" maxHeight="80.0" maxWidth="300.0" minHeight="80.0" minWidth="80.0" prefHeight="80.0" prefWidth="300.0" promptText="What it does, side effects, etc." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -113,7 +113,7 @@
                         <Insets />
                      </GridPane.margin>
                   </TextArea>
-                  <TextField fx:id="prescribDoc" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                  <TextField fx:id="prescribDoc" editable="false" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -121,13 +121,13 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="purpOfPrescript" disable="true" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Purpose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+                  <TextField fx:id="purpOfPrescript" editable="false" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Purpose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="DOPPicker" disable="true" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-                  <DatePicker fx:id="ArchivePicker" disable="true" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+                  <DatePicker fx:id="DOPPicker" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+                  <DatePicker fx:id="ArchivePicker" editable="false" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
                   <Button fx:id="btnOK" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10">
                      <GridPane.margin>
                         <Insets />
@@ -176,7 +176,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="reasonTF" disable="true" editable="false" maxWidth="300.0" minHeight="80.0" prefHeight="80.0" prefWidth="300.0" promptText="Reason for archival" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <TextArea fx:id="reasonTF" editable="false" maxWidth="300.0" minHeight="80.0" prefHeight="80.0" prefWidth="300.0" promptText="Reason for archival" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>

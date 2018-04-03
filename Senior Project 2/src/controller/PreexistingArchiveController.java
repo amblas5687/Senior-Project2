@@ -78,6 +78,9 @@ public class PreexistingArchiveController {
     @FXML
     private Label datePrescribedLBL;
     
+    @FXML
+    private Label lblDescript;
+    
 	
 	public void initialize() {
 
@@ -367,10 +370,14 @@ public class PreexistingArchiveController {
 	
 	private boolean validateMedDescription() {
 		System.out.println("VALIDATING MED DESCRIPTION...");
+		
+		lblDescript.setText(null);
 		String details = medDescript.getText();
+		
 		if((!details.equals(null) || !details.equals("")) && details.length() >= 500)
 		{
 			System.out.println("DESCRIPTION TOO LONG");
+			lblDescript.setText("Description is too long.");
 			return false;
 		}
 		return true;
