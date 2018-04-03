@@ -85,6 +85,8 @@ public class NewUserController {
 
 	@FXML
 	private Label lblAll;
+	
+	private int count;
 
 	public void initialize() {
 
@@ -97,7 +99,10 @@ public class NewUserController {
 	// user selects next button and enters code
 	@FXML
 	void patientCodeEnter(ActionEvent event) throws ParseException {
-
+		
+		count = 0;
+		lblAll.setText(null);
+		
 		// validate fields
 		boolean validDOB, validFname, validLname, validRelation, validEmail, validPassword = false;
 		validDOB = validateDOB();
@@ -106,8 +111,10 @@ public class NewUserController {
 		validRelation = validateRelation();
 		validEmail = validateEmail();
 		validPassword = validatePassword();
-
-		if (validDOB && validFname && validLname && validRelation && validEmail && validPassword) {
+		
+		if(count > 0) {
+			lblAll.setText("Please fill in all fields");
+		}else if (validDOB && validFname && validLname && validRelation && validEmail && validPassword) {
 
 			// grab the fields for the user
 			UserModel subUser = grabFields();
@@ -351,14 +358,15 @@ public class NewUserController {
 
 		// date is empty
 		if (dobString.equals(null) || dobString.equals("")) {
-			lblDOB.setText("Please enter a date");
+			lblDOB.setText("Please select or enter your date of birth");
+			count++;
 			System.out.println("DOB EMTPY");
 			return false;
 		}
 		// date format is wrong
 		else if (!b) {
 			System.out.println("INVALID DATE FORMAT");
-			lblDOB.setText("Invalid date format. MM/DD/YYYY");
+			lblDOB.setText("Invalid date format. Please use MM/DD/YYYY");
 			return false;
 		} else {
 
@@ -375,14 +383,14 @@ public class NewUserController {
 				// date is after current date
 				if (date.after(curDate)) {
 					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
-					lblDOB.setText("Date cannot be after today's date");
+					lblDOB.setText("Date of birth cannot be after today's date");
 					return false;
 				}
 				return true;
 			} catch (ParseException e) {
 				// not an actual date
 				System.out.println("INVALID DATE");
-				lblDOB.setText("Incorrect date.");
+				lblDOB.setText("Incorrect date. Please enter a valid date");
 				return false;
 			}
 		}
@@ -403,11 +411,12 @@ public class NewUserController {
 		boolean b = m.matches();
 
 		if (fname.equals(null) || fname.equals("")) {
-			lblFname.setText("First name cannot be empty");
+			lblFname.setText("Enter your first name");
+			count++;
 			System.out.println("FIRST NAME IS EMPTY...");
 			return false;
 		} else if (!b) {
-			lblFname.setText("No numbers or special characters");
+			lblFname.setText("Remove any numbers, special characters, or extra spaces");
 			System.out.println("FIRST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			return false;
 		}
@@ -430,11 +439,12 @@ public class NewUserController {
 		boolean b = m.matches();
 
 		if (lname.equals(null) || lname.equals("")) {
-			lblLname.setText("Last name cannot be empty");
+			lblLname.setText("Enter your last name");
+			count++;
 			System.out.println("LAST NAME IS EMPTY...");
 			return false;
 		} else if (!b) {
-			lblLname.setText("No numbers or special characters");
+			lblLname.setText("Remove any numbers, special characters, or extra spaces");
 			System.out.println("LAST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			return false;
 		}
@@ -448,7 +458,8 @@ public class NewUserController {
 		System.out.println("VALIDATING RELATION");
 
 		if (relationBox.getValue() == null) {
-			lblRelation.setText("Please provide a relation");
+			lblRelation.setText("Please select your relation to patient");
+			count++;
 			return false;
 		}
 
@@ -469,11 +480,12 @@ public class NewUserController {
 		boolean b = m.matches();
 
 		if (email.equals(null) || email.equals("")) {
-			lblEmail.setText("Email cannot be empty");
+			lblEmail.setText("Enter email address");
+			count++;
 			System.out.println("EMAIL IS EMPTY...");
 			return false;
 		} else if (!b) {
-			lblEmail.setText("Invalid email format");
+			lblEmail.setText("Invalid email format for email address");
 			System.out.println("EMAIL WAS NOT IN PROPER FORMAT");
 			return false;
 		}
@@ -505,25 +517,28 @@ public class NewUserController {
 		 */
 
 		if ((p1.equals(null) || p1.equals("")) && (p2.equals(null) || p2.equals(""))) {
-			lblPassword1.setText("Password cannot be empty");
-			lblPassword2.setText("Password cannot be empty");
+			lblPassword1.setText("Enter your password");
+			lblPassword2.setText("Enter password verification");
+			count++;
 			System.out.println("BOTH PASSWORDS EMPTY...");
 			passwordFlag = false;
 		} else if (p1.equals(null) || p1.equals("")) {
-			lblPassword1.setText("Password cannot be empty");
+			lblPassword1.setText("Enter your password");
+			count++;
 			System.out.println("PASSWORD EMPTY...");
 			passwordFlag = false;
 		} else if (p1.length() < 4) {
-			lblPassword1.setText("Password not long enough, must be longer than 4");
+			lblPassword1.setText("Your password must be longer than 4 digits");
 			System.out.println("PASSWORD < 4");
 			passwordFlag = false;
 		} else if (p2.equals(null) || p2.equals("")) {
-			lblPassword2.setText("Password cannot be empty");
+			lblPassword2.setText("Enter password verification");
+			count++;
 			System.out.println("PASSWORD EMPTY...");
 			passwordFlag = false;
 		} else if (!p1.equals(p2)) {
-			lblPassword1.setText("Password does not match");
-			lblPassword2.setText("Password does not match");
+			//lblPassword1.setText("Password does not match");
+			lblPassword2.setText("Mismatched passwords");
 			System.out.println("PASSWORDS DON'T MATCH...");
 			passwordFlag = false;
 		}
@@ -553,10 +568,10 @@ public class NewUserController {
 
 			if (rs.isBeforeFirst()) {
 				System.out.println("USER EMAIL TAKEN");
-				lblEmail.setText("Email already taken");
+				lblEmail.setText("Email is taken. Please enter a different email address");
 				Alert failure = new Alert(AlertType.ERROR);
 				// safely catches error by pop-up alert.
-				failure.setContentText("Email is already taken. Please use another.");
+				failure.setContentText("Email is already in use. Please enter a different email address");
 				failure.getDialogPane().getStylesheets()
 						.add(getClass().getResource("/application/application.css").toExternalForm());
 				Optional<ButtonType> error = failure.showAndWait();

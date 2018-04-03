@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -41,6 +43,9 @@ public class LoginController {
 	 @FXML 
 	 private Label lblLogin;
 	 
+	 @FXML
+	 private ImageView logo;
+	 
 	 
 	//global variables for login
 	 public static String currentUserID = null;
@@ -50,6 +55,7 @@ public class LoginController {
 	 public void initialize(){
 			
 			System.out.println("*******LOGIN*******");
+			logo.setImage(new Image("/application/4getmenot1.jpg"));
 	 }
 	 
 	 
@@ -90,7 +96,7 @@ public class LoginController {
 		 lblLogin.setText(null);
 		 
 		 if(email.equals("") || password.equals("")) {
-			 lblLogin.setText("Please fill both fields.");
+			 lblLogin.setText("Please fill in both fields");
 		 } else {
 			 Connection connection = null;
 		     PreparedStatement ps = null;
@@ -131,7 +137,7 @@ public class LoginController {
 						 }
 				 }
 				 
-				 lblLogin.setText("Incorrect email or password.");
+				 lblLogin.setText("Incorrect email address or password");
 				 
 			 }catch (Exception e)
 		    	{

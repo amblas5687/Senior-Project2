@@ -128,7 +128,7 @@ public class NewPatientController {
 		boolean Doc = checkDoc();
 
 		if (count > 0) {
-			lblAll.setText("Please fill in all fields.");
+			lblAll.setText("Please fill in all fields");
 		} else if (!fName && !lName && !DOB && !cGiver && !cStage && !dDate && !Doc) {
 			
 			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -237,7 +237,7 @@ public class NewPatientController {
 		String name = fnameTF.getText();
 
 		if (name.equals("")) {
-			lblFname.setText("Enter first name.");
+			lblFname.setText("Enter patient first name");
 			count++;
 			return flag = true;
 		}
@@ -249,7 +249,7 @@ public class NewPatientController {
 		boolean n = nam.find();
 
 		if (n) {
-			lblFname.setText("No numbers, special characters, or extra spaces.");
+			lblFname.setText("Remove any numbers, special characters, or extra spaces");
 			flag = true;
 		} else {
 			flag = false;
@@ -265,7 +265,7 @@ public class NewPatientController {
 		String name = lnameTF.getText();
 
 		if (name.equals("")) {
-			lblLname.setText("Enter last name.");
+			lblLname.setText("Enter patient last name");
 			count++;
 			return flag = true;
 		}
@@ -277,7 +277,7 @@ public class NewPatientController {
 		boolean n = nam.find();
 
 		if (n) {
-			lblLname.setText("No numbers, special characters, or extra spaces.");
+			lblLname.setText("Remove any numbers, special characters, or extra spaces");
 			flag = true;
 		} else {
 			flag = false;
@@ -293,7 +293,7 @@ public class NewPatientController {
 		String name = cargiverTF.getText();
 
 		if (name.equals("")) {
-			lblCaregiver.setText("Enter name of caregiver.");
+			lblCaregiver.setText("Enter name of caregiver");
 			count++;
 			return flag = true;
 		}
@@ -305,7 +305,7 @@ public class NewPatientController {
 		boolean n = nam.find();
 
 		if (n) {
-			lblCaregiver.setText("No numbers, special characters, or extra spaces.");
+			lblCaregiver.setText("Remove any numbers, special characters, or extra spaces");
 			flag = true;
 		} else {
 			flag = false;
@@ -322,7 +322,7 @@ public class NewPatientController {
 
 		if (dob.equals("")) {
 
-			lblDOB.setText("Please select or enter a date.");
+			lblDOB.setText("Please select or enter the patient's date of birth");
 			count++;
 			flag = true;
 
@@ -347,10 +347,10 @@ public class NewPatientController {
 				}
 
 				if (year < 1900) {
-					lblDOB.setText("Invalid year.");
+					lblDOB.setText("Invalid year");
 					flag = true;
 				} else if (date.after(curDate)) {
-					lblDOB.setText("Invalid date. Date cannot be after today's date.");
+					lblDOB.setText("Date of birth cannot be after today's date");
 					flag = true;
 				} else {
 					flag = false;
@@ -358,7 +358,7 @@ public class NewPatientController {
 
 			} catch (ParseException e) {
 				
-				lblDOB.setText("Incorrect date.");
+				lblDOB.setText("Incorrect date. Please enter a valid date");
 				return flag = true;
 			}
 
@@ -374,7 +374,7 @@ public class NewPatientController {
 		String diag = diagnosesPicker.getEditor().getText();
 
 		if (diag.equals("")) {
-			lblDiagnoses.setText("Please select or enter a date.");
+			lblDiagnoses.setText("Please select or enter a date of diagnoses for patient");
 			count++;
 			flag = true;
 		} else {
@@ -399,13 +399,13 @@ public class NewPatientController {
 				}
 
 				if (year < 1900) {
-					lblDiagnoses.setText("Invalid year.");
+					lblDiagnoses.setText("Invalid year");
 					flag = true;
 				} else if (date.after(curDate)) {
-					lblDiagnoses.setText("Invalid date. Date cannot be after today's date.");
+					lblDiagnoses.setText("Date of diagnoses cannot be after today's date");
 					flag = true;
 				} else if(date.before(dob) || date.equals(dob)) {
-					lblDiagnoses.setText("Invalid date. Date cannot be before or on the day of patient's birthday.");
+					lblDiagnoses.setText("Date cannot be before or on the day of patient's birthday.");
 					flag = true;
 				} else {
 					flag = false;
@@ -413,7 +413,7 @@ public class NewPatientController {
 
 			} catch (ParseException e) {
 				
-				lblDiagnoses.setText("Incorrect date.");
+				lblDiagnoses.setText("Incorrect date. Please enter a valid date");
 				return flag = true;
 			}
 
@@ -427,7 +427,7 @@ public class NewPatientController {
 		lblStage.setText(null);
 
 		if (stageBox.getValue() == null) {
-			lblStage.setText("Please select a stage.");
+			lblStage.setText("Please select patient's current stage");
 			count++;
 			flag = true;
 		} else {
@@ -444,7 +444,7 @@ public class NewPatientController {
 		String doc = doctorTF.getText();
 
 		if (doc.equals("")) {
-			lblDoc.setText("Enter doctor name.");
+			lblDoc.setText("Enter doctor name");
 			count++;
 			return flag = true;
 		}
@@ -456,7 +456,7 @@ public class NewPatientController {
 		boolean n = nam.find();
 
 		if (n) {
-			lblDoc.setText("No numbers, special characters, or extra spaces.");
+			lblDoc.setText("Remove any numbers, special characters, or extra spaces");
 			flag = true;
 		} else {
 			flag = false;

@@ -212,7 +212,7 @@
 		                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		                    </rowConstraints>
 		                     <children>
-		                        <Label fx:id="lblAll" alignment="CENTER" contentDisplay="CENTER" GridPane.halignment="CENTER">
+		                        <Label fx:id="lblAll" alignment="CENTER" contentDisplay="CENTER" styleClass="error" wrapText="true" GridPane.halignment="CENTER">
 		                           <font>
 		                              <Font size="16.0" />
 		                           </font>

@@ -6,6 +6,7 @@
  * 		- Main
  * 		- Error
  * 		- Button
+ * 		- Login Box
  * 		- Slider
  * 		- Alert
  * 		- Toggle Button
@@ -73,6 +74,18 @@
 /* Affects hover over action for currently selected button */
 .activeButton:hover{
 	-fx-background-color: #ffcdd2;
+}
+
+
+/* -- BORDER -- */
+
+/* Custom class for login border */
+.loginBox{
+	-fx-border-color: #80deea;
+    -fx-border-insets: 5;
+    -fx-border-radius: 10;
+    -fx-border-width: 3;
+    -fx-border-style: dotted;
 }
 
 
