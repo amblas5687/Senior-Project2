@@ -143,9 +143,10 @@ public class EditMedController {
 			String pDoc = prescribDoc.getText();
 			String pPurpose = purpOfPrescript.getText();
 			String dateUpdated = java.time.LocalDate.now().toString();
+			String updatedBy = LoginController.currentUserName;
 
 			String query = "UPDATE currentMeds SET medName = ?, medDosage = ?, doseType = ?, medDescript = ?, "
-					+ "prescribDoc = ?, purpPresrcipt = ?, dateUpdated = ? " + "WHERE patientCode = ? AND medID = ?";
+					+ "prescribDoc = ?, purpPresrcipt = ?, dateUpdated = ?, updatedBy = ?" + "WHERE patientCode = ? AND medID = ?";
 
 			Connection connection = null;
 			PreparedStatement ps = null;
@@ -162,10 +163,11 @@ public class EditMedController {
 				ps.setString(5, pDoc);
 				ps.setString(6, pPurpose);
 				ps.setString(7, dateUpdated);
+				ps.setString(8, updatedBy);
 
 				// parameters from edit med to update by
-				ps.setString(8, editMed.getPatientCode().get());
-				ps.setString(9, editMed.getMedID().get());
+				ps.setString(9, editMed.getPatientCode().get());
+				ps.setString(10, editMed.getMedID().get());
 
 				ps.execute();
 
