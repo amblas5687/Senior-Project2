@@ -40,7 +40,7 @@
 				            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 				          </rowConstraints>
 				         	<children>
-				            	<Label text="First Name" GridPane.rowIndex="1">
+				            	<Label text="Your First Name:" GridPane.rowIndex="1">
 		                     		<font>
 		                        		<Font size="16.0" />
 		                     		</font>
@@ -48,7 +48,7 @@
 		                        		<Insets left="50.0" />
 		                     		</GridPane.margin>
 				            	</Label>
-				            	<Label text="Last Name" GridPane.rowIndex="2">
+				            	<Label text="Your Last Name:" GridPane.rowIndex="2">
 		                     		<font>
 		                        		<Font size="16.0" />
 		                     		</font>
@@ -56,7 +56,7 @@
 		                        		<Insets left="50.0" />
 		                     		</GridPane.margin>
 				            	</Label>
-				            	<Label text="Date of Birth" GridPane.rowIndex="3">
+				            	<Label text="Your Date of Birth:" GridPane.rowIndex="3">
 				                     <font>
 				                        <Font size="16.0" />
 				                     </font>
@@ -64,7 +64,7 @@
 				                        <Insets left="50.0" />
 				                     </GridPane.margin>
 				            	</Label>
-				            	<Label text="Relation to Patient" GridPane.rowIndex="4">
+				            	<Label text="Your Relation to Patient:" GridPane.rowIndex="4">
 				                     <font>
 				                        <Font size="16.0" />
 				                     </font>
@@ -72,7 +72,7 @@
 				                        <Insets left="50.0" />
 				                     </GridPane.margin>
 					            </Label>
-					            <Label text="Email" GridPane.rowIndex="7">
+					            <Label text="Email Address:" GridPane.rowIndex="7">
 				                     <font>
 				                        <Font size="16.0" />
 				                     </font>
@@ -80,7 +80,7 @@
 				                        <Insets left="50.0" />
 				                     </GridPane.margin>
 					            </Label>
-					            <Label text="Password" GridPane.rowIndex="8">
+					            <Label text="Account Password:" GridPane.rowIndex="8">
 				                     <font>
 				                        <Font size="16.0" />
 				                     </font>
@@ -104,10 +104,7 @@
 					                  <Font name="System Bold Italic" size="16.0" />
 					               </font>
 					            </Label>
-					            <Label text="Verify Password" GridPane.rowIndex="9">
-					               <padding>
-					                  <Insets right="5.0" />
-					               </padding>
+					            <Label text="Verify Account Password:" GridPane.rowIndex="9">
 			                     <font>
 			                        <Font size="16.0" />
 			                     </font>
@@ -120,7 +117,7 @@
 				                	  <Insets left="5.0" right="5.0" />
 				               		</padding>
 				            	</Separator>
-				            	<TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				            	<TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
@@ -128,7 +125,7 @@
 		                        		<Font size="16.0" />
 		                     		</font>
 				            	</TextField>
-				            	<TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+				            	<TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
@@ -146,7 +143,7 @@
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
 				            	</ComboBox>
-				            	<TextField fx:id="emailTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+				            	<TextField fx:id="emailTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Personal Email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
@@ -170,37 +167,37 @@
 		                        		<Font size="16.0" />
 		                     		</font>
 				            	</PasswordField>
-                        <Label fx:id="lblFname" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label fx:id="lblFname" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblLname" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label fx:id="lblLname" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDOB" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <Label fx:id="lblDOB" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblRelation" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <Label fx:id="lblRelation" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblEmail" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                        <Label fx:id="lblEmail" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblPassword1" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                        <Label fx:id="lblPassword1" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblPassword2" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                        <Label fx:id="lblPassword2" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="9">
                            <font>
                               <Font size="16.0" />
                            </font>

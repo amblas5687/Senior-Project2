@@ -73,6 +73,9 @@ public class ViewUserController {
 
 	@FXML
 	private Label lblPassword2;
+	
+	@FXML
+	private Label lblVerifyPass;
 
 	@FXML
 	private Label lblAll;
@@ -85,7 +88,7 @@ public class ViewUserController {
 		System.out.println("*******VIEW USER INFO*******");
 
 		relationBox.getItems().addAll("Son/Daughter", "Spouse", "Grandchild", "Friend", "Medical Professional");
-
+		
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -164,7 +167,16 @@ public class ViewUserController {
 		DOBPicker.setDisable(false);
 		relationBox.setDisable(false);
 		emailTF.setDisable(false);
+		password1TF.setDisable(false);
 		cancelBTN.setVisible(true);
+		
+		password1TF.textProperty().addListener((observable, oldValue, newValue) -> {
+			password2TF.setText(null);
+		    System.out.println("textfield changed from " + oldValue + " to " + newValue);
+		    password2TF.setVisible(true);
+		    lblVerifyPass.setVisible(true);
+		    lblPassword2.setVisible(true);
+		});
 	}
 
 	@FXML
@@ -177,9 +189,9 @@ public class ViewUserController {
 		validLname = validateLName();
 		//validRelation = validateRelation();
 		validEmail = validateEmail();
-		//validPassword = validatePassword();
+		validPassword = validatePassword();
 
-		if (validDOB && validFname && validLname && validEmail) {
+		if (validDOB && validFname && validLname && validEmail && validPassword) {
 
 			String firstName = fnameTF.getText();
 			String lastName = lnameTF.getText();
@@ -254,6 +266,7 @@ public class ViewUserController {
 			DOBPicker.setDisable(true);
 			relationBox.setDisable(true);
 			emailTF.setDisable(true);
+			password1TF.setDisable(true);
 			btnEdit.setVisible(true);
 			cancelBTN.setVisible(false);
 		}
@@ -446,7 +459,7 @@ public class ViewUserController {
 			lblPassword1.setText("Password not long enough, must be longer than 4");
 			System.out.println("PASSWORD < 4");
 			passwordFlag = false;
-		} else if (p2.equals(null) || p2.equals("")) {
+		} else if (p2 == null || p2.equals(null) || p2.equals("")) {
 			lblPassword2.setText("Password cannot be empty");
 			System.out.println("PASSWORD EMPTY...");
 			passwordFlag = false;

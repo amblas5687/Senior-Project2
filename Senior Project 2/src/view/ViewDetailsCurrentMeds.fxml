@@ -28,7 +28,7 @@
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+		            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,7 +37,7 @@
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		        </rowConstraints>
 		         <children>
-		            <Label text="Prescribing Doctor" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+		            <Label text="Prescribing Doctor:" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
-		            <Label text="Purpose of Presrciption" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+		            <Label text="Purpose of Presrciption:" GridPane.halignment="LEFT" GridPane.rowIndex="7">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -69,7 +69,7 @@
 		                  <Font name="System Bold Italic" size="16.0" />
 		               </font>
 		            </Label>
-		            <Label text="Date of Prescription" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+		            <Label text="Date of Prescription:" GridPane.halignment="LEFT" GridPane.rowIndex="8">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -77,12 +77,15 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
-		            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+		            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
 		               <padding>
 		                  <Insets left="5.0" right="5.0" />
 		               </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
 		            </Separator>
-		            <TextField fx:id="medName" disable="true" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+		            <TextField fx:id="medName" disable="true" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="270.0" promptText="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -90,7 +93,7 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="medDosage" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+		            <TextField fx:id="medDosage" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="300.0" promptText="Dose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -98,12 +101,15 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextArea fx:id="medDescript" disable="true" maxWidth="300.0" prefHeight="80.0" prefWidth="230.0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+		            <TextArea fx:id="medDescript" disable="true" maxWidth="300.0" minHeight="80.0" prefHeight="80.0" prefWidth="230.0" promptText="What it does, side effects, etc." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets top="35.0" />
+                     </GridPane.margin>
                   </TextArea>
-		            <TextField fx:id="prescribDoc" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+		            <TextField fx:id="prescribDoc" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -111,7 +117,7 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="purpOfPrescript" disable="true" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+		            <TextField fx:id="purpOfPrescript" disable="true" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Purpose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -126,7 +132,7 @@
                         <Font size="16.0" />
                      </font>
 		            </Button>
-                  <Label text="Medication Name" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <Label text="Medication Name:" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -134,7 +140,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Medication Dosage" GridPane.rowIndex="2">
+                  <Label text="Medication Dosage:" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -142,7 +148,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Medication Description" GridPane.rowIndex="3">
+                  <Label text="Medication Description:" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -150,7 +156,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="60.0" layoutY="543.0" text="Last Updated" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+                  <Label layoutX="60.0" layoutY="543.0" text="Last Updated:" GridPane.halignment="LEFT" GridPane.rowIndex="9">
                      <font>
                         <Font size="16.0" />
                      </font>

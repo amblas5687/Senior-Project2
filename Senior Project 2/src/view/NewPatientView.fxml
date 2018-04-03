@@ -49,7 +49,7 @@
 			            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			         </rowConstraints>
 			         <children>
-			            <Label text="First Name:" GridPane.rowIndex="1">
+			            <Label text="Patient First Name:" GridPane.rowIndex="1">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -57,7 +57,7 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 			            </Label>
-			            <Label text="Last Name:" GridPane.rowIndex="2">
+			            <Label text="Patient Last Name:" GridPane.rowIndex="2">
 	                     <GridPane.margin>
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
@@ -65,7 +65,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </Label>
-			            <Label text="Date of Birth:" GridPane.rowIndex="3">
+			            <Label text="Patient Date of Birth:" GridPane.rowIndex="3">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -73,7 +73,7 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 			            </Label>
-			            <Label text="Current Stage of Alzheimer's:" GridPane.rowIndex="7">
+			            <Label text="Patient's Current Stage of Alzheimer's:" GridPane.rowIndex="7">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -81,7 +81,7 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 			            </Label>
-			            <Label text="Diagnoses Date:" GridPane.rowIndex="8">
+			            <Label text="Patient's Diagnoses Date:" GridPane.rowIndex="8">
 	                     <GridPane.margin>
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
@@ -105,7 +105,7 @@
 			                  <Font name="System Bold Italic" size="16.0" />
 			               </font>
 			            </Label>
-			            <Label text="Primary Doctor:" GridPane.rowIndex="9">
+			            <Label text="Patient's Primary Doctor:" GridPane.rowIndex="9">
 			               <padding>
 			                  <Insets right="5.0" />
 			               </padding>
@@ -121,7 +121,7 @@
 			                  <Insets left="5.0" right="5.0" />
 			               </padding>
 			            </Separator>
-			            <TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+			            <TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="FIrst Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 			               <GridPane.margin>
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
@@ -129,7 +129,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+			            <TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 			               <GridPane.margin>
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
@@ -142,7 +142,7 @@
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
 			            </DatePicker>
-			            <TextField fx:id="cargiverTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+			            <TextField fx:id="cargiverTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Full Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 			               <GridPane.margin>
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
@@ -160,7 +160,7 @@
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
 			            </DatePicker>
-			            <TextField fx:id="doctorTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+			            <TextField fx:id="doctorTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 			               <GridPane.margin>
 			                  <Insets left="5.0" />
 			               </GridPane.margin>
@@ -168,7 +168,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <Label text="Primary Caregiver:" GridPane.rowIndex="4">
+			            <Label text="Primary Caregiver of Patient:" GridPane.rowIndex="4">
 	                     <GridPane.margin>
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
@@ -176,37 +176,37 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </Label>
-                        <Label fx:id="lblFname" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Label fx:id="lblFname" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblLname" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Label fx:id="lblLname" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblCaregiver" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                        <Label fx:id="lblCaregiver" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDOB" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="lblDOB" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDiagnoses" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+                        <Label fx:id="lblDiagnoses" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStage" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                        <Label fx:id="lblStage" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDoc" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+                        <Label fx:id="lblDoc" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>

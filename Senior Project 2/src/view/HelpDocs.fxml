@@ -87,7 +87,7 @@
                               <Insets right="33.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="*DISCLAIMER*" textFill="#bf5f82" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                        <Label styleClass="error" text="*DISCLAIMER*" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>

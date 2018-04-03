@@ -4,6 +4,7 @@
  * Author: Danni
  * Sections:
  * 		- Main
+ * 		- Error
  * 		- Button
  * 		- Slider
  * 		- Alert
@@ -20,6 +21,15 @@
 /* Affects all GUIs */
 .root{
 	
+}
+
+
+/* -- ERROR -- */
+
+/* Custom class for error labels */
+.error{
+	-fx-text-fill: #bf5f82;
+	-fx-font-weight: bold;
 }
 
 

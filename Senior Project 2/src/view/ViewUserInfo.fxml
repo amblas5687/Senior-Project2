@@ -40,7 +40,7 @@
 			            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			        </rowConstraints>
 			         <children>
-			            <Label text="Email" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+			            <Label text="Email Address:" GridPane.halignment="LEFT" GridPane.rowIndex="7">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -48,7 +48,7 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 			            </Label>
-			            <Label text="Password" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+			            <Label text="Account Password:" GridPane.halignment="LEFT" GridPane.rowIndex="8">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -72,7 +72,7 @@
 			                  <Font name="System Bold Italic" size="16.0" />
 			               </font>
 			            </Label>
-			            <Label text="Verify Password" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+			            <Label fx:id="lblVerifyPass" text="Verify Account Password:" visible="false" GridPane.halignment="LEFT" GridPane.rowIndex="9">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -85,7 +85,7 @@
 			                  <Insets left="5.0" right="5.0" />
 			               </padding>
 			            </Separator>
-			            <TextField fx:id="fnameTF" disable="true" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+			            <TextField fx:id="fnameTF" disable="true" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
@@ -93,7 +93,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <TextField fx:id="lnameTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+			            <TextField fx:id="lnameTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="230.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
@@ -111,7 +111,7 @@
 			                  <Insets />
 			               </GridPane.margin>
 			            </ComboBox>
-			            <TextField fx:id="emailTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+			            <TextField fx:id="emailTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Personal Email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
@@ -127,7 +127,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </PasswordField>
-			            <PasswordField fx:id="password2TF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+			            <PasswordField fx:id="password2TF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
@@ -135,7 +135,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </PasswordField>
-	                  <Label text="First Name" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+	                  <Label text="Your First Name:" GridPane.halignment="LEFT" GridPane.rowIndex="1">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -143,7 +143,7 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 	                  </Label>
-	                  <Label text="Last Name" GridPane.rowIndex="2">
+	                  <Label text="Your Last Name:" GridPane.rowIndex="2">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -151,7 +151,7 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 	                  </Label>
-	                  <Label text="Date of Birth" GridPane.rowIndex="3">
+	                  <Label text="Your Date of Birth:" GridPane.rowIndex="3">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -159,7 +159,7 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 	                  </Label>
-	                  <Label text="Relation to Patient" GridPane.rowIndex="4">
+	                  <Label text="Your Relation to Patient:" GridPane.rowIndex="4">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -167,37 +167,37 @@
 	                        <Insets left="50.0" />
 	                     </GridPane.margin>
 	                  </Label>
-                        <Label fx:id="lblFname" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label fx:id="lblFname" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblLname" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label fx:id="lblLname" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDOB" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <Label fx:id="lblDOB" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblRelation" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <Label fx:id="lblRelation" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblEmail" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                        <Label fx:id="lblEmail" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblPassword1" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                        <Label fx:id="lblPassword1" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblPassword2" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                        <Label fx:id="lblPassword2" styleClass="error" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="9">
                            <font>
                               <Font size="16.0" />
                            </font>
