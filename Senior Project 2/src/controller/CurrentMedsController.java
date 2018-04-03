@@ -224,7 +224,7 @@ public class CurrentMedsController {
 				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
+						dateAdded, addedBy, medID, null, null, null, dateUpdated, updatedBy);
 				patientMeds.add(tempMed);
 				System.out.println("MED..." + tempMed);
 			}
@@ -579,7 +579,7 @@ public class CurrentMedsController {
 				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
+						dateAdded, addedBy, medID, null, null, null, dateUpdated, updatedBy);
 
 				// add to list
 				patientMeds.add(tempMed);
@@ -680,7 +680,7 @@ public class CurrentMedsController {
 				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
+						dateAdded, addedBy, medID, null, null, null, dateUpdated, updatedBy);
 
 				// add to list
 				patientMeds.add(tempMed);
@@ -787,7 +787,7 @@ public class CurrentMedsController {
 				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
+						dateAdded, addedBy, medID, null, null, null, dateUpdated, updatedBy);
 
 				// add to list
 				patientMeds.add(tempMed);

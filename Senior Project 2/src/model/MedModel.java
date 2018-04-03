@@ -15,6 +15,7 @@ public class MedModel {
 	StringProperty date;
 	StringProperty details;
 	StringProperty archiveDate;
+	StringProperty archivedBy;
 	StringProperty archiveReason;
 	StringProperty dateAdded;
 	StringProperty addedBy;
@@ -27,7 +28,7 @@ public class MedModel {
 	//used for current patient
 	public MedModel(String patientCode, String medName, String medDate, String doc, String purpose,
 			String medDose, String doseType, String details, String dateAdded, String addedBy,
-			String medID, String archiveDate, String archiveReason, String dateUpdated, String updatedBy) {
+			String medID, String archiveDate, String archivedBy, String archiveReason, String dateUpdated, String updatedBy) {
 		super();
 		this.patientCode = new SimpleStringProperty(patientCode);
 		this.medName = new SimpleStringProperty(medName);
@@ -41,6 +42,7 @@ public class MedModel {
 		this.addedBy = new SimpleStringProperty(addedBy);
 		this.medID = new SimpleStringProperty(medID);
 		this.archiveDate = new SimpleStringProperty(archiveDate);
+		this.archivedBy = new SimpleStringProperty(archivedBy);
 		this.archiveReason = new SimpleStringProperty(archiveReason);
 		this.dateUpdated = new SimpleStringProperty(dateUpdated);
 		this.updatedBy = new SimpleStringProperty(updatedBy);
@@ -158,6 +160,14 @@ public class MedModel {
 
 	public void setArchiveDate(StringProperty archiveDate) {
 		this.archiveDate = archiveDate;
+	}
+	
+	public StringProperty getArchiveBy() {
+		return archivedBy;
+	}
+
+	public void setArchiveBy(StringProperty archivedBy) {
+		this.archivedBy = archivedBy;
 	}
 
 	public StringProperty getArchiveReason() {
