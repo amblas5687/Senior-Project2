@@ -946,13 +946,14 @@ public class CurrentMedsController {
 					String purpPresrcipt = moveMed.getPurpose().get();
 					String prescribDate = moveMed.getDate().get();
 					String dateArchived = java.time.LocalDate.now().toString();
+					String archivedBy = LoginController.currentUserName;
 					String archiveReason = notes.getText();
 
 					String medID = moveMed.getMedID().get();
 
 					String moveMedQ = "INSERT INTO archivedMeds(patientCode, medName, medDosage, doseType, medDescript, "
-							+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archiveReason) "
-							+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+							+ "prescribDoc, purpPresrcipt, prescribDate, dateArchived, archivedBy, archiveReason) "
+							+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 					moveMedPS = connection.prepareStatement(moveMedQ);
 
@@ -966,7 +967,8 @@ public class CurrentMedsController {
 					moveMedPS.setString(7, purpPresrcipt);
 					moveMedPS.setString(8, prescribDate);
 					moveMedPS.setString(9, dateArchived);
-					moveMedPS.setString(10, archiveReason);
+					moveMedPS.setString(10, archivedBy);
+					moveMedPS.setString(11, archiveReason);
 
 					moveMedPS.execute();
 					System.out.println("MEDICATION MOVED CURRENT");

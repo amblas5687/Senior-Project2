@@ -197,9 +197,10 @@ public class MedModel {
 
 	
 	public String toString() {
-		return "CurMedModel [patientCode=" + patientCode + ", medName=" + medName + ", medDosage=" + medDosage + ", doseType= " + doseType + " \ndoc=" + doc + ", purpose=" + purpose
-				+ ", date=" + date + ", \ndetails=" + details + ", dateAdded=" + dateAdded + ", medID=" + medID +
-				", \narchiveDate=" + archiveDate + ", archiveReason=" + archiveReason + ", dateUpdated=" + dateUpdated + "]";
+		return "CurMedModel patientCode=" + patientCode.get() + ", medName=" + medName.get() + ", medDosage=" + medDosage.get() + ", doseType= " + doseType.get() + 
+				" \ndoc=" + doc.get() + ", purpose=" + purpose.get() + ", date=" + date.get() + ", \ndetails=" + details.get() 
+				+ ", dateAdded=" + dateAdded.get() + ", addedBy="+ addedBy.get() + ", dateUpdated=" + dateUpdated.get() + ", updatedBy=" + updatedBy.get() + 
+				", medID=" + medID.get() + ", \narchiveDate=" + archiveDate.get() + ", archivedBy=" + archivedBy.get() + ", archiveReason=" + archiveReason.get() + "]";
 	}
 	
 
