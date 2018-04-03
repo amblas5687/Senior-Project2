@@ -67,6 +67,9 @@ public class EditMedController {
 
 	@FXML
 	private Label purposeLBL;
+	
+	@FXML
+	private Label lblDescript;
 
 	
 	private URL toPane;
@@ -287,12 +290,6 @@ public class EditMedController {
 		return dtFlag;
 	}
 
-	/*
-	 * private boolean validateDescription() {
-	 * 
-	 * }
-	 */
-
 	private boolean validateDoctor() {
 		doctorLBL.setText(null);
 		System.out.println("VALIDATING DOCTOR");
@@ -346,10 +343,14 @@ public class EditMedController {
 	
 	private boolean validateMedDescription() {
 		System.out.println("VALIDATING MED DESCRIPTION...");
+		
+		lblDescript.setText(null);
 		String details = medDescript.getText();
+		
 		if((!details.equals(null) || !details.equals("")) && details.length() >= 500)
 		{
 			System.out.println("DESCRIPTION TOO LONG");
+			lblDescript.setText("Description is too long.");
 			return false;
 		}
 		return true;

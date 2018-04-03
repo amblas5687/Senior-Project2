@@ -71,6 +71,9 @@ public class NewMedController {
 
 	@FXML
 	private Label datePrescribedLBL;
+	
+	@FXML
+	private Label lblDescript;
 
 	private URL toPane;
 	private AnchorPane temp;
@@ -366,10 +369,14 @@ public class NewMedController {
 	
 	private boolean validateMedDescription() {
 		System.out.println("VALIDATING MED DESCRIPTION...");
+		
+		lblDescript.setText(null);
 		String details = medDescript.getText();
+		
 		if((!details.equals(null) || !details.equals("")) && details.length() >= 500)
 		{
 			System.out.println("DESCRIPTION TOO LONG");
+			lblDescript.setText("Description is too long.");
 			return false;
 		}
 		return true;
