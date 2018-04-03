@@ -45,6 +45,7 @@ public class LoginController {
 	//global variables for login
 	 public static String currentUserID = null;
 	 public static String currentPatientID = null;
+	 public static String currentUserName = null;
 		 
 	 public void initialize(){
 			
@@ -118,6 +119,9 @@ public class LoginController {
 							stage.setScene(scene);
 							
 							currentUserID = rs.getString("userID");
+							String first = rs.getString("fname");
+							String last = rs.getString("lname");
+							currentUserName = first + " " + last;
 							currentPatientID = rs.getString("patientCode");
 							
 							System.out.println("CURRENT USER AND PATIENT... " + currentUserID + "__" + currentPatientID);
