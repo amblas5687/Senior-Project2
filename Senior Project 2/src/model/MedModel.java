@@ -17,15 +17,17 @@ public class MedModel {
 	StringProperty archiveDate;
 	StringProperty archiveReason;
 	StringProperty dateAdded;
+	StringProperty addedBy;
 	StringProperty medID;
 	StringProperty dateUpdated;
+	StringProperty updatedBy;
 
 	
 	
 	//used for current patient
 	public MedModel(String patientCode, String medName, String medDate, String doc, String purpose,
-			String medDose, String doseType, String details, String dateAdded, 
-			String medID, String archiveDate, String archiveReason, String dateUpdated) {
+			String medDose, String doseType, String details, String dateAdded, String addedBy,
+			String medID, String archiveDate, String archiveReason, String dateUpdated, String updatedBy) {
 		super();
 		this.patientCode = new SimpleStringProperty(patientCode);
 		this.medName = new SimpleStringProperty(medName);
@@ -36,10 +38,12 @@ public class MedModel {
 		this.date = new SimpleStringProperty(medDate);
 		this.details = new SimpleStringProperty(details);
 		this.dateAdded = new SimpleStringProperty(dateAdded);
+		this.addedBy = new SimpleStringProperty(addedBy);
 		this.medID = new SimpleStringProperty(medID);
 		this.archiveDate = new SimpleStringProperty(archiveDate);
 		this.archiveReason = new SimpleStringProperty(archiveReason);
 		this.dateUpdated = new SimpleStringProperty(dateUpdated);
+		this.updatedBy = new SimpleStringProperty(updatedBy);
 
 	}
 
@@ -132,6 +136,14 @@ public class MedModel {
 		this.dateAdded = dateAdded;
 	}
 	
+	public StringProperty getAddedBY() {
+		return addedBy;
+	}
+
+	public void setAddedBy(StringProperty addedBy) {
+		this.addedBy = addedBy;
+	}
+	
 	public StringProperty getMedID() {
 		return medID;
 	}
@@ -162,6 +174,14 @@ public class MedModel {
 
 	public void setDateUpdated(StringProperty dateUpdated) {
 		this.dateUpdated = dateUpdated;
+	}
+	
+	public StringProperty getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void updatedBy(StringProperty updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
 

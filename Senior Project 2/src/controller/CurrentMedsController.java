@@ -202,8 +202,10 @@ public class CurrentMedsController {
 			String medDoseType;
 			String purpose;
 			String dateAdded;
+			String addedBy;
 			String medID;
 			String dateUpdated;
+			String updatedBy;
 
 			while (rs.next()) {
 				patientCode = rs.getString("patientCode");
@@ -216,11 +218,13 @@ public class CurrentMedsController {
 				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
+				addedBy = rs.getString("addedBy");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
+				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, medID, null, null, dateUpdated);
+						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
 				patientMeds.add(tempMed);
 				System.out.println("MED..." + tempMed);
 			}
@@ -552,8 +556,10 @@ public class CurrentMedsController {
 			String medDoseType;
 			String purpose;
 			String dateAdded;
+			String addedBy;
 			String medID;
 			String dateUpdated;
+			String updatedBy;
 
 			// set values from search
 			while (rs.next()) {
@@ -567,11 +573,13 @@ public class CurrentMedsController {
 				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
+				addedBy = rs.getString("addedBy");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
+				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, medID, null, null, dateUpdated);
+						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
 
 				// add to list
 				patientMeds.add(tempMed);
@@ -652,8 +660,10 @@ public class CurrentMedsController {
 				String medDoseType;
 				String purpose;
 				String dateAdded;
+				String addedBy;
 				String medID;
 				String dateUpdated;
+				String updatedBy;
 
 				patientCode = rs.getString("patientCode");
 				medName = rs.getString("medName");
@@ -664,11 +674,13 @@ public class CurrentMedsController {
 				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
+				addedBy = rs.getString("addedBy");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
+				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, medID, null, null, dateUpdated);
+						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
 
 				// add to list
 				patientMeds.add(tempMed);
@@ -755,8 +767,10 @@ public class CurrentMedsController {
 				String medDoseType;
 				String purpose;
 				String dateAdded;
+				String addedBy;
 				String medID;
 				String dateUpdated;
+				String updatedBy;
 
 				patientCode = rs.getString("patientCode");
 				medName = rs.getString("medName");
@@ -767,11 +781,13 @@ public class CurrentMedsController {
 				medDoseType = rs.getString("doseType");
 				purpose = rs.getString("purpPresrcipt");
 				dateAdded = rs.getString("dateAdded");
+				addedBy = rs.getString("addedBy");
 				medID = rs.getString("medID");
 				dateUpdated = rs.getString("dateUpdated");
+				updatedBy = rs.getString("updatedBy");
 
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
-						dateAdded, medID, null, null, dateUpdated);
+						dateAdded, addedBy, medID, null, null, dateUpdated, updatedBy);
 
 				// add to list
 				patientMeds.add(tempMed);

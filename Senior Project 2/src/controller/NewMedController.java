@@ -130,12 +130,13 @@ public class NewMedController {
 			System.out.println("Before format " + pDate + " After format " + formatDate);
 
 			String dateAdded = java.time.LocalDate.now().toString();
+			String addedBy = LoginController.currentUserName;
 
 			Connection connection = null;
 			PreparedStatement ps = null;
 
-			String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, doseType, medDescript, prescribDoc, purpPresrcipt, prescribDate, dateAdded)"
-					+ "VALUES (?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO currentMeds (patientCode, medName, medDosage, doseType, medDescript, prescribDoc, purpPresrcipt, prescribDate, dateAdded, addedBy)"
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 			try {
 				connection = DataSource.getInstance().getConnection();
@@ -150,6 +151,7 @@ public class NewMedController {
 				ps.setString(7, pPurpose);
 				ps.setString(8, formatDate);
 				ps.setString(9, dateAdded);
+				ps.setString(10, addedBy);
 
 				ps.execute();
 
