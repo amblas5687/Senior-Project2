@@ -101,7 +101,7 @@ public class NewMedController {
 	@FXML
 	void submit(ActionEvent event) throws ParseException {
 
-		boolean validName, validDose, validDoseType, validDoctor, validPurpose, validDate = true;
+		boolean validName, validDose, validDoseType, validDoctor, validPurpose, validDate, validDescript = true;
 
 		validName = validateName();
 		validDose = validateDose();
@@ -109,8 +109,9 @@ public class NewMedController {
 		validDoctor = validateDoctor();
 		validPurpose = validatePurpose();
 		validDate = validateDate();
+		validDescript = validateMedDescription();
 
-		if (validName && validDose && validDoseType && validDoctor && validPurpose && validDate) {
+		if (validName && validDose && validDoseType && validDoctor && validPurpose && validDate && validDescript) {
 
 			String mName = medName.getText();
 			String mDosage = medDosage.getText();
@@ -362,5 +363,16 @@ public class NewMedController {
 			}
 		}
 	}// end method
+	
+	private boolean validateMedDescription() {
+		System.out.println("VALIDATING MED DESCRIPTION...");
+		String details = medDescript.getText();
+		if((!details.equals(null) || !details.equals("")) && details.length() >= 500)
+		{
+			System.out.println("DESCRIPTION TOO LONG");
+			return false;
+		}
+		return true;
+	}
 
 }

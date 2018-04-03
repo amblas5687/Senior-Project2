@@ -123,15 +123,16 @@ public class EditMedController {
 	@FXML
 	void submit(ActionEvent event) {
 
-		boolean validName, validDose, validDoseType, validDoctor, validPurpose = true;
+		boolean validName, validDose, validDoseType, validDoctor, validPurpose, validDescript = true;
 
 		validName = validateName();
 		validDose = validateDose();
 		validDoseType = validateDoseType();
 		validDoctor = validateDoctor();
 		validPurpose = validatePurpose();
+		validDescript = validateMedDescription();
 
-		if (validName && validDose && validDoseType && validDoctor && validPurpose) {
+		if (validName && validDose && validDoseType && validDoctor && validPurpose && validDescript) {
 			String mName = medName.getText();
 			String mDosage = medDosage.getText();
 			String mDoseType = doseType.getValue();
@@ -340,6 +341,18 @@ public class EditMedController {
 			purposeFlag = false;
 		}
 		return purposeFlag;
+	}
+	
+	
+	private boolean validateMedDescription() {
+		System.out.println("VALIDATING MED DESCRIPTION...");
+		String details = medDescript.getText();
+		if((!details.equals(null) || !details.equals("")) && details.length() >= 500)
+		{
+			System.out.println("DESCRIPTION TOO LONG");
+			return false;
+		}
+		return true;
 	}
 
 }
