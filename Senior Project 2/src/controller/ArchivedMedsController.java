@@ -56,9 +56,8 @@ public class ArchivedMedsController {
 	private TableColumn<MedModel, String> mDoc;
 	@FXML
 	private TableColumn<MedModel, String> archiveDate;
-	@FXML
-	private TableColumn<MedModel, String> archiveReason;
-
+	
+	
 	ObservableList<MedModel> archivedMeds = FXCollections.observableArrayList();
 
 	@FXML
@@ -117,7 +116,6 @@ public class ArchivedMedsController {
 		mDate.setCellValueFactory(cellData -> cellData.getValue().getDate());
 		mDoc.setCellValueFactory(cellData -> cellData.getValue().getDoc());
 		archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
-		archiveReason.setCellValueFactory(cellData -> cellData.getValue().getArchiveReason());
 		archiveTable.setItems(archivedMeds);
 
 		searchOptions.getItems().addAll("Name", "Date", "Date Range");
