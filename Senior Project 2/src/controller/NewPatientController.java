@@ -230,93 +230,100 @@ public class NewPatientController {
 
 	}// end method
 
-	boolean checkFirstName() {
-
-		lblFname.setText(null);
-
-		String name = fnameTF.getText();
-
-		if (name.equals("")) {
-			lblFname.setText("Enter patient first name");
-			count++;
-			return flag = true;
-		}
-
-		name = name.trim();
-
-		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*$");
-		Matcher nam = p.matcher(name);
-		boolean n = nam.find();
-
-		if (n) {
-			lblFname.setText("Remove any numbers, special characters, or extra spaces");
-			flag = true;
-		} else {
-			flag = false;
-		}
-
-		return flag;
-	}
-
-	boolean checkLastName() {
-
-		lblLname.setText(null);
-
-		String name = lnameTF.getText();
-
-		if (name.equals("")) {
-			lblLname.setText("Enter patient last name");
-			count++;
-			return flag = true;
-		}
-
-		name = name.trim();
-
-		Pattern p = Pattern.compile("[^a-zA-Z]+[\\-\\.\\s]?[^a-zA-Z]*$");
-		Matcher nam = p.matcher(name);
-		boolean n = nam.find();
-
-		if (n) {
-			lblLname.setText("Remove any numbers, special characters, or extra spaces");
-			flag = true;
-		} else {
-			flag = false;
-		}
-
-		return flag;
-	}
-
-	boolean checkCaregiver() {
-
-		lblCaregiver.setText(null);
-
-		String name = cargiverTF.getText();
-
-		if (name.equals("")) {
-			lblCaregiver.setText("Enter name of caregiver");
-			count++;
-			return flag = true;
-		}
-
-		name = name.trim();
-
-		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*[\\-\\.\\s]?[^a-zA-Z]*$");
-		Matcher nam = p.matcher(name);
-		boolean n = nam.find();
-
-		if (n) {
-			lblCaregiver.setText("Remove any numbers, special characters, or extra spaces");
-			flag = true;
-		} else {
-			flag = false;
-		}
-
-		return flag;
-	}
-
-	boolean checkDOB() {
-
-		lblDOB.setText(null);
+    boolean checkFirstName() {
+	   	
+    	lblFname.setText(null);
+    	
+    	String name = fnameTF.getText();
+    	
+	   	if(name.equals("")) {
+	   		lblFname.setText("Enter patient first name");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	name = name.trim();
+		
+		Pattern p = Pattern.compile("^[a-zA-Z]+\\s?[a-zA-Z]*$");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
+    	//System.out.println("n " + n);
+		
+    	
+	   	if(!n) {
+	   		lblFname.setText("Remove any numbers, special characters, or extra spaces");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
+    
+    boolean checkLastName() {
+    	
+    	lblLname.setText(null);
+    	
+    	String name = lnameTF.getText();
+	   	
+	   	if(name.equals("")) {
+	   		lblLname.setText("Enter patient last name");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	name = name.trim();
+		
+		Pattern p = Pattern.compile("^[a-zA-Z]+[\\-\\.\\s]?[a-zA-Z]*$");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
+		
+    	
+	   	if(!n) {
+	   		lblLname.setText("Remove any numbers, special characters, or extra spaces");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
+    
+    boolean checkCaregiver() {
+    	
+    	lblCaregiver.setText(null);
+    	
+    	String name = cargiverTF.getText();
+	   	
+	   	if(name.equals("")) {
+	   		lblCaregiver.setText("Enter name of caregiver");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	name = name.trim();
+		
+	   	
+	   	
+	   			
+		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
+		
+    	
+	   	if(!n) {
+	   		lblCaregiver.setText("Remove any numbers, special characters, or extra spaces");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
+    
+    boolean checkDOB() {
+    	
+    	lblDOB.setText(null);
 
 		String dob = DOBPicker.getEditor().getText();
 
@@ -365,14 +372,14 @@ public class NewPatientController {
 		}
 
 		return flag;
-	}
-
-	boolean checkDiagnoses() {
-
-		lblDiagnoses.setText(null);
+    }
+    
+    boolean checkDiagnoses(){
+    	
+    	lblDiagnoses.setText(null);
 
 		String diag = diagnosesPicker.getEditor().getText();
-
+		
 		if (diag.equals("")) {
 			lblDiagnoses.setText("Please select or enter a date of diagnoses for patient");
 			count++;
@@ -384,7 +391,12 @@ public class NewPatientController {
 				String[] sections = diag.split("/");
 				int year = Integer.parseInt(sections[2]);
 				DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-				Date dob = formatter.parse(DOBPicker.getEditor().getText());
+				Date dob;
+				if(DOBPicker.getEditor().getText().equals("")) {
+					dob = null;
+				} else {
+					dob = formatter.parse(DOBPicker.getEditor().getText());
+				}
 				formatter.setLenient(false);
 				Date date = formatter.parse(diag);
 				Date curDate = new Date();
@@ -404,7 +416,7 @@ public class NewPatientController {
 				} else if (date.after(curDate)) {
 					lblDiagnoses.setText("Date of diagnoses cannot be after today's date");
 					flag = true;
-				} else if(date.before(dob) || date.equals(dob)) {
+				} else if(dob != null && date.before(dob) || date.equals(dob)) {
 					lblDiagnoses.setText("Date cannot be before or on the day of patient's birthday.");
 					flag = true;
 				} else {
@@ -420,50 +432,51 @@ public class NewPatientController {
 		}
 
 		return flag;
-	}
-
-	boolean checkStage() {
-
-		lblStage.setText(null);
-
-		if (stageBox.getValue() == null) {
+    }
+    
+    boolean checkStage(){
+    	
+    	lblStage.setText(null);
+    	
+    	if(stageBox.getValue() == null) {
 			lblStage.setText("Please select patient's current stage");
-			count++;
+	   		count++;
 			flag = true;
 		} else {
 			flag = false;
 		}
-
+		
 		return flag;
-	}
-
-	boolean checkDoc() {
-
-		lblDoc.setText(null);
-
-		String doc = doctorTF.getText();
-
-		if (doc.equals("")) {
-			lblDoc.setText("Enter doctor name");
-			count++;
-			return flag = true;
-		}
-
-		doc = doc.trim();
-
-		Pattern p = Pattern.compile("[^a-zA-Z]+\\.?\\s?[^a-zA-Z]*[\\-\\.\\s]?[^a-zA-Z]*$");
-		Matcher nam = p.matcher(doc);
-		boolean n = nam.find();
-
-		if (n) {
-			lblDoc.setText("Remove any numbers, special characters, or extra spaces");
-			flag = true;
-		} else {
-			flag = false;
-		}
-
-		return flag;
-	}
+    }
+    
+    boolean checkDoc() {
+    	
+    	lblDoc.setText(null);
+    	
+    	String doc = doctorTF.getText();
+    
+    	if(doc.equals("")) {
+	   		lblDoc.setText("Enter doctor name");
+	   		count++;
+	   		return flag = true;
+	   	} 
+	   	
+	   	doc = doc.trim();
+		
+		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
+    	Matcher nam = p.matcher(doc);
+    	boolean n = nam.find();
+		
+    	
+	   	if(!n) {
+	   		lblDoc.setText("Remove any numbers, special characters, or extra spaces");
+	   		flag = true;
+	   	} else {
+	   		flag = false;
+	   	}
+	   	
+	   	return flag;
+    }
 
 	String genCode() {
 
