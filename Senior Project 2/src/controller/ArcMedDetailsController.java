@@ -44,6 +44,9 @@ public class ArcMedDetailsController {
 
 	@FXML
 	private TextArea reasonTF;
+	
+    @FXML
+    private TextField archiveByTF;
 
 	private MedModel medDetails;
 	
@@ -77,15 +80,14 @@ public class ArcMedDetailsController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate prescribDate = LocalDate.parse(prescribDateString, formatter);
 		DOPPicker.setValue(prescribDate);
-		DOPPicker.setDisable(true);
 
 		// setting the datepicker archive date
 		String archiveDate = medDetails.getArchiveDate().get();
 		if (archiveDate != null) {
 			LocalDate archive = LocalDate.parse(archiveDate, formatter);
 			ArchivePicker.setValue(archive);
-			ArchivePicker.setDisable(true);
 		}
+		archiveByTF.setText(medDetails.getArchiveBy().get());
 	}
 
 	@FXML
