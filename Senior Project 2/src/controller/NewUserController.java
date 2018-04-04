@@ -568,22 +568,7 @@ public class NewUserController {
 
 			if (rs.isBeforeFirst()) {
 				System.out.println("USER EMAIL TAKEN");
-				lblEmail.setText("Email is taken. Please enter a different email address");
-				Alert failure = new Alert(AlertType.ERROR);
-				// safely catches error by pop-up alert.
-				failure.setContentText("Email is already in use. Please enter a different email address");
-				failure.getDialogPane().getStylesheets()
-						.add(getClass().getResource("/application/application.css").toExternalForm());
-				Optional<ButtonType> error = failure.showAndWait();
-				//System.out.println("Button type " + error.get());
-				if(error.isPresent() && error.get().getButtonData().toString() == "OK_DONE")
-				{
-					return false;
-				}
-				else if(!error.isPresent())
-				{
-					return false;
-				}
+				lblEmail.setText("Email is already in use. Please enter a different email address");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
