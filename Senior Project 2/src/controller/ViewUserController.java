@@ -198,8 +198,8 @@ public class ViewUserController {
 			lblAll.setText("Please fill in all fields");
 		}else if (validDOB && validFname && validLname && validEmail && validPassword) {
 
-			String firstName = fnameTF.getText();
-			String lastName = lnameTF.getText();
+			String firstName = fnameTF.getText().trim();
+			String lastName = lnameTF.getText().trim();
 			
 			
 			
