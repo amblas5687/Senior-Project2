@@ -73,7 +73,7 @@ public class ViewUserController {
 
 	@FXML
 	private Label lblPassword2;
-	
+
 	@FXML
 	private Label lblVerifyPass;
 
@@ -84,12 +84,14 @@ public class ViewUserController {
 	private URL toPane;
 	private AnchorPane temp;
 
+	private String currentEmail = "";
+
 	public void initialize() {
 
 		System.out.println("*******VIEW USER INFO*******");
 
 		relationBox.getItems().addAll("Son/Daughter", "Spouse", "Grandchild", "Friend", "Medical Professional");
-		
+
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -109,6 +111,7 @@ public class ViewUserController {
 				lnameTF.setText(rs.getString("lname"));
 				dob = rs.getString("DOB");
 				emailTF.setText(rs.getString("email"));
+				currentEmail = emailTF.getText();
 				relation = rs.getString("pRelation");
 				password1TF.setText(rs.getString("password"));
 				password2TF.setText(rs.getString("password"));
@@ -170,19 +173,19 @@ public class ViewUserController {
 		emailTF.setDisable(false);
 		password1TF.setDisable(false);
 		cancelBTN.setVisible(true);
-		
+
 		password1TF.textProperty().addListener((observable, oldValue, newValue) -> {
 			password2TF.setText(null);
-		    System.out.println("textfield changed from " + oldValue + " to " + newValue);
-		    password2TF.setVisible(true);
-		    lblVerifyPass.setVisible(true);
-		    lblPassword2.setVisible(true);
+			System.out.println("textfield changed from " + oldValue + " to " + newValue);
+			password2TF.setVisible(true);
+			lblVerifyPass.setVisible(true);
+			lblPassword2.setVisible(true);
 		});
 	}
 
 	@FXML
 	void submit(ActionEvent event) throws ParseException {
-		
+
 		count = 0;
 		lblAll.setText(null);
 		// validate fields
@@ -190,19 +193,17 @@ public class ViewUserController {
 		validDOB = validateDOB();
 		validFname = validateFName();
 		validLname = validateLName();
-		//validRelation = validateRelation();
+		// validRelation = validateRelation();
 		validEmail = validateEmail();
 		validPassword = validatePassword();
-		
-		if(count > 0) {
+
+		if (count > 0) {
 			lblAll.setText("Please fill in all fields");
-		}else if (validDOB && validFname && validLname && validEmail && validPassword) {
+		} else if (validDOB && validFname && validLname && validEmail && validPassword) {
 
 			String firstName = fnameTF.getText().trim();
 			String lastName = lnameTF.getText().trim();
-			
-			
-			
+
 			// grab date
 			String DOB = DOBPicker.getEditor().getText();
 
@@ -211,13 +212,11 @@ public class ViewUserController {
 			Date DOBDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOB);
 			String formatDate = formatter2.format(DOBDate);
 			System.out.println("Before format " + DOB + " After format " + formatDate);
-			
-			
-			
+
 			String relation = relationBox.getValue();
 			String email = emailTF.getText();
 			String password = password1TF.getText();
-			
+
 			String query = "UPDATE user SET fname = ?, lname = ?, DOB = ?, pRelation = ?, "
 					+ "email = ?, password = ? WHERE userID = ?";
 
@@ -239,11 +238,10 @@ public class ViewUserController {
 				ps.execute();
 
 				System.out.println("CHANGED USER INFO");
-			    password2TF.setVisible(false);
-			    lblPassword2.setVisible(false);
-			    password2TF.setText(null);
-			    lblVerifyPass.setVisible(false);
-				
+				password2TF.setVisible(false);
+				lblPassword2.setVisible(false);
+				// password2TF.setText(null);
+				lblVerifyPass.setVisible(false);
 
 			} catch (SQLException e) {
 				DBConfig.displayException(e);
@@ -428,9 +426,14 @@ public class ViewUserController {
 
 		System.out.println("VALIDATING EMAIL");
 		lblEmail.setText(null);
+		boolean takenEmail = true;
 		String email = emailTF.getText();
 		// ^([a-zA-Z0-9~!$%^&*_=+}{\'?]+(\.[a-zA-Z0-9~!$%^&*_=+}{\'?]+)*@[a-zA-Z0-9_-]+(\.com|\.net|\.edu|\.gov|\.mil))$
-		Pattern p = Pattern.compile("^([a-zA-Z0-9~!$%^&*_=+}{\\'?]+(\\.[a-zA-Z0-9~!$%^&*_=+}{\\'?]+)*@[a-zA-Z0-9_-]+(\\.com|\\.net|\\.edu|\\.gov|\\.mil))$");// . represents single character
+		Pattern p = Pattern.compile(
+				"^([a-zA-Z0-9~!$%^&*_=+}{\\'?]+(\\.[a-zA-Z0-9~!$%^&*_=+}{\\'?]+)*@[a-zA-Z0-9_-]+(\\.com|\\.net|\\.edu|\\.gov|\\.mil))$");// .
+																																			// represents
+																																			// single
+																																			// character
 		Matcher m = p.matcher(email);
 		boolean b = m.matches();
 
@@ -445,7 +448,76 @@ public class ViewUserController {
 			return false;
 		}
 
-		return true;
+		// see if email taken
+		if (!currentEmail.equals(email)) {
+			takenEmail = checkUserExist();
+		}
+		if (takenEmail) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean checkUserExist() {
+
+		System.out.println("CHECKING IF EMAIL IS TAKEN");
+		lblEmail.setText(null);
+
+		String email = emailTF.getText();
+
+		Connection connection = null;
+		PreparedStatement userEmail = null;
+		ResultSet rs = null;
+		boolean emailFlag = true;
+
+		// check if patient code in database
+		try {
+			String emailQ = "SELECT email FROM user WHERE email = ?";
+
+			connection = DataSource.getInstance().getConnection();
+			userEmail = connection.prepareStatement(emailQ);
+			userEmail.setString(1, email);
+			rs = userEmail.executeQuery();
+
+			if (rs.isBeforeFirst()) {
+				System.out.println("USER EMAIL TAKEN");
+				lblEmail.setText("Email is already in use. Please enter a different email address");
+				emailFlag = false;
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (userEmail != null) {
+				try {
+					userEmail.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} // finally
+
+		return emailFlag;
 	}
 
 	private boolean validatePassword() {
@@ -484,7 +556,7 @@ public class ViewUserController {
 			System.out.println("PASSWORD EMPTY...");
 			passwordFlag = false;
 		} else if (!p1.equals(p2)) {
-			//lblPassword1.setText("Password does not match");
+			// lblPassword1.setText("Password does not match");
 			lblPassword2.setText("Mismatched passwords");
 			System.out.println("PASSWORDS DON'T MATCH...");
 			passwordFlag = false;

@@ -556,6 +556,7 @@ public class NewUserController {
 		Connection connection = null;
 		PreparedStatement userEmail = null;
 		ResultSet rs = null;
+		boolean emailFlag = true;
 
 		// check if patient code in database
 		try {
@@ -565,10 +566,13 @@ public class NewUserController {
 			userEmail = connection.prepareStatement(emailQ);
 			userEmail.setString(1, email);
 			rs = userEmail.executeQuery();
+			
 
 			if (rs.isBeforeFirst()) {
 				System.out.println("USER EMAIL TAKEN");
 				lblEmail.setText("Email is already in use. Please enter a different email address");
+				emailFlag = false;
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -601,8 +605,7 @@ public class NewUserController {
 			}
 		} // finally
 		
-		return true;
-		
+		return emailFlag;
 	}
 
 }
