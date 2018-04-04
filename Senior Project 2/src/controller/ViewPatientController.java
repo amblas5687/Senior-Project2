@@ -353,13 +353,13 @@ public class ViewPatientController {
 	   	
 	   	name = name.trim();
 		
-		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*$");
+		Pattern p = Pattern.compile("^[a-zA-Z]+\\s?[a-zA-Z]*$");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
-    	System.out.println("n " + n);
+    	//System.out.println("n " + n);
 		
     	
-	   	if(n) {
+	   	if(!n) {
 	   		lblFname.setText("Remove any numbers, special characters, or extra spaces");
 	   		flag = true;
 	   	} else {
@@ -383,12 +383,12 @@ public class ViewPatientController {
 	   	
 	   	name = name.trim();
 		
-		Pattern p = Pattern.compile("[^a-zA-Z]+[\\-\\.\\s]?[^a-zA-Z]*$");
+		Pattern p = Pattern.compile("^[a-zA-Z]+[\\-\\.\\s]?[a-zA-Z]*$");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
 		
     	
-	   	if(n) {
+	   	if(!n) {
 	   		lblLname.setText("Remove any numbers, special characters, or extra spaces");
 	   		flag = true;
 	   	} else {
@@ -412,12 +412,15 @@ public class ViewPatientController {
 	   	
 	   	name = name.trim();
 		
-		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*[\\-\\.\\s]?[^a-zA-Z]*$");
+	   	
+	   	
+	   			
+		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
 		
     	
-	   	if(n) {
+	   	if(!n) {
 	   		lblCaregiver.setText("Remove any numbers, special characters, or extra spaces");
 	   		flag = true;
 	   	} else {
@@ -569,12 +572,12 @@ public class ViewPatientController {
 	   	
 	   	doc = doc.trim();
 		
-		Pattern p = Pattern.compile("[^a-zA-Z]+\\.?\\s?[^a-zA-Z]*[\\-\\.\\s]?[^a-zA-Z]*$");
+		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
     	Matcher nam = p.matcher(doc);
     	boolean n = nam.find();
 		
     	
-	   	if(n) {
+	   	if(!n) {
 	   		lblDoc.setText("Remove any numbers, special characters, or extra spaces");
 	   		flag = true;
 	   	} else {
