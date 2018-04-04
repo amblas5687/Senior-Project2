@@ -275,13 +275,13 @@ public class ViewPatientController {
 			PatientModel updatePatient = new PatientModel();
 	
 	    	
-	    	updatePatient.setFname(fnameTF.getText());
-	    	updatePatient.setLname(lnameTF.getText());
+	    	updatePatient.setFname(fnameTF.getText().trim());
+	    	updatePatient.setLname(lnameTF.getText().trim());
 	    	updatePatient.setDOB(formatter.format(dobDate));
-	    	updatePatient.setDoctor(doctorTF.getText());
+	    	updatePatient.setDoctor(doctorTF.getText().trim());
 	    	updatePatient.setStage(stageBox.getValue().toString());
 	    	updatePatient.setDiagnosesDate(formatter.format(diagnosesDate));
-	    	updatePatient.setCargiver(cargiverTF.getText());
+	    	updatePatient.setCargiver(cargiverTF.getText().trim());
 	    	updatePatient.setPatientCode(LoginController.currentPatientID);
 	    	
 	    	
