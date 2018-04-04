@@ -138,7 +138,7 @@ public class MedModel {
 		this.dateAdded = dateAdded;
 	}
 	
-	public StringProperty getAddedBY() {
+	public StringProperty getAddedBy() {
 		return addedBy;
 	}
 

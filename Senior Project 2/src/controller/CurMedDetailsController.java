@@ -42,6 +42,12 @@ public class CurMedDetailsController {
     @FXML
     private Button btnOK;
     
+    @FXML
+    private TextField addByTF;
+
+    @FXML
+    private TextField editByTF;
+    
 	private MedModel medDetails;
 
 
@@ -74,7 +80,6 @@ public class CurMedDetailsController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	LocalDate prescribDate = LocalDate.parse(prescribDateString, formatter);
     	DOPPicker.setValue(prescribDate);
-    	DOPPicker.setDisable(true);
     	
     	//setting the datepicker DOP
     	String updateDateString = medDetails.getDateUpdated().get();
@@ -82,8 +87,10 @@ public class CurMedDetailsController {
     	{
 	    	LocalDate updateDate = LocalDate.parse(updateDateString, formatter);
 	    	LUPicker.setValue(updateDate);
-	    	LUPicker.setDisable(true);
     	}
+    	addByTF.setText(medDetails.getAddedBy().get());
+    	editByTF.setText(medDetails.getUpdatedBy().get());
+    	
     }
     
     @FXML
