@@ -267,7 +267,7 @@ public class ViewPatientController {
     	if(count > 0) {
 	   		lblAll.setText("Please fill in all fields");
 	   	} else if(!fName && !lName && !DOB && !cGiver && !cStage && !dDate && !Doc) {
-	   		
+	   		System.out.println("VALIDATED");
 	    	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date dobDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOBPicker.getEditor().getText());
 			Date diagnosesDate = new SimpleDateFormat("MM/dd/yyyy").parse(diagnosesPicker.getEditor().getText());
@@ -356,6 +356,7 @@ public class ViewPatientController {
 		Pattern p = Pattern.compile("[^a-zA-Z]+\\s?[^a-zA-Z]*$");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
+    	System.out.println("n " + n);
 		
     	
 	   	if(n) {

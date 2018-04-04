@@ -216,9 +216,10 @@ public class ViewUserController {
 			
 			String relation = relationBox.getValue();
 			String email = emailTF.getText();
-
+			String password = password1TF.getText();
+			
 			String query = "UPDATE user SET fname = ?, lname = ?, DOB = ?, pRelation = ?, "
-					+ "email = ? WHERE userID = ?";
+					+ "email = ?, password = ? WHERE userID = ?";
 
 			Connection connection = null;
 			PreparedStatement ps = null;
@@ -232,11 +233,17 @@ public class ViewUserController {
 				ps.setString(3, formatDate);
 				ps.setString(4, relation);
 				ps.setString(5, email);
-				ps.setString(6, LoginController.currentUserID);
+				ps.setString(6, password);
+				ps.setString(7, LoginController.currentUserID);
 
 				ps.execute();
 
 				System.out.println("CHANGED USER INFO");
+			    password2TF.setVisible(false);
+			    lblPassword2.setVisible(false);
+			    password2TF.setText(null);
+			    lblVerifyPass.setVisible(false);
+				
 
 			} catch (SQLException e) {
 				DBConfig.displayException(e);
