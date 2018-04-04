@@ -34,6 +34,8 @@
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		        </rowConstraints>
 		         <children>
@@ -77,12 +79,12 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
 		            </Label>
-		            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+		            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" GridPane.valignment="CENTER">
 		               <padding>
 		                  <Insets left="5.0" right="5.0" />
 		               </padding>
                      <GridPane.margin>
-                        <Insets bottom="5.0" />
+                        <Insets top="50.0" />
                      </GridPane.margin>
 		            </Separator>
 		            <TextField fx:id="medName" editable="false" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="270.0" promptText="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
@@ -123,8 +125,8 @@
                      </font>
                   </TextField>
                   <DatePicker fx:id="DOPPicker" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                  <DatePicker fx:id="LUPicker" editable="false" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-		            <Button fx:id="btnOK" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                  <DatePicker fx:id="LUPicker" editable="false" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+		            <Button fx:id="btnOK" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -156,7 +158,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label layoutX="60.0" layoutY="543.0" text="Last Updated:" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+                  <Label layoutX="60.0" layoutY="543.0" text="Last Updated:" GridPane.halignment="LEFT" GridPane.rowIndex="11">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -164,6 +166,32 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
+                  <Label text="Added by:" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Last Edited by:" GridPane.rowIndex="10">
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="addByTF" editable="false" layoutX="344.0" layoutY="380.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Full Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="editByTF" editable="false" layoutX="344.0" layoutY="380.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Full Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
 		         </children>
 		      </GridPane>
 		   </center>
