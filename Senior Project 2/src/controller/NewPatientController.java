@@ -135,13 +135,13 @@ public class NewPatientController {
 			Date dobDate = new SimpleDateFormat("MM/dd/yyyy").parse(DOBPicker.getEditor().getText());
 			Date diagnosesDate = new SimpleDateFormat("MM/dd/yyyy").parse(diagnosesPicker.getEditor().getText());
 
-			String firstName = fnameTF.getText();
-			String lastName = lnameTF.getText();
+			String firstName = fnameTF.getText().trim();
+			String lastName = lnameTF.getText().trim();
 			String dob = formatter.format(dobDate);
 			String curStage = stageBox.getValue().toString();
 			String diagDate = formatter.format(diagnosesDate);
-			String doc = doctorTF.getText();
-			String caregiver = cargiverTF.getText();
+			String doc = doctorTF.getText().trim();
+			String caregiver = cargiverTF.getText().trim();
 			String patientCode = genCode();
 
 			Alert alert = new Alert(AlertType.INFORMATION);

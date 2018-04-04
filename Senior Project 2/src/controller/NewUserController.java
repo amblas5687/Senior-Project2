@@ -200,8 +200,8 @@ public class NewUserController {
 								+ "VALUES (?,?,?,?,?,?,?,?)";
 
 						user = connection.prepareStatement(userQ);
-						user.setString(1, subUser.getFname());
-						user.setString(2, subUser.getLname());
+						user.setString(1, subUser.getFname().trim());
+						user.setString(2, subUser.getLname().trim());
 						user.setString(3, subUser.getDOB());
 						user.setString(4, subUser.getRelation());
 						user.setString(5, subUser.getEmail());
