@@ -37,6 +37,7 @@
 			            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			         </rowConstraints>
 			         <children>
 			            <Label text="Patient First Name:" GridPane.rowIndex="1">
@@ -95,7 +96,7 @@
 			                  <Font name="System Bold Italic" size="16.0" />
 			               </font>
 			            </Label>
-			            <Label text="Patient's Primary Doctor:" GridPane.rowIndex="9">
+			            <Label text="Patient's Primary Doctor:                 Dr." GridPane.rowIndex="9">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
@@ -197,6 +198,22 @@
                            <font>
                               <Font size="16.0" />
                            </font>
+                        </Label>
+                        <Label text="Patient Code:" GridPane.rowIndex="10">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="50.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label disable="true" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="10">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="17.0" />
+                           </GridPane.margin>
                         </Label>
 			         </children>
 			      </GridPane>
