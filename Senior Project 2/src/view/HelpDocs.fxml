@@ -42,7 +42,7 @@
                            <GridPane.margin>
                               <Insets top="20.0" />
                            </GridPane.margin></MediaView>
-                        <Button fx:id="btnMeds" maxWidth="72.0" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <Button fx:id="btnMeds" maxWidth="72.0" minHeight="40.0" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -50,7 +50,7 @@
                               <Insets bottom="15.0" left="200.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnUser" maxWidth="72.0" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <Button fx:id="btnUser" maxWidth="72.0" minHeight="40.0" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -58,7 +58,7 @@
                               <Insets bottom="15.0" right="200.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnPatient" mnemonicParsing="false" onAction="#patientVideo" text="Patient" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <Button fx:id="btnPatient" minHeight="40.0" mnemonicParsing="false" onAction="#patientVideo" text="Patient" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -95,7 +95,7 @@
                               <Insets top="10.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="This system was built as a senior project. Therefore, errors and bugs exist in the project. If you find an issue, please feel free to report it to us." wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <Label fx:id="lblDisclaimer" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -116,7 +116,7 @@
             		            <Font name="System Bold" size="24.0" />
             		         </font>
                            <GridPane.margin>
-                              <Insets top="10.0" />
+                              <Insets top="5.0" />
                            </GridPane.margin>
             		      </Label>
                         <Label text="To watch a specific segment of the video, please click a button below:" GridPane.halignment="CENTER" GridPane.rowIndex="2">

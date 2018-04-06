@@ -126,7 +126,7 @@
                   </TextField>
                   <DatePicker fx:id="DOPPicker" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
                   <DatePicker fx:id="LUPicker" editable="false" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-		            <Button fx:id="btnOK" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11">
+		            <Button fx:id="btnOK" minHeight="40.0" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>

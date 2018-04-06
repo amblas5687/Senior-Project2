@@ -23,6 +23,9 @@
 		         <font>
 		            <Font name="System Bold" size="24.0" />
 		         </font>
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
 		      </Label>
 		   </top>
          <bottom>
@@ -131,7 +134,7 @@
                      </font>
                   </TextField>
                   <DatePicker fx:id="DOPPicker" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />      
-		            <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="75.0" text="Add" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+		            <Button fx:id="btnSubmit" minHeight="40.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="75.0" text="Add" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 		               <GridPane.margin>
 		                  <Insets left="100.0" />
 		               </GridPane.margin>
@@ -139,7 +142,7 @@
                         <Font size="16.0" />
                      </font>
 		            </Button>
-		          <Button fx:id="cancelBTN" mnemonicParsing="false" onAction="#returnMain" prefHeight="25.0" prefWidth="75.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+		          <Button fx:id="cancelBTN" minHeight="40.0" mnemonicParsing="false" onAction="#returnMain" prefHeight="25.0" prefWidth="75.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
                      <font>
                         <Font size="16.0" />
                      </font>
