@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
@@ -345,7 +344,7 @@ public class ViewPatientController {
     	
     	String name = fnameTF.getText();
     	
-	   	if(name.equals("")) {
+	   	if(name ==  null || name.equals(null) || name.equals("")) {
 	   		lblFname.setText("Enter patient first name");
 	   		count++;
 	   		return flag = true;
@@ -360,7 +359,7 @@ public class ViewPatientController {
 		
     	
 	   	if(!n) {
-	   		lblFname.setText("Remove any numbers, special characters, or extra spaces");
+	   		lblFname.setText("Remove numbers and special characters");
 	   		flag = true;
 	   	} else {
 	   		flag = false;
@@ -375,7 +374,7 @@ public class ViewPatientController {
     	
     	String name = lnameTF.getText();
 	   	
-	   	if(name.equals("")) {
+	   	if(name == null || name.equals(null) || name.equals("")) {
 	   		lblLname.setText("Enter patient last name");
 	   		count++;
 	   		return flag = true;
@@ -389,7 +388,7 @@ public class ViewPatientController {
 		
     	
 	   	if(!n) {
-	   		lblLname.setText("Remove any numbers, special characters, or extra spaces");
+	   		lblLname.setText("Remove numbers and special characters");
 	   		flag = true;
 	   	} else {
 	   		flag = false;
@@ -404,16 +403,13 @@ public class ViewPatientController {
     	
     	String name = cargiverTF.getText();
 	   	
-	   	if(name.equals("")) {
+	   	if(name == null || name.equals(null) || name.equals("")) {
 	   		lblCaregiver.setText("Enter name of caregiver");
 	   		count++;
 	   		return flag = true;
 	   	} 
 	   	
 	   	name = name.trim();
-		
-	   	
-	   	
 	   			
 		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
     	Matcher nam = p.matcher(name);
@@ -421,7 +417,7 @@ public class ViewPatientController {
 		
     	
 	   	if(!n) {
-	   		lblCaregiver.setText("Remove any numbers, special characters, or extra spaces");
+	   		lblCaregiver.setText("Remove numbers and special characters");
 	   		flag = true;
 	   	} else {
 	   		flag = false;
@@ -436,9 +432,9 @@ public class ViewPatientController {
 
 		String dob = DOBPicker.getEditor().getText();
 
-		if (dob.equals("")) {
+		if (dob == null || dob.equals(null) || dob.equals("")) {
 
-			lblDOB.setText("Please select or enter the patient's date of birth");
+			lblDOB.setText("Please select or enter patient's date of birth");
 			count++;
 			flag = true;
 
@@ -489,7 +485,7 @@ public class ViewPatientController {
 
 		String diag = diagnosesPicker.getEditor().getText();
 		
-		if (diag.equals("")) {
+		if (diag == null || diag.equals(null) || diag.equals("")) {
 			lblDiagnoses.setText("Please select or enter a date of diagnoses for patient");
 			count++;
 			flag = true;
@@ -564,7 +560,7 @@ public class ViewPatientController {
     	
     	String doc = doctorTF.getText();
     
-    	if(doc.equals("")) {
+    	if(doc == null || doc.equals(null) || doc.equals("")) {
 	   		lblDoc.setText("Enter doctor name");
 	   		count++;
 	   		return flag = true;
@@ -578,7 +574,7 @@ public class ViewPatientController {
 		
     	
 	   	if(!n) {
-	   		lblDoc.setText("Remove any numbers, special characters, or extra spaces");
+	   		lblDoc.setText("Remove numbers and special characters");
 	   		flag = true;
 	   	} else {
 	   		flag = false;

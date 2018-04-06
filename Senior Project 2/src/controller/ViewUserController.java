@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
@@ -313,7 +312,7 @@ public class ViewUserController {
 		System.out.println("Date " + dobString);
 
 		// date is empty
-		if (dobString.equals(null) || dobString.equals("")) {
+		if (dobString == null || dobString.equals(null) || dobString.equals("")) {
 			lblDOB.setText("Please select or enter your date of birth");
 			count++;
 			System.out.println("DOB EMTPY");
@@ -366,13 +365,13 @@ public class ViewUserController {
 		Matcher m = p.matcher(fname);
 		boolean b = m.matches();
 
-		if (fname.equals(null) || fname.equals("")) {
+		if (fname == null || fname.equals(null) || fname.equals("")) {
 			lblFname.setText("Enter your first name");
 			count++;
 			System.out.println("FIRST NAME IS EMPTY...");
 			return false;
 		} else if (!b) {
-			lblFname.setText("Remove any numbers or special characters");
+			lblFname.setText("Remove numbers and special characters");
 			System.out.println("FIRST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			return false;
 		}
@@ -394,13 +393,13 @@ public class ViewUserController {
 		Matcher m = p.matcher(lname);
 		boolean b = m.matches();
 
-		if (lname.equals(null) || lname.equals("")) {
+		if (lname ==  null || lname.equals(null) || lname.equals("")) {
 			lblLname.setText("Enter your last name");
 			count++;
 			System.out.println("LAST NAME IS EMPTY...");
 			return false;
 		} else if (!b) {
-			lblLname.setText("Remove any numbers or special characters");
+			lblLname.setText("Remove numbers and special characters");
 			System.out.println("LAST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			return false;
 		}
@@ -437,7 +436,7 @@ public class ViewUserController {
 		Matcher m = p.matcher(email);
 		boolean b = m.matches();
 
-		if (email.equals(null) || email.equals("")) {
+		if (email == null || email.equals(null) || email.equals("")) {
 			lblEmail.setText("Enter email address");
 			count++;
 			System.out.println("EMAIL IS EMPTY...");
@@ -541,7 +540,7 @@ public class ViewUserController {
 			count++;
 			System.out.println("BOTH PASSWORDS EMPTY...");
 			passwordFlag = false;
-		} else if (p1.equals(null) || p1.equals("")) {
+		} else if (p1 == null || p1.equals(null) || p1.equals("")) {
 			lblPassword1.setText("Enter your password");
 			count++;
 			System.out.println("PASSWORD EMPTY...");

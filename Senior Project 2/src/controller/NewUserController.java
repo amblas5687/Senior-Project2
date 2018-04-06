@@ -357,7 +357,7 @@ public class NewUserController {
 		System.out.println("Date " + dobString);
 
 		// date is empty
-		if (dobString.equals(null) || dobString.equals("")) {
+		if (dobString == null || dobString.equals(null) || dobString.equals("")) {
 			lblDOB.setText("Please select or enter your date of birth");
 			count++;
 			System.out.println("DOB EMTPY");
@@ -410,13 +410,13 @@ public class NewUserController {
 		Matcher m = p.matcher(fname);
 		boolean b = m.matches();
 
-		if (fname.equals(null) || fname.equals("")) {
+		if (fname == null || fname.equals(null) || fname.equals("")) {
 			lblFname.setText("Enter your first name");
 			count++;
 			System.out.println("FIRST NAME IS EMPTY...");
 			return false;
 		} else if (!b) {
-			lblFname.setText("Remove any numbers, special characters, or extra spaces");
+			lblFname.setText("Remove numbers and special characters");
 			System.out.println("FIRST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			return false;
 		}
@@ -438,13 +438,13 @@ public class NewUserController {
 		Matcher m = p.matcher(lname);
 		boolean b = m.matches();
 
-		if (lname.equals(null) || lname.equals("")) {
+		if (lname == null || lname.equals(null) || lname.equals("")) {
 			lblLname.setText("Enter your last name");
 			count++;
 			System.out.println("LAST NAME IS EMPTY...");
 			return false;
 		} else if (!b) {
-			lblLname.setText("Remove any numbers, special characters, or extra spaces");
+			lblLname.setText("Remove numbers and special characters");
 			System.out.println("LAST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			return false;
 		}
@@ -479,7 +479,7 @@ public class NewUserController {
 		Matcher m = p.matcher(email);
 		boolean b = m.matches();
 
-		if (email.equals(null) || email.equals("")) {
+		if (email == null || email.equals(null) || email.equals("")) {
 			lblEmail.setText("Enter email address");
 			count++;
 			System.out.println("EMAIL IS EMPTY...");
@@ -516,13 +516,13 @@ public class NewUserController {
 		 * = p.matcher(email); boolean b = m.matches();
 		 */
 
-		if ((p1.equals(null) || p1.equals("")) && (p2.equals(null) || p2.equals(""))) {
+		if ((p1 == null || p1.equals(null) || p1.equals("")) && (p2 == null || p2.equals(null) || p2.equals(""))) {
 			lblPassword1.setText("Enter your password");
 			lblPassword2.setText("Enter password verification");
 			count++;
 			System.out.println("BOTH PASSWORDS EMPTY...");
 			passwordFlag = false;
-		} else if (p1.equals(null) || p1.equals("")) {
+		} else if (p1 == null || p1.equals(null) || p1.equals("")) {
 			lblPassword1.setText("Enter your password");
 			count++;
 			System.out.println("PASSWORD EMPTY...");
@@ -531,7 +531,7 @@ public class NewUserController {
 			lblPassword1.setText("Your password must be longer than 4 digits");
 			System.out.println("PASSWORD < 4");
 			passwordFlag = false;
-		} else if (p2.equals(null) || p2.equals("")) {
+		} else if (p2 == null || p2.equals(null) || p2.equals("")) {
 			lblPassword2.setText("Enter password verification");
 			count++;
 			System.out.println("PASSWORD EMPTY...");
