@@ -55,7 +55,7 @@ public class LoginController {
 	 public void initialize(){
 			
 			System.out.println("*******LOGIN*******");
-			logo.setImage(new Image("/application/4getmenot1.jpg"));
+			logo.setImage(new Image("/application/logo.png"));
 	 }
 	 
 	 

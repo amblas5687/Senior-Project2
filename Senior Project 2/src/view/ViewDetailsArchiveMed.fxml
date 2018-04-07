@@ -47,7 +47,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Purpose of Presrciption:" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+                  <Label text="Purpose of Prescription:" GridPane.halignment="LEFT" GridPane.rowIndex="8">
                      <font>
                         <Font size="16.0" />
                      </font>

@@ -64,7 +64,7 @@ public class HelpDocsController {
     	lblStatus.setStyle("-fx-background-image: url('/application/play.png');"
 				 + "-fx-background-repeat: no-repeat;");
     	
-    	lblDescription.setText("Forget Me Not is designed to help nonprofessional inhome cargivers keep track of Alzheimer's patient information.\n\n"
+    	lblDescription.setText("Forget Me Not is designed to help nonprofessional inhome caregivers keep track of Alzheimer's patient information.\n\n"
     			+ "Forget Me Not seeks to cut down on communication issues between multiple caregivers for one patient.");
     	
     	lblDisclaimer.setText("This system was built as a senior project. Therefore, errors and bugs exist in this system. Also, this system is not HIPPA"

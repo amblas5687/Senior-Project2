@@ -19,9 +19,9 @@
    <children>
       <BorderPane prefHeight="678.0" prefWidth="1200.0">
          <top>
-            <Label text="Forget Me Not" BorderPane.alignment="CENTER">
+            <Label text="Welcome to Forget Me Not!" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="System Bold" size="30.0" />
+                  <Font size="30.0" />
                </font>
                <BorderPane.margin>
                   <Insets top="10.0" />
@@ -122,7 +122,7 @@
 		                        <Insets />
 		                     </GridPane.margin>
 		                  </JFXButton>
-                        <Label text="New here? Click below to begin:" GridPane.halignment="CENTER">
+                        <Label text="First time visiting? Click below to get started:" GridPane.halignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -146,7 +146,7 @@
 		                        <Insets />
 		                     </GridPane.margin>
 		                  </JFXButton>
-                        <Label text="Already have a patient account? Begin here:" GridPane.halignment="CENTER">
+                        <Label text="Already have a patient account? Click below to finish setting up your account:" GridPane.halignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
