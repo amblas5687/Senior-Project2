@@ -492,7 +492,7 @@ public class ViewPatientController {
 		String diag = diagnosesPicker.getEditor().getText();
 		
 		if (diag == null || diag.equals(null) || diag.equals("")) {
-			lblDiagnoses.setText("Please select or enter a date of diagnoses for patient");
+			lblDiagnoses.setText("Please select or enter a date of diagnosis for patient");
 			count++;
 			flag = true;
 		} else {
@@ -525,7 +525,7 @@ public class ViewPatientController {
 					lblDiagnoses.setText("Invalid year");
 					flag = true;
 				} else if (date.after(curDate)) {
-					lblDiagnoses.setText("Date of diagnoses cannot be after today's date");
+					lblDiagnoses.setText("Date of diagnosis cannot be after today's date");
 					flag = true;
 				} else if(dob != null && date.before(dob) || date.equals(dob)) {
 					lblDiagnoses.setText("Date cannot be before or on the day of patient's birthday.");
