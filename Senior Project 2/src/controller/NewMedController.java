@@ -213,12 +213,12 @@ public class NewMedController {
 		Matcher m = p.matcher(name);
 		boolean b = m.matches();
 
-		if (name == null || name.equals("")) {
-			nameLBL.setText("Name cannot be empty");
+		if (name == null || name.equals(null) || name.equals("")) {
+			nameLBL.setText("Enter medication name");
 			nameFlag = false;
 			System.out.println("MED NAME IS EMPTY...");
 		} else if (!b) {
-			nameLBL.setText("No numbers, special characters, or extra white spaces");
+			nameLBL.setText("Remove numbers and special characters");
 			System.out.println("MED NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			nameFlag = false;
 		}
@@ -238,12 +238,12 @@ public class NewMedController {
 		Matcher m = p.matcher(dose);
 		boolean b = m.matches();
 
-		if (dose == null || dose.equals("")) {
-			doseLBL.setText("Dose cannot be empty");
+		if (dose == null || dose.equals(null) || dose.equals("")) {
+			doseLBL.setText("Enter dosage amount");
 			doseFlag = false;
 			System.out.println("DOSE IS EMPTY...");
 		} else if (!b) {
-			doseLBL.setText("Dose must only contain numbers and decimals");
+			doseLBL.setText("Dose must be a whole number or decimal number");
 			System.out.println("DOSE HAD LETTERS OR TOO MANY DECIMALS");
 			doseFlag = false;
 		}
@@ -255,12 +255,12 @@ public class NewMedController {
 		boolean dtFlag = true;
 		String dose = medDosage.getText();
 
-		if (doseType.getValue() == null && dose.equals("")) {
+		if (doseType.getValue() == null && (dose == null || dose.equals(null) ||dose.equals(""))) {
 			dtFlag = false;
-			doseLBL.setText("Please fill in dosage amount and select a dosage type.");
+			doseLBL.setText("Please enter dosage amount and select a dosage type");
 		} else if (doseType.getValue() == null) {
 			dtFlag = false;
-			doseLBL.setText("Please select a dosage type.");
+			doseLBL.setText("Please select a dosage type");
 		}
 
 		return dtFlag;
@@ -279,12 +279,12 @@ public class NewMedController {
 		Matcher m = p.matcher(doctor);
 		boolean b = m.matches();
 
-		if (doctor == null || doctor.equals("")) {
-			doctorLBL.setText("Doctor name cannot be empty");
+		if (doctor == null || doctor.equals(null) || doctor.equals("")) {
+			doctorLBL.setText("Enter doctor name");
 			doctorFlag = false;
 			System.out.println("DOCTOR NAME IS EMPTY...");
 		} else if (!b) {
-			doctorLBL.setText("No numbers, special characters, or extra white spaces");
+			doctorLBL.setText("Remove numbers and special characters");
 			System.out.println("DOCTOR NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			doctorFlag = false;
 		}
@@ -304,12 +304,12 @@ public class NewMedController {
 		Matcher m = p.matcher(purpose);
 		boolean b = m.matches();
 
-		if (purpose == null || purpose.equals("")) {
-			purposeLBL.setText("Purpose cannot be empty");
+		if (purpose == null || purpose.equals(null) || purpose.equals("")) {
+			purposeLBL.setText("Enter purpose of prescription");
 			purposeFlag = false;
 			System.out.println("PURPOSE IS EMPTY...");
 		} else if (!b) {
-			purposeLBL.setText("No numbers, special characters, or extra white spaces");
+			purposeLBL.setText("Remove numbers and special characters");
 			System.out.println("PURPOSE CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			purposeFlag = false;
 		}
@@ -331,15 +331,15 @@ public class NewMedController {
 		System.out.println("Date " + dopString);
 
 		// date is empty
-		if (dopString.equals(null) || dopString.equals("")) {
-			datePrescribedLBL.setText("Please enter a date");
-			System.out.println("DOB EMTPY");
+		if (dopString == null || dopString.equals(null) || dopString.equals("")) {
+			datePrescribedLBL.setText("Please select or enter a date of prescription");
+			System.out.println("DOP EMTPY");
 			return false;
 		}
 		// date format is wrong
 		else if (!b) {
 			System.out.println("INVALID DATE FORMAT");
-			datePrescribedLBL.setText("Invalid date format. MM/DD/YYYY");
+			datePrescribedLBL.setText("Incorrect date format. Please use MM/DD/YYYY");
 			return false;
 		} else {
 
@@ -356,14 +356,14 @@ public class NewMedController {
 				// date is after current date
 				if (date.after(curDate)) {
 					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
-					datePrescribedLBL.setText("Date cannot be after today's date");
+					datePrescribedLBL.setText("Date of prescription cannot be after today's date");
 					return false;
 				}
 				return true;
 			} catch (ParseException e) {
 				// not an actual date
 				System.out.println("INVALID DATE");
-				datePrescribedLBL.setText("Incorrect date.");
+				datePrescribedLBL.setText("Incorrect date. Please enter a valid date");
 				return false;
 			}
 		}
@@ -375,10 +375,10 @@ public class NewMedController {
 		lblDescript.setText(null);
 		String details = medDescript.getText();
 		
-		if((!details.equals(null) || !details.equals("")) && details.length() >= 500)
+		if((details != null || !details.equals(null) || !details.equals("")) && details.length() >= 500)
 		{
 			System.out.println("DESCRIPTION TOO LONG");
-			lblDescript.setText("Description is too long.");
+			lblDescript.setText("Description exceeds maximum possible length");
 			return false;
 		}
 		return true;

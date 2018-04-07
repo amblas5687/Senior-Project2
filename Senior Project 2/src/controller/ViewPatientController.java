@@ -33,6 +33,8 @@ public class ViewPatientController {
     @FXML
     private TextField lnameTF;
     @FXML
+    private TextField patientCodeTF;
+    @FXML
     private DatePicker DOBPicker;
     @FXML
     private TextField doctorTF;
@@ -81,6 +83,10 @@ public class ViewPatientController {
     	
     	//add combo box selections
     	stageBox.getItems().addAll("Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5", "Stage 6", "Stage 7");    	
+    	
+    	//set label to display current patient code
+    	
+    	patientCodeTF.setText(LoginController.currentPatientID);
     	
     	//prepopulate, uses dummy user for now
     	

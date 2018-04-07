@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +10,8 @@ import java.text.DateFormat;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import application.DBConfig;
 import application.DataSource;
 import javafx.collections.FXCollections;
@@ -39,8 +36,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.MedModel;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class ArchivedMedsController {
 
@@ -737,12 +732,12 @@ public class ArchivedMedsController {
 		Matcher m = p.matcher(search);
 		boolean b = m.matches();
 
-		if (search == null || search.equals("")) {
-			errLBL.setText("Name cannot be empty");
+		if (search == null || search.equals(null) || search.equals("")) {
+			errLBL.setText("Enter medication name");
 			nameFlag = false;
 			System.out.println("NAME IS EMPTY...");
 		} else if (!b) {
-			errLBL.setText("No numbers, special characters, or extra white spaces");
+			errLBL.setText("Remove numbers and special characters");
 			System.out.println("CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR STARTED WITH SPACES");
 			nameFlag = false;
 		}
@@ -764,15 +759,15 @@ public class ArchivedMedsController {
 		System.out.println("Date " + dateString);
 
 		// date is empty
-		if (dateString.equals(null) || dateString.equals("")) {
-			errLBL.setText("Please enter a date");
+		if (dateString == null || dateString.equals(null) || dateString.equals("")) {
+			errLBL.setText("Please select or enter a date of prescription");
 			System.out.println("DATE EMTPY");
 			return false;
 		}
 		// date format is wrong
 		else if (!b) {
 			System.out.println("INVALID DATE FORMAT");
-			errLBL.setText("Invalid date format. MM/DD/YYYY");
+			errLBL.setText("Incorrect date format. Please use MM/DD/YYYY");
 			return false;
 		} else {
 
@@ -790,14 +785,14 @@ public class ArchivedMedsController {
 				// date is after current date
 				if (date.after(curDate)) {
 					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
-					errLBL.setText("Date cannot be after today's date");
+					errLBL.setText("Date of prescription cannot be after today's date");
 					return false;
 				}
 				return true;
 			} catch (ParseException e) {
 				// not an actual date
 				System.out.println("INVALID DATE");
-				errLBL.setText("Incorrect date.");
+				errLBL.setText("Incorrect date. Please enter a valid date");
 				return false;
 			}
 		}
@@ -822,15 +817,15 @@ public class ArchivedMedsController {
 		System.out.println("Dates " + d1String + " -- " + d2String);
 
 		// date is empty
-		if ((d1String.equals(null) || d1String.equals("")) || (d2String.equals(null) || d2String.equals(""))) {
-			errLBL.setText("Please enter both dates");
+		if ((d1String == null || d1String.equals(null) || d1String.equals("")) || (d2String == null || d2String.equals(null) || d2String.equals(""))) {
+			errLBL.setText("Please select or enter a date of prescription for both fields");
 			System.out.println("DATES EMTPY");
 			return false;
 		}
 		// date format is wrong
 		else if (!b1 || !b2) {
 			System.out.println("INVALID DATE FORMAT");
-			errLBL.setText("Invalid date format. MM/DD/YYYY");
+			errLBL.setText("Incorrect date format. Please use MM/DD/YYYY");
 			return false;
 		} else {
 
@@ -850,26 +845,26 @@ public class ArchivedMedsController {
 				// date 1 is after current date
 				if (date1.after(curDate)) {
 					System.out.println("DATE CANNOT BE AFTER TODAY'S DATE");
-					errLBL.setText("Date cannot be after today's date");
+					errLBL.setText("First date of prescription cannot be after today's date");
 					return false;
 				}
 				// date 2 after current date
 				else if (date2.after(curDate)) {
 					System.out.println("DATE 2 CANNOT BE AFTER TODAY'S DATE");
-					errLBL.setText("To date cannot be after today's date");
+					errLBL.setText("Second date of prescription cannot be after today's date");
 					return false;
 				}
 				// if d1 after d2
 				else if (date1.after(date2)) {
 					System.out.println("DATE 1 AFTER DATE 2");
-					errLBL.setText("Invalid date range.");
+					errLBL.setText("Invalid date range. Second date cannot occur before first date");
 					return false;
 				}
 				return true;
 			} catch (ParseException e) {
 				// not an actual date
 				System.out.println("INVALID DATE");
-				errLBL.setText("Incorrect date.");
+				errLBL.setText("Incorrect date(s). Please enter valid date(s)");
 				return false;
 			}
 		}

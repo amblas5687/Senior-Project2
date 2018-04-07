@@ -45,7 +45,7 @@
 		                        		<Font size="16.0" />
 		                     		</font>
 		                     		<GridPane.margin>
-		                        		<Insets left="50.0" />
+		                        		<Insets left="80.0" />
 		                     		</GridPane.margin>
 				            	</Label>
 				            	<Label text="Your Last Name:" GridPane.rowIndex="2">
@@ -53,7 +53,7 @@
 		                        		<Font size="16.0" />
 		                     		</font>
 		                     		<GridPane.margin>
-		                        		<Insets left="50.0" />
+		                        		<Insets left="80.0" />
 		                     		</GridPane.margin>
 				            	</Label>
 				            	<Label text="Your Date of Birth:" GridPane.rowIndex="3">
@@ -61,7 +61,7 @@
 				                        <Font size="16.0" />
 				                     </font>
 				                     <GridPane.margin>
-				                        <Insets left="50.0" />
+				                        <Insets left="80.0" />
 				                     </GridPane.margin>
 				            	</Label>
 				            	<Label text="Your Relation to Patient:" GridPane.rowIndex="4">
@@ -69,7 +69,7 @@
 				                        <Font size="16.0" />
 				                     </font>
 				                     <GridPane.margin>
-				                        <Insets left="50.0" />
+				                        <Insets left="80.0" />
 				                     </GridPane.margin>
 					            </Label>
 					            <Label text="Email Address:" GridPane.rowIndex="7">
@@ -77,7 +77,7 @@
 				                        <Font size="16.0" />
 				                     </font>
 				                     <GridPane.margin>
-				                        <Insets left="50.0" />
+				                        <Insets left="80.0" />
 				                     </GridPane.margin>
 					            </Label>
 					            <Label text="Account Password:" GridPane.rowIndex="8">
@@ -85,31 +85,31 @@
 				                        <Font size="16.0" />
 				                     </font>
 				                     <GridPane.margin>
-				                        <Insets left="50.0" />
+				                        <Insets left="80.0" />
 				                     </GridPane.margin>
 					            </Label>
 					            <Label text="Personal Information">
-					               <padding>
-					                  <Insets left="5.0" />
-					               </padding>
 					               <font>
 					                  <Font name="System Bold Italic" size="16.0" />
 					               </font>
+                           <GridPane.margin>
+                              <Insets left="30.0" />
+                           </GridPane.margin>
 				            	</Label>
 				            	<Label text="Login Information" GridPane.rowIndex="6">
-					               <padding>
-					                  <Insets left="5.0" />
-					               </padding>
 					               <font>
 					                  <Font name="System Bold Italic" size="16.0" />
 					               </font>
+                           <GridPane.margin>
+                              <Insets left="30.0" />
+                           </GridPane.margin>
 					            </Label>
 					            <Label text="Verify Account Password:" GridPane.rowIndex="9">
 			                     <font>
 			                        <Font size="16.0" />
 			                     </font>
 			                     <GridPane.margin>
-			                        <Insets left="50.0" />
+			                        <Insets left="80.0" />
 			                     </GridPane.margin>
 				            	</Label>
 				            	<Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
@@ -117,7 +117,7 @@
 				                	  <Insets left="5.0" right="5.0" />
 				               		</padding>
 				            	</Separator>
-				            	<TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				            	<TextField fx:id="fnameTF" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
@@ -125,7 +125,7 @@
 		                        		<Font size="16.0" />
 		                     		</font>
 				            	</TextField>
-				            	<TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+				            	<TextField fx:id="lnameTF" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
@@ -133,17 +133,17 @@
 		                        		<Font size="16.0" />
 		                     		</font>
 				            	</TextField>
-				            	<DatePicker fx:id="DOBPicker" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+				            	<DatePicker fx:id="DOBPicker" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
 				            	</DatePicker>
-				            	<ComboBox fx:id="relationBox" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+				            	<ComboBox fx:id="relationBox" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
 				            	</ComboBox>
-				            	<TextField fx:id="emailTF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Personal Email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+				            	<TextField fx:id="emailTF" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Personal Email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
@@ -151,7 +151,7 @@
 		                        		<Font size="16.0" />
 		                     		</font>
 				            	</TextField>
-				            	<PasswordField fx:id="password1TF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+				            	<PasswordField fx:id="password1TF" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>
@@ -159,7 +159,7 @@
 		                        		<Font size="16.0" />
 		                    		</font>
 				            	</PasswordField>
-				            	<PasswordField fx:id="password2TF" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+				            	<PasswordField fx:id="password2TF" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 				               		<GridPane.margin>
 				                  		<Insets left="5.0" />
 				               		</GridPane.margin>

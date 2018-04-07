@@ -109,48 +109,48 @@
 			                  <Insets left="5.0" right="5.0" />
 			               </padding>
 			            </Separator>
-			            <TextField fx:id="fnameTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+			            <TextField fx:id="fnameTF" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 			               <GridPane.margin>
-			                  <Insets left="5.0" />
+			                  <Insets />
 			               </GridPane.margin>
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <TextField fx:id="lnameTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+			            <TextField fx:id="lnameTF" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 			               <GridPane.margin>
-			                  <Insets left="5.0" />
+			                  <Insets />
 			               </GridPane.margin>
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <DatePicker fx:id="DOBPicker" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+			            <DatePicker fx:id="DOBPicker" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 			               <GridPane.margin>
-			                  <Insets left="5.0" />
+			                  <Insets />
 			               </GridPane.margin>
 			            </DatePicker>
-			            <TextField fx:id="cargiverTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Full Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+			            <TextField fx:id="cargiverTF" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Full Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 			               <GridPane.margin>
-			                  <Insets left="5.0" />
+			                  <Insets />
 			               </GridPane.margin>
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <ComboBox fx:id="stageBox" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+			            <ComboBox fx:id="stageBox" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 			               <GridPane.margin>
-			                  <Insets left="5.0" />
+			                  <Insets />
 			               </GridPane.margin>
 			            </ComboBox>
-			             <DatePicker fx:id="diagnosesPicker" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+			             <DatePicker fx:id="diagnosesPicker" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
 			               <GridPane.margin>
-			                  <Insets left="5.0" />
+			                  <Insets />
 			               </GridPane.margin>
 			            </DatePicker>
-			            <TextField fx:id="doctorTF" disable="true" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+			            <TextField fx:id="doctorTF" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 			               <GridPane.margin>
-			                  <Insets left="5.0" />
+			                  <Insets />
 			               </GridPane.margin>
 	                     <font>
 	                        <Font size="16.0" />
@@ -207,14 +207,14 @@
                               <Insets left="50.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label disable="true" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="10">
+                        <TextField fx:id="patientCodeTF" disable="true" editable="false" layoutX="346.0" layoutY="478.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Patient Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="17.0" />
+                              <Insets />
                            </GridPane.margin>
-                        </Label>
+                        </TextField>
 			         </children>
 			      </GridPane>
 			      <GridPane prefHeight="40.0" prefWidth="968.0">

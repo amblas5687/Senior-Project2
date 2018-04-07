@@ -96,7 +96,7 @@
                         <Insets top="45.0" />
                      </GridPane.margin>
 		            </Separator>
-		            <TextField fx:id="medName" maxHeight="41.0" maxWidth="300.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" promptText="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+		            <TextField fx:id="medName" maxHeight="41.0" maxWidth="310.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" promptText="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -104,15 +104,15 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="medDosage" maxHeight="25.0" maxWidth="140.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="125.0" promptText="Dose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+		            <TextField fx:id="medDosage" maxHeight="25.0" maxWidth="145.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="125.0" promptText="Dose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 		               <GridPane.margin>
-		                  <Insets right="160.0" />
+		                  <Insets right="165.0" />
 		               </GridPane.margin>
                      <font>
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextArea fx:id="medDescript" maxHeight="80.0" maxWidth="300.0" minHeight="80.0" prefHeight="80.0" prefWidth="230.0" promptText="What it does, side effects, etc." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+		            <TextArea fx:id="medDescript" maxHeight="80.0" maxWidth="310.0" minHeight="80.0" prefHeight="80.0" prefWidth="230.0" promptText="What it does, side effects, etc." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -120,7 +120,7 @@
                         <Insets top="30.0" />
                      </GridPane.margin>
                   </TextArea>
-		            <TextField fx:id="prescribDoc" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+		            <TextField fx:id="prescribDoc" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Doctor Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
 		               <GridPane.margin>
 		                  <Insets />
 		               </GridPane.margin>
@@ -128,12 +128,12 @@
                         <Font size="16.0" />
                      </font>
 		            </TextField>
-		            <TextField fx:id="purpOfPrescript" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Purpose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+		            <TextField fx:id="purpOfPrescript" layoutX="376.0" layoutY="453.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Purpose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="DOPPicker" disable="true" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="300.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />      
+                  <DatePicker fx:id="DOPPicker" disable="true" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />      
 		            <Button fx:id="btnSubmit" alignment="CENTER" contentDisplay="CENTER" minHeight="40.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="75.0" text="Submit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
 		               <GridPane.margin>
 		                  <Insets left="100.0" />
@@ -173,9 +173,9 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <ComboBox fx:id="doseType" prefWidth="140.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <ComboBox fx:id="doseType" prefWidth="145.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <GridPane.margin>
-                        <Insets left="160.0" />
+                        <Insets left="164.0" />
                      </GridPane.margin>
                   </ComboBox>
                   <Label fx:id="nameLBL" styleClass="error" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
