@@ -77,6 +77,7 @@ public class NewPatientController {
 	private Label lblAll;
 
 	private boolean flag;
+	private boolean failed;
 	private int count;
 
 
@@ -334,6 +335,16 @@ public class NewPatientController {
 
 			try {
 
+				Pattern p = Pattern.compile("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4}$");
+				Matcher dat = p.matcher(dob);
+				boolean d = dat.find();
+
+				if (!d) {
+					lblDOB.setText("Incorrect date format. Please use MM/DD/YYYY");
+					failed = true;
+					return flag = true;
+				}
+				
 				String[] sections = dob.split("/");
 				int year = Integer.parseInt(sections[2]);
 				DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
@@ -341,28 +352,23 @@ public class NewPatientController {
 				Date date = formatter.parse(dob);
 				Date curDate = new Date();
 
-				Pattern p = Pattern.compile("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4}$");
-				Matcher dat = p.matcher(dob);
-				boolean d = dat.find();
-
-				if (!d) {
-					lblDOB.setText("Incorrect date format. Please use MM/DD/YYYY");
-					return flag = true;
-				}
-
 				if (year < 1900) {
 					lblDOB.setText("Invalid year");
 					flag = true;
+					failed = true;
 				} else if (date.after(curDate)) {
 					lblDOB.setText("Date of birth cannot be after today's date");
 					flag = true;
+					failed = true;
 				} else {
 					flag = false;
+					failed = false;
 				}
 
 			} catch (ParseException e) {
 				
 				lblDOB.setText("Incorrect date. Please enter a valid date");
+				failed = true;
 				return flag = true;
 			}
 
@@ -385,19 +391,6 @@ public class NewPatientController {
 
 			try {
 
-				String[] sections = diag.split("/");
-				int year = Integer.parseInt(sections[2]);
-				DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-				Date dob;
-				if(DOBPicker.getEditor().getText().equals("")) {
-					dob = null;
-				} else {
-					dob = formatter.parse(DOBPicker.getEditor().getText());
-				}
-				formatter.setLenient(false);
-				Date date = formatter.parse(diag);
-				Date curDate = new Date();
-
 				Pattern p = Pattern.compile("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4}$");
 				Matcher dat = p.matcher(diag);
 				boolean d = dat.find();
@@ -406,6 +399,19 @@ public class NewPatientController {
 					lblDiagnoses.setText("Incorrect date format. Please use MM/DD/YYYY");
 					return flag = true;
 				}
+				
+				String[] sections = diag.split("/");
+				int year = Integer.parseInt(sections[2]);
+				DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+				Date dob;
+				if(DOBPicker.getEditor().getText().equals("") || failed) {
+					dob = null;
+				} else {
+					dob = formatter.parse(DOBPicker.getEditor().getText());
+				}
+				formatter.setLenient(false);
+				Date date = formatter.parse(diag);
+				Date curDate = new Date();
 
 				if (year < 1900) {
 					lblDiagnoses.setText("Invalid year");
