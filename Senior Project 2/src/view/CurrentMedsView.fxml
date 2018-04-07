@@ -17,43 +17,43 @@
 	<children>
 		<BorderPane prefHeight="678.0" prefWidth="968.0" stylesheets="@../application/application.css">
          <top>
-            <Label text="Current Medication Information" BorderPane.alignment="CENTER">
+            <Label text="Current Medication Information" BorderPane.alignment="CENTER_LEFT">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
                <BorderPane.margin>
-                  <Insets top="5.0" />
+                  <Insets left="250.0" top="5.0" />
                </BorderPane.margin>
             </Label>
          </top>
          <center>
             <AnchorPane prefHeight="450.0" prefWidth="842.0" BorderPane.alignment="CENTER">
                <children>
-                   <ToggleButton fx:id="currMed" layoutX="401.0" layoutY="23.0" mnemonicParsing="false" onAction="#currentMed" text="Current">
+                   <ToggleButton fx:id="currMed" layoutX="353.0" layoutY="23.0" mnemonicParsing="false" onAction="#currentMed" text="Current">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </ToggleButton>
-                  <ToggleButton fx:id="archMed" layoutX="477.0" layoutY="23.0" mnemonicParsing="false" onAction="#archivedMed" text="Archived">
+                  <ToggleButton fx:id="archMed" layoutX="428.0" layoutY="23.0" mnemonicParsing="false" onAction="#archivedMed" text="Archived">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </ToggleButton>
-                  <ComboBox fx:id="searchOptions" layoutX="142.0" layoutY="84.0" maxHeight="40.0" onAction="#options" prefHeight="40.0" prefWidth="153.0" promptText="Select..." />
-                  <TextField fx:id="searchTF" layoutX="296.0" layoutY="84.0" prefHeight="40.0" prefWidth="455.0" promptText="Search...">
+                  <ComboBox fx:id="searchOptions" layoutX="86.0" layoutY="84.0" maxHeight="40.0" onAction="#options" prefHeight="40.0" prefWidth="153.0" promptText="Select..." />
+                  <TextField fx:id="searchTF" layoutX="240.0" layoutY="84.0" prefHeight="40.0" prefWidth="455.0" promptText="Search...">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="btnSearch" layoutX="751.0" layoutY="84.0" minHeight="40.0" minWidth="75.0" mnemonicParsing="false" onAction="#searchMed" text="Search">
+                  <Button fx:id="btnSearch" layoutX="695.0" layoutY="84.0" minHeight="40.0" minWidth="75.0" mnemonicParsing="false" onAction="#searchMed" text="Search">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <DatePicker fx:id="datePicker" layoutX="296.0" layoutY="84.0" maxHeight="40.0" maxWidth="456.0" minHeight="40.0" minWidth="277.0" prefHeight="40.0" prefWidth="455.0" promptText="MM/DD/YYYY" visible="false" />
-                  <DatePicker fx:id="DRPicker1" layoutX="296.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" promptText="MM/DD/YYYY" visible="false" />
-                  <DatePicker fx:id="DRPicker2" layoutX="536.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" promptText="MM/DD/YYYY" visible="false" />
-                  <Label fx:id="drpLabel" alignment="CENTER" layoutX="511.0" layoutY="94.0" minWidth="25.0" prefHeight="25.0" text="to" visible="false">
+                  <DatePicker fx:id="datePicker" layoutX="240.0" layoutY="84.0" maxHeight="40.0" maxWidth="456.0" minHeight="40.0" minWidth="277.0" prefHeight="40.0" prefWidth="455.0" promptText="MM/DD/YYYY" visible="false" />
+                  <DatePicker fx:id="DRPicker1" layoutX="240.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" promptText="MM/DD/YYYY" visible="false" />
+                  <DatePicker fx:id="DRPicker2" layoutX="480.0" layoutY="84.0" maxHeight="40.0" maxWidth="215.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="277.0" promptText="MM/DD/YYYY" visible="false" />
+                  <Label fx:id="drpLabel" alignment="CENTER" layoutX="455.0" layoutY="94.0" minWidth="25.0" prefHeight="25.0" text="to" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -86,7 +86,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Label fx:id="lblSearch" layoutX="296.0" layoutY="126.0" styleClass="error" wrapText="true">
+                  <Label fx:id="lblSearch" layoutX="240.0" layoutY="126.0" styleClass="error" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>
