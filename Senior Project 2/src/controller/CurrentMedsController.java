@@ -111,6 +111,8 @@ public class CurrentMedsController {
 
 	private URL toPane;
 	private AnchorPane temp;
+	
+	Stage stage;
 
 	private ToggleGroup state = new ToggleGroup();
 
@@ -871,13 +873,15 @@ public class CurrentMedsController {
 		dialog.initModality(Modality.APPLICATION_MODAL);
 
 		DialogPane dialogPane = dialog.getDialogPane();
+		
 		// css for info alert box
 		dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-
+		stage = (Stage) dialogPane.getScene().getWindow();
+		stage.getIcons().add(new Image("/application/logo_wbg.png"));
 		// dialogPane.getStyleClass().add("alert");
 
 		dialog.setTitle("Archive Reason");
-		dialog.setHeaderText("Enter archival reason below:");
+		dialog.setHeaderText("Enter the reason for this medication's archival:");
 
 		// Set the button types.
 		ButtonType createBtn = new ButtonType("Add Reason");
@@ -890,7 +894,7 @@ public class CurrentMedsController {
 		grid.setPadding(new Insets(20, 90, 10, 10));
 
 		TextArea notes = new TextArea();
-		notes.setPromptText("Enter archive reason here");
+		notes.setPromptText("Enter archival reason");
 
 		grid.add(notes, 1, 0);
 
@@ -1035,14 +1039,18 @@ public class CurrentMedsController {
 			} else if (no.equals("")) {
 				Alert failure = new Alert(AlertType.ERROR);
 				// safely catches error by pop-up alert.
-				failure.setContentText("Must enter archive reason");
+				stage = (Stage) failure.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/application/logo_wbg.png"));
+				failure.setTitle("Error");
+				failure.setHeaderText("Error!");
+				failure.setContentText("Must enter a reason for medication archival");
 				failure.getDialogPane().getStylesheets()
 						.add(getClass().getResource("/application/application.css").toExternalForm());
 				Optional<ButtonType> error = failure.showAndWait();
 			} else if (no.length() > 500) {
 				Alert failure = new Alert(AlertType.ERROR);
 				// safely catches error by pop-up alert.
-				failure.setContentText("Notes must be less than 500 characters");
+				failure.setContentText("Reason for archival exceeded maximum length");
 				failure.getDialogPane().getStylesheets()
 						.add(getClass().getResource("/application/application.css").toExternalForm());
 				Optional<ButtonType> error = failure.showAndWait();
