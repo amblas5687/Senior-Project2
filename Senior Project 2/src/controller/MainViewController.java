@@ -57,7 +57,10 @@ public class MainViewController {
 		
 		 tp.setText("Help & Documentation");
 		 tp.setShowDelay(Duration.seconds(0.25));
-		 logo.setStyle("-fx-background-image: url('/application/4getmenot1.jpg');");
+		 logo.setStyle("-fx-background-image: url('/application/logo_mainview.png');"
+				 + "-fx-background-position: center;"
+				 + "-fx-background-color: white;"
+				 + "-fx-background-repeat: no-repeat;");
 	 }
 	    
 	 @FXML
