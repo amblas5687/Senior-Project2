@@ -135,8 +135,8 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="DOPPicker" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-                  <DatePicker fx:id="ArchivePicker" editable="false" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+                  <DatePicker fx:id="DOPPicker" disable="true" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" styleClass="disable" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+                  <DatePicker fx:id="ArchivePicker" disable="true" editable="false" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" styleClass="disable" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
                   <Label text="Medication Name:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />

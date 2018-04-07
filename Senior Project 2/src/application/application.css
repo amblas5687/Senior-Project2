@@ -5,6 +5,7 @@
  * Sections:
  * 		- Main
  * 		- Error
+ * 		- Disable
  * 		- Button
  * 		- Login Box
  * 		- Slider
@@ -31,6 +32,14 @@
 .error{
 	-fx-text-fill: #bf5f82;
 	-fx-font-weight: bold;
+}
+
+
+/* -- DISABLE -- */
+
+/* Custom disable class that makes disabled objects look like non-disabled objects */
+.disable{
+	-fx-opacity: 1;
 }
 
 
