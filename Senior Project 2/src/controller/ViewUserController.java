@@ -165,12 +165,13 @@ public class ViewUserController {
 	void edit(ActionEvent event) {
 		btnEdit.setVisible(false);
 		btnSubmit.setVisible(true);
-		fnameTF.setDisable(false);
-		lnameTF.setDisable(false);
+		fnameTF.setEditable(true);
+		lnameTF.setEditable(true);
+		DOBPicker.setEditable(true);
 		DOBPicker.setDisable(false);
 		relationBox.setDisable(false);
-		emailTF.setDisable(false);
-		password1TF.setDisable(false);
+		emailTF.setEditable(true);
+		password1TF.setEditable(true);
 		cancelBTN.setVisible(true);
 
 		password1TF.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -270,12 +271,13 @@ public class ViewUserController {
 			} // end finally
 
 			btnSubmit.setVisible(false);
-			fnameTF.setDisable(true);
-			lnameTF.setDisable(true);
-			DOBPicker.setDisable(true);
+			fnameTF.setEditable(false);
+			lnameTF.setEditable(false);
+			DOBPicker.setEditable(false);
+			DOBPicker.setDisable(true);	
 			relationBox.setDisable(true);
-			emailTF.setDisable(true);
-			password1TF.setDisable(true);
+			emailTF.setEditable(false);
+			password1TF.setEditable(false);
 			btnEdit.setVisible(true);
 			cancelBTN.setVisible(false);
 		}

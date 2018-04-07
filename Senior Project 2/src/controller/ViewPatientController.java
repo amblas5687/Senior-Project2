@@ -211,13 +211,15 @@ public class ViewPatientController {
     
     @FXML
     void edit(ActionEvent event) {
-    	fnameTF.setDisable(false);
-    	lnameTF.setDisable(false);
+    	fnameTF.setEditable(true);
+    	lnameTF.setEditable(true);
+    	DOBPicker.setEditable(true);
     	DOBPicker.setDisable(false);
-    	doctorTF.setDisable(false);
+    	doctorTF.setEditable(true);
     	stageBox.setDisable(false);
     	diagnosesPicker.setDisable(false);
-    	cargiverTF.setDisable(false);
+    	diagnosesPicker.setEditable(true);
+    	cargiverTF.setEditable(true);
     	
     	cancelBTN.setVisible(true);
     	editBTN.setVisible(false);
@@ -226,13 +228,15 @@ public class ViewPatientController {
     
     private void disableEdit()
     {
-    	fnameTF.setDisable(true);
-    	lnameTF.setDisable(true);
+    	fnameTF.setEditable(false);
+    	lnameTF.setEditable(false);
     	DOBPicker.setDisable(true);
-    	doctorTF.setDisable(true);
+    	DOBPicker.setEditable(false);
+    	doctorTF.setEditable(false);
     	stageBox.setDisable(true);
+    	diagnosesPicker.setEditable(false);
     	diagnosesPicker.setDisable(true);
-    	cargiverTF.setDisable(true);
+    	cargiverTF.setEditable(false);
     	
     	cancelBTN.setVisible(false);
     	submitBTN.setVisible(false);
