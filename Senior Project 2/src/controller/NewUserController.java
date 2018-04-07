@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import application.DBConfig;
 import application.DataSource;
 import javafx.event.ActionEvent;
@@ -128,13 +127,13 @@ public class NewUserController {
 			dialog.getDialogPane().getStylesheets()
 					.add(getClass().getResource("/application/application.css").toExternalForm());
 			dialog.setTitle("Patient Code");
-			dialog.setHeaderText("Enter the patient code that was \ngenerated when you created your patient");
+			dialog.setHeaderText("Enter the patient code generated when your \npatient account was created");
 
 			stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/application/4getmenot1.jpg"));
+			stage.getIcons().add(new Image("/application/logo_wbg.png"));
 
 			GridPane grid = new GridPane();
-			Label label = new Label("Please enter your patient code:  ");
+			Label label = new Label("Enter your patient code:  ");
 			TextField textField = new TextField();
 
 			grid.add(label, 0, 0);
@@ -186,9 +185,15 @@ public class NewUserController {
 						System.out.println("PATIENT DOES NOT EXIST");
 						Alert failure = new Alert(AlertType.ERROR);
 						// safely catches error by pop-up alert.
-						failure.setContentText("Patient does not exist");
+						failure.setTitle("Error");
+						failure.setHeaderText("Error!");
+						failure.setContentText("Patient code not found. Please enter a different patient code or create a patient account");
 						failure.getDialogPane().getStylesheets()
 								.add(getClass().getResource("/application/application.css").toExternalForm());
+						
+						stage = (Stage) failure.getDialogPane().getScene().getWindow();
+						stage.getIcons().add(new Image("/application/logo_wbg.png"));
+						
 						Optional<ButtonType> error = failure.showAndWait();
 
 					} else {
@@ -528,7 +533,7 @@ public class NewUserController {
 			System.out.println("PASSWORD EMPTY...");
 			passwordFlag = false;
 		} else if (p1.length() < 4) {
-			lblPassword1.setText("Your password must be longer than 4 digits");
+			lblPassword1.setText("Your password must be at least 4 digits long");
 			System.out.println("PASSWORD < 4");
 			passwordFlag = false;
 		} else if (p2 == null || p2.equals(null) || p2.equals("")) {

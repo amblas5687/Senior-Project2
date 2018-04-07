@@ -546,7 +546,7 @@ public class ViewUserController {
 			System.out.println("PASSWORD EMPTY...");
 			passwordFlag = false;
 		} else if (p1.length() < 4) {
-			lblPassword1.setText("Your password must be longer than 4 digits");
+			lblPassword1.setText("Your password must be at least 4 digits long");
 			System.out.println("PASSWORD < 4");
 			passwordFlag = false;
 		} else if (p2 == null || p2.equals(null) || p2.equals("")) {

@@ -153,7 +153,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <ImageView fx:id="logo" fitHeight="337.0" fitWidth="330.0" layoutX="98.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="logo" fitHeight="337.0" fitWidth="330.0" layoutX="98.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </center>

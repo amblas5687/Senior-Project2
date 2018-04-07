@@ -851,7 +851,7 @@ public class CurrentMedsController {
 		
 		Scene detailScene = new Scene(detailRoot);
 		detailStage.setScene(detailScene);
-		detailStage.getIcons().add(new Image("/application/4getmenot1.jpg"));
+		detailStage.getIcons().add(new Image("/application/logo_wbg.png"));
 		detailStage.initModality(Modality.APPLICATION_MODAL);
 		detailStage.show();
 	}

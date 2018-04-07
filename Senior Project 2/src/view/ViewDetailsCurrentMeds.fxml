@@ -39,6 +39,14 @@
 		            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		        </rowConstraints>
 		         <children>
+		            <Button fx:id="btnOK" minHeight="40.0" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11">
+		               <GridPane.margin>
+		                  <Insets />
+		               </GridPane.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+		            </Button>
 		            <Label text="Prescribing Doctor:" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                      <font>
                         <Font size="16.0" />
@@ -126,14 +134,6 @@
                   </TextField>
                   <DatePicker fx:id="DOPPicker" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
                   <DatePicker fx:id="LUPicker" editable="false" layoutX="376.0" layoutY="536.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-		            <Button fx:id="btnOK" minHeight="40.0" mnemonicParsing="false" onAction="#stopViewing" prefHeight="25.0" prefWidth="75.0" text="OK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11">
-		               <GridPane.margin>
-		                  <Insets />
-		               </GridPane.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-		            </Button>
                   <Label text="Medication Name:" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />

@@ -153,7 +153,7 @@ public class NewPatientController {
 			alert.setHeaderText("Patient code uniquely identifies each patient. Please record for further use.");
 
 			stage = (Stage) alert.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/application/4getmenot1.jpg"));
+			stage.getIcons().add(new Image("/application/logo_wbg.png"));
 
 			TextField textField = new TextField("Patient Code: " + patientCode);
 			textField.setEditable(false);
