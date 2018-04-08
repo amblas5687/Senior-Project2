@@ -239,7 +239,7 @@
             </AnchorPane>
          </bottom>
 		   <top>
-		      <Label text="Create User" BorderPane.alignment="CENTER">
+		      <Label text="Create User Account" BorderPane.alignment="CENTER">
 		         <font>
 		            <Font name="System Bold" size="24.0" />
 		         </font>

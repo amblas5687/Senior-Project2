@@ -37,6 +37,9 @@ public class HelpDocsController {
     private Label lblDisclaimer;
     
     @FXML
+    private Label lblContact;
+    
+    @FXML
     private Button btnMeds;
 
     @FXML
@@ -65,10 +68,14 @@ public class HelpDocsController {
 				 + "-fx-background-repeat: no-repeat;");
     	
     	lblDescription.setText("Forget Me Not is designed to help nonprofessional inhome caregivers keep track of Alzheimer's patient information.\n\n"
-    			+ "Forget Me Not seeks to cut down on communication issues between multiple caregivers for one patient.");
+    			+ "Forget Me Not seeks to cut down on communication issues between multiple caregivers for one patient.\n\n"
+    			+ "Forget Me Not is not limited to tracking just Alzheimer's. This system can be "
+    			+ "used to track a patient with any illness, disease, disorder, or disability.");
     	
     	lblDisclaimer.setText("This system was built as a senior project. Therefore, errors and bugs exist in this system. Also, this system is not HIPPA"
     			+ " compliant. If you find an issue, please feel free to report it to us.");
+    	
+    	lblContact.setText("If you need to get in touch with us for any reason. Please email us at:\n           gmail@gmail.com");
     	
     	player.setOnEndOfMedia(new Runnable() {
 		    @Override

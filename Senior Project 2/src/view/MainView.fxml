@@ -16,22 +16,22 @@
                   <Tooltip fx:id="tp" text="Empty Tooltip" />
                </tooltip>
             </Label>
-            <JFXButton fx:id="btnMed" buttonType="RAISED" onAction="#selectMenuOption" prefHeight="102.0" prefWidth="235.0" ripplerFill="LIGHTBLUE" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="MY MEDS">
+            <JFXButton fx:id="btnMed" buttonType="RAISED" onAction="#selectMenuOption" prefHeight="102.0" prefWidth="235.0" ripplerFill="#4fc3f7" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="MY MEDS">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnPat" buttonType="RAISED" onAction="#selectMenuOption" prefHeight="102.0" prefWidth="235.0" ripplerFill="LIGHTBLUE" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="MY PATIENT">
+            <JFXButton fx:id="btnPat" buttonType="RAISED" onAction="#selectMenuOption" prefHeight="102.0" prefWidth="235.0" ripplerFill="#4fc3f7" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="MY PATIENT">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnInfo" buttonType="RAISED" onAction="#selectMenuOption" prefHeight="102.0" prefWidth="235.0" ripplerFill="LIGHTBLUE" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="MY INFO">
+            <JFXButton fx:id="btnInfo" buttonType="RAISED" onAction="#selectMenuOption" prefHeight="102.0" prefWidth="235.0" ripplerFill="#4fc3f7" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="MY INFO">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnExit" buttonType="RAISED" onAction="#logout" prefHeight="102.0" prefWidth="235.0" ripplerFill="LIGHTBLUE" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="LOG OUT">
+            <JFXButton fx:id="btnExit" buttonType="RAISED" onAction="#logout" prefHeight="102.0" prefWidth="235.0" ripplerFill="#4fc3f7" styleClass="mainJFXButton" stylesheets="@../application/application.css" text="LOG OUT">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

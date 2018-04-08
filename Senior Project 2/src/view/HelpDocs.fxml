@@ -30,7 +30,7 @@
                         <RowConstraints maxHeight="350.0" minHeight="10.0" prefHeight="139.39999389648432" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Below is a video to help you navigate Forget Me Not:" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Label text="This video is a tutorial to help you navigate Forget Me Not:" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -79,12 +79,12 @@
                               <Insets right="590.0" top="245.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblDescription" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Label fx:id="lblDescription" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="33.0" />
+                              <Insets right="33.0" top="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label styleClass="error" text="*DISCLAIMER*" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -100,15 +100,15 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="5.0" />
+                              <Insets bottom="10.0" left="40.0" right="40.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="Contact us at: gmail@gmail.com" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                        <Label fx:id="lblContact" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="20.0" />
+                              <Insets right="33.0" />
                            </GridPane.margin>
                         </Label>
             		      <Label text="Help &amp; Documentation" GridPane.halignment="CENTER">
@@ -119,13 +119,29 @@
                               <Insets top="5.0" />
                            </GridPane.margin>
             		      </Label>
-                        <Label text="To watch a specific segment of the video, please click a button below:" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Label text="To watch a specific segment of the video, please select a button below:" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets top="315.0" />
                            </GridPane.margin>
                            <font>
                               <Font size="16.0" />
                            </font>
+                        </Label>
+                        <Label text="About Us:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="33.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label layoutX="809.0" layoutY="49.0" text="Contact Us:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="15.0" right="33.0" />
+                           </GridPane.margin>
                         </Label>
                      </children>
                   </GridPane>

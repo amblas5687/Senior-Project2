@@ -57,32 +57,33 @@
 
 /* Affects buttons (on login page) linked to this custom class */
 .loginJFXButton{
-	 
+	 -fx-underline: true;
 }
 
 /* Affects hover for buttons (on login page) linked to this custom class */
 .loginJFXButton:hover{
-	 -fx-background-color: #80deea;
+	 -fx-background-color: #4fc3f7;
+	 -fx-underline: false;
 }
 
 /* Affects buttons (on main page) linked to this custom class */
 .mainJFXButton{
-	 -fx-background-color: #80deea;
+	 -fx-background-color: #4fc3f7;
 }
 
 /* Affects hover for buttons (on main page) linked to this custom class */
 .mainJFXButton:hover{
-	 -fx-background-color: #4bacb8;
+	 -fx-background-color: #0093c4;
 }
 
 /* Affects currently selected button */
 .activeButton{
-	-fx-background-color: #ffcdd2;
+	-fx-background-color: #ffc6d5;
 }
 
 /* Affects hover over action for currently selected button */
 .activeButton:hover{
-	-fx-background-color: #ffcdd2;
+	-fx-background-color: #ffc6d5;
 }
 
 
@@ -102,18 +103,18 @@
 
 /* Affects the left side of the slider track */
 .jfx-slider .colored-track {
-    -fx-background-color: #4bacb8;
+    -fx-background-color: #0093c4;
 }
 
 /* Affects the slider thumb (circle) */
 .jfx-slider .thumb {
-    -fx-background-color: #4bacb8;
+    -fx-background-color: #0093c4;
 }
 
 /* Affects the tear-drop with time that pops up while you drag the slider */
 .jfx-slider .animated-thumb,
 .jfx-slider .animated-thumb:min{
-	-fx-background-color: #80deea;
+	-fx-background-color: #4fc3f7;
 	-fx-text-fill: black;
 }
 
@@ -131,7 +132,7 @@
 
 /* Changes selected toggle button */
 .toggle-button:selected {
-	-fx-base: #80deea;
+	-fx-base: #4fc3f7;
 }
 
 
@@ -145,7 +146,7 @@
 
 /* Affects buttons on dialog pane */
 .dialog-pane .button{
-	-fx-base: #80deea;
+	-fx-base: #4fc3f7;
 }
 
 
@@ -153,12 +154,12 @@
 
 /* Affects column head (behind label) */
 .table-view .column-header{
-	-fx-background-color: #80deea;
+	-fx-background-color: #4fc3f7;
 }
 
 /* Affects labels of column head of table view */
 .table-view .column-header-background .label{
-	-fx-background-color: #80deea;
+	-fx-background-color: #4fc3f7;
     -fx-font-size: 15.5px;
 }
 
@@ -169,8 +170,8 @@
 
 /* Affects row selector of table view */
 .table-row-cell:selected { 
-	-fx-background-color: #ffcdd2;
-	-fx-selection-bar: #ffcdd2;
+	-fx-background-color: #ffc6d5;
+	-fx-selection-bar: #ffc6d5;
 }
 
 /* Affects scroll bar buttons */
@@ -202,13 +203,13 @@
 
 /* Affects dropdown selector for list */
 .combo-box .list-cell:hover{
-	-fx-background-color: #4bacb8;
+	-fx-background-color: #0093c4;
 	-fx-text-fill: black;
 }
 
 /* Affects selected item in dropdown list */
 .combo-box .list-view .list-cell:filled:selected{
-	-fx-background-color: #ffcdd2;
+	-fx-background-color: #ffc6d5;
 	-fx-text-fill: black;
 }
 
@@ -223,7 +224,7 @@
 
 /* Affects month and year at top of calendar of date picker */
 .date-picker-popup > .month-year-pane {
-    -fx-background-color: #80deea;
+    -fx-background-color: #4fc3f7;
     -fx-background-radius: 15 15 15 15;
     -fx-background-insets: 6 6 6 6 ;
     -fx-text-fill: rgba(0,0,0,0.7);
@@ -233,7 +234,7 @@
 /* Changes background of date picker calendar selector */
 .date-picker .arrow-button{
 	-fx-background-radius: 3px;
-	-fx-background-color: #80deea;/* #232323; */
+	-fx-background-color: #4fc3f7;/* #232323; */
 	-fx-padding: 20px;
 }
 
@@ -247,7 +248,7 @@
 /* Changes calendar picture on date picker selector on hover */
 .date-picker .arrow-button:hover .arrow{
 	-fx-background-radius: 0px;
-	-fx-background-color: #005662;
+	-fx-background-color: #004c8c;
  }
 
 /* Changes arrow background surrounding month and year on calendar in date picker */
@@ -273,14 +274,14 @@
 
 /* Changes grid with dates on calendar in date picker */
  .date-picker .cell {
-	-fx-background-color: #80deea;/* #232323; */
+	-fx-background-color: #4fc3f7;/* #232323; */
 	-fx-pref-width:20px;
 	-fx-pref-height:25px;
  }
 
 /* Changes hover on dates for calendar in date picker */
 .date-picker .cell:hover {
-	-fx-background-color: #0097a7;
+	-fx-background-color: #0093c4;
 	-fx-pref-width:20px;
 	-fx-pref-height:25px;
 	
@@ -288,7 +289,7 @@
 
 /* Changes current date on calendar in date picker */
 .date-picker .cell:focused {
-	-fx-background-color: #ffcdd2;
+	-fx-background-color: #ffc6d5;
 	-fx-pref-width:20px;
 	-fx-pref-height:25px;
 	-fx-text-fill: black;
