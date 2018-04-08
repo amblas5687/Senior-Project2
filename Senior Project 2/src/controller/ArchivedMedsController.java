@@ -104,6 +104,7 @@ public class ArchivedMedsController {
 	public void initialize() {
 
 		System.out.println("*******ARCHIVED MED*******");
+		System.out.println("TEst commit to see if it is still working");
 
 		// bind columns
 		mName.setCellValueFactory(cellData -> cellData.getValue().getMedName());
