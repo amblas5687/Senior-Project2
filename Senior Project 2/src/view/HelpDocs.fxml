@@ -30,24 +30,24 @@
                         <RowConstraints maxHeight="350.0" minHeight="10.0" prefHeight="139.39999389648432" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="This video is a tutorial to help you navigate Forget Me Not:" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Label fx:id="lblReturn" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets top="10.0" />
+                              <Insets top="30.0" />
                            </GridPane.margin>
                         </Label>
                         <MediaView fx:id="media_view" fitHeight="355.0" fitWidth="650.0" onMouseClicked="#clickVideo" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <GridPane.margin>
-                              <Insets top="20.0" />
+                              <Insets top="30.0" />
                            </GridPane.margin></MediaView>
                         <Button fx:id="btnMeds" maxWidth="72.0" minHeight="40.0" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="15.0" left="200.0" />
+                              <Insets bottom="5.0" left="200.0" />
                            </GridPane.margin>
                         </Button>
                         <Button fx:id="btnUser" maxWidth="72.0" minHeight="40.0" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
@@ -55,7 +55,7 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="15.0" right="200.0" />
+                              <Insets bottom="5.0" right="200.0" />
                            </GridPane.margin>
                         </Button>
                         <Button fx:id="btnPatient" minHeight="40.0" mnemonicParsing="false" onAction="#patientVideo" text="Patient" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
@@ -63,12 +63,12 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="15.0" />
+                              <Insets bottom="5.0" />
                            </GridPane.margin>
                         </Button>
                         <JFXSlider fx:id="timeSlider" indicatorPosition="RIGHT" max="3.045" maxWidth="590.0" onDragDetected="#dragSlider" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <GridPane.margin>
-                              <Insets left="35.0" top="245.0" />
+                              <Insets left="35.0" top="255.0" />
                            </GridPane.margin>
                         </JFXSlider>
                         <Label fx:id="lblStatus" maxHeight="30.0" minHeight="25.0" onMouseClicked="#clickVideo" prefHeight="30.0" prefWidth="30.0" textFill="#4bacb8" GridPane.halignment="CENTER" GridPane.rowIndex="2">
@@ -76,7 +76,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="590.0" top="245.0" />
+                              <Insets right="590.0" top="255.0" />
                            </GridPane.margin>
                         </Label>
                         <Label fx:id="lblDescription" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -84,7 +84,7 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="33.0" top="10.0" />
+                              <Insets right="33.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
                         <Label styleClass="error" text="*DISCLAIMER*" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -92,7 +92,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets top="10.0" />
+                              <Insets top="20.0" />
                            </GridPane.margin>
                         </Label>
                         <Label fx:id="lblDisclaimer" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -100,7 +100,7 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="10.0" left="40.0" right="40.0" top="20.0" />
+                              <Insets bottom="10.0" left="40.0" right="40.0" top="30.0" />
                            </GridPane.margin>
                         </Label>
                         <Label fx:id="lblContact" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
@@ -108,7 +108,7 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="33.0" />
+                              <Insets right="33.0" top="10.0" />
                            </GridPane.margin>
                         </Label>
             		      <Label text="Help &amp; Documentation" GridPane.halignment="CENTER">
@@ -121,7 +121,7 @@
             		      </Label>
                         <Label text="To watch a specific segment of the video, please select a button below:" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <GridPane.margin>
-                              <Insets top="315.0" />
+                              <Insets top="335.0" />
                            </GridPane.margin>
                            <font>
                               <Font size="16.0" />
@@ -132,7 +132,7 @@
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="33.0" />
+                              <Insets right="33.0" top="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label layoutX="809.0" layoutY="49.0" text="Contact Us:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
@@ -140,7 +140,7 @@
                               <Font size="18.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="15.0" right="33.0" />
+                              <Insets bottom="5.0" right="33.0" />
                            </GridPane.margin>
                         </Label>
                      </children>

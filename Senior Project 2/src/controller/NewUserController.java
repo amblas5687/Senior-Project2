@@ -133,8 +133,9 @@ public class NewUserController {
 			stage.getIcons().add(new Image("/application/logo_wbg.png"));
 
 			GridPane grid = new GridPane();
-			Label label = new Label("Enter your patient code:  ");
+			Label label = new Label("Enter patient code:  ");
 			TextField textField = new TextField();
+			textField.setPrefWidth(370);
 
 			grid.add(label, 0, 0);
 			grid.add(textField, 1, 0);
