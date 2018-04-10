@@ -18,6 +18,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -25,6 +28,30 @@ public class LoginController {
 	 Parent root;
 	 Scene scene;
 	 Stage stage;
+	 
+	 @FXML
+	 private AnchorPane ap;
+	 
+	 @FXML
+	 private BorderPane bp;
+	 
+	 @FXML
+	 private AnchorPane ap2;
+	 
+	 @FXML
+	 private AnchorPane ap3;
+	 
+	 @FXML
+	 private GridPane grid;
+	 
+	 @FXML
+	 private GridPane grid2;
+	 
+	 @FXML
+	 private GridPane grid3;
+	 
+	 @FXML
+	 private GridPane grid4;
 	 
 	 @FXML
 	 private TextField emailTF;
@@ -62,6 +89,14 @@ public class LoginController {
 			logo.setImage(new Image("/application/logo.png"));
 			btnHelp.setPadding(Insets.EMPTY);
 			btnHelp.setPadding(new Insets(8, 8, 8, 8));
+			
+			//binds borderpane to parent anchorpane
+			//resizes borderpane based on anchorpane size
+			bp.prefWidthProperty().bind(ap.widthProperty());
+			bp.prefHeightProperty().bind(ap.heightProperty());
+			bp.setMinSize(600, 400);
+			bp.setMaxSize(1200, 678);
+
 	 }
 	 
 	 @FXML
