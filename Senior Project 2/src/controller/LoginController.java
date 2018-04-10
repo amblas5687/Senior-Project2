@@ -9,6 +9,7 @@ import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -33,6 +34,9 @@ public class LoginController {
 
 	 @FXML
 	 private Button btnLogin;
+	 
+	 @FXML
+	 private JFXButton btnHelp;
 
 	 @FXML
      private JFXButton btnUser;
@@ -56,8 +60,23 @@ public class LoginController {
 			
 			System.out.println("*******LOGIN*******");
 			logo.setImage(new Image("/application/logo.png"));
+			btnHelp.setPadding(Insets.EMPTY);
+			btnHelp.setPadding(new Insets(8, 8, 8, 8));
 	 }
 	 
+	 @FXML
+	 void loadHelp(ActionEvent event) {
+		 
+		 try {
+			stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+			root = FXMLLoader.load(getClass().getResource("/view/LoginHelpDocs.fxml"));
+			scene = new Scene(root);
+			stage.setScene(scene);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
+	 }
 	 
 	 @FXML
 	 void loadNewPatient(ActionEvent event) {

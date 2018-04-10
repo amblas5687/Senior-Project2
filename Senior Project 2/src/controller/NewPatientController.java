@@ -151,7 +151,7 @@ public class NewPatientController {
 			dialogPane.setMaxHeight(200);
 			dialogPane.getStyleClass().add("alert");
 			alert.setTitle("Patient Code");
-			alert.setHeaderText("Patient code uniquely identifies each patient. Please record for further use.");
+			alert.setHeaderText("Patient code uniquely identifies each patient. Please record or copy for further use.");
 
 			stage = (Stage) alert.getDialogPane().getScene().getWindow();
 			stage.getIcons().add(new Image("/application/logo_wbg.png"));
