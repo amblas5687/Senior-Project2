@@ -22,7 +22,7 @@
 
 /* Affects all GUIs */
 .root{
-	
+	-fx-background-color: linear-gradient(to bottom, #dbf3fd, #e2f0fb, #e8eef6, #ebedf1, #ececec);
 }
 
 
@@ -37,9 +37,31 @@
 
 /* -- DISABLE -- */
 
-/* Custom disable class that makes disabled objects look like non-disabled objects */
+/* Custom disable class that makes enabled objects look like disabled objects */
 .disable{
-	-fx-opacity: 1;
+	-fx-opacity: 0.6;
+	-fx-color: white;
+}
+
+/* Affects disabled text-field appearance */
+.text-field:disabled {
+	-fx-opacity: 0.6;
+	-fx-color: white;
+	-fx-text-fill: grey;
+}
+
+/* Affects disabled combo-box appearance */
+.combo-box:disabled {
+	-fx-opacity: 0.7;
+	-fx-text-fill: black;
+	-fx-color: white;
+}
+
+/* Affects disabled date-picker appearance */
+.date-picker:disabled {
+	-fx-opacity: 0.7;
+	-fx-text-fill: black;
+	-fx-color: white;
 }
 
 
@@ -64,6 +86,7 @@
 .loginJFXButton:hover{
 	 -fx-background-color: #4fc3f7;
 	 -fx-underline: false;
+	 -jfx-button-type: RAISED;
 }
 
 /* Affects buttons (on main page) linked to this custom class */
@@ -91,7 +114,7 @@
 
 /* Custom class for login border */
 .loginBox{
-	-fx-border-color: silver;
+	-fx-border-color: #D3D3D3;
     -fx-border-insets: 5;
     -fx-border-radius: 10;
     -fx-border-width: 1;
