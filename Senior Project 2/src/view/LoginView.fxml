@@ -104,7 +104,7 @@
                         <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-		                  <JFXButton fx:id="btnPatient" buttonType="RAISED" onAction="#loadNewPatient" ripplerFill="#4fc3f7" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Create Patient Account" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+		                  <JFXButton fx:id="btnPatient" onAction="#loadNewPatient" ripplerFill="#4fc3f7" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Create Patient Account" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 		                     <font>
 		                        <Font size="17.0" />
 		                     </font>
@@ -128,7 +128,7 @@
                       <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-		                  <JFXButton fx:id="btnUser" buttonType="RAISED" onAction="#loadNewUser" ripplerFill="#4fc3f7" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Create User Account" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+		                  <JFXButton fx:id="btnUser" onAction="#loadNewUser" ripplerFill="#4fc3f7" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Create User Account" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 		                     <font>
 		                        <Font size="17.0" />
 		                     </font>
@@ -160,7 +160,7 @@
                               <Insets right="180.0" />
                            </GridPane.margin>
                         </Label>
-                        <JFXButton fx:id="btnHelp" buttonType="RAISED" onAction="#loadHelp" ripplerFill="#4fc3f7" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Learn more about us!" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER">
+                        <JFXButton fx:id="btnHelp" onAction="#loadHelp" ripplerFill="#4fc3f7" styleClass="loginJFXButton" stylesheets="@../application/application.css" text="Learn more about us!" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
