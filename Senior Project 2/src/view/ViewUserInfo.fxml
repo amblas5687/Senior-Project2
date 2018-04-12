@@ -85,7 +85,7 @@
 			                  <Insets left="5.0" right="5.0" />
 			               </padding>
 			            </Separator>
-			            <TextField fx:id="fnameTF" editable="false" maxHeight="41.0" maxWidth="310.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+			            <TextField fx:id="fnameTF" disable="true" maxHeight="41.0" maxWidth="310.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" promptText="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
@@ -93,7 +93,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <TextField fx:id="lnameTF" editable="false" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="230.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+			            <TextField fx:id="lnameTF" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="40.0" prefWidth="230.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
@@ -101,17 +101,17 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <DatePicker fx:id="DOBPicker" disable="true" editable="false" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" styleClass="disable" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+			            <DatePicker fx:id="DOBPicker" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
 			            </DatePicker>
-			            <ComboBox fx:id="relationBox" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Select..." styleClass="disable" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+			            <ComboBox fx:id="relationBox" disable="true" editable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
 			            </ComboBox>
-			            <TextField fx:id="emailTF" editable="false" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Personal Email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+			            <TextField fx:id="emailTF" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Personal Email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
@@ -119,7 +119,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <PasswordField fx:id="password1TF" editable="false" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+			            <PasswordField fx:id="password1TF" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
