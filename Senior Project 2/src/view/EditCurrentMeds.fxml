@@ -134,20 +134,20 @@
                      </font>
                   </TextField>
                   <DatePicker fx:id="DOPPicker" disable="true" editable="false" layoutX="376.0" layoutY="221.0" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="MM/DD/YYYY" styleClass="disable" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />      
-		            <Button fx:id="btnSubmit" alignment="CENTER" contentDisplay="CENTER" minHeight="40.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="75.0" text="Submit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+		            <Button fx:id="btnSubmit" alignment="CENTER" contentDisplay="CENTER" minHeight="40.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="75.0" text="Submit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
 		               <GridPane.margin>
-		                  <Insets left="100.0" />
+		                  <Insets bottom="15.0" left="100.0" />
 		               </GridPane.margin>
                      <font>
                         <Font size="16.0" />
                      </font>
 		            </Button>
-		          <Button fx:id="cancelBTN" minHeight="40.0" mnemonicParsing="false" onAction="#returnMain" prefHeight="25.0" prefWidth="75.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+		          <Button fx:id="cancelBTN" minHeight="40.0" mnemonicParsing="false" onAction="#returnMain" prefHeight="25.0" prefWidth="75.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets right="100.0" />
+                        <Insets bottom="15.0" right="100.0" />
                      </GridPane.margin></Button>
                   <Label text="Medication Name:" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <font>
