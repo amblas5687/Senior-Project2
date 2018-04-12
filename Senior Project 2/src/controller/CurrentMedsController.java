@@ -891,7 +891,7 @@ public class CurrentMedsController {
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
 		grid.setVgap(10);
-		grid.setPadding(new Insets(20, 90, 10, 10));
+		grid.setPadding(new Insets(20, 30, 10, 20));
 
 		TextArea notes = new TextArea();
 		notes.setPromptText("Enter archival reason");
