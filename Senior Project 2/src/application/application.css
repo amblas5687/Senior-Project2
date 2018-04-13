@@ -39,27 +39,28 @@
 
 /* Custom disable class that makes enabled objects look like disabled objects */
 .disable{
-	-fx-opacity: 0.6;
+	-fx-opacity: 0.7;
 	-fx-color: white;
+	-fx-text-fill: grey;
 }
 
 /* Affects disabled text-field appearance */
 .text-field:disabled {
-	-fx-opacity: 0.6;
+	-fx-opacity: 0.7;
 	-fx-color: white;
 	-fx-text-fill: grey;
 }
 
 /* Affects disabled combo-box appearance */
 .combo-box:disabled {
-	-fx-opacity: 0.7;
+	-fx-opacity: 0.8;
 	-fx-text-fill: black;
 	-fx-color: white;
 }
 
 /* Affects disabled date-picker appearance */
 .date-picker:disabled {
-	-fx-opacity: 0.7;
+	-fx-opacity: 0.8;
 	-fx-text-fill: black;
 	-fx-color: white;
 }
