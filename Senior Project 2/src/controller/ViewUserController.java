@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import application.DBConfig;
@@ -19,13 +20,20 @@ import application.DataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class ViewUserController {
 
@@ -82,6 +90,7 @@ public class ViewUserController {
 	private int count;
 	private URL toPane;
 	private AnchorPane temp;
+	private Stage stage;
 
 	private String currentEmail = "";
 
@@ -163,24 +172,88 @@ public class ViewUserController {
 
 	@FXML
 	void edit(ActionEvent event) {
+		
 		btnEdit.setVisible(false);
 		btnSubmit.setVisible(true);
+		cancelBTN.setVisible(true);
+		
 		fnameTF.setDisable(false);
 		lnameTF.setDisable(false);
 		DOBPicker.setDisable(false);
 		relationBox.setDisable(false);
 		emailTF.setDisable(false);
 		password1TF.setDisable(false);
-		cancelBTN.setVisible(true);
 
-		password1TF.textProperty().addListener((observable, oldValue, newValue) -> {
-			password2TF.setText(null);
-			System.out.println("textfield changed from " + oldValue + " to " + newValue);
-			password2TF.setVisible(true);
-			lblVerifyPass.setVisible(true);
-			lblPassword2.setVisible(true);
-		});
 	}
+	
+    @FXML
+    void clickPassword(MouseEvent event) {
+    	
+    	password2TF.setText(null);
+    	lblPassword1.setText(null);
+    	
+    	// safely catches error by pop-up alert
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+		//changes standard stage icon to logo
+		stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("/application/logo_wbg.png"));
+		
+		alert.setTitle("Change Password");
+		alert.setHeaderText("Change Password Process");
+		alert.getDialogPane().getStylesheets()
+				.add(getClass().getResource("/application/application.css").toExternalForm());
+		
+		GridPane grid = new GridPane();
+		Label label = new Label("Enter original password:  ");
+		PasswordField passField = new PasswordField();
+		passField.setPrefWidth(300);
+
+		grid.add(label, 0, 0);
+		grid.add(passField, 1, 0);
+		alert.getDialogPane().setContent(grid);
+
+		ButtonType btnSubmit = new ButtonType("Submit");
+		ButtonType btnCancel = new ButtonType("Cancel");
+		alert.getDialogPane().getButtonTypes().setAll(btnCancel, btnSubmit);
+		
+		if(!password2TF.isVisible()) {
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			
+			if(result.get() == btnSubmit) {
+				
+				String oldPass = passField.getText();
+				
+				if(password1TF.getText().equals(oldPass)) {
+			    	
+					password2TF.setVisible(true);
+					lblVerifyPass.setVisible(true);
+					lblPassword2.setVisible(true);
+				} else {
+					alert.hide();
+					lblPassword1.setText("Incorrect original password");
+				}
+			}
+		}
+		
+
+    }
+    
+    @FXML
+    void disableEdit() {
+    	
+		btnEdit.setVisible(true);
+		cancelBTN.setVisible(false);
+		btnSubmit.setVisible(false);
+		
+		fnameTF.setDisable(true);
+		lnameTF.setDisable(true);
+		DOBPicker.setDisable(true);	
+		relationBox.setDisable(true);
+		emailTF.setDisable(true);
+		password1TF.setDisable(true);
+
+    }
 
 	@FXML
 	void submit(ActionEvent event) throws ParseException {
@@ -269,15 +342,7 @@ public class ViewUserController {
 
 			} // end finally
 
-			btnSubmit.setVisible(false);
-			fnameTF.setDisable(true);
-			lnameTF.setDisable(true);
-			DOBPicker.setDisable(true);	
-			relationBox.setDisable(true);
-			emailTF.setDisable(true);
-			password1TF.setDisable(true);
-			btnEdit.setVisible(true);
-			cancelBTN.setVisible(false);
+			disableEdit();
 		}
 	}
 
