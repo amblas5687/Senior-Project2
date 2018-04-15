@@ -113,7 +113,8 @@ public class ArchivedMedsController {
 		archiveDate.setCellValueFactory(cellData -> cellData.getValue().getArchiveDate());
 		archiveTable.setItems(archivedMeds);
 
-		searchOptions.getItems().addAll("Name", "Date", "Date Range");
+		searchOptions.getItems().addAll("Select...", "Name", "Date", "Date Range");
+		searchOptions.getSelectionModel().select(0);
 
 		// add to toggle group
 		currMed.setToggleGroup(state);
@@ -395,15 +396,22 @@ public class ArchivedMedsController {
 		String option = searchOptions.getValue();
 		archiveTable.getItems().clear();
 
-		if (option == null) {
+		if (option == null || option.equals("") || option == "Select...") {
 			archiveTable.getItems().clear();
 			grabAllMeds();
+			
+			errLBL.setText(null);
+			
+			if(searchTF != null && !searchTF.getText().equals("") && !searchTF.getText().equals(null)) {
+				errLBL.setText("Select a search parameter for more refined results");
+			}
 		} else if (option == "Name") {
 			searchFlag = validateName();
 			if (searchFlag == true) {
 				optionName();
-				searchOptions.setValue(null);
+				searchOptions.getSelectionModel().select(0);
 				searchTF.setText(null);
+				searchTF.setPromptText("Search...");
 			}
 
 		} else if (option == "Date") {
@@ -412,7 +420,10 @@ public class ArchivedMedsController {
 				optionDate();
 				datePicker.setValue(null);
 				datePicker.getEditor().setText(null);
-				searchOptions.setValue(null);
+				
+				searchOptions.getSelectionModel().select(0);
+				searchTF.setText(null);
+				searchTF.setPromptText("Search...");
 			}
 		} else if (option == "Date Range") {
 			searchFlag = validateDateRange();
@@ -422,7 +433,10 @@ public class ArchivedMedsController {
 				DRPicker1.getEditor().setText(null);
 				DRPicker2.setValue(null);
 				DRPicker2.getEditor().setText(null);
-				searchOptions.setValue(null);
+
+				searchOptions.getSelectionModel().select(0);
+				searchTF.setText(null);
+				searchTF.setPromptText("Search...");
 			}
 		}
 

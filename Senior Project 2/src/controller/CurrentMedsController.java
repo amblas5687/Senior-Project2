@@ -136,7 +136,8 @@ public class CurrentMedsController {
 		// load the meds
 		grabMeds();
 
-		searchOptions.getItems().addAll("Name", "Date", "Date Range");
+		searchOptions.getItems().addAll("Select...", "Name", "Date", "Date Range");
+		searchOptions.getSelectionModel().select(0);
 
 		// add to toggle group
 		currMed.setToggleGroup(state);
@@ -333,17 +334,24 @@ public class CurrentMedsController {
 
 		String option = searchOptions.getValue();
 		medicationTable.getItems().clear();
-
-		if (option == null) {
+		
+		if (option == null ||  option.equals("") || option == "Select...") {
 			grabMeds();
+
+			lblSearch.setText(null);
+			
+			if(searchTF != null && !searchTF.getText().equals("") && !searchTF.getText().equals(null)) {
+				lblSearch.setText("Select a search parameter for more refined results");
+			}
 		} else if (option == "Name") {
 
 			if (!checkName()) {
 				optionName();
 
 				// clear the search values
-				searchOptions.setValue(null);
+				searchOptions.getSelectionModel().select(0);
 				searchTF.setText(null);
+				searchTF.setPromptText("Search...");
 			}
 
 		} else if (option == "Date") {
@@ -353,7 +361,10 @@ public class CurrentMedsController {
 
 				datePicker.setValue(null);
 				datePicker.getEditor().setText(null);
-				searchOptions.setValue(null);
+
+				searchOptions.getSelectionModel().select(0);
+				searchTF.setText(null);
+				searchTF.setPromptText("Search...");
 			}
 
 		} else if (option == "Date Range") {
@@ -365,7 +376,10 @@ public class CurrentMedsController {
 				DRPicker1.getEditor().setText(null);
 				DRPicker2.setValue(null);
 				DRPicker2.getEditor().setText(null);
-				searchOptions.setValue(null);
+
+				searchOptions.getSelectionModel().select(0);
+				searchTF.setText(null);
+				searchTF.setPromptText("Search...");
 			}
 
 		}
