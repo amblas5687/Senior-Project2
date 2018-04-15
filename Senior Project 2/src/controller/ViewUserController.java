@@ -226,6 +226,9 @@ public class ViewUserController {
 				
 				if(password1TF.getText().equals(oldPass)) {
 			    	
+					password1TF.setEditable(true);
+					password1TF.setText(null);
+					
 					password2TF.setVisible(true);
 					lblVerifyPass.setVisible(true);
 					lblPassword2.setVisible(true);
