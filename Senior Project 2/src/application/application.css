@@ -41,14 +41,14 @@
 .disable{
 	-fx-opacity: 0.7;
 	-fx-color: white;
-	-fx-text-fill: grey;
+	-fx-text-fill: #808080;
 }
 
 /* Affects disabled text-field appearance */
 .text-field:disabled {
 	-fx-opacity: 0.7;
 	-fx-color: white;
-	-fx-text-fill: grey;
+	-fx-text-fill: #808080;
 }
 
 /* Affects disabled combo-box appearance */
@@ -147,7 +147,7 @@
 
 /* Affects alert dialog boxes */
 .alert{
-	-fx-background-color: lightgrey;
+	-fx-background-color: #D3D3D3;
 	-fx-font-size: 14pt;
 }
 
@@ -164,7 +164,7 @@
 
 /* Affects pop-up dialog boxes */
 .dialog-pane{
-	-fx-background-color: lightgrey;
+	-fx-background-color: #D3D3D3;
 	-fx-font-size: 14pt;
 }
 
