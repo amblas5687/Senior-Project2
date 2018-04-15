@@ -125,7 +125,7 @@ public class PreexistingArchiveController {
 			String mDescript = medDescript.getText();
 			String pDoc = prescribDoc.getText();
 			String pPurpose = purpOfPrescript.getText();
-			String pDate = DOPPicker.getValue().toString();
+			String pDate = DOPPicker.getEditor().getText();
 			String dateArchived = java.time.LocalDate.now().toString();
 
 			Connection connection = null;
@@ -187,7 +187,7 @@ public class PreexistingArchiveController {
 			prescribDoc.setText("");
 			purpOfPrescript.setText("");
 			DOPPicker.setValue(null);
-			btnSubmit.setText("Add Another!");
+			btnSubmit.setText("Add Another");
 			btnSubmit.setPrefWidth(120);
 			
 			//TODO fix insets
