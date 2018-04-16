@@ -144,14 +144,30 @@
                               <Insets bottom="5.0" left="33.0" />
                            </GridPane.margin>
                         </Label>
-                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#returnMain" prefHeight="40.0" prefWidth="72.0" text="Done!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#returnMain" prefHeight="40.0" prefWidth="72.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets />
+                              <Insets right="33.0" />
                            </GridPane.margin>
                         </Button>
+                        <Label layoutX="112.0" layoutY="54.0" text="Upcoming Features:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="33.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblUpcoming" layoutX="992.0" layoutY="47.0" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="33.0" top="20.0" />
+                           </GridPane.margin>
+                        </Label>
                      </children>
                   </GridPane>
                </children>

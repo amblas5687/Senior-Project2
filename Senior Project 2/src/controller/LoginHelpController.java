@@ -58,6 +58,9 @@ public class LoginHelpController {
     private Label lblReturn;
     
     @FXML
+    private Label lblUpcoming;
+    
+    @FXML
     private Button btnMeds;
 
     @FXML
@@ -103,6 +106,10 @@ public class LoginHelpController {
     			+ "If you find an issue, feel free to report it to us.\n                                 Please note: This system is not HIPPA compliant.");
     	
     	lblContact.setText("If you need to get in touch with us for any reason. Please email us at:\n          gmail@gmail.com");
+    	
+    	lblUpcoming.setText("Forget Me Not is still under development. As such, more features are constantly being added or updated.\n\n"
+    			+ "A calendar function is currently being developed. This will give users the ability to mark appointments or important events, "
+    			+ "post doctor results for an appointment, and record daily medication.");
     	
     	player.setOnEndOfMedia(new Runnable() {
 		    @Override
