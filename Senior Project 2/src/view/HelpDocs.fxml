@@ -12,13 +12,13 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="content_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#exitVideo" prefHeight="678.0" prefWidth="968.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HelpDocsController">
+<AnchorPane fx:id="content_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#enterScreen" onMouseExited="#exitVideo" prefHeight="678.0" prefWidth="968.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HelpDocsController">
 	<children>
-   		<BorderPane prefHeight="678.0" prefWidth="968.0">
+   		<BorderPane fx:id="bp" prefHeight="678.0" prefWidth="968.0">
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="ap" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane maxWidth="972.0" prefHeight="679.0" prefWidth="968.0">
+                  <GridPane fx:id="grid" prefHeight="679.0" prefWidth="968.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="720.6666870117188" minWidth="10.0" prefWidth="710.2666137695312" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="467.8666076660156" minWidth="10.0" prefWidth="258.53338623046875" />
@@ -30,7 +30,7 @@
                         <RowConstraints maxHeight="350.0" minHeight="10.0" prefHeight="139.39999389648432" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="lblReturn" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Label fx:id="lblReturn" minHeight="50.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -42,7 +42,7 @@
                            <GridPane.margin>
                               <Insets top="30.0" />
                            </GridPane.margin></MediaView>
-                        <Button fx:id="btnMeds" maxWidth="72.0" minHeight="40.0" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <Button fx:id="btnMeds" minHeight="40.0" minWidth="72.0" mnemonicParsing="false" onAction="#medsVideo" text="Meds" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -50,7 +50,7 @@
                               <Insets bottom="5.0" left="200.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnUser" maxWidth="72.0" minHeight="40.0" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <Button fx:id="btnUser" minHeight="40.0" minWidth="72.0" mnemonicParsing="false" onAction="#userVideo" text="User" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -58,7 +58,7 @@
                               <Insets bottom="5.0" right="200.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnPatient" minHeight="40.0" mnemonicParsing="false" onAction="#patientVideo" text="Patient" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <Button fx:id="btnPatient" minHeight="40.0" minWidth="72.0" mnemonicParsing="false" onAction="#patientVideo" text="Patient" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -71,7 +71,7 @@
                               <Insets left="35.0" top="255.0" />
                            </GridPane.margin>
                         </JFXSlider>
-                        <Label fx:id="lblStatus" maxHeight="30.0" minHeight="25.0" onMouseClicked="#clickVideo" prefHeight="30.0" prefWidth="30.0" textFill="#4bacb8" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Label fx:id="lblStatus" minHeight="30.0" onMouseClicked="#clickVideo" prefHeight="30.0" prefWidth="30.0" textFill="#4bacb8" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>

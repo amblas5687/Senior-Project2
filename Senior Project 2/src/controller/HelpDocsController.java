@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -23,6 +25,15 @@ public class HelpDocsController {
 	
 	@FXML
     private AnchorPane content_view;
+	
+	@FXML
+	private BorderPane bp;
+	
+	@FXML
+	private AnchorPane ap;
+	
+	@FXML
+	private GridPane grid;
 
     @FXML
     private MediaView media_view;
@@ -56,7 +67,6 @@ public class HelpDocsController {
 
     boolean end = false;
     
-    //URL mediaUrl = getClass().getResource("/application/jellyfish-25-mbps-hd-hevc.mp4");
     URL mediaUrl = getClass().getResource("/application/moon_jellies.mp4");
     String mediaStringUrl = mediaUrl.toExternalForm();
     Media media = new Media(mediaStringUrl);
@@ -64,6 +74,8 @@ public class HelpDocsController {
     Duration time, curTime;
     
     public void initialize() {
+		
+    	System.out.println("*******HELP & DOCS*******");
     	
     	media_view.setMediaPlayer(player);
     	timeSlider.setValue(0);
@@ -94,6 +106,27 @@ public class HelpDocsController {
 		        System.out.println("Status: " + player.getStatus());
 		    }
     	});
+    	
+    }
+    
+
+    @FXML
+    void enterScreen(MouseEvent event) {
+    	/*
+    	content_view.prefWidthProperty().bind(content_view.getParent().sceneProperty().get().widthProperty());
+		content_view.prefHeightProperty().bind(content_view.getParent().sceneProperty().get().heightProperty());
+		content_view.setMinSize(600, 400);
+		content_view.setMaxSize(968, 678);
+
+		grid.prefWidthProperty().bind(content_view.widthProperty());
+		grid.prefHeightProperty().bind(content_view.heightProperty());
+		grid.setMinSize(600, 400);
+		grid.setMaxSize(968, 678);
+		System.out.println(content_view.getParent().getParent().getScene().heightProperty());
+		System.out.println(content_view.getParent().getScene().heightProperty());
+		System.out.println(content_view.getScene().heightProperty());	
+		System.out.println(grid.getScene().heightProperty());
+		*/
     }
     
     @FXML
@@ -148,7 +181,7 @@ public class HelpDocsController {
     
     @FXML
     void medsVideo(ActionEvent event) {
-
+    	
     }
 
     @FXML
