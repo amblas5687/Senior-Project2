@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,6 +36,8 @@ public class MainViewController {
      private Label logo;
 	 @FXML
 	 private Tooltip tp;
+	 @FXML 
+	 private VBox menu;
 	 @FXML
 	 private AnchorPane content;
 	 @FXML
@@ -62,6 +65,16 @@ public class MainViewController {
 				 + "-fx-background-color: white;"
 				 + "-fx-background-size: contain;"
 				 + "-fx-background-repeat: no-repeat;");
+		 
+		 menu.prefWidthProperty().bind(content.widthProperty());
+		 menu.prefHeightProperty().bind(content.heightProperty());
+		 menu.setMinSize(150, 400);
+		 menu.setMaxSize(233, 678);
+		 
+		 content_view.prefWidthProperty().bind(content.widthProperty());
+		 content_view.prefHeightProperty().bind(content.heightProperty());
+		 content_view.setMinSize(600, 400);
+		 content_view.setMaxSize(968, 678);
 	 }
 	    
 	 @FXML
