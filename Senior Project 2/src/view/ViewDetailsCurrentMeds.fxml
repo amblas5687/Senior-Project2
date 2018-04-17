@@ -47,7 +47,7 @@
                         <Font size="16.0" />
                      </font>
 		            </Button>
-		            <Label text="Prescribing Doctor:" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+		            <Label text="Prescribing Doctor:                          Dr." GridPane.halignment="LEFT" GridPane.rowIndex="6">
                      <font>
                         <Font size="16.0" />
                      </font>

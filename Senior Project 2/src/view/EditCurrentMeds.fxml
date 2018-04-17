@@ -48,7 +48,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 		        </rowConstraints>
 		         <children>
-		            <Label text="Prescribing Doctor:" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+		            <Label text="Prescribing Doctor:                          Dr." GridPane.halignment="LEFT" GridPane.rowIndex="6">
                      <font>
                         <Font size="16.0" />
                      </font>

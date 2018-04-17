@@ -216,7 +216,7 @@
                               <Font size="16.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="15.0" />
+                              <Insets left="17.0" />
                            </GridPane.margin>
                         </Label>
 			         </children>
