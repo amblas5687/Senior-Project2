@@ -187,8 +187,8 @@ public class PreexistingArchiveController {
 			prescribDoc.setText("");
 			purpOfPrescript.setText("");
 			DOPPicker.setValue(null);
-			btnSubmit.setText("Add Another");
-			btnSubmit.setPrefWidth(120);
+			btnSubmit.setText("Add More");
+			btnSubmit.setPrefWidth(95);
 			
 			//TODO fix insets
 			//cancelBTN.setStyle("-fx-background-insets: 0 130px 0 0;");
