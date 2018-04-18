@@ -220,6 +220,12 @@ public class PreexistingArchiveController {
 			System.out.println("MED NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			nameFlag = false;
 		}
+		else if(name.length()>=60)
+		{
+			nameLBL.setText("Medication name length greater than 60 characters");
+			nameFlag = false;
+			System.out.println("NAME TOO LONG");
+		}
 		return nameFlag;
 	}
 
@@ -244,6 +250,12 @@ public class PreexistingArchiveController {
 			doseLBL.setText("Dose must be a whole number or decimal number");
 			System.out.println("DOSE HAD LETTERS OR TOO MANY DECIMALS");
 			doseFlag = false;
+		}
+		else if(dose.length()>=25)
+		{
+			doseLBL.setText("Dose length greater than 25 characters");
+			doseFlag = false;
+			System.out.println("DOSE TOO LONG");
 		}
 		return doseFlag;
 	}
@@ -286,6 +298,12 @@ public class PreexistingArchiveController {
 			System.out.println("DOCTOR NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			doctorFlag = false;
 		}
+		else if(doctor.length()>=60)
+		{
+			doctorLBL.setText("Doctor name length greater than 60 characters");
+			doctorFlag = false;
+			System.out.println("NAME TOO LONG");
+		}
 		return doctorFlag;
 	}
 
@@ -310,6 +328,12 @@ public class PreexistingArchiveController {
 			purposeLBL.setText("Remove numbers and special characters");
 			System.out.println("PURPOSE CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			purposeFlag = false;
+		}
+		else if(purpose.length()>=60)
+		{
+			purposeLBL.setText("Purpose of prescription length greater than 60 characters");
+			purposeFlag = false;
+			System.out.println("PURPOSE TOO LONG");
 		}
 		return purposeFlag;
 	}
