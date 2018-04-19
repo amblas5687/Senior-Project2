@@ -443,6 +443,12 @@ public class ViewUserController {
 			System.out.println("FIRST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
 			return false;
 		}
+		else if(fname.length() >= 30)
+		{
+			lblFname.setText("First name length greater than 30 characters");
+			System.out.println("FIRST NAME LONGER THAN 30");
+			return false;
+		}
 
 		return true;
 
@@ -469,6 +475,12 @@ public class ViewUserController {
 		} else if (!b) {
 			lblLname.setText("Remove numbers and special characters");
 			System.out.println("LAST NAME CONTAINED EITHER NUMBER, SPECIAL CHARCTERS, OR EXTRA SPACES");
+			return false;
+		}
+		else if(lname.length() >= 30)
+		{
+			lblLname.setText("Last name lenght greater than 30 characters");
+			System.out.println("LAST NAME 30 CHARACTERS");
 			return false;
 		}
 
@@ -512,6 +524,12 @@ public class ViewUserController {
 		} else if (!b) {
 			lblEmail.setText("Invalid email format for email address");
 			System.out.println("EMAIL WAS NOT IN PROPER FORMAT");
+			return false;
+		}
+		else if(email.length() >= 35)
+		{
+			lblEmail.setText("Email length greater than 35 characters");
+			System.out.println("EMAIL LONGER THAN 35");
 			return false;
 		}
 
@@ -616,6 +634,10 @@ public class ViewUserController {
 		} else if (p1.length() < 4) {
 			lblPassword1.setText("Your password must be at least 4 digits long");
 			System.out.println("PASSWORD < 4");
+			passwordFlag = false;
+		} else if(p1.length() >= 35) {
+			lblPassword1.setText("Your password must be less than 35 digits long");
+			System.out.println("PASSWORD > 35");
 			passwordFlag = false;
 		} else if (p2 == null || p2.equals(null) || p2.equals("")) {
 			lblPassword2.setText("Enter password verification");
