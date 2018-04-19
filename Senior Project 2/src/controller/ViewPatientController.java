@@ -347,28 +347,30 @@ public class ViewPatientController {
     
     boolean checkFirstName() {
 	   	
+    	flag = false;
+    	
     	lblFname.setText(null);
     	
     	String name = fnameTF.getText();
     	
-	   	if(name ==  null || name.equals(null) || name.equals("")) {
-	   		lblFname.setText("Enter patient first name");
-	   		count++;
-	   		return flag = true;
-	   	} 
-	   	
-	   	name = name.trim();
+    	name = name.trim();
 		
 		Pattern p = Pattern.compile("^[a-zA-Z]+\\s?[a-zA-Z]*$");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
-    	//System.out.println("n " + n);
-		
     	
-	   	if(!n) {
+	   	if(name == null || name.equals(null) || name.equals("")) {
+	   		lblFname.setText("Enter patient first name");
+	   		count++;
+	   		return flag = true;
+	   	} else if(!n) {
 	   		lblFname.setText("Remove numbers and special characters");
 	   		flag = true;
-	   	} else {
+	   	} else if(name.length() >= 30) {
+	   		lblFname.setText("First name length greater than 30 characters");
+	   		flag = true;
+	   	}
+	   	else {
 	   		flag = false;
 	   	}
 	   	
@@ -377,27 +379,30 @@ public class ViewPatientController {
     
     boolean checkLastName() {
     	
+flag = false;
+    	
     	lblLname.setText(null);
     	
     	String name = lnameTF.getText();
-	   	
-	   	if(name == null || name.equals(null) || name.equals("")) {
-	   		lblLname.setText("Enter patient last name");
-	   		count++;
-	   		return flag = true;
-	   	} 
-	   	
+    	
 	   	name = name.trim();
 		
 		Pattern p = Pattern.compile("^[a-zA-Z]+[\\-\\.\\s]?[a-zA-Z]*$");
     	Matcher nam = p.matcher(name);
     	boolean n = nam.find();
-		
-    	
-	   	if(!n) {
+	   	
+	   	if(name == null || name.equals(null) || name.equals("")) {
+	   		lblLname.setText("Enter patient last name");
+	   		count++;
+	   		return flag = true;
+	   	} else if(!n) {
 	   		lblLname.setText("Remove numbers and special characters");
 	   		flag = true;
-	   	} else {
+	   	} else if(name.length() >= 30){
+	   		lblLname.setText("Last name length greater than 30 characters");
+	   		flag = true;
+	   	}
+	   	else {
 	   		flag = false;
 	   	}
 	   	
@@ -406,27 +411,30 @@ public class ViewPatientController {
     
     boolean checkCaregiver() {
     	
+flag = false;
+    	
     	lblCaregiver.setText(null);
     	
     	String name = cargiverTF.getText();
+    	
+    	name = name.trim();
+			
+		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
+    	Matcher nam = p.matcher(name);
+    	boolean n = nam.find();
 	   	
 	   	if(name == null || name.equals(null) || name.equals("")) {
 	   		lblCaregiver.setText("Enter name of caregiver");
 	   		count++;
 	   		return flag = true;
-	   	} 
-	   	
-	   	name = name.trim();
-	   			
-		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
-    	Matcher nam = p.matcher(name);
-    	boolean n = nam.find();
-		
-    	
-	   	if(!n) {
+	   	} else if(!n) {
 	   		lblCaregiver.setText("Remove numbers and special characters");
 	   		flag = true;
-	   	} else {
+	   	} else if(name.length() >= 30) {
+			lblCaregiver.setText("Caregiver name greater than 30 characters");
+	   		flag = true;
+	   	}
+	   	else {
 	   		flag = false;
 	   	}
 	   	
@@ -568,27 +576,31 @@ public class ViewPatientController {
     
     boolean checkDoc() {
     	
+flag = false; 
+    	
     	lblDoc.setText(null);
     	
     	String doc = doctorTF.getText();
+    	
+    	doc = doc.trim();
+		
+		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
+    	Matcher nam = p.matcher(doc);
+    	boolean n = nam.find();
     
     	if(doc == null || doc.equals(null) || doc.equals("")) {
 	   		lblDoc.setText("Enter doctor name");
 	   		count++;
 	   		return flag = true;
-	   	} 
-	   	
-	   	doc = doc.trim();
-		
-		Pattern p = Pattern.compile("^([a-zA-Z]+(\\s[a-zA-Z]+)?)(\\s[a-zA-Z]+(((\\.\\s)|[\\.\\s\\-])[a-zA-Z]+)?)?$");
-    	Matcher nam = p.matcher(doc);
-    	boolean n = nam.find();
-		
-    	
-	   	if(!n) {
+	   	} else if(!n) {
 	   		lblDoc.setText("Remove numbers and special characters");
 	   		flag = true;
-	   	} else {
+	   	} else if(doc.length() >= 30)
+	   	{
+	   		lblDoc.setText("Doctor name greater than 30 characters");
+	   		flag = true;
+	   	}
+	   	else {
 	   		flag = false;
 	   	}
 	   	
