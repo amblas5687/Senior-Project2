@@ -32,6 +32,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -101,10 +102,10 @@ public class NewMedController {
 	private Label lblFreq;
 	
 	@FXML
-	private JFXRadioButton rbSingle = new JFXRadioButton();
+	private RadioButton rbSingle;
 	
 	@FXML
-	private JFXRadioButton rbMultiple = new JFXRadioButton();
+	private RadioButton rbMultiple;
 	
 	private ToggleGroup rbFreq = new ToggleGroup();
 
@@ -176,25 +177,26 @@ public class NewMedController {
 			stage.getIcons().add(new Image("/application/logo_wbg.png"));
 			
 			freqTable.setPrefHeight(100);
-			dose.setPrefWidth(285);
-			type.setPrefWidth(285);
-			time.setPrefWidth(285);
+			dose.setPrefWidth(296);
+			type.setPrefWidth(296);
+			time.setPrefWidth(296);
 			freqTable.getColumns().addAll(dose, type, time);
 			alert.getDialogPane().setContent(freqTable);
 			
 			GridPane grid = new GridPane();
 			//label
 			Label lblDose = new Label("Medication Dosage:");
-			lblDose.setPadding(new Insets(18, 10, 15, 15));
+			lblDose.setPadding(new Insets(18, 12, 15, 15));
 			//textfield
 			TextField doseTF = new TextField();
 			doseTF.setPromptText("Dose");
 			doseTF.setPrefHeight(40);
-			doseTF.setPrefWidth(100);
+			doseTF.setPrefWidth(110);
 			//combo box
 			ComboBox<String> dType = new ComboBox<String>();
 			dType.setPromptText("Select...");
 			dType.setPrefHeight(40);
+			dType.setPrefWidth(110);
 			dType.getItems().addAll("Select...", "mg", "g", "kg", "oz", "tab", "tsp", "tbsp");
 			//label
 			Label lblTime = new Label("Time Taken:");
@@ -203,16 +205,16 @@ public class NewMedController {
 			TextField hourTF = new TextField();
 			hourTF.setPromptText("Hour");
 			hourTF.setPrefHeight(40);
-			hourTF.setPrefWidth(100);
+			hourTF.setPrefWidth(110);
 			//Radio Buttons
-			JFXRadioButton rbAM = new JFXRadioButton("AM");
-			JFXRadioButton rbPM = new JFXRadioButton("PM");
+			RadioButton rbAM = new RadioButton("AM");
+			RadioButton rbPM = new RadioButton("PM");
 			//toggle group
 			ToggleGroup rbTime = new ToggleGroup();
 			rbAM.setToggleGroup(rbTime);
-			//rbAM.setPadding(new Insets(0, 0, 0, 0));
+			rbAM.setPadding(new Insets(0, 0, 0, 17));
 			rbPM.setToggleGroup(rbTime);
-			//rbPM.setPadding(new Insets(10, 20, 0, 0));
+			rbPM.setPadding(new Insets(0, 0, 0, 17));
 			//submit
 			Button btnSubmit = new Button("Add");
 			btnSubmit.setPrefHeight(40);
@@ -294,6 +296,7 @@ public class NewMedController {
 				rbMultiple.setSelected(false);
 				
 				freqTable.getColumns().clear();
+				multipleMed.clear();
 			}
 
     	}
