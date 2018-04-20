@@ -44,4 +44,8 @@ public class DoseModel {
 	public void setTime(StringProperty time) {
 		this.time = time;
 	}
+	
+	public String toString() {
+		return dose.get() + type.get() + " " + time.get();
+	}
 }

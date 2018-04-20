@@ -121,6 +121,9 @@ public class NewMedController {
 	MedModel tempMed = new MedModel();
 	
 	ObservableList<DoseModel> multipleMed = FXCollections.observableArrayList();	
+	
+	//lets you know if they selected and entered multiple medications to disable error checking
+	private boolean multiMed = false;
 
 	public void initialize() {
 
@@ -151,6 +154,7 @@ public class NewMedController {
 	@FXML
 	void selectFreq(ActionEvent event) {
     	
+		multiMed = false;
     	if(rbSingle.isSelected()) {
     		//hide radio buttons
     		rbSingle.setVisible(false);
@@ -160,7 +164,7 @@ public class NewMedController {
     		medDosage.setVisible(true);
     		doseType.setVisible(true);
     	} else {
-    		
+    		multiMed = true;
     		Alert alert = new Alert(AlertType.INFORMATION);
 			DialogPane dialogPane = alert.getDialogPane();
 			dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
@@ -216,9 +220,9 @@ public class NewMedController {
 				String tim = "";
 				
 				if(rbAM.isSelected()) {
-					tim = hourTF.getText() + " " + rbAM.getText();
+					tim = hourTF.getText() + rbAM.getText();
 				} else {
-					tim = hourTF.getText() + " " + rbPM.getText();
+					tim = hourTF.getText() + rbPM.getText();
 				}
 				
 				//set fields
@@ -268,14 +272,24 @@ public class NewMedController {
 			
 			if(result.get() == ButtonType.FINISH) {
 				//TODO: concatenate doses into medDoseMul
-				
-				
+				StringBuilder medConcat = new StringBuilder();
+				for(DoseModel dose: multipleMed) {
+					medConcat.append(dose.toString());
+					medConcat.append(", ");
+				}
+				System.out.println("medConcat " + medConcat);
+				String medConcatSTR = medConcat.toString().substring(0, medConcat.toString().length()-2);
+
 				//enable
 				rbSingle.setVisible(false);
 				rbMultiple.setVisible(false);
 				
 				medDoseMul.setVisible(true);
+				
+				medDoseMul.setText(medConcatSTR);
+				
 			} else {
+				//System.out.println("Cancelled hit");
 				rbSingle.setSelected(false);
 				rbMultiple.setSelected(false);
 				
@@ -291,8 +305,18 @@ public class NewMedController {
 		boolean validName, validDose, validDoseType, validDoctor, validPurpose, validDate, validDescript = true;
 
 		validName = validateName();
-		validDose = validateDose();
-		validDoseType = validateDoseType();
+		
+		//if they selected a single med, error check
+		if(multiMed == false)
+		{
+			validDose = validateDose();
+			validDoseType = validateDoseType();
+		}
+		//otherwise just let it through for now
+		else {
+			validDose = true;
+			validDoseType = true;
+		}
 		validDoctor = validateDoctor();
 		validPurpose = validatePurpose();
 		validDate = validateDate();
@@ -301,8 +325,18 @@ public class NewMedController {
 		if (validName && validDose && validDoseType && validDoctor && validPurpose && validDate && validDescript) {
 
 			String mName = medName.getText();
-			String mDosage = medDosage.getText();
-			String mDoseType = doseType.getValue().toString();
+			
+			String mDosage = "";
+			String mDoseType = "";
+			if(multiMed == false)
+			{
+				mDosage = medDosage.getText();
+				mDoseType = doseType.getValue().toString();
+			}
+			else {
+				mDosage = medDoseMul.getText();
+			}
+			
 			String mDescript = medDescript.getText();
 			String pDoc = prescribDoc.getText();
 			String pPurpose = purpOfPrescript.getText();
