@@ -172,9 +172,9 @@ public class NewMedController {
 			stage.getIcons().add(new Image("/application/logo_wbg.png"));
 			
 			freqTable.setPrefHeight(100);
-			dose.setPrefWidth(270);
-			type.setPrefWidth(270);
-			time.setPrefWidth(270);
+			dose.setPrefWidth(285);
+			type.setPrefWidth(285);
+			time.setPrefWidth(285);
 			freqTable.getColumns().addAll(dose, type, time);
 			alert.getDialogPane().setContent(freqTable);
 			
@@ -186,14 +186,20 @@ public class NewMedController {
 			TextField doseTF = new TextField();
 			doseTF.setPromptText("Dose");
 			doseTF.setPrefHeight(40);
+			doseTF.setPrefWidth(100);
 			//combo box
 			ComboBox<String> dType = new ComboBox<String>();
 			dType.setPromptText("Select...");
 			dType.setPrefHeight(40);
-			dType.getItems().addAll("mg", "g", "kg", "oz", "tab", "tsp", "tbsp");
+			dType.getItems().addAll("Select...", "mg", "g", "kg", "oz", "tab", "tsp", "tbsp");
 			//label
 			Label lblTime = new Label("Time Taken:");
 			lblTime.setPadding(new Insets(18, 0, 15, 15));
+			//textfield
+			TextField hourTF = new TextField();
+			hourTF.setPromptText("Hour");
+			hourTF.setPrefHeight(40);
+			hourTF.setPrefWidth(100);
 			//Radio Buttons
 			JFXRadioButton rbAM = new JFXRadioButton("AM");
 			JFXRadioButton rbPM = new JFXRadioButton("PM");
@@ -210,9 +216,9 @@ public class NewMedController {
 				String tim = "";
 				
 				if(rbAM.isSelected()) {
-					tim = rbAM.getText();
+					tim = hourTF.getText() + " " + rbAM.getText();
 				} else {
-					tim = rbPM.getText();
+					tim = hourTF.getText() + " " + rbPM.getText();
 				}
 				
 				//set fields
@@ -228,14 +234,16 @@ public class NewMedController {
 				
 				//clear
 				doseTF.setText(null);
-				dType.setValue(null);
+				dType.setValue("Select...");
+				hourTF.setText(null);
 				rbAM.setSelected(false);
 				rbPM.setSelected(false);
 			});
 			//separator
 			Label sep = new Label("   ");
 			Label sep2 = new Label("   ");
-			Label sep3 = new Label(" ");
+			Label sep3 = new Label("   ");
+			Label sep4 = new Label(" ");
 			sep3.setPadding(new Insets(0, 2, 0, 0));
 			//table
 			freqTable.setPrefHeight(300);
@@ -245,11 +253,13 @@ public class NewMedController {
 			grid.add(sep, 2, 0);
 			grid.add(dType, 3, 0);
 			grid.add(lblTime, 4, 0);
-			grid.add(rbAM, 5, 0);
-			grid.add(rbPM, 6, 0);
-			grid.add(sep2, 7, 0);
-			grid.add(btnSubmit, 8, 0);
+			grid.add(sep2, 5, 0);
+			grid.add(hourTF, 6, 0);
+			grid.add(rbAM, 7, 0);
+			grid.add(rbPM, 8, 0);
 			grid.add(sep3, 9, 0);
+			grid.add(btnSubmit, 10, 0);
+			grid.add(sep4, 11, 0);
 			grid.setPrefHeight(60);
 			alert.getDialogPane().setHeader(grid);
 
@@ -265,6 +275,11 @@ public class NewMedController {
 				rbMultiple.setVisible(false);
 				
 				medDoseMul.setVisible(true);
+			} else {
+				rbSingle.setSelected(false);
+				rbMultiple.setSelected(false);
+				
+				freqTable.getColumns().clear();
 			}
 
     	}
