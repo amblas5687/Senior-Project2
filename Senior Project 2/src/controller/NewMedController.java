@@ -39,6 +39,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -301,6 +302,145 @@ public class NewMedController {
 
     	}
     }
+	
+	@FXML
+	void addMultiple(MouseEvent event) {
+		freqTable.getColumns().clear();
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		//dialogPane.setMaxHeight(200);
+		dialogPane.getStyleClass().add("alert");
+		alert.setTitle("Medication Frequency");
+		
+		stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("/application/logo_wbg.png"));
+		
+		freqTable.setPrefHeight(100);
+		dose.setPrefWidth(296);
+		type.setPrefWidth(296);
+		time.setPrefWidth(296);
+		freqTable.getColumns().addAll(dose, type, time);
+		alert.getDialogPane().setContent(freqTable);
+		
+		GridPane grid = new GridPane();
+		//label
+		Label lblDose = new Label("Medication Dosage:");
+		lblDose.setPadding(new Insets(18, 12, 15, 15));
+		//textfield
+		TextField doseTF = new TextField();
+		doseTF.setPromptText("Dose");
+		doseTF.setPrefHeight(40);
+		doseTF.setPrefWidth(110);
+		//combo box
+		ComboBox<String> dType = new ComboBox<String>();
+		dType.setPromptText("Select...");
+		dType.setPrefHeight(40);
+		dType.setPrefWidth(110);
+		dType.getItems().addAll("Select...", "mg", "g", "kg", "oz", "tab", "tsp", "tbsp");
+		//label
+		Label lblTime = new Label("Time Taken:");
+		lblTime.setPadding(new Insets(18, 0, 15, 15));
+		//textfield
+		TextField hourTF = new TextField();
+		hourTF.setPromptText("Hour");
+		hourTF.setPrefHeight(40);
+		hourTF.setPrefWidth(110);
+		//Radio Buttons
+		RadioButton rbAM = new RadioButton("AM");
+		RadioButton rbPM = new RadioButton("PM");
+		//toggle group
+		ToggleGroup rbTime = new ToggleGroup();
+		rbAM.setToggleGroup(rbTime);
+		rbAM.setPadding(new Insets(0, 0, 0, 17));
+		rbPM.setToggleGroup(rbTime);
+		rbPM.setPadding(new Insets(0, 0, 0, 17));
+		//submit
+		Button btnSubmit = new Button("Add");
+		btnSubmit.setPrefHeight(40);
+		btnSubmit.setOnAction(click -> {
+			String tim = "";
+			
+			if(rbAM.isSelected()) {
+				tim = hourTF.getText() + rbAM.getText();
+			} else {
+				tim = hourTF.getText() + rbPM.getText();
+			}
+			
+			//set fields
+			DoseModel tempDose = new DoseModel(doseTF.getText(), dType.getValue(), tim);
+			multipleMed.add(tempDose);
+			System.out.println(tempDose.getDose());
+			//get fields
+			dose.setCellValueFactory(cellData -> cellData.getValue().getDose());
+			type.setCellValueFactory(cellData -> cellData.getValue().getType());
+			time.setCellValueFactory(cellData -> cellData.getValue().getTime());
+			
+			freqTable.setItems(multipleMed);
+			
+			//clear
+			doseTF.setText(null);
+			dType.setValue("Select...");
+			hourTF.setText(null);
+			rbAM.setSelected(false);
+			rbPM.setSelected(false);
+		});
+		//separator
+		Label sep = new Label("   ");
+		Label sep2 = new Label("   ");
+		Label sep3 = new Label("   ");
+		Label sep4 = new Label(" ");
+		sep3.setPadding(new Insets(0, 2, 0, 0));
+		//table
+		freqTable.setPrefHeight(300);
+		//add to grid
+		grid.add(lblDose, 0, 0);
+		grid.add(doseTF, 1, 0);
+		grid.add(sep, 2, 0);
+		grid.add(dType, 3, 0);
+		grid.add(lblTime, 4, 0);
+		grid.add(sep2, 5, 0);
+		grid.add(hourTF, 6, 0);
+		grid.add(rbAM, 7, 0);
+		grid.add(rbPM, 8, 0);
+		grid.add(sep3, 9, 0);
+		grid.add(btnSubmit, 10, 0);
+		grid.add(sep4, 11, 0);
+		grid.setPrefHeight(60);
+		alert.getDialogPane().setHeader(grid);
+
+		alert.getButtonTypes().setAll(ButtonType.FINISH, ButtonType.CANCEL);
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if(result.get() == ButtonType.FINISH) {
+			//TODO: concatenate doses into medDoseMul
+			StringBuilder medConcat = new StringBuilder();
+			for(DoseModel dose: multipleMed) {
+				medConcat.append(dose.toString());
+				medConcat.append(", ");
+			}
+			System.out.println("medConcat " + medConcat);
+			String medConcatSTR = medConcat.toString().substring(0, medConcat.toString().length()-2);
+
+			//enable
+			rbSingle.setVisible(false);
+			rbMultiple.setVisible(false);
+			
+			medDoseMul.setVisible(true);
+			
+			medDoseMul.setText(medConcatSTR);
+			
+		} else {
+			//System.out.println("Cancelled hit");
+			rbSingle.setSelected(false);
+			rbMultiple.setSelected(false);
+			
+			freqTable.getColumns().clear();
+			multipleMed.clear();
+		}
+
+	}
 	
 	@FXML
 	void submit(ActionEvent event) throws ParseException {

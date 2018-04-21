@@ -209,7 +209,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="medDoseMul" layoutX="339.0" layoutY="88.0" maxHeight="41.0" maxWidth="310.0" minHeight="25.0" minWidth="152.0" prefHeight="40.0" prefWidth="230.0" promptText="Dose" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <TextField fx:id="medDoseMul" editable="false" layoutX="339.0" layoutY="88.0" maxHeight="41.0" maxWidth="310.0" minHeight="25.0" minWidth="152.0" onMouseClicked="#addMultiple" prefHeight="40.0" prefWidth="230.0" promptText="Dose" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
