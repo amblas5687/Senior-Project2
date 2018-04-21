@@ -12,12 +12,10 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.jfoenix.controls.JFXRadioButton;
-
 import application.DBConfig;
 import application.DataSource;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +41,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.DoseModel;
 import model.MedModel;
 
@@ -101,6 +100,9 @@ public class NewMedController {
 	
 	@FXML
 	private Label lblFreq;
+	
+	@FXML
+	private Label lblSuccess;
 	
 	@FXML
 	private RadioButton rbSingle;
@@ -551,12 +553,18 @@ public class NewMedController {
 			// Clears fields after medication insertion
 			medName.setText("");
 			medDosage.setText("");
+			medDoseMul.setText("");
 			doseType.setValue(null);
 			medDescript.setText("");
 			prescribDoc.setText("");
 			purpOfPrescript.setText("");
 			DOPPicker.setValue(null);
-
+			lblSuccess.setText("Medication successfully inserted!");
+			
+			Timeline timeline = new Timeline(new KeyFrame(
+	    	        Duration.seconds(3),
+	    	        ae -> lblSuccess.setText(null)));
+	    	timeline.play();
 		} // end if
 
 	}// end submit

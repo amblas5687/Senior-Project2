@@ -230,6 +230,11 @@
                         <Insets left="140.0" />
                      </GridPane.margin>
                   </RadioButton>
+                  <Label fx:id="lblSuccess" styleClass="error" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
 		         </children>
 		      </GridPane>
          </bottom>
