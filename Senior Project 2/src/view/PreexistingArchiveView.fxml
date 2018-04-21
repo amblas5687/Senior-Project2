@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -104,7 +105,7 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="medDosage" maxHeight="25.0" maxWidth="145.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="125.0" promptText="Dose" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <TextField fx:id="medDosage" maxHeight="25.0" maxWidth="145.0" minHeight="40.0" minWidth="125.0" prefHeight="40.0" prefWidth="125.0" promptText="Dose" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="165.0" />
                      </GridPane.margin>
@@ -158,7 +159,7 @@
                         <Insets left="80.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Medication Dosage:" GridPane.rowIndex="2">
+                  <Label fx:id="lblFreq" text="Medication Frequency:" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -174,7 +175,7 @@
                         <Insets left="80.0" />
                      </GridPane.margin>
                   </Label>
-                  <ComboBox fx:id="doseType" prefWidth="145.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <ComboBox fx:id="doseType" prefWidth="145.0" promptText="Select..." visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="164.0" />
                      </GridPane.margin>
@@ -217,6 +218,32 @@
                         <Insets left="15.0" />
                      </GridPane.margin>
                   </Label>
+                  <Label fx:id="lblSuccess" styleClass="error" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="medDoseMul" editable="false" layoutX="455.0" layoutY="88.0" maxHeight="41.0" maxWidth="310.0" minHeight="25.0" minWidth="152.0" onMouseClicked="#addMultiple" prefHeight="40.0" prefWidth="230.0" promptText="Dose" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <RadioButton fx:id="rbSingle" mnemonicParsing="false" onAction="#selectFreq" text="Single" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="140.0" />
+                     </GridPane.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="rbMultiple" layoutX="504.0" layoutY="160.0" mnemonicParsing="false" onAction="#selectFreq" text="Multiple" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="140.0" />
+                     </GridPane.margin>
+                  </RadioButton>
                </children>
             </GridPane>
          </bottom>

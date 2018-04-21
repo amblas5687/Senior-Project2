@@ -436,10 +436,15 @@ public class NewMedController {
 		} else {
 			//System.out.println("Cancelled hit");
 			rbSingle.setSelected(false);
+			rbSingle.setVisible(true);
 			rbMultiple.setSelected(false);
+			rbMultiple.setVisible(true);
 			
 			freqTable.getColumns().clear();
 			multipleMed.clear();
+			medDoseMul.setVisible(false);
+			medDoseMul.setText("");
+
 		}
 
 	}
