@@ -225,9 +225,9 @@ public class NewMedController {
 				String tim = "";
 				
 				if(rbAM.isSelected()) {
-					tim = hourTF.getText() + rbAM.getText();
+					tim = hourTF.getText() + "_" + rbAM.getText();
 				} else {
-					tim = hourTF.getText() + rbPM.getText();
+					tim = hourTF.getText() + "_" + rbPM.getText();
 				}
 				
 				//set fields

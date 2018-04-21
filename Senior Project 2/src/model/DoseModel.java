@@ -46,6 +46,6 @@ public class DoseModel {
 	}
 	
 	public String toString() {
-		return dose.get() + type.get() + " " + time.get();
+		return dose.get() + "_" +type.get() + "_" + time.get();
 	}
 }
