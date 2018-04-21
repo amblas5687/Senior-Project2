@@ -551,8 +551,6 @@ public class PreexistingArchiveController {
 			prescribDoc.setText("");
 			purpOfPrescript.setText("");
 			DOPPicker.setValue(null);
-			btnSubmit.setText("Add More");
-			btnSubmit.setPrefWidth(95);
 			lblSuccess.setText("Medication successfully inserted!");
 			
 			Timeline timeline = new Timeline(new KeyFrame(
