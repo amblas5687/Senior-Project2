@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -449,7 +450,7 @@ public class PreexistingArchiveController {
 	}
 
     @FXML
-	void submit(ActionEvent event) {
+	void submit(ActionEvent event) throws ParseException {
 
 		boolean validName, validDose, validDoseType, validDoctor, validPurpose, validDate, validDescript = true;
 
@@ -491,6 +492,12 @@ public class PreexistingArchiveController {
 			String pPurpose = purpOfPrescript.getText();
 			String pDate = DOPPicker.getEditor().getText();
 			String dateArchived = java.time.LocalDate.now().toString();
+			
+			// format date for database
+			Format formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+			Date DOPDate = new SimpleDateFormat("MM/dd/yyyy").parse(pDate);
+			String formatDate = formatter2.format(DOPDate);
+			System.out.println("Before format " + pDate + " After format " + formatDate);
 
 			Connection connection = null;
 			PreparedStatement ps = null;
@@ -509,7 +516,7 @@ public class PreexistingArchiveController {
 				ps.setString(5, mDescript);
 				ps.setString(6, pDoc);
 				ps.setString(7, pPurpose);
-				ps.setString(8, pDate);
+				ps.setString(8, formatDate);
 				ps.setString(9, dateArchived);
 
 				ps.execute();
