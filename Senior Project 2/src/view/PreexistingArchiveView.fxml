@@ -233,7 +233,7 @@
                         <Font size="16.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets right="140.0" />
+                        <Insets right="150.0" />
                      </GridPane.margin>
                   </RadioButton>
                   <RadioButton fx:id="rbMultiple" layoutX="504.0" layoutY="160.0" mnemonicParsing="false" onAction="#selectFreq" text="Multiple" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">

@@ -168,6 +168,8 @@ public class NewMedController {
     		medDosage.setVisible(true);
     		doseType.setVisible(true);
     	} else {
+    		lblFreq.setText("Medication Dosage:");
+    		
     		multiMed = true;
     		Alert alert = new Alert(AlertType.INFORMATION);
 			DialogPane dialogPane = alert.getDialogPane();
@@ -297,6 +299,7 @@ public class NewMedController {
 				//System.out.println("Cancelled hit");
 				rbSingle.setSelected(false);
 				rbMultiple.setSelected(false);
+				lblFreq.setText("Medication Frequency:");
 				
 				freqTable.getColumns().clear();
 				multipleMed.clear();
@@ -439,6 +442,7 @@ public class NewMedController {
 			rbSingle.setVisible(true);
 			rbMultiple.setSelected(false);
 			rbMultiple.setVisible(true);
+			lblFreq.setText("Medication Frequency:");
 			
 			freqTable.getColumns().clear();
 			multipleMed.clear();
