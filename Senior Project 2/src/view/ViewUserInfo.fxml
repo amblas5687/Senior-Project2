@@ -106,7 +106,7 @@
 			                  <Insets />
 			               </GridPane.margin>
 			            </DatePicker>
-			            <ComboBox fx:id="relationBox" disable="true" editable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+			            <ComboBox fx:id="relationBox" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="230.0" promptText="Select..." styleClass="disable" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>

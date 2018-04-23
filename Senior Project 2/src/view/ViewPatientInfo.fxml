@@ -138,7 +138,7 @@
 	                        <Font size="16.0" />
 	                     </font>
 			            </TextField>
-			            <ComboBox fx:id="stageBox" disable="true" editable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Select..." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+			            <ComboBox fx:id="stageBox" disable="true" maxHeight="25.0" maxWidth="310.0" minHeight="40.0" minWidth="230.0" prefHeight="25.0" prefWidth="152.0" promptText="Select..." styleClass="disable" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
 			               <GridPane.margin>
 			                  <Insets />
 			               </GridPane.margin>
