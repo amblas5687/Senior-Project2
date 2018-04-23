@@ -558,7 +558,19 @@ public class PreexistingArchiveController {
 			prescribDoc.setText("");
 			purpOfPrescript.setText("");
 			DOPPicker.setValue(null);
-			lblSuccess.setText("Medication successfully inserted!");
+			//reset med dosage
+			medDosage.setVisible(false);
+			doseType.setVisible(false);
+			medDoseMul.setVisible(false);
+			multipleMed.clear();
+			medDoseMul.setText("");
+			rbSingle.setVisible(true);
+			rbSingle.setSelected(false);
+			rbMultiple.setVisible(true);
+			rbMultiple.setSelected(false);
+			lblFreq.setText("Medication Frequency:");
+			
+			lblSuccess.setText("Medication successfully added!");
 			
 			Timeline timeline = new Timeline(new KeyFrame(
 	    	        Duration.seconds(3),
