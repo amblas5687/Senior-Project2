@@ -54,20 +54,21 @@ public class HelpDocsController {
     private Label lblReturn;
     
     @FXML
+    private Button btnStart;
+
+    @FXML
+    private Button btnEdit;
+
+    @FXML
     private Button btnMeds;
-
-    @FXML
-    private Button btnUser;
-
-    @FXML
-    private Button btnPatient;
     
     @FXML
     private JFXSlider timeSlider;
 
     boolean end = false;
     
-    URL mediaUrl = getClass().getResource("/application/moon_jellies.mp4");
+    //URL mediaUrl = getClass().getResource("/application/moon_jellies.mp4");
+    URL mediaUrl = getClass().getResource("/application/tutorial.MP4");
     String mediaStringUrl = mediaUrl.toExternalForm();
     Media media = new Media(mediaStringUrl);
     final MediaPlayer player = new MediaPlayer(media);
@@ -180,19 +181,76 @@ public class HelpDocsController {
     }
     
     @FXML
-    void medsVideo(ActionEvent event) {
+    void createVideo(ActionEvent event) {//0-1.624
+    	player.seek(Duration.minutes(0));
+    	player.play();
     	
+    	Timeline timeline = new Timeline(new KeyFrame(
+    	        Duration.minutes(1.624),
+    	        ae -> player.pause()));
+    	timeline.play();
+    	
+    	player.currentTimeProperty().addListener(new InvalidationListener() {
+    		
+    		public void invalidated(Observable ov) {
+    			
+    			if (!timeSlider.isValueChanging()) {
+    				System.out.println("HIT");
+    				System.out.println(player.currentTimeProperty().get().toMinutes());
+    				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
+    				
+    			}
+            }
+        });
     }
 
     @FXML
-    void patientVideo(ActionEvent event) {
-
+    void editVideo(ActionEvent event) {//4.650-5.163
+    	player.seek(Duration.minutes(4.650));
+    	player.play();
+    	
+    	Timeline timeline = new Timeline(new KeyFrame(
+    	        Duration.minutes(.513),
+    	        ae -> player.pause()));
+    	timeline.play();
+    	
+    	player.currentTimeProperty().addListener(new InvalidationListener() {
+    		
+    		public void invalidated(Observable ov) {
+    			
+    			if (!timeSlider.isValueChanging()) {
+    				System.out.println("HIT");
+    				System.out.println(player.currentTimeProperty().get().toMinutes());
+    				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
+    				
+    			}
+            }
+        });
     }
     
 
     @FXML
-    void userVideo(ActionEvent event) {
-
+    void medsVideo(ActionEvent event) {//current: 1.624-4.650, archive: 5.163-6.025
+    	player.seek(Duration.minutes(1.624));
+    	player.play();
+    	
+    	Timeline timeline = new Timeline(new KeyFrame(
+    	        Duration.minutes(3.006),
+    	        ae -> player.seek(Duration.minutes(5.163))));
+    	timeline.play();
+    	
+    	player.currentTimeProperty().addListener(new InvalidationListener() {
+    		
+    		public void invalidated(Observable ov) {
+    			
+    			if (!timeSlider.isValueChanging()) {
+    				System.out.println("HIT");
+    				System.out.println(player.currentTimeProperty().get().toMinutes());
+    				timeSlider.setValue(player.currentTimeProperty().get().toMinutes());
+    				
+    			}
+            }
+        });
     }
     
     @FXML
