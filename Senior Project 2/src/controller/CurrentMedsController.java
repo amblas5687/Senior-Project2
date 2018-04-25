@@ -162,7 +162,7 @@ public class CurrentMedsController {
 	void clickMed(MouseEvent event) {
 
 		MedModel selectedMed = medicationTable.getSelectionModel().getSelectedItem();
-		System.out.println("SELECTED CURRENT MED..." + selectedMed);
+		//System.out.println("SELECTED CURRENT MED..." + selectedMed);
 
 		if (selectedMed != null) {
 			btnDetails.setDisable(false);
@@ -225,7 +225,7 @@ public class CurrentMedsController {
 				tempMed = new MedModel(patientCode, medName, medDate, doc, purpose, medDose, medDoseType, medDetails,
 						dateAdded, addedBy, medID, null, null, null, dateUpdated, updatedBy);
 				patientMeds.add(tempMed);
-				System.out.println("MED..." + tempMed);
+				//System.out.println("MED..." + tempMed);
 			}
 		} catch (SQLException e) {
 			DBConfig.displayException(e);

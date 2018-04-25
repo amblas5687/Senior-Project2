@@ -58,7 +58,7 @@ public class CurMedDetailsController {
     	
     	CurrentMedsController test = new CurrentMedsController();
 		medDetails = test.getDetail();
-		System.out.println("SETTING MED DETAILS FOR... " + medDetails);
+		//System.out.println("SETTING MED DETAILS FOR... " + medDetails);
 		getDetails();	        
     }
     

@@ -495,7 +495,7 @@ public class ArchivedMedsController {
 
 				archivedMeds.add(tempMed);
 
-				System.out.println("RESULT FROM NAME SEARCH ARCHIVE... " + tempMed);
+				//System.out.println("RESULT FROM NAME SEARCH ARCHIVE... " + tempMed);
 			}
 
 		} catch (SQLException e) {

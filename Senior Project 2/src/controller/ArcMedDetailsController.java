@@ -58,7 +58,7 @@ public class ArcMedDetailsController {
 
 		ArchivedMedsController test = new ArchivedMedsController();
 		medDetails = test.getDetail();
-		System.out.println("SETTING MED DETAILS FOR... " + medDetails);
+		//System.out.println("SETTING MED DETAILS FOR... " + medDetails);
 		getDetails();
 	}
 

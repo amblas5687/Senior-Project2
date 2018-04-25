@@ -166,7 +166,7 @@ public class NewUserController {
 			} else if (code != null && result.get() == ButtonType.OK) {
 
 				// TODO need to check patient table to verify the patient
-				System.out.println("PATIENT CODE... " + textField.getText());
+				//System.out.println("PATIENT CODE... " + textField.getText());
 
 				Connection connection = null;
 				PreparedStatement user = null;
@@ -216,7 +216,7 @@ public class NewUserController {
 						user.setString(8, subUser.getUserID());
 
 						user.execute();
-						System.out.println("USER ENTERED..." + subUser);
+						//System.out.println("USER ENTERED..." + subUser);
 
 						// go back to main
 						try {
@@ -339,12 +339,12 @@ public class NewUserController {
 				sb.append(String.format("%02X", randBytes[i]));
 			}
 
-			System.out.println("\nBuilt string " + sb);
+			//System.out.println("\nBuilt string " + sb);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("User code: " + sb.toString());
+		//System.out.println("User code: " + sb.toString());
 		return sb.toString();
 
 	}

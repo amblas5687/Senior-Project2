@@ -130,7 +130,7 @@ public class EditMedController {
 	public void setMed() {
 		CurrentMedsController test = new CurrentMedsController();
 		editMed = test.getEdit();
-		System.out.println("MED TO EDIT... " + editMed);
+		//System.out.println("MED TO EDIT... " + editMed);
 
 		// prepopulate textfields
 		medName.setText(editMed.getMedName().get());

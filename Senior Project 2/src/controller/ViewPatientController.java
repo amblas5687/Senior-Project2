@@ -118,7 +118,7 @@ public class ViewPatientController {
 				curPatient.setCargiver(rs.getString("caregiver"));
 				curPatient.setPatientCode(LoginController.currentPatientID);
 				
-				System.out.println("VIEWING PATIENT... " + curPatient);
+				//System.out.println("VIEWING PATIENT... " + curPatient);
 			}
 			
 		} catch (SQLException e) {
@@ -313,7 +313,7 @@ public class ViewPatientController {
 	        	//disable editability
 	        	disableEdit();
 	        	
-	        	System.out.println("PATIENT UPDATED... " + updatePatient);
+	        	//System.out.println("PATIENT UPDATED... " + updatePatient);
 	    	} catch (SQLException e) {
 	    		DBConfig.displayException(e);
 	    	}catch (Exception e)

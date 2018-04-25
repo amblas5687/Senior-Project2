@@ -184,7 +184,7 @@ public class LoginController {
 							currentUserName = first + " " + last;
 							currentPatientID = rs.getString("patientCode");
 							
-							System.out.println("CURRENT USER AND PATIENT... " + currentUserID + "__" + currentPatientID);
+							//System.out.println("CURRENT USER AND PATIENT... " + currentUserID + "__" + currentPatientID);
 							 
 						 } else {
 							 System.out.println("FAILED LOGIN");

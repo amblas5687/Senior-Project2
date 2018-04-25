@@ -104,7 +104,7 @@ public class NewPatientController {
 
 		try {
 			//stage = AnnaMain.getStage();
-			System.out.println(stage);
+			//System.out.println(stage);
 			root = FXMLLoader.load(getClass().getResource("/view/PreexistingArchiveView.fxml"));
 			scene = new Scene(root);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -509,13 +509,13 @@ public class NewPatientController {
 				sb.append(String.format("%02X", randBytes[i]));
 			}
 
-			System.out.println("\nBUILT CODE " + sb);
+			//System.out.println("\nBUILT CODE " + sb);
 
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("PATIENT CODE... " + sb.toString());
+		//System.out.println("PATIENT CODE... " + sb.toString());
 		return sb.toString();
 
 	}
